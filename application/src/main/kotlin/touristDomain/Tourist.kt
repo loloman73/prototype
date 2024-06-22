@@ -1,0 +1,7 @@
+package touristDomain
+
+class Tourist {
+
+
+}
+

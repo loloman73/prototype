@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm")
-    id("java")
+    id("java-library")
 }
 
 group = "app.xenagos"

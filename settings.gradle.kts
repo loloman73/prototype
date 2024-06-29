@@ -5,6 +5,5 @@ rootProject.name = "prototype"
 include("web-adapter")
 include("persistence-adapter")
 include("persistence-adapter")
-include("api")
 include("application")
 include("configuration")

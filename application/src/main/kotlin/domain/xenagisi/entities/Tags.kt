@@ -1,4 +1,4 @@
-package domain.xenagisi
+package domain.xenagisi.entities
 
 enum class ContentTag(val description:String) {
     Architecture(""),

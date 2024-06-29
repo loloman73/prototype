@@ -1,4 +1,4 @@
-package domain.xenagisi
+package domain.xenagisi.entities
 
 import java.net.URI
 import java.util.*

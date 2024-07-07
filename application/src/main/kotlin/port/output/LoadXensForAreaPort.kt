@@ -4,5 +4,5 @@ import domain.xenagisi.entities.Xen
 
 interface LoadXensForAreaPort {
 
-    fun whereAreaIs(): Set<Xen>
+    fun whereAreaIs(area:Int): Set<Xen>
 }

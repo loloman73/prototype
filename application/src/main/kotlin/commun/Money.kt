@@ -1,9 +1,9 @@
 package commun
 
-import java.math.BigDecimal
 import java.util.Currency
 
-data class Money(val amount: BigDecimal, var currency: Currency ) {
+//TODO use BigDecimal for amount
+data class Money(val amount: Int, var currency: Currency ) {
 
 
 }

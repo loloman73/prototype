@@ -1,15 +1,15 @@
 package appService
 
-import port.input.GetLightXensForAreaPort
+import port.input.GetLightXensForAreaInPort
 import port.output.LoadLightXensForAreaOutPort
 import lombok.RequiredArgsConstructor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import port.output.LightXenDTO
+import port.commun.models.LightXenDTO
 
 @Service
 @RequiredArgsConstructor
-class GetLightXensForAreaService(@Autowired private val loadLightXensForArea: LoadLightXensForAreaOutPort): GetLightXensForAreaPort {
+class GetLightXensForAreaService(@Autowired private val loadLightXensForArea: LoadLightXensForAreaOutPort): GetLightXensForAreaInPort {
 
     //TODO Fix nullable lists
     private fun shortList(myList: Set<LightXenDTO>?): List<LightXenDTO>?{
@@ -18,9 +18,7 @@ class GetLightXensForAreaService(@Autowired private val loadLightXensForArea: Lo
     }
 
     override fun whereAreaIs(area: Int): List<LightXenDTO>? {
-        //TODO -- Load Gens from Persistence
         val xenList = loadLightXensForArea.whereAreaIs(area)
-
         return shortList(xenList)
     }
 

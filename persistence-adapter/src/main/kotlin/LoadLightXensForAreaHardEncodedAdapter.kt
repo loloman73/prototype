@@ -1,7 +1,7 @@
 import commun.Money
 import domain.xenagisi.entities.*
-import port.output.LightXPointDTO
-import port.output.LightXenDTO
+import port.commun.models.LightXPointDTO
+import port.commun.models.LightXenDTO
 import port.output.LoadLightXensForAreaOutPort
 import java.util.*
 

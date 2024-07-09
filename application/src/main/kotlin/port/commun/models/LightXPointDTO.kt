@@ -1,4 +1,4 @@
-package port.output
+package port.commun.models
 
 import domain.xenagisi.entities.Coordinates
 import domain.xenagisi.entities.XPointUUID

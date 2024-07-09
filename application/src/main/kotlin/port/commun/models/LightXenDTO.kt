@@ -1,4 +1,4 @@
-package port.output
+package port.commun.models
 
 import commun.Money
 import domain.xenagisi.entities.XenUUID

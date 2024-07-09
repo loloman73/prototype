@@ -1,12 +1,12 @@
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import port.output.LoadLightXensForAreaPort
+import port.output.LoadLightXensForAreaOutPort
 
 @Configuration
 class PrototypeConfiguration {
     @Bean
-    fun loadXensForArea(): LoadLightXensForAreaPort {
-        return LoadLightXensForAreaHardCopyAdapter()
+    fun loadXensForArea(): LoadLightXensForAreaOutPort {
+        return LoadLightXensForAreaHardEncodedAdapter()
     }
 
 }

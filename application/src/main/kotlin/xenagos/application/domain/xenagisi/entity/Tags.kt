@@ -1,4 +1,4 @@
-package xenagos.application.domain.xenagisi.entities
+package xenagos.application.domain.xenagisi.entity
 
 enum class ContentTag(val description:String) {
     Architecture(""),

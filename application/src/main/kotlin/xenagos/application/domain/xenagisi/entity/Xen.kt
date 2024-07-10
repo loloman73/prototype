@@ -1,4 +1,4 @@
-package xenagos.application.domain.xenagisi.entities
+package xenagos.application.domain.xenagisi.entity
 
 import xenagos.application.commun.Money
 import java.util.*

@@ -1,8 +1,8 @@
-package xenagos.application.port.commun.models
+package xenagos.application.port.commun.model
 
 import xenagos.application.commun.Money
-import xenagos.application.domain.xenagisi.entities.XenUUID
-import xenagos.application.domain.xenagisi.entities.XenagosUUID
+import xenagos.application.domain.xenagisi.entity.XenUUID
+import xenagos.application.domain.xenagisi.entity.XenagosUUID
 
 
 data class LightXenDTO(val xenId: XenUUID,

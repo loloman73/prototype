@@ -1,4 +1,4 @@
-package xenagos.application.domain.xenagisi.entities
+package xenagos.application.domain.xenagisi.entity
 
 import java.util.UUID
 

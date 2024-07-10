@@ -5,7 +5,7 @@ import xenagos.application.port.output.LoadLightXensForAreaOutPort
 import lombok.RequiredArgsConstructor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import xenagos.application.port.commun.models.LightXenDTO
+import xenagos.application.port.commun.model.LightXenDTO
 
 @Service
 @RequiredArgsConstructor

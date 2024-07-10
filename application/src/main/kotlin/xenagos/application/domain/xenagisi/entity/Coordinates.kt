@@ -1,6 +1,4 @@
-package xenagos.application.domain.xenagisi.entities
-
-import java.text.DecimalFormat
+package xenagos.application.domain.xenagisi.entity
 
 data class Coordinates(val latitude: DecimalDegreeLat, val longitude: DecimalDegreeLon)
 

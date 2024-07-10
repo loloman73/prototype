@@ -1,6 +1,6 @@
 package xenagos.application.port.input
 
-import xenagos.application.port.commun.models.LightXenDTO
+import xenagos.application.port.commun.model.LightXenDTO
 
 interface GetLightXensForAreaInPort {
 

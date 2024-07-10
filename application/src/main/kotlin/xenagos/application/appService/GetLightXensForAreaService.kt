@@ -9,8 +9,7 @@ import xenagos.application.port.commun.models.LightXenDTO
 
 @Service
 @RequiredArgsConstructor
-class GetLightXensForAreaService(@Autowired private val loadLightXensForArea: LoadLightXensForAreaOutPort):
-    GetLightXensForAreaInPort {
+class GetLightXensForAreaService(@Autowired private val loadLightXensForArea: LoadLightXensForAreaOutPort): GetLightXensForAreaInPort {
 
     //TODO Fix nullable lists
     private fun shortList(myList: Set<LightXenDTO>?): List<LightXenDTO>?{

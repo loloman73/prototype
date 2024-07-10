@@ -1,7 +1,7 @@
 package xenagisiDomain
 
-import domain.xenagisi.entities.DecimalDegreeLat
-import domain.xenagisi.entities.DecimalDegreeLon
+import xenagos.application.domain.xenagisi.entities.DecimalDegreeLat
+import xenagos.application.domain.xenagisi.entities.DecimalDegreeLon
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals

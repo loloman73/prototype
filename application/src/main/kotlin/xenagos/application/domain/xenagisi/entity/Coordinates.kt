@@ -1,30 +1,34 @@
 package xenagos.application.domain.xenagisi.entity
 
 import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 
 data class Coordinates(val latitude: DecimalDegreeLat, val longitude: DecimalDegreeLon)
 
-
-//precision of 6 digits
-private const val PATTERN ="0.000000"
+private const val PATTERN ="0.000000"  //precision of 6 digits
 private const val LAT_MAX = 90
 private const val LON_MAX = 180
+private const val DECIMAL_SEPARATOR = '.'
 
-data class DecimalDegreeLat (private val degValue:Double) {
+fun formatDoubleToDecimalDegree(degValue:Double):Double{
+    val dfs = DecimalFormatSymbols.getInstance()
+    dfs.setDecimalSeparator(DECIMAL_SEPARATOR)
+    val df = DecimalFormat(PATTERN, dfs)
+    return df.format(degValue).toDouble()
+}
+
+data class DecimalDegreeLat (private val doubleValue:Double) {
    val degrees: Double
     init{
-        if ((degValue> LAT_MAX) || (degValue<-LAT_MAX)) throw IllegalArgumentException("Out of Range")
-        //degrees = degValue
-        //TODO FIX problem with conversion
-        degrees = DecimalFormat(PATTERN).format(degValue).toDouble()
+        if ((doubleValue> LAT_MAX) || (doubleValue<-LAT_MAX)) throw IllegalArgumentException("Out of Range")
+        degrees = formatDoubleToDecimalDegree(doubleValue)
     }
 }
 
-data class DecimalDegreeLon (private var degValue:Double) {
+data class DecimalDegreeLon (private var doubleValue:Double) {
     val degrees: Double
     init{
-        if ((degValue> LON_MAX) || (degValue<-LON_MAX)) throw IllegalArgumentException("Out of Range")
-        //degrees = degValue
-        degrees = DecimalFormat(PATTERN).format(degValue).toDouble()
+        if ((doubleValue> LON_MAX) || (doubleValue<-LON_MAX)) throw IllegalArgumentException("Out of Range")
+        degrees = formatDoubleToDecimalDegree(doubleValue)
     }
 }

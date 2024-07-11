@@ -11,7 +11,7 @@ import java.util.*
 @Repository
 class LoadLightXensForAreaHardEncodedAdapter: LoadLightXensForAreaOutPort {
     override fun whereAreaIs(area: Int): Set<LightXenDTO>? {
-        if (area < 51) {
+        if (area == 51) {
             val x1p1 = LightXPointDTO(
                 XPointUUID(UUID.randomUUID()),
                 Coordinates(DecimalDegreeLat(29.980417),DecimalDegreeLon(31.134389))

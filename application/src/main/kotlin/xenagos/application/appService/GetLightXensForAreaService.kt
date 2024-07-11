@@ -22,5 +22,4 @@ class GetLightXensForAreaService(@Autowired private val loadLightXensForArea: Lo
         return shortList(xenList)
     }
 
-
 }

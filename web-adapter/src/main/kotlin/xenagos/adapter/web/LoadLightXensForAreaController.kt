@@ -16,10 +16,13 @@ class LoadLightXensForAreaController( @Autowired private val loadLightXensForAre
         return ("HELLO FROM ROOT")
     }
 
-    @GetMapping("/l/{area}/")
+    @GetMapping("/{area}/")
     fun LoadLightXensForArea(@PathVariable("area") area: Int): String{
+
         val lightXensForArea: List<LightXenDTO>? = loadLightXensForAreaService.whereAreaIs(area)
-        return "HELLO FROM $area"
+
+
+        return "$lightXensForArea"
     }
 
 

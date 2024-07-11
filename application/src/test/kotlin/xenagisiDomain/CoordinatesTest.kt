@@ -29,9 +29,6 @@ class CoordinatesTest {
     @Test
     fun `Lat enter out of range value 90,0001 Should throw exception`(){
         assertThrows<IllegalArgumentException> { DecimalDegreeLat(90.0001) }
-
-       // val exc = assertThrows<Exception> {DecimalDegreeLat(90.0001)}
-       // assertTrue ( exc::class.java.typeName=="java.lang.IllegalArgumentException")
     }
     @Test
     fun `Lat enter number with 7 decimal digits Should convert it to 6 decimal digits with rounding`(){

@@ -6,8 +6,7 @@ import java.util.*
 class Xen(val xenId: XenUUID,
           val xenagosId: XenagosUUID,
           val xPoints: Set<XPoint>,
-          val price: Money
-) {
+          val price: Money) {
 
     fun midPoint(): XPoint {
 

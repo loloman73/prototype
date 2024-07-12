@@ -1,5 +1,6 @@
 package xenagos.adapter.web
 
+import com.google.gson.Gson
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -21,8 +22,11 @@ class LoadLightXensForAreaController( @Autowired private val loadLightXensForAre
 
         val lightXensForArea: List<LightXenDTO>? = loadLightXensForAreaService.whereAreaIs(area)
 
+        var gson = Gson()
+        var jsonString = gson.toJson(lightXensForArea)
+        //println(jsonString)
 
-        return "$lightXensForArea"
+        return "$jsonString"
     }
 
 

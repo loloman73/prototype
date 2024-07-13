@@ -9,6 +9,7 @@ dependencies {
     implementation(project(":application"))
     implementation(project(":persistence-adapter"))
     implementation(project(":web-adapter"))
+
     implementation("org.springframework.boot:spring-boot-starter:3.3.1")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 }

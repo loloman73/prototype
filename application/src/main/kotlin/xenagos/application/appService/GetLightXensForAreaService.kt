@@ -2,14 +2,11 @@ package xenagos.application.appService
 
 import xenagos.application.port.input.GetLightXensForAreaInPort
 import xenagos.application.port.output.LoadLightXensForAreaOutPort
-import lombok.RequiredArgsConstructor
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import xenagos.application.port.commun.model.LightXenDTO
 
 @Service
-@RequiredArgsConstructor
-class GetLightXensForAreaService(@Autowired private val loadLightXensForArea: LoadLightXensForAreaOutPort): GetLightXensForAreaInPort {
+class GetLightXensForAreaService( private val loadLightXensForArea: LoadLightXensForAreaOutPort): GetLightXensForAreaInPort {
 
     //TODO Fix nullable lists
     private fun shortList(myList: Set<LightXenDTO>?): List<LightXenDTO>?{

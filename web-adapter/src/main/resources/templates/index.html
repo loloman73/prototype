@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Xenagos</title>
+</head>
+<body>
+<h1  th:text="${area}"> </h1>
+
+<div>
+    <ul>
+        <li th:each="xenID : ${XenID}">
+            <span th:text="${xenID}"></span>
+        </li>
+    </ul>
+</div>
+
+<p></p>
+
+<div>
+    <ul>
+        <li th:each="xen : ${Xens}">
+            <span th:text="${xen}"></span>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

@@ -13,7 +13,7 @@ import xenagos.application.port.input.GetLightXensForAreaInPort
 @Controller
 class LoadLightXensForAreaController( @Autowired private val loadLightXensForAreaService: GetLightXensForAreaInPort) {
 
-
+    /* works for area=51 */
     @GetMapping("/{area}")
     fun testThyme(@PathVariable("area") area: Int, model: Model): String{
 
@@ -24,7 +24,6 @@ class LoadLightXensForAreaController( @Autowired private val loadLightXensForAre
 
 
         model.addAttribute("area", area)
-        model.addAttribute("XenID", xenIdList)
         model.addAttribute("Xens", lightXensForArea)
 
         return "index"

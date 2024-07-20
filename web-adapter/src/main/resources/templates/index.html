@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Xenagos</title>
 </head>
 <body>
-<h1  th:text="${area}"> </h1>
-
-<div>
-    <ul>
-        <li th:each="xenID : ${XenID}">
-            <span th:text="${xenID}"></span>
-        </li>
-    </ul>
-</div>
-
-<p></p>
+<h1 th:text="${area}"> area code </h1>
 
 <div>
     <ul>
         <li th:each="xen : ${Xens}">
-            <span th:text="${xen}"></span>
+            <span th:text="|Xenagisi UUID = ${xen.xenId.value}|"></span><br>
+            <span th:text="|Xenagos UUID = ${xen.xenagosId.value}|"></span><br>
+            <span th:text="|Price = ${xen.price.amount} ${xen.price.currency}|"></span> <br>
+            <div th:each="lxp: ${xen.lightXPoints}">
+                <ul>
+                    <li>
+                        <span th:text="|XPoint UUID = ${lxp.xPointId.value}|"></span><br>
+                        <span th:text="|Latitude = ${lxp.coordinates.latitude.degrees}|"></span><br>
+                        <span th:text="|Longitude = ${lxp.coordinates.longitude.degrees}|"></span><br>
+                    </li>
+                </ul>
+            </div>
+
         </li>
     </ul>
 </div>

@@ -2,10 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{./css/output.css}">
+    <link rel="shortcut icon" type="image/png" th:href="@{./img/favicon.ico}">
     <title>Xenagos</title>
 </head>
 <body>
-<h1 th:text="${area}"> area code </h1>
+<h1 class="text-3xl font-bold underline" th:text="${area}"> area code </h1>
 
 <div>
     <ul>

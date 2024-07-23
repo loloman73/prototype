@@ -12,7 +12,7 @@ at tailwind.config.js edit
 content: ["./src/main/resources/templates/**/*.{html,js}"]
 
 
-at PowerShell
+at PowerShell every time we open IDE
 ./tailwindcss -i ./src/main/resources/static/css/input.css -o ./src/main/resources/static/css/output.css --watch
 
 

@@ -8,27 +8,46 @@
     <title>Xenagos</title>
 </head>
 <body>
-<h1 class="text-8xl font-bold underline" th:text="${area}"> area code </h1>
 
-<div>
-    <ul>
-        <li th:each="xen : ${Xens}">
-            <span th:text="|Xenagisi UUID = ${xen.xenId.value}|"></span><br>
-            <span th:text="|Xenagos UUID = ${xen.xenagosId.value}|"></span><br>
-            <span th:text="|Price = ${xen.price.amount} ${xen.price.currency}|"></span> <br>
-            <div th:each="lxp: ${xen.lightXPoints}">
-                <ul>
-                    <li>
-                        <span th:text="|XPoint UUID = ${lxp.xPointId.value}|"></span><br>
-                        <span th:text="|Latitude = ${lxp.coordinates.latitude.degrees}|"></span><br>
-                        <span th:text="|Longitude = ${lxp.coordinates.longitude.degrees}|"></span><br>
-                    </li>
-                </ul>
-            </div>
+<header >
+    <h1 class="text-4xl font-bold underline" th:text="${area}"> area code </h1>
+</header>
 
-        </li>
-    </ul>
-</div>
+<main>
+    <section>
+        <div>
+            <ul>
+                <li th:each="xen : ${Xens}">
+                    <span th:text="|Xenagisi UUID = ${xen.xenId.value}|"></span><br>
+                    <span th:text="|Xenagos UUID = ${xen.xenagosId.value}|"></span><br>
+                    <span th:text="|Price = ${xen.price.amount} ${xen.price.currency}|"></span> <br>
+                    <div th:each="lxp: ${xen.lightXPoints}">
+                        <ul>
+                            <li>
+                                <span th:text="|XPoint UUID = ${lxp.xPointId.value}|"></span><br>
+                                <span th:text="|Latitude = ${lxp.coordinates.latitude.degrees}|"></span><br>
+                                <span th:text="|Longitude = ${lxp.coordinates.longitude.degrees}|"></span><br>
+                            </li>
+                        </ul>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h1 class="text-4xl font-bold underline" > Map </h1>
+        </div>
+    </section>
+
+
+</main>
+
+<footer>
+
+</footer>
+
+
+
 
 </body>
 </html>

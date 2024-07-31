@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{./css/output.css}">
+    <link rel="stylesheet" th:href="@{./css/styles.css}">
     <link rel="shortcut icon" type="image/png" th:href="@{./img/favicon.ico}">
     <title>Xenagos</title>
 </head>
@@ -14,7 +14,15 @@
 </header>
 
 <main>
-    <section>
+    <section id="allLists">
+        <section id="detailsList">
+
+        </section>
+
+        <section id="mapList">
+
+        </section>
+
         <div>
             <ul>
                 <li th:each="xen : ${Xens}">
@@ -42,10 +50,7 @@
 
 </main>
 
-<footer>
-
-</footer>
-
+<footer></footer>
 
 
 

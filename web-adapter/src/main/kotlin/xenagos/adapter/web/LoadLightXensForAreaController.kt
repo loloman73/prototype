@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.ResponseBody
 import xenagos.application.domain.xenagisi.entity.XenUUID
 import xenagos.application.port.commun.model.LightXenDTO
 import xenagos.application.port.input.GetLightXensForAreaInPort
@@ -19,9 +18,8 @@ class LoadLightXensForAreaController( @Autowired private val loadLightXensForAre
 
         val lightXensForArea: List<LightXenDTO>? = loadLightXensForAreaService.whereAreaIs(area)
 
-        var xenIdList = mutableListOf<XenUUID>()
+        val xenIdList = mutableListOf<XenUUID>()
         lightXensForArea?.forEach {xenIdList.add(it.xenId)  }
-
 
         model.addAttribute("area", area)
         model.addAttribute("Xens", lightXensForArea)

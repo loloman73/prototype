@@ -1,3 +1,299 @@
-.detailsList{
-border=solid, black;
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+:root {
+  --LIGHT_GRAY_COLOR: hsla(0, 0%, 60%, 0.2);
+}
+
+body {
+  margin: 0px 15px;
+}
+
+
+/* HEADER CONTAINER */
+
+header {
+  position: sticky;
+  top: 0;
+  display: block;
+  background-color: white;
+  z-index: 10;
+}
+
+
+/* UPPER HEADER */
+
+.upHeader {
+  height: 85px;
+  display: grid;
+  grid-template-columns: 380px auto 100px 100px;
+  align-items: center;
+  border-bottom: 1px solid var(--LIGHT_GRAY_COLOR);
+  padding: 0 20px;
+}
+
+.logoCell{
+  grid-area: 1/1/1/2;
+}
+.logoCell img{
+  width: 360px;
+  height: 80px;
+}
+
+.i18nOptionsCell{
+  grid-area: 1/3/1/4;
+  display:grid;
+  grid-template-columns: auto auto;
+  justify-content:center;
+}
+.i18nOptionsCell img {
+  width: 18px;
+  height: 18px;
+  margin-right:5px;
+}
+
+.userLoginCell{
+  grid-area: 1/4/1/5;
+  text-align: center;
+}
+.userLoginButton{
+  border: none;
+  text-decoration: none;
+  padding: 0;
+  height: 50px;
+  width: 50px;
+  background-color: white;
+  cursor: pointer;
+  box-shadow: 0 0 20px 2px hsl(0, 0%, 90%);
+  border-radius: 50%;
+}
+.userLoginCell img{
+  width: 50px;
+  height: 50px;
+}
+
+
+/* LOWER HEADER */
+
+.loHeader{
+  height: 60px;
+  display: grid;
+  grid-template-columns: 500px auto 150px;
+  align-items: center;
+  box-shadow: 0 4px 8px var(--LIGHT_GRAY_COLOR);
+  padding: 0 20px;
+}
+
+.filtersCell {
+  grid-area: 1/1/1/2;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  column-gap: 15px;
+  justify-content:start;
+  }
+.filtersCell select {
+  font-size: 1rem;
+  height: 35px;
+  padding: 3px 8px;
+}
+
+.viewModeCell {
+  grid-area: 1/3/1/4;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: end;
+  gap: 15px;
+}
+
+.viewModeCell button {
+  font-size: 1rem;
+  height: 35px;
+  padding: 3px 8px;
+}
+
+
+/* MAIN CONTAINER */
+
+.mainContainer {
+  display: grid;
+  grid-template-columns: 45% auto;
+  margin-top: 10px;
+}
+
+
+/* MAIN CONTAINER - LEFT - XEN CARDS */
+.XenCardsContainer {
+
+}
+
+.XenCardsList {
+  list-style-type: none;
+  padding: 0px;
+}
+
+.XenCard{
+    height: 200px;
+    border: 2px solid var(--LIGHT_GRAY_COLOR);
+    margin: 10px 10px 15px 0px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.XenCard:hover {
+    box-shadow: 0 4px 8px 0 hsla(0, 0%, 10%, 0.2),
+      0 6px 20px 0 hsla(0, 0%, 10%, 0.2);
+    transition-property: box-shadow;
+    transition-duration: 250ms;
+    cursor: pointer;
+}
+
+.XenCardLink {
+    text-decoration: none;
+}
+
+.XenCardLink:link, .XenCardLink:visited {
+    color: #505050;
+}
+
+.XenCardImage {
+    border-radius: 10px;
+    width: 267px;
+    height: 199px;
+    margin-top: -1px;
+    margin-left: -1px;
+}
+
+.XenCardDetails{
+    display: grid;
+    grid-template-columns: auto 110px;
+    grid-template-rows: 40px auto 35px 30px;
+    gap: 0px;
+    padding: 8px;
+}
+
+.XenCardTitle{
+    grid-area: 1/1/2/2;
+    font-size: 1rem;
+    font-weight: bold;
+    padding-right: 12px;
+    text-align: left;
+    vertical-align: top;
+}
+.XenCardDescription{
+    grid-area: 2/1/3/2;
+    font-size: 0.8rem;
+    padding-right: 12px;
+    padding-top: 3px;
+    text-align: left;
+    vertical-align: top;
+}
+.XenagosFace{
+    grid-area: 1/2/3/3;
+    align-self: center;
+}
+.xenagosFaceImage {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+}
+.XenagosName{
+    grid-area: 3/2/4/3;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #404040;
+    align-content: top;
+    text-align: center;
+}
+
+.XenPrice {
+    grid-area: 3/1/4/2;
+    font-size: 1.25rem;
+    text-shadow: 0px 0px 2px rgb(160, 160, 160);
+    align-content: top;
+}
+
+.XenMetaData{
+    grid-area: 4/1/5/3;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.XenMetaDataItem {
+    padding: 4px 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    gap: 5px;
+    border: 1px solid var(--LIGHT_GRAY_COLOR);
+    border-radius: 6px;
+    background-color: hsl(192, 100%, 97%);
+  }
+.XPointFlagImage{
+   width: 13px;
+   height: 20px;
+}
+.hideImage{
+   width: 24px;
+   height: 24px;
+}
+.shareIconImage{
+    width: 20px;
+    height: 20px;
+}
+
+.XenCardAddToCartCell{
+    grid-area: 4/2/5/3;
+    justify-self: center;
+    width: 60%;
+    border: 1px solid var(--LIGHT_GRAY_COLOR);
+    border-radius: 16px;
+    background-color: hsl(90, 75%, 75%);
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+.XenCardCartImage{
+    width: 24px;
+    height: 24px;
+}
+
+
+/* MAIN CONTAINER - RIGHT - XEN MAP */
+
+.XensMapContainer {
+  padding: 0 10px;
+}
+
+.mapContainer {
+  position: sticky;
+  top: 160px;
+}
+
+.googleMap{
+  width:100%;
+}
+
+
+
+/* FOOTER */
+
+footer {
+  margin-top: 80px;
+  background-color:hsl(193, 75%, 65%);
+}
+.footerContainer{
+    display:flex;
+    justify-self: center;
+    gap:50px;
+}
+.footerList{
+    list-style-type: none;
+}
+

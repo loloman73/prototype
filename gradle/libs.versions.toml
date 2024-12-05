@@ -1,0 +1,14 @@
+[versions]
+sb="3.4.0"
+
+[libraries]
+sb-starter = {group="org.springframework.boot", name="spring-boot-starter", version.ref="sb"}
+sb-starter-web = {group="org.springframework.boot", name="spring-boot-starter-web", version.ref="sb"}
+lombok="org.projectlombok:lombok:1.18.34"
+thymeleaf="org.thymeleaf:thymeleaf-spring6:3.1.2.RELEASE"
+jetbrains-kotlin-reflect="org.jetbrains.kotlin:kotlin-reflect:2.1.0"
+
+[plugins]
+sb = {id="org.springframework.boot", version.ref="sb"}
+jetbrains-kotlin-spring = {id="org.jetbrains.kotlin.plugin.spring", version="1.9.24"}
+

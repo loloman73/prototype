@@ -11,4 +11,3 @@ jetbrains-kotlin-reflect="org.jetbrains.kotlin:kotlin-reflect:2.1.0"
 [plugins]
 sb = {id="org.springframework.boot", version.ref="sb"}
 jetbrains-kotlin-spring = {id="org.jetbrains.kotlin.plugin.spring", version="1.9.24"}
-

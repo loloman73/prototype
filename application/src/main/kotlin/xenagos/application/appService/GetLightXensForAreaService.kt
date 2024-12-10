@@ -1,9 +1,9 @@
 package xenagos.application.appService
 
-import xenagos.application.port.input.GetLightXensForAreaInPort
-import xenagos.application.port.output.LoadLightXensForAreaOutPort
 import org.springframework.stereotype.Service
 import xenagos.application.port.commun.model.LightXenDTO
+import xenagos.application.port.input.GetLightXensForAreaInPort
+import xenagos.application.port.output.LoadLightXensForAreaOutPort
 
 @Service
 class GetLightXensForAreaService( private val loadLightXensForArea: LoadLightXensForAreaOutPort): GetLightXensForAreaInPort {

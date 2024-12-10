@@ -1,9 +1,9 @@
 package xenagisiDomain
 
-import xenagos.application.domain.xenagisi.entity.DecimalDegreeLat
-import xenagos.application.domain.xenagisi.entity.DecimalDegreeLon
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import xenagos.application.domain.xenagisi.entity.DecimalDegreeLat
+import xenagos.application.domain.xenagisi.entity.DecimalDegreeLon
 import kotlin.test.assertEquals
 
 class CoordinatesTest {

@@ -1,13 +1,17 @@
 [versions]
-sb="3.4.0"
+springboot="3.4.0"
+postgres="42.7.4"
 
 [libraries]
-sb-starter = {group="org.springframework.boot", name="spring-boot-starter", version.ref="sb"}
-sb-starter-web = {group="org.springframework.boot", name="spring-boot-starter-web", version.ref="sb"}
+sb-starter = {group="org.springframework.boot", name="spring-boot-starter", version.ref="springboot"}
+sb-starter-web = {group="org.springframework.boot", name="spring-boot-starter-web", version.ref="springboot"}
+sb-starter-data-jpa = {group="org.springframework.boot", name="spring-boot-starter-data-jpa", version.ref="springboot"}
 lombok="org.projectlombok:lombok:1.18.34"
 thymeleaf="org.thymeleaf:thymeleaf-spring6:3.1.2.RELEASE"
 jetbrains-kotlin-reflect="org.jetbrains.kotlin:kotlin-reflect:2.1.0"
+postgres={group="org.postgresql", name="postgresql", version.ref="postgres"}
+
 
 [plugins]
-sb = {id="org.springframework.boot", version.ref="sb"}
+sb = {id="org.springframework.boot", version.ref="springboot"}
 jetbrains-kotlin-spring = {id="org.jetbrains.kotlin.plugin.spring", version="1.9.24"}

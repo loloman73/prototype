@@ -1,6 +1,6 @@
 package xenagos.adapter.persistence
 
-import org.springframework.stereotype.Repository
+import org.springframework.stereotype.Service
 import xenagos.application.commun.Money
 import xenagos.application.domain.xenagisi.entity.*
 import xenagos.application.port.commun.model.LightXPointDTO
@@ -8,7 +8,7 @@ import xenagos.application.port.commun.model.LightXenDTO
 import xenagos.application.port.output.LoadLightXensForAreaOutPort
 import java.util.*
 
-@Repository
+@Service
 class LoadLightXensForAreaHardEncodedAdapter: LoadLightXensForAreaOutPort {
     override fun whereAreaIs(area: Int): Set<LightXenDTO>? {
         if (area == 51) {

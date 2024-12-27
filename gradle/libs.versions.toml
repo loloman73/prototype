@@ -1,6 +1,6 @@
 [versions]
 springboot="3.4.0"
-postgres="42.7.4"
+postgres="42.7.3"
 flyway="11.0.1"
 lombok="1.18.36"
 thymeleaf="3.1.2.RELEASE"

@@ -2,7 +2,11 @@ package xenagos.adapter.persistence
 
 import org.springframework.stereotype.Service
 import xenagos.application.commun.Money
+import xenagos.application.domain.tour.commun.Coordinates
+import xenagos.application.domain.tour.commun.DecimalDegreeLat
+import xenagos.application.domain.tour.commun.DecimalDegreeLon
 import xenagos.application.domain.xenagisi.entity.*
+import xenagos.application.domain.xenagos.XenagosUUID
 import xenagos.application.port.commun.model.LightXPointDTO
 import xenagos.application.port.commun.model.LightXenDTO
 import xenagos.application.port.output.LoadLightXensForAreaOutPort
@@ -14,19 +18,19 @@ class LoadLightXensForAreaHardEncodedAdapter: LoadLightXensForAreaOutPort {
         if (area == 51) {
             val x1p1 = LightXPointDTO(
                 XPointUUID(UUID.randomUUID()),
-                Coordinates(DecimalDegreeLat(29.980417),DecimalDegreeLon(31.134389))
+                Coordinates(DecimalDegreeLat(29.980417), DecimalDegreeLon(31.134389))
                 )
             val x1p2 = LightXPointDTO(
                 XPointUUID(UUID.randomUUID()),
-                Coordinates(DecimalDegreeLat(29.980361),DecimalDegreeLon(31.132972))
+                Coordinates(DecimalDegreeLat(29.980361), DecimalDegreeLon(31.132972))
                 )
             val x1p3 = LightXPointDTO(
                 XPointUUID(UUID.randomUUID()),
-                Coordinates(DecimalDegreeLat(29.979472),DecimalDegreeLon(31.132806))
+                Coordinates(DecimalDegreeLat(29.979472), DecimalDegreeLon(31.132806))
                 )
             val x1p4 = LightXPointDTO(
                 XPointUUID(UUID.randomUUID()),
-                Coordinates(DecimalDegreeLat(29.978083),DecimalDegreeLon(31.132806))
+                Coordinates(DecimalDegreeLat(29.978083), DecimalDegreeLon(31.132806))
                 )
             val x1 = LightXenDTO(xenId = XenUUID(UUID.randomUUID()),
                                   xenagosId = XenagosUUID(UUID.randomUUID()),

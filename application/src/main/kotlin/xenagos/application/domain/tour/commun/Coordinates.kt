@@ -1,4 +1,4 @@
-package xenagos.application.domain.xenagisi.entity
+package xenagos.application.domain.tour.commun
 
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols

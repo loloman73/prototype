@@ -6,23 +6,23 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import xenagos.application.domain.tour.entity.TourUUID
-import xenagos.application.port.commun.model.LightXenDTO
-import xenagos.application.port.input.GetLightXensForAreaInPort
+import xenagos.application.port.commun.model.LightTourDTO
+import xenagos.application.port.input.GetLightToursForAreaInPort
 
 @Controller
-class LoadLightXensForAreaController( @Autowired private val loadLightXensForAreaService: GetLightXensForAreaInPort) {
+class LoadLightToursForAreaController( @Autowired private val loadLightToursForAreaService: GetLightToursForAreaInPort) {
 
     /* works for area=51 */
     @GetMapping("/{area}")
     fun testThyme(@PathVariable("area") area: Int, model: Model): String{
 
-        val lightXensForArea: List<LightXenDTO>? = loadLightXensForAreaService.whereAreaIs(area)
+        val lightToursForArea: List<LightTourDTO>? = loadLightToursForAreaService.whereAreaIs(area)
 
-        val xenIdList = mutableListOf<TourUUID>()
-        lightXensForArea?.forEach {xenIdList.add(it.xenId)  }
+        val tourIdList = mutableListOf<TourUUID>()
+        lightToursForArea?.forEach {tourIdList.add(it.tourId)  }
 
         model.addAttribute("area", area)
-        model.addAttribute("Xens", lightXensForArea)
+        model.addAttribute("tours", lightToursForArea)
 
         return "index"
     }

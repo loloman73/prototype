@@ -189,14 +189,14 @@
         <h1 class="text-4xl font-bold underline" th:text="${area}"> area code </h1>
         <br><br><br><br><br>
         <ul>
-            <li th:each="xen : ${Xens}">
-                <span th:text="|Xenagisi UUID = ${xen.xenId.value}|"></span><br>
-                <span th:text="|Xenagos UUID = ${xen.xenagosId.value}|"></span><br>
-                <span th:text="|Price = ${xen.price.amount} ${xen.price.currency}|"></span> <br>
-                <div th:each="lxp: ${xen.lightXPoints}">
+            <li th:each="tour : ${tours}">
+                <span th:text="|Xenagos UUID = ${tour.xenagosId.value}|"></span><br>
+                <span th:text="|Tour UUID = ${tour.tourId.value}|"></span><br>
+                <span th:text="|Price = ${tour.price.amount} ${tour.price.currency}|"></span> <br>
+                <div th:each="lxp: ${tour.lightTourPoints}">
                     <ul>
                         <li>
-                            <span th:text="|XPoint UUID = ${lxp.xPointId.value}|"></span><br>
+                            <span th:text="|TourPoint UUID = ${lxp.tourPointId.value}|"></span><br>
                             <span th:text="|Latitude = ${lxp.coordinates.latitude.degrees}|"></span><br>
                             <span th:text="|Longitude = ${lxp.coordinates.longitude.degrees}|"></span><br>
                         </li>

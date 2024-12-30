@@ -1,6 +1,5 @@
 package xenagos.adapter.web
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -10,10 +9,10 @@ import xenagos.application.port.commun.model.LightTourDTO
 import xenagos.application.port.input.GetLightToursForAreaInPort
 
 @Controller
-class LoadLightToursForAreaController( @Autowired private val loadLightToursForAreaService: GetLightToursForAreaInPort) {
+class LoadLightToursForAreaController(private val loadLightToursForAreaService: GetLightToursForAreaInPort) {
 
     /* works for area=51 */
-    @GetMapping("/{area}")
+    @GetMapping("/area/{area}")
     fun testThyme(@PathVariable("area") area: Int, model: Model): String{
 
         val lightToursForArea: List<LightTourDTO>? = loadLightToursForAreaService.whereAreaIs(area)
@@ -24,7 +23,7 @@ class LoadLightToursForAreaController( @Autowired private val loadLightToursForA
         model.addAttribute("area", area)
         model.addAttribute("tours", lightToursForArea)
 
-        return "index"
+        return "area"
     }
 
 

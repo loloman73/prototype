@@ -23,7 +23,7 @@ class LoadLightToursForAreaController(private val loadLightToursForAreaService: 
         model.addAttribute("area", area)
         model.addAttribute("tours", lightToursForArea)
 
-        return "area"
+        return "main"
     }
 
 

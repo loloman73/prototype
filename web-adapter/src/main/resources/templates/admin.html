@@ -1,12 +1,29 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{/layouts/layout.html}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  th:href="@{/css/styles.css}">
-    <title>Admin Page</title>
+    <title>Admin</title>
 </head>
+
 <body>
 
+    <section layout:fragment="loHeader">
+        LO HEADER
+    </section>
+
+    <section layout:fragment="leftMainContainer">
+        LEFT MAIN CONTAINER
+    </section>
+
+    <section layout:fragment="rightMainContainer">
+        RIGHT MAIN CONTAINER
+    </section>
+
+    <section layout:fragment="extraFooter">
+        EXTRA FOOTER
+    </section>
+
 </body>
+
 </html>

@@ -12,6 +12,7 @@ kotlinSpring="1.9.24"
 sb-starter = {group="org.springframework.boot", name="spring-boot-starter", version.ref="springboot"}
 sb-starter-web = {group="org.springframework.boot", name="spring-boot-starter-web", version.ref="springboot"}
 sb-starter-data-jpa = {group="org.springframework.boot", name="spring-boot-starter-data-jpa", version.ref="springboot"}
+sb-dev-tools = {group="org.springframework.boot", name="spring-boot-devtools", version.ref="springboot"}
 lombok = {group="org.projectlombok", name="lombok", version.ref="lombok"}
 thymeleaf = {group="org.thymeleaf", name="thymeleaf-spring6", version.ref="thymeleaf"}
 thymeleafLD = {group="nz.net.ultraq.thymeleaf", name="thymeleaf-layout-dialect", version.ref="thymeleafLD"}

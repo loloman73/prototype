@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{/layouts/layout.html}">
 <head>
     <title>Main</title>
@@ -43,56 +44,8 @@
 
     <section layout:fragment="leftMainContainer" class="TourCardsContainer">
         <ul class="TourCardsList">
-            <li class="TourCard">
-                <a class="TourCardLink" href="#">
-                    <img class="TourCardImage" th:src="@{/img/egypt.jpg}" alt="">
-                    <div class="TourCardDetails">
-                        <div class="TourCardTitle">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit
-                        </div>
-                        <div class="TourCardDescription">
-                            Quibusdam itaque, saepe molestiae enim nesciunt dolor excepturi ipsa
-                            similique eaque aut ex sint asperiores
-                            quia commodi, reprehenderit eum voluptatum veniam porro?
-                        </div>
-                        <div class="XenagosFace">
-                            <figure>
-                                <a href="#" >
-                                    <img th:src="@{/img/xenagos1.jpg}" class="XenagosFaceImage" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="XenagosName">
-                            Tour. Name
-                        </div>
-                        <div class="TourPrice">US$ 8</div>
-                        <div class="TourMetaData">
-                            <div class="TourMetaDataItem">
-                                <span>23</span>
-                                <img th:src="@{/img/XPointFlag.png}" class="XPointFlagImage" alt="">
-                            </div>
-                            <div class="TourMetaDataItem">
-                                en
-                            </div>
-                            <div class="TourMetaDataItem">
-                                <h3>&starf;</h3>4.8(100)
-                            </div>
-                            <div class="TourMetaDataItem">
-                                Save &#128153;
-                            </div>
-                            <div class="TourMetaDataItem">
-                                <img th:src="@{/img/hide.png}" class="hideImage" alt="">
-                            </div>
-                            <div class="TourMetaDataItem">
-                                Share
-                                <img th:src="@{/img/share.png}" class="shareIconImage" alt="">
-                            </div>
-                        </div>
-                        <div class="TourCardAddToCartCell">
-                            <img th:src="@{/img/AddToCart.png}" class="TourCardCartImage" alt="">
-                        </div>
-                    </div>
-                </a>
+            <li th:each="tour:${tours}" class="TourCard">
+                <a th:replace="fragments/fragments.html :: TourCard(xenagosID=${tour.xenagosId})"></a>
             </li>
         </ul>
     </section>

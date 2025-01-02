@@ -2,14 +2,14 @@
 <html
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layouts/layout.html}">
+        layout:decorate="~{/layouts/layout.html}">
 <head>
     <title>Main</title>
 </head>
 
 <body>
 
-    <section layout:fragment="loHeader">
+    <section layout:fragment="Header_Lo">
         <article class="filtersCell">
             <select name="TourLanguage" id="tourLang">
                 <option value="English">English</option>
@@ -42,44 +42,19 @@
         </article>
     </section>
 
-    <section layout:fragment="leftMainContainer" class="TourCardsContainer">
+    <section layout:fragment="MainContainer_Left" class="TourCardsContainer">
         <ul class="TourCardsList">
             <li th:each="tour:${tours}" class="TourCard">
-                <a th:replace="fragments/fragments.html :: TourCard(xenagosID=${tour.xenagosId})"></a>
+                <a th:replace="~{fragments/fragments.html :: TourCard(xenagosID=${tour.xenagosId})}"></a>
             </li>
         </ul>
     </section>
 
-    <section layout:fragment="rightMainContainer" class="ToursMapContainer">
+    <section layout:fragment="MainContainer_Right" class="ToursMapContainer">
         <div class="mapContainer">
             <iframe class="googleMap" src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d10850.84757670908!2d23.72488576362117!3d37.9660634094878!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2seg!4v1722882312653!5m2!1sen!2seg" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </section>
-
-    <div layout:fragment="extraFooter">
-        <br><br><br><br><br>
-        <h1 class="text-4xl font-bold underline" th:text="${area}"> area code </h1>
-        <br><br><br><br><br>
-        <ul>
-            <li th:each="tour : ${tours}">
-                <span th:text="|Xenagos UUID = ${tour.xenagosId.value}|"></span><br>
-                <span th:text="|Tour UUID = ${tour.tourId.value}|"></span><br>
-                <span th:text="|Price = ${tour.price.amount} ${tour.price.currency}|"></span> <br>
-                <div th:each="lxp: ${tour.lightTourPoints}">
-                    <ul>
-                        <li>
-                            <span th:text="|TourPoint UUID = ${lxp.tourPointId.value}|"></span><br>
-                            <span th:text="|Latitude = ${lxp.coordinates.latitude.degrees}|"></span><br>
-                            <span th:text="|Longitude = ${lxp.coordinates.longitude.degrees}|"></span><br>
-                        </li>
-                    </ul>
-                </div>
-
-            </li>
-        </ul>
-        <br><br><br><br><br>
-
-    </div>
 
 </body>
 

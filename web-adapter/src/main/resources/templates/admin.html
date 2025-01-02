@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html
+        xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{/layouts/layout.html}">
 <head>
@@ -8,26 +9,22 @@
 
 <body>
 
-    <section layout:fragment="loHeader">
+    <section layout:fragment="Header_Lo">
         LO HEADER
     </section>
 
-    <section layout:fragment="leftMainContainer" style="border: 2px solid blue;">
+    <section layout:fragment="MainContainer_Left" style="border: 2px solid blue;">
         LEFT MAIN CONTAINER START
         <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
         <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
         LEFT MAIN CONTAINER END
     </section>
 
-    <section layout:fragment="rightMainContainer" style="border: 2px solid red;">
+    <section layout:fragment="MainContainer_Right" style="border: 2px solid red;">
         RIGHT MAIN CONTAINER START
         <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
         <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
         RIGHT MAIN CONTAINER END 
-    </section>
-
-    <section layout:fragment="extraFooter">
-        EXTRA FOOTER
     </section>
 
 </body>

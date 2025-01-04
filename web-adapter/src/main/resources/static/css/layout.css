@@ -9,7 +9,7 @@
 }
 
 body {
-  margin: 0px 15px;
+  margin: 0 15px;
 }
 
 
@@ -87,8 +87,7 @@ header {
 
 /* MAIN CONTAINER */
 .main-container {
-  display: grid;
-  grid-template-columns: 45% auto;
+  display: flex;
   margin-top: 10px;
 }
 

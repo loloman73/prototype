@@ -1,0 +1,14 @@
+.left-section {
+    border: 2px solid blue;
+    width: 20%;
+    display:block;
+}
+.left-section button{
+    width:100%;
+}
+
+
+.right-section{
+    border: 2px solid red;
+    width: 60%;
+}

@@ -5,22 +5,23 @@
         layout:decorate="~{/layouts/layout.html}">
 <head>
     <title>Admin</title>
+    <link rel="stylesheet"  th:href="@{/css/admin.css}">
 </head>
 
 <body>
 
-    <section layout:fragment="Header_Lo">
+    <section layout:fragment="HEADER_LO">
         LO HEADER
     </section>
 
-    <section layout:fragment="MainContainer_Left" style="border: 2px solid blue;">
+    <section layout:fragment="MAIN_CONTAINER_LEFT" style="border: 2px solid blue;">
         LEFT MAIN CONTAINER START
         <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
         <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
         LEFT MAIN CONTAINER END
     </section>
 
-    <section layout:fragment="MainContainer_Right" style="border: 2px solid red;">
+    <section layout:fragment="MAIN_CONTAINER_RIGHT" style="border: 2px solid red;">
         RIGHT MAIN CONTAINER START
         <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
         <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>

@@ -7,45 +7,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  th:href="@{/css/styles.css}">
+    <link rel="stylesheet"  th:href="@{/css/layout.css}">
     <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Prototype Xenagos</title>
 </head>
 
 <body>
     <header>
-        <section class="upHeader">
-            <article class="logoCell">
-                <img th:src="@{/img/logo.png}" alt="logo">
+        <section class="header-up">
+            <article class="header-up__logo-cell">
+                <img class="logo-img" th:src="@{/img/logo.png}" alt="logo">
             </article>
-            <article class="i18nOptionsCell">
-                <img th:src="@{/img/globe.jpg}" alt="globe">
+            <article class="header-up__i18n-cell">
+                <img class="i18n-img" th:src="@{/img/globe.jpg}" alt="globe">
                 <select name="PageLanguage" id="pageLang">
                     <option value="GR">GR</option>
                     <option value="EN">EN</option>
                 </select>
             </article>
-            <article class="userLoginCell">
-                <button class="userLoginButton">
-                    <img th:src="@{/img/user.png}" alt="profile photo" >
+            <article class="header-up__login-cell">
+                <button class="user-login-btn">
+                    <img class="user-login-img" th:src="@{/img/user.png}" alt="profile photo" >
                 </button>
             </article>
         </section>
-        <section layout:fragment="Header_Lo" class="loHeader"> </section>
+        <section layout:fragment="HEADER_LO" class="header-lo"> </section>
     </header>
 
     <main>
-        <section class="mainContainer">
-            <section layout:fragment="MainContainer_Left"> </section>
-            <section layout:fragment="MainContainer_Right"> </section>
+        <section class="main-container">
+            <section layout:fragment="MAIN_CONTAINER_LEFT"> </section>
+            <section layout:fragment="MAIN_CONTAINER_RIGHT"> </section>
         </section>
     </main>
 
     <footer>
         <br> <br> <br>
         <br> <br> <br>
-        <div class="footerContainer">
+        <div class="footer-container">
             <article>
-                <ul class="footerList">
+                <ul class="footer-list">
                     <li>
                         <a href="#"> About Us </a>
                     </li>
@@ -58,7 +58,7 @@
                 </ul>
             </article>
             <article>
-                <ul class="footerList">
+                <ul class="footer-list">
                     <li>
                         <a href="#"> For Professionals </a>
                     </li>
@@ -71,7 +71,7 @@
                 </ul>
             </article>
             <article>
-                <ul class="footerList">
+                <ul class="footer-list">
                     <li>
                         <a href="#"> Mobile </a>
                     </li>
@@ -84,7 +84,7 @@
                 </ul>
             </article>
             <article>
-                <ul class="footerList">
+                <ul class="footer-list">
                     <li>
                         <a href="#"> Privacy policy </a>
                     </li>

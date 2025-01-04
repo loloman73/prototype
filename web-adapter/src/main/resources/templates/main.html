@@ -5,12 +5,13 @@
         layout:decorate="~{/layouts/layout.html}">
 <head>
     <title>Main</title>
+    <link rel="stylesheet"  th:href="@{/css/main.css}">
 </head>
 
 <body>
 
-    <section layout:fragment="Header_Lo">
-        <article class="filtersCell">
+    <section layout:fragment="HEADER_LO">
+        <article class="filters-cell">
             <select name="TourLanguage" id="tourLang">
                 <option value="English">English</option>
                 <option value="Spanish">Spanish</option>
@@ -36,23 +37,23 @@
                 <option value="Visual">Visual</option>
             </select>
         </article>
-        <article class="viewModeCell">
+        <article class="view-mode-cell">
             <button>Map</button>
             <button>Gallery</button>
         </article>
     </section>
 
-    <section layout:fragment="MainContainer_Left" class="TourCardsContainer">
-        <ul class="TourCardsList">
-            <li th:each="tour:${tours}" class="TourCard">
-                <a th:replace="~{fragments/fragments.html :: TourCard(xenagosID=${tour.xenagosId})}"></a>
+    <section layout:fragment="MAIN_CONTAINER_LEFT" class="tour-cards-container">
+        <ul class="tour-cards-list">
+            <li th:each="tour:${tours}" class="tour-card">
+                <a th:replace="~{fragments/fragments.html :: TOUR_CARD(xenagosID=${tour.xenagosId})}"></a>
             </li>
         </ul>
     </section>
 
-    <section layout:fragment="MainContainer_Right" class="ToursMapContainer">
-        <div class="mapContainer">
-            <iframe class="googleMap" src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d10850.84757670908!2d23.72488576362117!3d37.9660634094878!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2seg!4v1722882312653!5m2!1sen!2seg" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <section layout:fragment="MAIN_CONTAINER_RIGHT" class="tours-map-container">
+        <div class="map-container">
+            <iframe class="google-map" src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d10850.84757670908!2d23.72488576362117!3d37.9660634094878!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2seg!4v1722882312653!5m2!1sen!2seg" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </section>
 

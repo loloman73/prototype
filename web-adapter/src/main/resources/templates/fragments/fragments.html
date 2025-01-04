@@ -6,53 +6,50 @@
 </head>
 <body>
 
-<a th:fragment="TourCard(xenagosID)" class="TourCardLink" href="#">
-    <img class="TourCardImage" th:src="@{/img/egypt.jpg}" alt="">
-    <div class="TourCardDetails">
-        <div class="TourCardTitle">
+<a th:fragment="TOUR_CARD(xenagosID)" class="tour-card__link" href="#">
+    <img class="tour-card__img" th:src="@{/img/egypt.jpg}" alt="">
+    <div class="tour-card__data">
+        <div class="tour-card__data__title-cell">
             <span th:text="${xenagosID}"></span>
-<!--            Lorem, ipsum dolor sit amet consectetur adipisicing elit-->
         </div>
-        <div class="TourCardDescription">
+        <div class="tour-card__data__description-cell">
             Quibusdam itaque, saepe molestiae enim nesciunt dolor excepturi ipsa
             similique eaque aut ex sint asperiores
             quia commodi, reprehenderit eum voluptatum veniam porro?
         </div>
-        <div class="XenagosFace">
+        <div class="tour-card__data__xenagos-face-cell">
             <figure>
-                <a href="#">
-                    <img th:src="@{/img/xenagos1.jpg}" class="XenagosFaceImage" alt="">
-                </a>
+                <img th:src="@{/img/xenagos1.jpg}" class="xenagos-face-image" alt="">
             </figure>
         </div>
-        <div class="XenagosName">
-            Tour. Name
+        <div class="tour-card__data__xenagos-name-cell">
+            Xenagos Name
         </div>
-        <div class="TourPrice">US$ 8</div>
-        <div class="TourMetaData">
-            <div class="TourMetaDataItem">
+        <div class="tour-card__data__price-cell">US$ 8</div>
+        <div class="tour-card__data__meta-data-cell">
+            <div class="tour-meta-data-item">
                 <span>23</span>
-                <img th:src="@{/img/XPointFlag.png}" class="XPointFlagImage" alt="">
+                <img th:src="@{/img/TourPointFlag.png}" class="tour-point-flag-image" alt="">
             </div>
-            <div class="TourMetaDataItem">
+            <div class="tour-meta-data-item">
                 en
             </div>
-            <div class="TourMetaDataItem">
+            <div class="tour-meta-data-item">
                 <h3>&starf;</h3>4.8(100)
             </div>
-            <div class="TourMetaDataItem">
+            <div class="tour-meta-data-item">
                 Save &#128153;
             </div>
-            <div class="TourMetaDataItem">
-                <img th:src="@{/img/hide.png}" class="hideImage" alt="">
+            <div class="tour-meta-data-item">
+                <img th:src="@{/img/hide.png}" class="hide-tour-image" alt="">
             </div>
-            <div class="TourMetaDataItem">
+            <div class="tour-meta-data-item">
                 Share
-                <img th:src="@{/img/share.png}" class="shareIconImage" alt="">
+                <img th:src="@{/img/share.png}" class="share-tour-image" alt="">
             </div>
         </div>
-        <div class="TourCardAddToCartCell">
-            <img th:src="@{/img/AddToCart.png}" class="TourCardCartImage" alt="">
+        <div class="tour-card__data__cart-cell">
+            <img th:src="@{/img/AddToCart.png}" class="cart-image" alt="">
         </div>
     </div>
 </a>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{/layouts/layout_main.html}"
+        lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"  th:href="@{/css/admin.css}">
+    <title></title>
+</head>
+<body>
+
+    <section layout:fragment="HEADER_LO">
+        <h1>Administrator Page </h1>
+    </section>
+
+    <section layout:fragment="MAIN_CONTAINER_LEFT" class="left-section">
+        <button onclick="location.href='/admin/AccessibilityTags/'" type="button">Accessibility Tags</button>
+        <button onclick="location.href='/admin/TopicTags/'" type="button">Topic Tags</button>
+        <button onclick="location.href='/admin/AgeRanges/'" type="button">Age Ranges</button>
+        <button onclick="location.href='/admin/Languages/'" type="button">Languages</button>
+        <button onclick="location.href='/admin/MediaTypes/'" type="button">Media Types</button>
+        <button onclick="location.href='/admin/DurationTypes/'" type="button">Duration Types</button>
+        <button onclick="location.href='/admin/AmeAFriendlyTypes/'" type="button">AmeA Friendly Types</button>
+    </section>
+
+    <section layout:fragment="MAIN_CONTAINER_RIGHT" class="right-section">
+        <th:block layout:fragment="ADMIN_DATA_SPACE"> </th:block>
+    </section>
+
+
+</body>
+</html>

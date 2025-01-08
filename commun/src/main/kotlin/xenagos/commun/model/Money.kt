@@ -1,4 +1,4 @@
-package xenagos.application.commun
+package xenagos.commun.model
 
 import java.util.*
 

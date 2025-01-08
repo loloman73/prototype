@@ -8,6 +8,7 @@ dependencies {
     implementation(project(":application"))
     implementation(project(":persistence-adapter"))
     implementation(project(":web-adapter"))
+    implementation(project(":input-port"))
 
     implementation(libs.sb.starter)
     implementation(libs.jetbrains.kotlin.reflect)

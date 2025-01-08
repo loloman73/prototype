@@ -1,6 +1,6 @@
 package xenagos.application.domain.tour.entity
 
-import xenagos.application.commun.Money
+import xenagos.commun.model.Money
 import java.util.*
 
 class Tour(
@@ -11,7 +11,6 @@ class Tour(
     val photoFileName: String,
     val totalRate: Byte,
     val totalReviews: Int,
-    val tourPoints: List<TourPoint>
 ) {
 }
 

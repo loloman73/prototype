@@ -1,6 +1,5 @@
-package xenagos.application.domain.xenagos
+package xenagos.application.entity
 
-import xenagos.application.domain.tour.entity.TourUUID
 import java.util.*
 
 class Xenagos(

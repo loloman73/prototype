@@ -1,6 +1,6 @@
-package xenagos.application.domain.tour.entity
+package xenagos.application.entity
 
-import xenagos.application.domain.tour.commun.*
+import xenagos.application.entity.commun.*
 import java.util.*
 import kotlin.time.Duration
 

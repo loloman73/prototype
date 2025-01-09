@@ -1,4 +1,4 @@
-package xenagos.application.domain.tour.entity
+package xenagos.application.entity
 
 import xenagos.commun.model.Money
 import java.util.*

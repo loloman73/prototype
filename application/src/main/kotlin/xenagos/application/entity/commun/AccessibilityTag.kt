@@ -1,4 +1,4 @@
-package xenagos.application.domain.tour.commun
+package xenagos.application.entity.commun
 
 enum class AccessibilityTag(val description:String) {
     WheelChair("Can be accessed with wheel chair"),

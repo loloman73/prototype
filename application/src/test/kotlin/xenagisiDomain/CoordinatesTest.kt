@@ -2,8 +2,8 @@ package xenagisiDomain
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import xenagos.application.domain.tour.commun.DecimalDegreeLat
-import xenagos.application.domain.tour.commun.DecimalDegreeLon
+import xenagos.application.entity.commun.DecimalDegreeLat
+import xenagos.application.entity.commun.DecimalDegreeLon
 import kotlin.test.assertEquals
 
 class CoordinatesTest {

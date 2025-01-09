@@ -1,9 +1,9 @@
 package xenagos.adapter.persistence
 
 import org.springframework.stereotype.Service
+import xenagos.application.entity.Tour
+import xenagos.application.entity.TourUUID
 import xenagos.commun.model.Money
-import xenagos.application.domain.tour.entity.*
-import xenagos.application.domain.xenagos.XenagosUUID
 import xenagos.application.port.output.LoadToursForAreaOutPort
 import java.util.*
 

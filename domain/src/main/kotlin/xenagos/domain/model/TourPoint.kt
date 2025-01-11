@@ -1,6 +1,6 @@
-package xenagos.application.entity
+package xenagos.domain.model
 
-import xenagos.application.entity.commun.Coordinates
+import xenagos.domain.model.commun.Coordinates
 import java.util.*
 
 class TourPoint(

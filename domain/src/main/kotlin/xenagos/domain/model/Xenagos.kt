@@ -1,4 +1,4 @@
-package xenagos.application.entity
+package xenagos.domain.model
 
 import java.util.*
 

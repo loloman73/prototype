@@ -1,4 +1,4 @@
-package xenagos.application.entity.commun
+package xenagos.domain.model.commun
 
 enum class AgeRangeTag(val description:String) {
     SmallChild("6-8"),

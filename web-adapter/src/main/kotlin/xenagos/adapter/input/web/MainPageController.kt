@@ -1,4 +1,4 @@
-package xenagos.adapter.web
+package xenagos.adapter.input.web
 
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -12,7 +12,7 @@ class MainPageController(private val getToursForArea: GetToursForAreaUseCase) {
 
     /* works for area=51 */
     @GetMapping("/area/{area}")
-    fun testThyme(@PathVariable("area") area: Int, model: Model): String{
+    fun mainPage(@PathVariable("area") area: Int, model: Model): String{
         val toursForArea: List<TourDTO>? =  getToursForArea.whereAreaIs(area)
         model.addAttribute("tours", toursForArea)
         return "main"

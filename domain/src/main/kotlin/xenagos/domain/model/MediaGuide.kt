@@ -1,6 +1,6 @@
-package xenagos.application.entity
+package xenagos.domain.model
 
-import xenagos.application.entity.commun.*
+import xenagos.domain.model.commun.*
 import java.util.*
 import kotlin.time.Duration
 

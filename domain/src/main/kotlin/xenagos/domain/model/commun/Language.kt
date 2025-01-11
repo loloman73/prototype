@@ -1,4 +1,4 @@
-package xenagos.application.entity.commun
+package xenagos.domain.model.commun
 
 enum class Language(val englishName:String, val localName:String) {
     en("English","English"),

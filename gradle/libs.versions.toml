@@ -2,10 +2,11 @@
 springboot="3.4.0"
 postgres="42.7.3"
 flyway="11.0.1"
-lombok="1.18.36"
 thymeleafLD="3.3.0"
 kotlinReflect="2.1.0"
 kotlinSpring="1.9.24"
+kotlinNoarg="2.1.0"
+#lombok="1.18.36"
 
 [libraries]
 sb-starter = {group="org.springframework.boot", name="spring-boot-starter", version.ref="springboot"}
@@ -13,12 +14,13 @@ sb-starter-web = {group="org.springframework.boot", name="spring-boot-starter-we
 sb-starter-data-jpa = {group="org.springframework.boot", name="spring-boot-starter-data-jpa", version.ref="springboot"}
 sb-starter-thymeleaf={group="org.springframework.boot", name="spring-boot-starter-thymeleaf", version.ref="springboot"}
 sb-dev-tools = {group="org.springframework.boot", name="spring-boot-devtools", version.ref="springboot"}
-lombok = {group="org.projectlombok", name="lombok", version.ref="lombok"}
 thymeleafLD = {group="nz.net.ultraq.thymeleaf", name="thymeleaf-layout-dialect", version.ref="thymeleafLD"}
 jetbrains-kotlin-reflect = {group="org.jetbrains.kotlin", name="kotlin-reflect", version.ref="kotlinReflect"}
 postgres = {group="org.postgresql", name="postgresql", version.ref="postgres"}
 flywayPostgresql = {group="org.flywaydb", name="flyway-database-postgresql", version.ref="flyway"}
+#lombok = {group="org.projectlombok", name="lombok", version.ref="lombok"}
 
 [plugins]
 sb = {id="org.springframework.boot", version.ref="springboot"}
 jetbrains-kotlin-spring = {id="org.jetbrains.kotlin.plugin.spring", version.ref="kotlinSpring"}
+jetbrains-kotlin-noarg={id="org.jetbrains.kotlin.plugin.noarg", version.ref="kotlinNoarg"}

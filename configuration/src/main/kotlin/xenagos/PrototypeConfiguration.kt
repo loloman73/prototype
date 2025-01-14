@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import xenagos.adapter.output.persistence.LoadToursForAreaHardEncodedAdapter
 import xenagos.application.port.input.GetToursForAreaUseCase
-import xenagos.application.port.output.LoadToursForAreaOutPort
 import xenagos.application.service.GetToursForAreaAppService
 import xenagos.domain.service.SortTourListDomainService
 import xenagos.application.mapper.Mapper

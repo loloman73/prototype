@@ -3,7 +3,7 @@ package xenagos.adapter.output.persistence
 import org.springframework.stereotype.Service
 import xenagos.domain.model.Tour
 import xenagos.domain.model.TourUUID
-import xenagos.commun.model.Money
+import xenagos.common.model.Money
 import xenagos.application.port.output.LoadToursForAreaOutPort
 import java.util.*
 import kotlin.random.Random

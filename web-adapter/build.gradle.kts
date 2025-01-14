@@ -4,7 +4,7 @@ plugins {
 
 dependencies {
     implementation(project(":input-port"))
-    implementation(project(":commun"))
+    implementation(project(":common"))
 
     implementation(libs.sb.starter.web)
     implementation(libs.sb.starter.thymeleaf)

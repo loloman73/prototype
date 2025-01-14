@@ -1,6 +1,6 @@
 package xenagos.domain.model
 
-import xenagos.commun.model.Money
+import xenagos.common.model.Money
 import java.util.*
 
 class Tour(

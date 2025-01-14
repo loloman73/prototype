@@ -1,6 +1,6 @@
 package xenagos.application.port.input.model
 
-import xenagos.commun.model.Money
+import xenagos.common.model.Money
 import java.util.*
 
 data class TourDTO(

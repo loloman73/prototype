@@ -5,5 +5,5 @@ plugins {
 dependencies {
 
     implementation(libs.sb.dev.tools)
-    implementation(project(":commun"))
+    implementation(project(":common"))
 }

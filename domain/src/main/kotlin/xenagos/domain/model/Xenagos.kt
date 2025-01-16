@@ -3,10 +3,8 @@ package xenagos.domain.model
 import java.util.*
 
 class Xenagos(
-    val id: XenagosUUID,
+    val id: UUID,
     val name: String,
     val photoFileName: String,
-    val tours: List<TourUUID>
+    val tours: List<Tour>
 )
-
-data class XenagosUUID(val value: UUID)

@@ -1,4 +1,4 @@
-package xenagos.domain.model.commun
+package xenagos.domain.model.common
 
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols

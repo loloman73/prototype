@@ -1,19 +1,17 @@
 package xenagos.domain.model
 
 import xenagos.common.model.Money
+import xenagos.domain.model.common.Coordinates
 import java.util.*
 
 class Tour(
-    val tourId: TourUUID,
+    val id: UUID,
     val title: String,
     val description: String,
     val price: Money,
     val photoFileName: String,
-    val totalRate: Byte,
-    val totalReviews: Int,
-) {
-}
-
-
-data class TourUUID(val value: UUID)
-
+    val totalRate: Byte?,
+    val totalReviews: Int?,
+    val avgCoordinates: Coordinates,
+    val tourPoints: List<TourPoint>
+)

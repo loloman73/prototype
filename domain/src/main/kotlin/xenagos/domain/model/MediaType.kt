@@ -1,6 +1,9 @@
 package xenagos.domain.model
 
-data class MediaType(val type:String)
+import java.util.*
+
+data class MediaType(val id: UUID,
+                     val type: String)
 
 //    audioGuide,
 //    visualGuide

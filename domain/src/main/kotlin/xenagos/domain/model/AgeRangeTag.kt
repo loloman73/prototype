@@ -1,6 +1,10 @@
 package xenagos.domain.model
 
-data class AgeRangeTag(val tag: String, val description:String)
+import java.util.*
+
+data class AgeRangeTag(val id: UUID,
+                       val tag: String,
+                       val description: String)
 
 //    SmallChild("6-8"),
 //    PreTeen("9-12"),

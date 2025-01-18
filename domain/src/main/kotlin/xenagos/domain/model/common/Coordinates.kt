@@ -10,7 +10,7 @@ private const val LAT_MAX = 90
 private const val LON_MAX = 180
 private const val DECIMAL_SEPARATOR = '.'
 
-fun formatDoubleToDecimalDegree(degValue:Double):Double{
+fun formatDoubleToDecimalDegree(degValue:Double):Double{0
     val dfs = DecimalFormatSymbols.getInstance()
     dfs.setDecimalSeparator(DECIMAL_SEPARATOR)
     val df = DecimalFormat(PATTERN, dfs)

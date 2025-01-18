@@ -1,6 +1,10 @@
 package xenagos.domain.model
 
-data class AmeaFriendlyTag(val tag: String, val description: String)
+import java.util.*
+
+data class AmeaFriendlyTag(val id: UUID,
+                           val tag: String,
+                           val description: String)
 
 // Blind
 // Deaf

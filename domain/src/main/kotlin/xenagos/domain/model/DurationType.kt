@@ -1,3 +1,6 @@
 package xenagos.domain.model
 
-data  class DurationType(val type:String)
+import java.util.*
+
+data  class DurationType(val id: UUID,
+                         val type:String)

@@ -1,6 +1,11 @@
 package xenagos.domain.model
 
-data class Language(val code: String, val englishName:String, val localName:String)
+import java.util.*
+
+data class Language(val id: UUID,
+                    val code: String,
+                    val englishName:String,
+                    val localName:String)
 
 //en("English","English"),
 //de("German","Deutsch"),

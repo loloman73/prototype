@@ -1,6 +1,10 @@
 package xenagos.domain.model
 
-data class TopicTag(val tag: String, val description:String)
+import java.util.*
+
+class TopicTag(val id: UUID,
+               val tag: String,
+               val description:String)
 
 //    Architecture
 //    Religion

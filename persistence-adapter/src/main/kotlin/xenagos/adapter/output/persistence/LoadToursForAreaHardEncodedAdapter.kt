@@ -4,9 +4,7 @@ import org.springframework.stereotype.Service
 import xenagos.common.model.Money
 import xenagos.application.port.output.LoadToursForAreaOutPort
 import xenagos.domain.model.*
-import xenagos.domain.model.common.Coordinates
-import xenagos.domain.model.common.DecimalDegreeLat
-import xenagos.domain.model.common.DecimalDegreeLon
+import xenagos.domain.model.common.*
 import java.util.*
 import kotlin.random.Random
 import kotlin.time.Duration
@@ -23,8 +21,8 @@ class LoadToursForAreaHardEncodedAdapter : LoadToursForAreaOutPort {
     private fun fakeTour(): Tour {
         return Tour(
             id = UUID.randomUUID(),
-            title = "",
-            description = "",
+            title = "Tour Title",
+            description = "Tour Description",
             photoFileName = "",
             avgCoordinates = Coordinates(DecimalDegreeLat(0.0),DecimalDegreeLon(0.0)),
             totalRate = Random.nextInt(5).toByte(),
@@ -33,13 +31,13 @@ class LoadToursForAreaHardEncodedAdapter : LoadToursForAreaOutPort {
             tourPoints = listOf(
                 TourPoint(
                     id = UUID.randomUUID(),
-                    title="AAA",
-                    description = "aaaaaa",
+                    title="Tour Point title",
+                    description = "Tour Point description",
                     coordinates = Coordinates(DecimalDegreeLat(0.0),DecimalDegreeLon(0.0)),
                     mediaGuides = listOf(MediaGuide(
                                         id = UUID.randomUUID(),
                                         language=Language(UUID.randomUUID(), "GR","Greek","Ελληνικά"),
-                                        mediaFileName = "AccessAll",
+                                        mediaFileName = "",
                                         mediaType = MediaType(UUID.randomUUID(), ""),
                                         duration = Duration.parse("50"),
                                         durationType = DurationType(UUID.randomUUID(),""),

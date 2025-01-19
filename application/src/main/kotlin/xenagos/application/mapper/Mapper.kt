@@ -7,8 +7,4 @@ import xenagos.domain.model.Xenagos
 
 @Component
 class Mapper {
-    fun toDTO(fromEntityTour: Tour, fromEntityXenagos: Xenagos): TourDTO {
-
-        return TourDTO(fromEntityTour.tourId.value, fromEntityXenagos.id.value, fromEntityTour.price, 10)
-    }
 }

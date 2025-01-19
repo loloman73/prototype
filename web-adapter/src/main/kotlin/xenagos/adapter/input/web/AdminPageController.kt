@@ -19,11 +19,6 @@ class AdminPageAdapter {
         return "adminAccessibilityTags"
     }
 
-    @GetMapping("/TopicTags/")
-    fun topicTags():String{
-        return "adminTopicTags"
-    }
-
     @GetMapping("/AgeRanges/")
     fun ageRanges():String{
         return "adminAgeRanges"

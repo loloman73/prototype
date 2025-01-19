@@ -19,18 +19,6 @@ class GetToursForAreaAppService(
         val sortedTourDTOList = mutableListOf<TourDTO>()
         val tourList: Set<Tour> = loadToursForArea.whereAreaIs(area)!!
         //TODO call Domain Service to add sort logic
-        tourList.forEach {
-            sortedTourDTOList.add(
-                mapper.toDTO(
-                    it, Xenagos(
-                        XenagosUUID(UUID.randomUUID()),
-                        "",
-                        "",
-                        listOf(TourUUID(UUID.randomUUID()), TourUUID(UUID.randomUUID()))
-                    )
-                )
-            )
-        }
 
         return sortedTourDTOList
     }

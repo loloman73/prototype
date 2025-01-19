@@ -6,7 +6,6 @@ import xenagos.application.port.input.model.TourDTO
 import xenagos.application.port.input.GetToursForAreaUseCase
 import xenagos.application.port.output.LoadToursForAreaOutPort
 import xenagos.application.mapper.Mapper
-import java.util.*
 
 class GetToursForAreaAppService(
     private val loadToursForArea: LoadToursForAreaOutPort,

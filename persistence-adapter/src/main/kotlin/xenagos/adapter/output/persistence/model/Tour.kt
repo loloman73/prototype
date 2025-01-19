@@ -33,13 +33,9 @@ open class Tour {
     @Column(name = "rate_reviews")
     open var rateReviews: Int? = null
 
+    @Column(name = "coordinates_avg", columnDefinition = "point")
+    open var coordinatesAvg: Any? = null
+
     @OneToMany(mappedBy = "tour")
     open var tourPoints: MutableSet<TourPoint> = mutableSetOf()
-
-    /*
-         TODO [Reverse Engineering] create field to map the 'coordinates_avg' column
-         Available actions: Define target Java type | Uncomment as is | Remove column mapping
-            @Column(name = "coordinates_avg", columnDefinition = "point")
-            open var coordinatesAvg: Any? = null
-        */
 }

@@ -6,7 +6,7 @@ import jakarta.persistence.*
 @Table(name = "media_guide_age_range")
 open class MediaGuideAgeRange {
     @EmbeddedId
-    open var id: MediaGuide? = null
+    open var id: MediaGuideAgeRangeId? = null
 
     @MapsId("mediaGuideId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

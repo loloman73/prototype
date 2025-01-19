@@ -1,6 +1,6 @@
 CREATE TABLE accessibility_tags
 (
-    accessibility_tag_id CHAR(36) NOT NULL,
+    accessibility_tag_id UUID NOT NULL,
     accessibility_tag    VARCHAR,
     description          VARCHAR,
     CONSTRAINT accessibility_tags_pkey PRIMARY KEY (accessibility_tag_id)
@@ -8,75 +8,75 @@ CREATE TABLE accessibility_tags
 
 CREATE TABLE admins
 (
-    admin_id CHAR(36) NOT NULL,
+    admin_id UUID NOT NULL,
     name     VARCHAR,
     CONSTRAINT admins_pkey PRIMARY KEY (admin_id)
 );
 
 CREATE TABLE age_ranges
 (
-    age_range_id CHAR(36) NOT NULL,
+    age_range_id UUID NOT NULL,
     age_range    VARCHAR,
     CONSTRAINT age_ranges_pkey PRIMARY KEY (age_range_id)
 );
 
 CREATE TABLE amea_friendly_types
 (
-    amea_friendly_type_id CHAR(36) NOT NULL,
+    amea_friendly_type_id UUID NOT NULL,
     amea_friendly_type    VARCHAR,
     CONSTRAINT amea_friendly_types_pkey PRIMARY KEY (amea_friendly_type_id)
 );
 
 CREATE TABLE duration_types
 (
-    duration_type_id CHAR(36) NOT NULL,
+    duration_type_id UUID NOT NULL,
     duration_type    VARCHAR,
     CONSTRAINT duration_types_pkey PRIMARY KEY (duration_type_id)
 );
 
 CREATE TABLE languages
 (
-    language_id CHAR(36) NOT NULL,
+    language_id UUID NOT NULL,
     language    VARCHAR,
     CONSTRAINT languages_pkey PRIMARY KEY (language_id)
 );
 
 CREATE TABLE media_guide_age_range
 (
-    media_guide_id CHAR(36) NOT NULL,
-    age_range_id   CHAR(36) NOT NULL,
+    media_guide_id UUID NOT NULL,
+    age_range_id   UUID NOT NULL,
     CONSTRAINT media_guide_age_range_pkey PRIMARY KEY (media_guide_id, age_range_id)
 );
 
 CREATE TABLE media_guide_topic_tag
 (
-    media_guide_id CHAR(36) NOT NULL,
-    topic_tag_id   CHAR(36) NOT NULL
+    media_guide_id UUID NOT NULL,
+    topic_tag_id   UUID NOT NULL
 );
 
 CREATE TABLE media_guides
 (
-    media_guide_id        CHAR(36) NOT NULL,
-    tour_point_id         CHAR(36),
-    language_id           CHAR(36),
+    media_guide_id        UUID NOT NULL,
+    tour_point_id         UUID,
+    language_id           UUID,
     media_file_name       VARCHAR,
-    media_type_id         CHAR(36),
+    media_type_id         UUID,
     duration              SMALLINT,
-    duration_type_id      CHAR(36),
-    amea_friendly_type_id CHAR(36),
+    duration_type_id      UUID,
+    amea_friendly_type_id UUID,
     CONSTRAINT media_guides_pkey PRIMARY KEY (media_guide_id)
 );
 
 CREATE TABLE media_types
 (
-    media_type_id CHAR(36) NOT NULL,
+    media_type_id UUID NOT NULL,
     media_type    VARCHAR,
     CONSTRAINT media_types_pkey PRIMARY KEY (media_type_id)
 );
 
 CREATE TABLE topic_tags
 (
-    topic_tag_id CHAR(36) NOT NULL,
+    topic_tag_id UUID NOT NULL,
     topic_tag    VARCHAR,
     description  VARCHAR,
     CONSTRAINT topic_tags_pkey PRIMARY KEY (topic_tag_id)
@@ -84,15 +84,15 @@ CREATE TABLE topic_tags
 
 CREATE TABLE tour_point_accessibility_tag
 (
-    tour_point_id        CHAR(36) NOT NULL,
-    accessibility_tag_id CHAR(36) NOT NULL,
+    tour_point_id        UUID NOT NULL,
+    accessibility_tag_id UUID NOT NULL,
     CONSTRAINT tour_point_accessibility_tag_pkey PRIMARY KEY (tour_point_id, accessibility_tag_id)
 );
 
 CREATE TABLE tour_points
 (
-    tour_point_id CHAR(36) NOT NULL,
-    tour_id       CHAR(36),
+    tour_point_id UUID NOT NULL,
+    tour_id       UUID,
     title         VARCHAR,
     description   VARCHAR,
     coordinates   POINT,
@@ -101,12 +101,12 @@ CREATE TABLE tour_points
 
 CREATE TABLE tours
 (
-    tour_id         CHAR(36) NOT NULL,
-    xenagos_id      CHAR(36),
+    tour_id         UUID NOT NULL,
+    xenagos_id      UUID,
     title           VARCHAR,
     description     VARCHAR,
     price           DECIMAL,
-    photo_file_name CHAR(36),
+    photo_file_name UUID,
     rate_stars      SMALLINT,
     rate_reviews    INTEGER,
     coordinates_avg POINT,
@@ -115,9 +115,9 @@ CREATE TABLE tours
 
 CREATE TABLE xenagoi
 (
-    xenagos_id      CHAR(36) NOT NULL,
+    xenagos_id      UUID NOT NULL,
     name            VARCHAR,
-    photo_file_name CHAR(36),
+    photo_file_name UUID,
     CONSTRAINT xenagoi_pkey PRIMARY KEY (xenagos_id)
 );
 

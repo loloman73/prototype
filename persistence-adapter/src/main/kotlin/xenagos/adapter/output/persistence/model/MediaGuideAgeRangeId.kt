@@ -8,24 +8,24 @@ import java.io.Serializable
 import java.util.*
 
 @Embeddable
-open class MediaGuideTopicTagId : Serializable {
-    @Column(name = "topic_tag_id", nullable = false)
-    open var topicTagId: UUID? = null
-
+open class MediaGuideAgeRangeId : Serializable {
     @Column(name = "media_guide_id", nullable = false)
     open var mediaGuideId: UUID? = null
-    override fun hashCode(): Int = Objects.hash(topicTagId, mediaGuideId)
+
+    @Column(name = "age_range_id", nullable = false)
+    open var ageRangeId: UUID? = null
+    override fun hashCode(): Int = Objects.hash(mediaGuideId, ageRangeId)
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
 
-        other as MediaGuideTopicTagId
+        other as MediaGuideAgeRangeId
 
-        return topicTagId == other.topicTagId &&
-                mediaGuideId == other.mediaGuideId
+        return mediaGuideId == other.mediaGuideId &&
+                ageRangeId == other.ageRangeId
     }
 
     companion object {
-        private const val serialVersionUID = 7161536210608267920L
+        private const val serialVersionUID = 6101093818970978129L
     }
 }

@@ -17,5 +17,10 @@ open class TopicTag {
     open var description: String? = null
 
     @ManyToMany
+    @JoinTable(
+        name = "media_guide_topic_tag",
+        joinColumns = [JoinColumn(name = "topic_tag_id")],
+        inverseJoinColumns = [JoinColumn(name = "media_guide_id")]
+    )
     open var mediaGuides: MutableSet<MediaGuide> = mutableSetOf()
 }

@@ -13,8 +13,6 @@ class AdminTopicTagsController(private val getTopics: AdminGetTopicsUseCase) {
     @GetMapping
     fun topicTags(model: Model): String{
 
-
-        model.addAttribute("topics","mytopic")
         return "adminTopicTags"
     }
 

@@ -20,16 +20,12 @@ open class TourPoint {
     @Column(name = "description", length = Integer.MAX_VALUE)
     open var description: String? = null
 
+    @Column(name = "coordinates", columnDefinition = "point")
+    open var coordinates: Any? = null
+
     @OneToMany(mappedBy = "tourPoint")
     open var mediaGuides: MutableSet<MediaGuide> = mutableSetOf()
 
     @ManyToMany(mappedBy = "tourPoints")
     open var accessibilityTags: MutableSet<AccessibilityTag> = mutableSetOf()
-
-    /*
-         TODO [Reverse Engineering] create field to map the 'coordinates' column
-         Available actions: Define target Java type | Uncomment as is | Remove column mapping
-            @Column(name = "coordinates", columnDefinition = "point")
-            open var coordinates: Any? = null
-        */
 }

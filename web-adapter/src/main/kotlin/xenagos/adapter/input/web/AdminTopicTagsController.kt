@@ -4,15 +4,15 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
-import xenagos.application.port.input.AdminGetTopicsUseCase
+import xenagos.application.port.input.AdminTopicTagsUseCase
 
 @Controller
 @RequestMapping("/admin/topicTags")
-class AdminTopicTagsController(private val getTopics: AdminGetTopicsUseCase) {
+class AdminTopicTagsController(private val adminTopicTagsService: AdminTopicTagsUseCase) {
 
     @GetMapping
-    fun topicTags(model: Model): String{
-
+    fun showTopicTags(model: Model): String{
+        model.addAttribute("topicTags", adminTopicTagsService.getAllTopicTags())
         return "adminTopicTags"
     }
 

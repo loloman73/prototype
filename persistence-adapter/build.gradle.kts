@@ -4,9 +4,9 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":application"))
-    implementation(project(":common"))
+    implementation(project(":output-port"))
     implementation(project(":domain"))
+    implementation(project(":common"))
     implementation(libs.sb.starter)
     implementation(libs.sb.starter.data.jpa)
     implementation(libs.flywayPostgresql)

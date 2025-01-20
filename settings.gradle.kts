@@ -3,10 +3,11 @@ plugins {
 }
 
 rootProject.name = "prototype"
+include("configuration")
 include("web-adapter")
 include("persistence-adapter")
-include("application")
-include("configuration")
 include("input-port")
-include("common")
+include("output-port")
+include("application")
 include("domain")
+include("common")

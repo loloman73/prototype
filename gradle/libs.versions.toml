@@ -6,6 +6,7 @@ thymeleafLD="3.3.0"
 kotlinReflect="2.1.0"
 kotlinSpring="1.9.24"
 kotlinNoarg="2.1.0"
+mapstruct="1.6.3"
 #lombok="1.18.36"
 
 [libraries]
@@ -19,6 +20,8 @@ jetbrains-kotlin-reflect = {group="org.jetbrains.kotlin", name="kotlin-reflect",
 postgres = {group="org.postgresql", name="postgresql", version.ref="postgres"}
 flywayPostgresql = {group="org.flywaydb", name="flyway-database-postgresql", version.ref="flyway"}
 #lombok = {group="org.projectlombok", name="lombok", version.ref="lombok"}
+mapstruct = {group="org.mapstruct", name="mapstruct", version.ref="mapstruct"}
+mapstruct-processor= {group="org.mapstruct", name="mapstruct-processor", version.ref="mapstruct"}
 
 [plugins]
 sb = {id="org.springframework.boot", version.ref="springboot"}

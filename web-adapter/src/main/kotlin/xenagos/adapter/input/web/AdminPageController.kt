@@ -14,32 +14,32 @@ class AdminPageAdapter {
         return "adminMain"
     }
 
-    @GetMapping("/AccessibilityTags/")
+    @GetMapping("/accessibilityTags")
     fun accessibilityTags():String{
         return "adminAccessibilityTags"
     }
 
-    @GetMapping("/AgeRanges/")
+    @GetMapping("/ageRanges")
     fun ageRanges():String{
         return "adminAgeRanges"
     }
 
-    @GetMapping("/Languages/")
+    @GetMapping("/languages")
     fun languages():String{
         return "adminLanguages"
     }
 
-    @GetMapping("/MediaTypes/")
+    @GetMapping("/mediaTypes")
     fun mediaTypes():String{
         return "adminMediaTypes"
     }
 
-    @GetMapping("/DurationTypes/")
+    @GetMapping("/durationTypes")
     fun durationTypes():String{
         return "adminDurationTypes"
     }
 
-    @GetMapping("/AmeAFriendlyTypes/")
+    @GetMapping("/ameaFriendlyTypes")
     fun ameAFriendlyTypes():String{
         return "adminAmeAFriendlyTypes"
     }

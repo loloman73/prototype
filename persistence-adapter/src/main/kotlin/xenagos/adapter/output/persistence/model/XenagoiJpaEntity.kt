@@ -5,7 +5,7 @@ import java.util.*
 
 @Entity
 @Table(name = "xenagoi")
-open class Xenagoi {
+open class XenagoiJpaEntity {
     @Id
     @Column(name = "xenagos_id", nullable = false)
     open var id: UUID? = null
@@ -17,5 +17,5 @@ open class Xenagoi {
     open var photoFileName: UUID? = null
 
     @OneToMany(mappedBy = "xenagos")
-    open var tours: MutableSet<Tour> = mutableSetOf()
+    open var tours: MutableSet<TourJpaEntity> = mutableSetOf()
 }

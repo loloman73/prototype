@@ -5,40 +5,40 @@ import java.util.*
 
 @Entity
 @Table(name = "media_guides")
-open class MediaGuide {
+open class MediaGuideJpaEntity {
     @Id
     @Column(name = "media_guide_id", nullable = false)
     open var id: UUID? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tour_point_id")
-    open var tourPoint: TourPoint? = null
+    open var tourPoint: TourPointJpaEntity? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "language_id")
-    open var language: Language? = null
+    open var language: LanguageJpaEntity? = null
 
     @Column(name = "media_file_name", length = Integer.MAX_VALUE)
     open var mediaFileName: String? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "media_type_id")
-    open var mediaType: MediaType? = null
+    open var mediaType: MediaTypeJpaEntity? = null
 
     @Column(name = "duration")
     open var duration: Short? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "duration_type_id")
-    open var durationType: DurationType? = null
+    open var durationType: DurationTypeJpaEntity? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "amea_friendly_type_id")
-    open var ameaFriendlyType: AmeaFriendlyType? = null
+    open var ameaFriendlyType: AmeaFriendlyTypeJpaEntity? = null
 
     @ManyToMany(mappedBy = "mediaGuides")
-    open var ageRanges: MutableSet<AgeRange> = mutableSetOf()
+    open var ageRanges: MutableSet<AgeRangeJpaEntity> = mutableSetOf()
 
     @ManyToMany(mappedBy = "mediaGuides")
-    open var topicTags: MutableSet<TopicTag> = mutableSetOf()
+    open var topicTags: MutableSet<TopicTagJpaEntity> = mutableSetOf()
 }

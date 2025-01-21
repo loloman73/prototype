@@ -6,14 +6,14 @@ import java.util.*
 
 @Entity
 @Table(name = "tours")
-open class Tour {
+open class TourJpaEntity {
     @Id
     @Column(name = "tour_id", nullable = false)
     open var id: UUID? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "xenagos_id")
-    open var xenagos: Xenagoi? = null
+    open var xenagos: XenagoiJpaEntity? = null
 
     @Column(name = "title", length = Integer.MAX_VALUE)
     open var title: String? = null
@@ -37,5 +37,5 @@ open class Tour {
     open var coordinatesAvg: Any? = null
 
     @OneToMany(mappedBy = "tour")
-    open var tourPoints: MutableSet<TourPoint> = mutableSetOf()
+    open var tourPoints: MutableSet<TourPointJpaEntity> = mutableSetOf()
 }

@@ -5,14 +5,14 @@ import java.util.*
 
 @Entity
 @Table(name = "tour_points")
-open class TourPoint {
+open class TourPointJpaEntity {
     @Id
     @Column(name = "tour_point_id", nullable = false)
     open var id: UUID? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tour_id")
-    open var tour: Tour? = null
+    open var tour: TourJpaEntity? = null
 
     @Column(name = "title", length = Integer.MAX_VALUE)
     open var title: String? = null
@@ -24,8 +24,8 @@ open class TourPoint {
     open var coordinates: Any? = null
 
     @OneToMany(mappedBy = "tourPoint")
-    open var mediaGuides: MutableSet<MediaGuide> = mutableSetOf()
+    open var mediaGuides: MutableSet<MediaGuideJpaEntity> = mutableSetOf()
 
     @ManyToMany(mappedBy = "tourPoints")
-    open var accessibilityTags: MutableSet<AccessibilityTag> = mutableSetOf()
+    open var accessibilityTags: MutableSet<AccessibilityTagJpaEntity> = mutableSetOf()
 }

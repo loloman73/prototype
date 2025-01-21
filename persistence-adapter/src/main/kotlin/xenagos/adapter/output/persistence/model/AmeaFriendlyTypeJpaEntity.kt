@@ -5,7 +5,7 @@ import java.util.*
 
 @Entity
 @Table(name = "amea_friendly_types")
-open class AmeaFriendlyType {
+open class AmeaFriendlyTypeJpaEntity {
     @Id
     @Column(name = "amea_friendly_type_id", nullable = false)
     open var id: UUID? = null
@@ -14,5 +14,5 @@ open class AmeaFriendlyType {
     open var ameaFriendlyType: String? = null
 
     @OneToMany(mappedBy = "ameaFriendlyType")
-    open var mediaGuides: MutableSet<MediaGuide> = mutableSetOf()
+    open var mediaGuides: MutableSet<MediaGuideJpaEntity> = mutableSetOf()
 }

@@ -5,7 +5,7 @@ import java.util.*
 
 @Entity
 @Table(name = "age_ranges")
-open class AgeRange {
+open class AgeRangeJpaEntity {
     @Id
     @Column(name = "age_range_id", nullable = false)
     open var id: UUID? = null
@@ -19,5 +19,5 @@ open class AgeRange {
         joinColumns = [JoinColumn(name = "age_range_id")],
         inverseJoinColumns = [JoinColumn(name = "media_guide_id")]
     )
-    open var mediaGuides: MutableSet<MediaGuide> = mutableSetOf()
+    open var mediaGuides: MutableSet<MediaGuideJpaEntity> = mutableSetOf()
 }

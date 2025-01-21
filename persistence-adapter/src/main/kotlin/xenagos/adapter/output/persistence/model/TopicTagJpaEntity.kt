@@ -5,7 +5,7 @@ import java.util.*
 
 @Entity
 @Table(name = "topic_tags")
-open class TopicTag {
+open class TopicTagJpaEntity {
     @Id
     @Column(name = "topic_tag_id", nullable = false)
     open var id: UUID? = null
@@ -22,5 +22,5 @@ open class TopicTag {
         joinColumns = [JoinColumn(name = "topic_tag_id")],
         inverseJoinColumns = [JoinColumn(name = "media_guide_id")]
     )
-    open var mediaGuides: MutableSet<MediaGuide> = mutableSetOf()
+    open var mediaGuides: MutableSet<MediaGuideJpaEntity> = mutableSetOf()
 }

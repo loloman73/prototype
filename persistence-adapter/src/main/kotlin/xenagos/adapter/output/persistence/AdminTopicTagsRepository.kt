@@ -1,10 +1,8 @@
 package xenagos.adapter.output.persistence
 
 import org.springframework.data.repository.CrudRepository
-import org.springframework.stereotype.Repository
-import xenagos.adapter.output.persistence.model.TopicTag
+import xenagos.adapter.output.persistence.model.TopicTagJpaEntity
 
-@Repository
-interface AdminTopicTagsRepository: CrudRepository<TopicTag, Long> {
+interface AdminTopicTagsRepository: CrudRepository<TopicTagJpaEntity, Long> {
 
 }

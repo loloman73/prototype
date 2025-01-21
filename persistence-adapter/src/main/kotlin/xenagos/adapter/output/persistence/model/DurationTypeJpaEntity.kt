@@ -5,7 +5,7 @@ import java.util.*
 
 @Entity
 @Table(name = "duration_types")
-open class DurationType {
+open class DurationTypeJpaEntity {
     @Id
     @Column(name = "duration_type_id", nullable = false)
     open var id: UUID? = null
@@ -14,5 +14,5 @@ open class DurationType {
     open var durationType: String? = null
 
     @OneToMany(mappedBy = "durationType")
-    open var mediaGuides: MutableSet<MediaGuide> = mutableSetOf()
+    open var mediaGuides: MutableSet<MediaGuideJpaEntity> = mutableSetOf()
 }

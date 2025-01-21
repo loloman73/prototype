@@ -5,7 +5,7 @@ import java.util.*
 
 @Entity
 @Table(name = "languages")
-open class Language {
+open class LanguageJpaEntity {
     @Id
     @Column(name = "language_id", nullable = false)
     open var id: UUID? = null
@@ -14,5 +14,5 @@ open class Language {
     open var language: String? = null
 
     @OneToMany(mappedBy = "language")
-    open var mediaGuides: MutableSet<MediaGuide> = mutableSetOf()
+    open var mediaGuides: MutableSet<MediaGuideJpaEntity> = mutableSetOf()
 }

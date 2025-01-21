@@ -8,7 +8,7 @@ import java.util.*
 
 @Entity
 @Table(name = "admins")
-open class Admin {
+open class AdminJpaEntity {
     @Id
     @Column(name = "admin_id", nullable = false)
     open var id: UUID? = null

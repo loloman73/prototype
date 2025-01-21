@@ -6,10 +6,10 @@ import xenagos.domain.model.TopicTag
 
 @Service
 class AdminTopicTagsPersistence(private val adminTopicTagsRepository: AdminTopicTagsRepository): AdminTopicTagsOutputPort {
-    override fun getAllTopicTags(): List<TopicTag> {
+    override fun getAllTopicTags(): ArrayList<TopicTag> {
 
         // TODO("call repository")
         // TODO ("map JAP Entity to Domain Entity")
-        return listOf<TopicTag>()
+        return arrayListOf<TopicTag>()
     }
 }

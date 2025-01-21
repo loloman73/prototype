@@ -1,16 +1,17 @@
 package xenagos.application.service
 
+import org.springframework.stereotype.Component
 import xenagos.domain.service.SortTourListDomainService
 import xenagos.domain.model.*
 import xenagos.application.port.input.model.TourDTO
 import xenagos.application.port.input.GetToursForAreaUseCase
 import xenagos.application.port.output.LoadToursForAreaOutPort
-import xenagos.application.mapper.Mapper
+import xenagos.application.mapper.AdminTopicTagMapper
 
+@Component
 class GetToursForAreaAppService(
     private val loadToursForArea: LoadToursForAreaOutPort,
-    private val sortService: SortTourListDomainService,
-    private val mapper: Mapper
+    private val sortService: SortTourListDomainService
 ) : GetToursForAreaUseCase {
 
     //TODO Fix nullable lists

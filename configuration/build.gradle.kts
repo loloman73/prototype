@@ -9,6 +9,7 @@ dependencies {
     implementation(project(":persistence-adapter"))
     implementation(project(":web-adapter"))
     implementation(project(":input-port"))
+    implementation(project(":output-port"))
     implementation(project(":domain"))
     implementation(project(":common"))
 

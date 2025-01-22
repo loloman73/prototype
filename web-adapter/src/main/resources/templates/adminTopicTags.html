@@ -11,6 +11,12 @@
     <h1>Topic Tags</h1>
     <br> <br>
     Show List // Edit // Delete
+    <br>
+    <ul >
+        <li th:each="topicTag : ${topicTags}" >
+            <span th:text="${topicTag.topicTagId}">Topic Tag Id</span>
+        </li>
+    </ul>
     <br> <br>
     Create New Tag
     <br> <br>

@@ -3,11 +3,12 @@ package xenagos.adapter.output.persistence
 import org.springframework.stereotype.Service
 import xenagos.common.model.Money
 import xenagos.application.port.output.LoadToursForAreaOutPort
+import xenagos.common.model.Coordinates
+import xenagos.common.model.DecimalDegreeLat
+import xenagos.common.model.DecimalDegreeLon
 import xenagos.domain.model.*
-import xenagos.domain.model.common.*
 import java.util.*
 import kotlin.random.Random
-import kotlin.time.Duration
 
 @Service
 class LoadToursForAreaHardEncodedAdapter : LoadToursForAreaOutPort {
@@ -23,8 +24,8 @@ class LoadToursForAreaHardEncodedAdapter : LoadToursForAreaOutPort {
             id = UUID.randomUUID(),
             title = "Tour Title",
             description = "Tour Description",
-            photoFileName = "",
-            avgCoordinates = Coordinates(DecimalDegreeLat(0.0),DecimalDegreeLon(0.0)),
+            photoFileName = UUID.randomUUID(),
+            avgCoordinates = Coordinates(DecimalDegreeLat(0.0), DecimalDegreeLon(0.0)),
             totalRate = Random.nextInt(5).toByte(),
             totalReviews = Random.nextInt(100),
             price =Money(Random.nextInt(10), Currency.getInstance("EUR")) ,
@@ -33,13 +34,13 @@ class LoadToursForAreaHardEncodedAdapter : LoadToursForAreaOutPort {
                     id = UUID.randomUUID(),
                     title="Tour Point title",
                     description = "Tour Point description",
-                    coordinates = Coordinates(DecimalDegreeLat(0.0),DecimalDegreeLon(0.0)),
+                    coordinates = Coordinates(DecimalDegreeLat(0.0), DecimalDegreeLon(0.0)),
                     mediaGuides = listOf(MediaGuide(
                                         id = UUID.randomUUID(),
                                         language=Language(UUID.randomUUID(), "GR","Greek","Ελληνικά"),
                                         mediaFileName = "",
                                         mediaType = MediaType(UUID.randomUUID(), ""),
-                                        duration = Duration.parse("50"),
+                                        duration = Random.nextInt(1,240).toShort(),
                                         durationType = DurationType(UUID.randomUUID(),""),
                                         ameaFriendlyTag = AmeaFriendlyTag(UUID.randomUUID(),"",""),
                                         topicTags = setOf(TopicTag(UUID.randomUUID(),"","")),

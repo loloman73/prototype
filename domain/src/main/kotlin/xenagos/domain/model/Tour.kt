@@ -1,7 +1,7 @@
 package xenagos.domain.model
 
 import xenagos.common.model.Money
-import xenagos.domain.model.common.Coordinates
+import xenagos.common.model.Coordinates
 import java.util.*
 
 class Tour(
@@ -9,7 +9,7 @@ class Tour(
     val title: String,
     val description: String,
     val price: Money,
-    val photoFileName: String,
+    val photoFileName: UUID,
     val totalRate: Byte?,
     val totalReviews: Int?,
     val avgCoordinates: Coordinates,

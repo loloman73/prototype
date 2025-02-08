@@ -7,14 +7,12 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 @Repository
-open class AdminTopicTagsPersistence(val adminTopicTagsRepository: AdminTopicTagsRepository) :
-    AdminTopicTagsOutputPort {
+open class AdminTopicTagsPersistence(val adminTopicTagsRepository: AdminTopicTagsRepository): AdminTopicTagsOutputPort
+{
     override fun getAllTopicTags(): ArrayList<TopicTag> {
-
 
         val mockTopicList = ArrayList<TopicTag>()
         repeat(5) { mockTopicList.add(mockTopic()) }
-
 
         // TODO("call repository")
         // TODO ("map JAP Entity to Domain Entity")

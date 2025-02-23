@@ -7,98 +7,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  th:href="@{/css/layout.css}">
+    <link rel="stylesheet"  th:href="@{/css/style.css}">
     <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Prototype Xenagos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" >
 </head>
 
 <body>
-    <header>
-        <section class="header-up">
-            <article class="header-up__logo-cell">
-                <img class="logo-img" th:src="@{/img/logo.png}" alt="logo">
-            </article>
-            <article class="header-up__i18n-cell">
-                <img class="i18n-img" th:src="@{/img/globe.jpg}" alt="globe">
-                <select name="PageLanguage" id="pageLang">
-                    <option value="GR">GR</option>
-                    <option value="EN">EN</option>
-                </select>
-            </article>
-            <article class="header-up__login-cell">
-                <button class="user-login-btn">
-                    <img class="user-login-img" th:src="@{/img/user.png}" alt="profile photo" >
+    <header class="container-fluid sticky-top bg-light pt-2">
+        <!--Upper Header-->
+        <div class="row pb-2 px-3 border-bottom ">
+            <!--Upper Header / left -->
+            <div class="col-4">
+                <!-- logo image -->
+                <a class="" href="#">
+                    <img th:src="@{/img/logo.png}" width="300px" alt="">
+                </a>
+            </div>
+            <!--Upper Header / right -->
+            <div class="col-auto ms-auto d-flex align-items-center">
+                <!--i8n-->
+                <button class="btn btn-outline-light d-flex align-items-center shadow-sm px-2 py-1" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="18"
+                         height="18"
+                         fill= rgb(170,170,170)
+                         class="bi bi-globe2 me-1"
+                         viewBox="0 0 16 17">
+                        <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m7.5-6.923c-.67.204-1.335.82-1.887 1.855q-.215.403-.395.872c.705.157 1.472.257 2.282.287zM4.249 3.539q.214-.577.481-1.078a7 7 0 0 1 .597-.933A7 7 0 0 0 3.051 3.05q.544.277 1.198.49zM3.509 7.5c.036-1.07.188-2.087.436-3.008a9 9 0 0 1-1.565-.667A6.96 6.96 0 0 0 1.018 7.5zm1.4-2.741a12.3 12.3 0 0 0-.4 2.741H7.5V5.091c-.91-.03-1.783-.145-2.591-.332M8.5 5.09V7.5h2.99a12.3 12.3 0 0 0-.399-2.741c-.808.187-1.681.301-2.591.332zM4.51 8.5c.035.987.176 1.914.399 2.741A13.6 13.6 0 0 1 7.5 10.91V8.5zm3.99 0v2.409c.91.03 1.783.145 2.591.332.223-.827.364-1.754.4-2.741zm-3.282 3.696q.18.469.395.872c.552 1.035 1.218 1.65 1.887 1.855V11.91c-.81.03-1.577.13-2.282.287zm.11 2.276a7 7 0 0 1-.598-.933 9 9 0 0 1-.481-1.079 8.4 8.4 0 0 0-1.198.49 7 7 0 0 0 2.276 1.522zm-1.383-2.964A13.4 13.4 0 0 1 3.508 8.5h-2.49a6.96 6.96 0 0 0 1.362 3.675c.47-.258.995-.482 1.565-.667m6.728 2.964a7 7 0 0 0 2.275-1.521 8.4 8.4 0 0 0-1.197-.49 9 9 0 0 1-.481 1.078 7 7 0 0 1-.597.933M8.5 11.909v3.014c.67-.204 1.335-.82 1.887-1.855q.216-.403.395-.872A12.6 12.6 0 0 0 8.5 11.91zm3.555-.401c.57.185 1.095.409 1.565.667A6.96 6.96 0 0 0 14.982 8.5h-2.49a13.4 13.4 0 0 1-.437 3.008M14.982 7.5a6.96 6.96 0 0 0-1.362-3.675c-.47.258-.995.482-1.565.667.248.92.4 1.938.437 3.008zM11.27 2.461q.266.502.482 1.078a8.4 8.4 0 0 0 1.196-.49 7 7 0 0 0-2.275-1.52c.218.283.418.597.597.932m-.488 1.343a8 8 0 0 0-.395-.872C9.835 1.897 9.17 1.282 8.5 1.077V4.09c.81-.03 1.577-.13 2.282-.287z"/>
+                    </svg>
+                    <span class="text-body-tertiary fw-medium">GR</span>
+                    <!-- TODO: Show languages modal -->
                 </button>
-            </article>
-        </section>
-        <section layout:fragment="HEADER_LO" class="header-lo"> </section>
+                <!--profile-->
+                <a href="#" class="ms-3">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="48"
+                         height="48"
+                         fill=rgb(0,128,256)
+                         class="bi bi-person-circle shadow-lg rounded-circle"
+                         viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>
+                    <!-- TODO: Show login modal -->
+                </a>
+            </div>
+        </div>
+
+
+        <th:block layout:fragment="HEADER_BOTTOM"> </th:block>
     </header>
 
-    <main>
-        <section class="main-container">
-            <section layout:fragment="MAIN_CONTAINER_LEFT"> </section>
-            <section layout:fragment="MAIN_CONTAINER_RIGHT"> </section>
-        </section>
+    <main class="container-fluid bg-light">
+        <div class="row ps-3 pb-5">
+            <th:block layout:fragment="MAIN_CONTAINER_LEFT"> </th:block>
+            <th:block layout:fragment="MAIN_CONTAINER_RIGHT"> </th:block>
+        </div>
+
     </main>
 
-    <footer>
-        <br> <br> <br>
-        <br> <br> <br>
-        <div class="footer-container">
-            <article>
-                <ul class="footer-list">
-                    <li>
-                        <a href="#"> About Us </a>
-                    </li>
-                    <li>
-                        <a href="#"> FAQ </a>
-                    </li>
-                    <li>
-                        <a href="#"> Contact Us </a>
-                    </li>
-                </ul>
-            </article>
-            <article>
-                <ul class="footer-list">
-                    <li>
-                        <a href="#"> For Professionals </a>
-                    </li>
-                    <li>
-                        <a href="#"> For Agencies </a>
-                    </li>
-                    <li>
-                        <a href="#"> Investors </a>
-                    </li>
-                </ul>
-            </article>
-            <article>
-                <ul class="footer-list">
-                    <li>
-                        <a href="#"> Mobile </a>
-                    </li>
-                    <li>
-                        <a href="#"> Cookie settings </a>
-                    </li>
-                    <li>
-                        <a href="#"> Sitemap </a>
-                    </li>
-                </ul>
-            </article>
-            <article>
-                <ul class="footer-list">
-                    <li>
-                        <a href="#"> Privacy policy </a>
-                    </li>
-                    <li>
-                        <a href="#"> Terms and Conditions </a>
-                    </li>
-                    <li>
-                        <a href="#"> Careers </a>
-                    </li>
-                </ul>
-            </article>
+    <footer class="text-light pt-5">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Company Info -->
+                <div class="col-4 g-0">
+                    <img class="d-block mb-4" th:src="@{/img/logo.png}" alt="" width="300px">
+                    <!-- Social Links -->
+                    <a href="#" class="social-icon bi-facebook d-inline-block"></a>
+                    <a href="#" class="social-icon bi-twitter-x d-inline-block"></a>
+                    <a href="#" class="social-icon bi-instagram d-inline-block"></a>
+                    <a href="#" class="social-icon bi-youtube d-inline-block"></a>
+                    <a href="#" class="social-icon bi-tiktok d-inline-block"></a>
+                    <h5 class="mt-4 footer-title">Download application</h5>
+                    <a href="#" class="social-icon bi-android2 d-inline-block"></a>
+                    <a href="#" class="social-icon bi-apple d-inline-block"></a>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-2">
+                    <h5 class="mb-4 footer-title">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="footer-link">Home</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">About</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Services</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Portfolio</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="col-2">
+                    <h5 class="mb-4 footer-title">Services</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="footer-link">Web Design</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Development</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Marketing</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Consulting</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Analytics</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="col-4 ">
+                    <h5 class="mb-4 footer-title">Contact Info</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <i class="bi bi-geo-alt-fill me-2 "></i>
+                            <a href="geo:30.040715,31.218486" class="footer-link">123 Business Street, New York, NY 10001</a>
+                        </li>
+                        <li class="mb-3">
+                            <i class="bi bi-telephone-fill me-2"></i>
+                            <a href="tel:+1234567890" class="footer-link">+1 (234) 567-890</a>
+                        </li>
+                        <li class="mb-3">
+                            <i class="bi bi-envelope-fill me-2"></i>
+                            <a href="mailto:contact@example.com" class="footer-link">contact@example.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- bottom footer -->
+            <div class="row mt-5">
+                <div class="col text-center">
+                    <hr class="mb-4">
+                    <ul class="list-inline">
+                        <li class="list-inline-item me-4"><a class="footer-bottom-link" href="#">Privacy Policy</a></li>
+                        <li class="list-inline-item me-4"><a class="footer-bottom-link"  href="#">Terms of Service</a></li>
+                        <li class="list-inline-item"><a class="footer-bottom-link"  href="#">Cookie Policy</a></li>
+                    </ul>
+                    <p class="company-text-color opacity-75">&copy; 2025 XENAGOS All rights reserved.</p>
+                </div>
+            </div>
         </div>
-        <br> <br> <br>
     </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous">
+    </script>
+
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+    </script>
 
 </body>
 

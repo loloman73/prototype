@@ -5,57 +5,90 @@
         layout:decorate="~{/layouts/layout_main.html}">
 <head>
     <title>Main</title>
-    <link rel="stylesheet"  th:href="@{/css/main.css}">
 </head>
 
 <body>
 
-    <section layout:fragment="HEADER_LO">
-        <article class="filters-cell">
-            <select name="TourLanguage" id="tourLang">
-                <option value="English">English</option>
-                <option value="Spanish">Spanish</option>
-                <option value="Greek">Greek</option>
-                <option value="Russian">Russian</option>
-            </select>
-            <select name="Age" id="age">
-                <option value="8-12">8-12</option>
-                <option value="13-18">13-18</option>
-                <option value="18-99">18-99</option>
-            </select>
-            <select name="Category" id="cat">
-                <option value="Religion">Religion</option>
-                <option value="Tecnology">Tecnology</option>
-                <option value="Arquitecture">Arquitecture</option>
-                <option value="Daily Life">Daily Life</option>
-                <option value="War">War</option>
-            </select>
-            <select name="Special" id="special">
-                <option value="None">None</option>
-                <option value="Mobility">Mobility</option>
-                <option value="Hear">Hear</option>
-                <option value="Visual">Visual</option>
-            </select>
-        </article>
-        <article class="view-mode-cell">
-            <button>Map</button>
-            <button>Gallery</button>
-        </article>
-    </section>
+    <th:block layout:fragment="HEADER_BOTTOM">
+        <!--Lower Header-->
+        <div class="row py-3 px-3 shadow-sm">
+            <!--filters-->
+            <!-- TODO: Filter dropdown items -->
+            <div class="col-6 align-content-center">
 
-    <section layout:fragment="MAIN_CONTAINER_LEFT" class="tour-cards-container">
-        <ul class="tour-cards-list">
-            <li th:each="tour:${tours}" class="tour-card">
-                <a th:replace="~{fragments/fragments.html :: TOUR_CARD(xenagosID=${tour.xenagosId})}"></a>
-            </li>
-        </ul>
-    </section>
+                <button class="btn dropdown-toggle btn-outline-secondary py-1 me-2"  data-bs-toggle="dropdown" aria-expanded="false">
+                    Language
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Menu item 1</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item 2</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item 3</a></li>
+                </ul>
 
-    <section layout:fragment="MAIN_CONTAINER_RIGHT" class="tours-map-container">
-        <div class="map-container">
-            <iframe class="google-map" src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d10850.84757670908!2d23.72488576362117!3d37.9660634094878!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2seg!4v1722882312653!5m2!1sen!2seg" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <button class="btn dropdown-toggle btn-outline-secondary py-1 me-2"  data-bs-toggle="dropdown" aria-expanded="false">
+                    Age Range
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Menu item 4</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item 5</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item 6</a></li>
+                </ul>
+
+                <button class="btn dropdown-toggle btn-outline-secondary py-1 me-2"  data-bs-toggle="dropdown" aria-expanded="false">
+                    Topics
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Menu item 7</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item 8</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item 9</a></li>
+                </ul>
+
+                <button class="btn dropdown-toggle btn-outline-secondary py-1 me-2"  data-bs-toggle="dropdown" aria-expanded="false">
+                    Accessibility
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Menu item 10</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item 11</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item 12</a></li>
+                </ul>
+            </div>
+            <!--search-->
+            <div class="col-3 ms-auto">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search Location" aria-label="Search">
+                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                </form>
+            </div>
         </div>
-    </section>
+    </th:block>
+
+
+    <th:block layout:fragment="MAIN_CONTAINER_LEFT">
+        <div class="col-6 pt-3">
+            <div class="tour-cards-list">
+                <th:block th:each="tour:${tours}">
+                    <div th:replace="~{fragments/fragments.html :: TOUR_CARD(xenagosID=${tour.xenagosId})}">
+
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </th:block>
+
+    <th:block layout:fragment="MAIN_CONTAINER_RIGHT" >
+        <!-- Right Side / Map -->
+        <div class="col-6 z-0">
+            <iframe class="google-map sticky-top"
+                    src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d10850.84757670908!2d23.72488576362117!3d37.9660634094878!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2seg!4v1722882312653!5m2!1sen!2seg"
+                    width="830"
+                    height="600"
+                    style="border:0; top:165px;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </th:block>
 
 </body>
 

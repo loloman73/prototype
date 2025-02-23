@@ -1,0 +1,57 @@
+:root{
+    --company-text-color:hsl(185, 100%, 45%);
+    --footer-text-color: rgb(190, 190, 190);;
+}
+.custom-tooltip {
+    --bs-tooltip-bg: rgb(130, 130, 130);
+    --bs-tooltip-color: var(--bs-white);
+}
+
+.tour-card:hover {
+    background-color:hsla(185, 100%, 45%, 0.03);
+    box-shadow: 0 0 15px 5px rgb(220, 220, 220);
+}
+
+.company-text-color{
+    color: var(--company-text-color)
+}
+
+footer{
+    background: linear-gradient(to right, #1a1c20, #2c3e50);
+    color: #ffffff;
+}
+.footer-title{
+    color: rgba(255, 130, 85, 0.80)
+}
+.footer-text-color{
+    color: var(--footer-text-color);
+}
+
+.footer-link {
+    color: var(--footer-text-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+.footer-link:hover {
+    transform: translateX(5px);
+    color: var(--company-text-color)
+}
+.social-icon {
+    font-size: 32px;
+    color: var(--footer-text-color);
+    margin: 0 12px;
+    transition: all 0.3s ease;
+}
+.social-icon:hover {
+    transform: translateY(-3px);
+    color: var(--company-text-color)
+}
+.footer-bottom-link {
+    color: var(--footer-text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.footer-bottom-link:hover{
+    color: var(--company-text-color);
+}

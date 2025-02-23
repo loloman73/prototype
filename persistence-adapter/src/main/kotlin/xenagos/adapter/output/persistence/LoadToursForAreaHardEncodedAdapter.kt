@@ -24,7 +24,12 @@ class LoadToursForAreaHardEncodedAdapter : LoadToursForAreaOutPort {
             id = UUID.randomUUID(),
             title = "Tour Title",
             description = "Tour Description",
-            photoFileName = UUID.randomUUID(),
+            photoFileName = UUID.randomUUID()
+
+
+
+
+            ,
             avgCoordinates = Coordinates(DecimalDegreeLat(0.0), DecimalDegreeLon(0.0)),
             totalRate = Random.nextInt(5).toByte(),
             totalReviews = Random.nextInt(100),

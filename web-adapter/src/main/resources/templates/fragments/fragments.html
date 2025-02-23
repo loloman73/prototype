@@ -6,53 +6,171 @@
 </head>
 <body>
 
-<a th:fragment="TOUR_CARD(xenagosID)" class="tour-card__link" href="#">
-    <img class="tour-card__img" th:src="@{/img/egypt.jpg}" alt="">
-    <div class="tour-card__data">
-        <div class="tour-card__data__title-cell">
-            <span th:text="${xenagosID}"></span>
-        </div>
-        <div class="tour-card__data__description-cell">
-            Quibusdam itaque, saepe molestiae enim nesciunt dolor excepturi ipsa
-            similique eaque aut ex sint asperiores
-            quia commodi, reprehenderit eum voluptatum veniam porro?
-        </div>
-        <div class="tour-card__data__xenagos-face-cell">
-            <figure>
-                <img th:src="@{/img/xenagos1.jpg}" class="xenagos-face-image" alt="">
-            </figure>
-        </div>
-        <div class="tour-card__data__xenagos-name-cell">
-            Xenagos Name
-        </div>
-        <div class="tour-card__data__price-cell">US$ 8</div>
-        <div class="tour-card__data__meta-data-cell">
-            <div class="tour-meta-data-item">
-                <span>23</span>
-                <img th:src="@{/img/TourPointFlag.png}" class="tour-point-flag-image" alt="">
-            </div>
-            <div class="tour-meta-data-item">
-                en
-            </div>
-            <div class="tour-meta-data-item">
-                <h3>&starf;</h3>4.8(100)
-            </div>
-            <div class="tour-meta-data-item">
-                Save &#128153;
-            </div>
-            <div class="tour-meta-data-item">
-                <img th:src="@{/img/hide.png}" class="hide-tour-image" alt="">
-            </div>
-            <div class="tour-meta-data-item">
-                Share
-                <img th:src="@{/img/share.png}" class="share-tour-image" alt="">
+<div th:fragment="TOUR_CARD(xenagosID)" class="tour-card card mb-3 mt-1">
+    <!-- new card -->
+    <div class="row me-0">
+        <!-- photo / left -->
+        <div class="col-4 g-0 align-content-center">
+            <div id="tour-123-photo-carousel" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="/img/mexico1.jpg" class="d-block img-fluid rounded" alt="">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/img/mexico2.jpg" class="d-block img-fluid rounded" alt="">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/img/mexico3.jpg" class="d-block img-fluid rounded" alt="">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#tour-123-photo-carousel"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#tour-123-photo-carousel"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
         </div>
-        <div class="tour-card__data__cart-cell">
-            <img th:src="@{/img/AddToCart.png}" class="cart-image" alt="">
+        <!-- card body / center -->
+        <div class="col-6 d-grid ps-3 g-0">
+            <a href="#" class="text-decoration-none mb-0">
+                <!-- title -->
+                <h5 class="text-body-secondary mb-1 mt-1">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</h5>
+                <!-- details -->
+                <p class="text-body-tertiary lh-sm small">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae ratione distinctio eum repudiandae
+                    ea? Debitis, molestias? Neque quo sequi optio beatae Neque quo sequi optio beatae
+                </p>
+            </a>
+            <!-- meta data -->
+            <div class="d-flex pb-2 mt-auto align-items-stretch">
+                <!-- total tour points -->
+                <a href="#" class="rounded-3 pill border border-success border-opacity-25
+                                   shadow-sm bg-body-tertiary text-success-emphasis me-2 px-2
+                                   small d-flex align-items-center text-decoration-none"
+                   data-bs-toggle="tooltip"
+                   data-bs-placement="top"
+                   data-bs-custom-class="custom-tooltip"
+                   data-bs-original-title="Tour Points">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="14"
+                         height="14"
+                         fill="rgb(25,130,160)"
+                         class="bi bi-flag-fill me-2"
+                         viewBox="0 0 16 14">
+                        <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12 12 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A20 20 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a20 20 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
+                    </svg>
+                    <span class="text-nowrap">24</span>
+                </a>
+                <!-- rating -->
+                <a href="#" class="rounded-3 pill border border-success border-opacity-25
+                                    shadow-sm bg-body-tertiary text-success-emphasis me-2 px-2
+                                    small d-flex align-items-center text-decoration-none"
+                   data-bs-toggle="tooltip"
+                   data-bs-placement="top"
+                   data-bs-custom-class="custom-tooltip"
+                   data-bs-original-title="Rating and Comments">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="14"
+                         height="14"
+                         fill="rgb(25,130,160)"
+                         class="bi bi-star-fill me-2"
+                         viewBox="0 0 16 16">
+                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                    <span class="text-nowrap">4.7 (120)</span>
+                </a>
+                <!-- hide -->
+                <a href="#" class="rounded-3 pill border border-success border-opacity-25
+                                    shadow-sm bg-body-tertiary text-success-emphasis me-2 px-2
+                                    small d-flex align-items-center text-decoration-none"
+                   data-bs-toggle="tooltip"
+                   data-bs-placement="top"
+                   data-bs-custom-class="custom-tooltip"
+                   data-bs-original-title="Don't show again">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="18"
+                         height="18"
+                         fill="rgb(25,130,160)"
+                         class="bi bi-eye-slash-fill"
+                         viewBox="0 0 16 16">
+                        <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z"/>
+                        <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z"/>
+                    </svg>
+                </a>
+                <!-- save -->
+                <a href="#" class="rounded-3 pill border border-success border-opacity-25
+                                    shadow-sm bg-body-tertiary text-success-emphasis me-2 px-2
+                                    small d-flex align-items-center text-decoration-none"
+                   data-bs-toggle="tooltip"
+                   data-bs-placement="top"
+                   data-bs-custom-class="custom-tooltip"
+                   data-bs-original-title="Save to Favorites">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="14"
+                         height="14"
+                         fill="rgb(25,130,160)"
+                         class="bi bi-heart-fill me-2"
+                         viewBox="0 0 16 14">
+                        <path fill-rule="evenodd"
+                              d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+                    </svg>
+                    <span class="text-nowrap">Save</span>
+                </a>
+                <!-- share -->
+                <a href="#" class="rounded-3 pill border border-success border-opacity-25
+                                    shadow-sm bg-body-tertiary text-success-emphasis me-2 px-2
+                                    small d-flex align-items-center text-decoration-none"
+                   data-bs-toggle="tooltip"
+                   data-bs-placement="top"
+                   data-bs-custom-class="custom-tooltip"
+                   data-bs-original-title="Share Tour">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="16"
+                         height="16"
+                         fill="rgb(25,130,160)"
+                         class="bi bi-share-fill me-2"
+                         viewBox="0 0 16 17">
+                        <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5"/>
+                    </svg>
+                    <span class="text-nowrap">Share</span>
+                </a>
+            </div>
+        </div>
+        <!-- xenagos / right -->
+        <div class="col-2 border-start d-grid px-0">
+            <a href="#" class="text-decoration-none">
+                <!-- photo -->
+                <img class="img-fluid rounded-circle px-4 pt-1" src="/img/xenagos1.jpg" alt="">
+                <!-- name -->
+                <div class="h6 small text-center fst-italic text-secondary-emphasis">
+                    Dr. Nefeli Fotiadou Valencia
+                </div>
+            </a>
+            <!-- price -->
+            <a href="#" class="btn btn-outline-primary rounded-5 mt-auto mb-2 px-0 mx-2 py-1
+                                text-decoration-none d-flex align-items-center justify-content-center">
+                <span class="fs-6 fw-bold me-2 text-nowrap">US$ 7.50</span>
+                <span class="vr me-1"></span>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="20"
+                     height="20"
+                     fill="currentColor"
+                     class="bi bi-cart-plus"
+                     viewBox="0 0 16 16">
+                    <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z"/>
+                    <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+            </a>
         </div>
     </div>
-</a>
+</div>
+
+
 
 </body>
 </html>

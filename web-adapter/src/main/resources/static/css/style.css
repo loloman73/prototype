@@ -1,5 +1,6 @@
 :root{
-    --company-text-color:hsl(185, 100%, 45%);
+    --company-primary-color:hsl(185, 100%, 45%);
+    --company-secondary-color:rgba(255, 130, 85, 0.80);
     --footer-text-color: rgb(190, 190, 190);;
 }
 .custom-tooltip {
@@ -13,7 +14,7 @@
 }
 
 .company-text-color{
-    color: var(--company-text-color)
+    color: var(--company-primary-color)
 }
 
 footer{
@@ -21,7 +22,7 @@ footer{
     color: #ffffff;
 }
 .footer-title{
-    color: rgba(255, 130, 85, 0.80)
+    color: var(--company-primary-color);
 }
 .footer-text-color{
     color: var(--footer-text-color);
@@ -35,7 +36,7 @@ footer{
 }
 .footer-link:hover {
     transform: translateX(5px);
-    color: var(--company-text-color)
+    color: var(--company-primary-color)
 }
 .social-icon {
     font-size: 32px;
@@ -45,7 +46,7 @@ footer{
 }
 .social-icon:hover {
     transform: translateY(-3px);
-    color: var(--company-text-color)
+    color: var(--company-primary-color)
 }
 .footer-bottom-link {
     color: var(--footer-text-color);
@@ -53,5 +54,5 @@ footer{
     transition: color 0.3s ease;
 }
 .footer-bottom-link:hover{
-    color: var(--company-text-color);
+    color: var(--company-primary-color);
 }

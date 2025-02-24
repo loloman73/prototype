@@ -1,33 +1,39 @@
 <!DOCTYPE html>
-<html
+<html   xmlns="http://www.w3.org/1999/xhtml"
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{/layouts/layout_main.html}"
         lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet"  th:href="@{/css/admin.css}">
-    <title></title>
-</head>
 <body>
 
-    <section layout:fragment="HEADER_LO">
-        <h1>Administrator Page </h1>
-    </section>
+    <th:block layout:fragment="HEADER_BOTTOM">
+        <div class="row py-3 px-3 shadow-sm">
+            <div class="col">
+                <h3>Administrator Page </h3>
+            </div>
+        </div>
+    </th:block>
 
-    <section layout:fragment="MAIN_CONTAINER_LEFT" class="left-section">
-        <button onclick="location.href='/admin/accessibilityTags'" type="button">Accessibility Tags</button>
-        <button onclick="location.href='/admin/topicTags'" type="button">Topic Tags</button>
-        <button onclick="location.href='/admin/ageRanges'" type="button">Age Ranges</button>
-        <button onclick="location.href='/admin/languages'" type="button">Languages</button>
-        <button onclick="location.href='/admin/mediaTypes'" type="button">Media Types</button>
-        <button onclick="location.href='/admin/durationTypes'" type="button">Duration Types</button>
-        <button onclick="location.href='/admin/ameaFriendlyTypes'" type="button">AmeA Friendly Types</button>
-    </section>
+    <th:block layout:fragment="MAIN_CONTAINER_LEFT">
+            <div class="col-2 pt-3 border-end">
+                <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/admin/accessibilityTags'">Accessibility Tags</button>
+                    <button type="button" class="btn btn-outline-primary " onclick="location.href='/admin/topicTags'">Topic Tags</button>
+                    <button type="button" class="btn btn-outline-primary " onclick="location.href='/admin/ageRanges'">Age Ranges</button>
+                    <button type="button" class="btn btn-outline-primary " onclick="location.href='/admin/languages'">Languages</button>
+                    <button type="button" class="btn btn-outline-primary " onclick="location.href='/admin/mediaTypes'">Media Types</button>
+                    <button type="button" class="btn btn-outline-primary " onclick="location.href='/admin/durationTypes'">Duration Types</button>
+                    <button type="button" class="btn btn-outline-primary " onclick="location.href='/admin/ameaFriendlyTypes'">AmeA Friendly Types</button>
+                </div>
+            </div>
+    </th:block>
 
-    <section layout:fragment="MAIN_CONTAINER_RIGHT" class="right-section">
-        <th:block layout:fragment="ADMIN_DATA_SPACE"> </th:block>
-    </section>
+
+    <th:block layout:fragment="MAIN_CONTAINER_RIGHT">
+        <div class="col-10 pt-3 ">
+            <th:block layout:fragment="ADMIN_DATA_SPACE"> </th:block>
+        </div>
+    </th:block>
 
 
 </body>

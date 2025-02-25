@@ -16,4 +16,5 @@ class AdminTopicTagsController(private val adminTopicTagsService: AdminTopicTags
         return "adminTopicTags"
     }
 
+
 }

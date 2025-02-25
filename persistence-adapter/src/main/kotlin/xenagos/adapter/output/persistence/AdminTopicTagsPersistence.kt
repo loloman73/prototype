@@ -24,8 +24,8 @@ open class AdminTopicTagsPersistence(val adminTopicTagsRepository: AdminTopicTag
     private fun mockTopic(): TopicTag {
         return TopicTag(
             id = UUID.randomUUID(),
-            tag = UUID.randomUUID().toString().substring(0, 3),
-            description = UUID.randomUUID().toString().substring(0, 15)
+            tag = "tag " + UUID.randomUUID().toString().substring(0, 3),
+            description = "description " + UUID.randomUUID().toString().substring(0, 15)
         )
     }
 

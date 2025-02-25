@@ -12,8 +12,7 @@ class AdminTopicTagsService(private val adminTopicTagsPersistence: AdminTopicTag
     override fun getAllTopicTags(): ArrayList<AdminTopicTagDto> {
         val mapper = AdminTopicTagMapper()
         val topicTagsDTO = arrayListOf<AdminTopicTagDto>()
-        val topicTags = adminTopicTagsPersistence.getAllTopicTags()
-        topicTags.forEach { topicTagsDTO.add(mapper.entityToDto(it)) }
+        adminTopicTagsPersistence.getAllTopicTags().forEach { topicTagsDTO.add(mapper.entityToDto(it)) }
         return topicTagsDTO
     }
 }

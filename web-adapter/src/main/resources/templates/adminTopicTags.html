@@ -5,24 +5,33 @@
         layout:decorate="~{/layouts/layout_admin}"
         lang="en">
 <head>
-    <title>Main Admin Page</title>
+    <title>Topic tags</title>
 </head>
 
 <body>
 
     <th:block layout:fragment="ADMIN_DATA_SPACE">
         <h4>Topic Tags</h4>
-        <br> <br>
-        Show List // Edit // Delete
         <br>
-        <ul >
-            <li th:each="topicTag : ${topicTags}" >
-                <span th:text="${topicTag.topicTagId}">Topic Tag Id</span>
-            </li>
-        </ul>
-        <br> <br>
-        Create New Tag
-        <br> <br>
+        <table class="table table-light table-striped table-bordered border-primary-subtle table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr th:each="topicTag : ${topicTags}" >
+                <th scope="row"> <span th:text="${topicTags.indexOf(topicTag)}"></span>  </th>
+                <td> <span th:text="${topicTag.topicTagId}"></span> </td>
+                <td> <span th:text="${topicTag.topicTag}"></span> </td>
+                <td> <span th:text="${topicTag.description}"></span> </td>
+            </tr>
+            </tbody>
+        </table>
+
     </th:block>
 
 </body>

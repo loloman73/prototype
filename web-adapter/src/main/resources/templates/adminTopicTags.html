@@ -11,23 +11,35 @@
 <body>
 
     <th:block layout:fragment="ADMIN_DATA_SPACE">
-        <h4>Topic Tags</h4>
-        <br>
-        <table class="table table-light table-striped table-bordered border-primary-subtle table-hover">
+        <h4 class="text-decoration-underline mb-5">Topic Tags</h4>
+        <button class="btn btn-primary mb-3">
+            Add New
+        </button>
+        <table class="table table-sm table-light table-striped table-bordered border-primary-subtle table-hover shadow">
             <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Description</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
             <tr th:each="topicTag : ${topicTags}" >
-                <th scope="row"> <span th:text="${topicTags.indexOf(topicTag)}"></span>  </th>
+                <th scope="row"> <span th:text="${topicTags.indexOf(topicTag)+1}"></span>  </th>
                 <td> <span th:text="${topicTag.topicTagId}"></span> </td>
                 <td> <span th:text="${topicTag.topicTag}"></span> </td>
                 <td> <span th:text="${topicTag.description}"></span> </td>
+                <td>
+                    <button class="btn btn-warning">
+                        Edit
+                    </button>
+                    <button class="btn btn-danger">
+                        Delete
+                    </button>
+
+                </td>
             </tr>
             </tbody>
         </table>

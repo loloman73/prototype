@@ -12,7 +12,7 @@
 
     <th:block layout:fragment="ADMIN_DATA_SPACE">
         <h4 class="text-decoration-underline mb-5">Topic Tags</h4>
-        <button class="btn btn-primary mb-3 " type="button" data-bs-toggle="modal" data-bs-target="#addNewTopicTagModal" >
+        <button class="btn btn-primary mb-3" type="button" data-bs-toggle="modal" data-bs-target="#addNewTopicTagModal" >
             Add New
         </button>
         <table class="table table-sm table-light table-striped table-bordered border-primary-subtle table-hover shadow">
@@ -32,10 +32,10 @@
                 <td> <span th:text="${topicTag.topicTag}"></span> </td>
                 <td> <span th:text="${topicTag.description}"></span> </td>
                 <td>
-                    <button class="btn btn-warning">
+                    <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#editTopicTagModal">
                         Edit
                     </button>
-                    <button class="btn btn-danger">
+                    <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteTopicTagModal">
                         Delete
                     </button>
 
@@ -65,12 +65,21 @@
                                         <div class="form-floating mb-3">
                                             <input class="form-control" id="topic_tag_name" type="text" placeholder="topic tag name">
                                             <label class="text-secondary" for="topic_tag_name">Name</label>
+                                        <div class="form-text fst-italic ps-2">maximum 30 digits</div>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
-                                            <textarea class="form-control" id="topic_tag_description" rows="3" placeholder="topic tag description"> </textarea>
+                                            <textarea class="form-control" id="topic_tag_description" rows="3" placeholder="topic tag description" style="height: 100px"> </textarea>
                                             <label class="text-secondary" for="topic_tag_description">Description</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="topic_tag_active" checked>
+                                            <label class="form-check-label" for="topic_tag_active">
+                                                Active
+                                            </label>
                                         </div>
                                     </div>
                                 </div>

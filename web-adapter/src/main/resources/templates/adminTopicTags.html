@@ -12,7 +12,7 @@
 
     <th:block layout:fragment="ADMIN_DATA_SPACE">
         <h4 class="text-decoration-underline mb-5">Topic Tags</h4>
-        <button class="btn btn-primary mb-3">
+        <button class="btn btn-primary mb-3 " type="button" data-bs-toggle="modal" data-bs-target="#addNewTopicTagModal" >
             Add New
         </button>
         <table class="table table-sm table-light table-striped table-bordered border-primary-subtle table-hover shadow">
@@ -43,6 +43,47 @@
             </tr>
             </tbody>
         </table>
+
+        <!-- Add New Modal -->
+        <div class="modal fade"
+             id="addNewTopicTagModal"
+             data-bs-backdrop="static"
+             tabindex="-1"
+             aria-labelledby="addNewTopicTagModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header text-bg-dark">
+                        <h1 class="modal-title fs-5" id="addNewTopicTagModalLabel">Add new Topic Tag</h1>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="container">
+                                <div class="row gx-3">
+                                    <div class="col-8">
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control" id="topic_tag_name" type="text" placeholder="topic tag name">
+                                            <label class="text-secondary" for="topic_tag_name">Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating mb-3">
+                                            <textarea class="form-control" id="topic_tag_description" rows="3" placeholder="topic tag description"> </textarea>
+                                            <label class="text-secondary" for="topic_tag_description">Description</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </th:block>
 

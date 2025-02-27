@@ -36,7 +36,9 @@
                             type="button"
                             data-bs-toggle="modal"
                             data-bs-target="#editTopicTagModal"
-                            data-bs-topicTagName="AAAaaa">
+                            th:data-topic-tag-id="${topicTag.topicTagId}"
+                            th:data-topic-tag-name="${topicTag.topicTag}"
+                            th:data-topic-tag-description="${topicTag.description}">
                         Edit
                     </button>
                     <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteTopicTagModal">
@@ -109,12 +111,18 @@
                 <div class="modal-content">
                     <div class="modal-header text-bg-dark">
                         <h1 class="modal-title fs-5" id="editTopicTagModalLabel">Edit Topic Tag</h1>
-                        <button type="button" class="btn-close btn-close-whiten" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form>
                             <div class="container">
                                 <div class="row">
+                                    <div class="col-10">
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control" id="edit_topic_tag_id" type="text" placeholder="topic tag id" disabled>
+                                            <label class="text-secondary" for="edit_topic_tag_id">Id</label>
+                                        </div>
+                                    </div>
                                     <div class="col-8">
                                         <div class="form-floating mb-3">
                                             <input class="form-control" id="edit_topic_tag_name" type="text" placeholder="topic tag name">
@@ -154,9 +162,18 @@
             if (editTopicTagModal) {
                 editTopicTagModal.addEventListener('show.bs.modal', event => {
                     const button = event.relatedTarget;
-                    const recipient = button.getAttribute('data-bs-topicTagName');
-                    const modalBodyInput = editTopicTagModal.querySelector('#edit_topic_tag_name');
-                    modalBodyInput.value = recipient;
+
+                    const id = button.getAttribute('data-topic-tag-id');
+                    const modalIdInput = editTopicTagModal.querySelector('#edit_topic_tag_id');
+                    modalIdInput.value = id;
+
+                    const tagNameData = button.getAttribute('data-topic-tag-name');
+                    const modalTagNameInput = editTopicTagModal.querySelector('#edit_topic_tag_name');
+                    modalTagNameInput.value = tagNameData;
+
+                    const tagNameDescription = button.getAttribute('data-topic-tag-description');
+                    const modalTagDescriptionInput = editTopicTagModal.querySelector('#edit_topic_tag_description');
+                    modalTagDescriptionInput.value = tagNameDescription;
                 });
             }
         </script>

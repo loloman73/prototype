@@ -32,7 +32,11 @@
                 <td> <span th:text="${topicTag.topicTag}"></span> </td>
                 <td> <span th:text="${topicTag.description}"></span> </td>
                 <td>
-                    <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#editTopicTagModal">
+                    <button class="btn btn-warning"
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#editTopicTagModal"
+                            data-bs-topicTagName="AAAaaa">
                         Edit
                     </button>
                     <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteTopicTagModal">
@@ -60,24 +64,24 @@
                     <div class="modal-body">
                         <form>
                             <div class="container">
-                                <div class="row gx-3">
+                                <div class="row">
                                     <div class="col-8">
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" id="topic_tag_name" type="text" placeholder="topic tag name">
-                                            <label class="text-secondary" for="topic_tag_name">Name</label>
+                                            <input class="form-control" id="new_topic_tag_name" type="text" placeholder="topic tag name">
+                                            <label class="text-secondary" for="new_topic_tag_name">Name</label>
                                         <div class="form-text fst-italic ps-2">maximum 30 digits</div>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
-                                            <textarea class="form-control" id="topic_tag_description" rows="3" placeholder="topic tag description" style="height: 100px"> </textarea>
-                                            <label class="text-secondary" for="topic_tag_description">Description</label>
+                                            <textarea class="form-control" id="new_topic_tag_description" rows="3" placeholder="topic tag description" style="height: 100px"> </textarea>
+                                            <label class="text-secondary" for="new_topic_tag_description">Description</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="topic_tag_active" checked>
-                                            <label class="form-check-label" for="topic_tag_active">
+                                            <input class="form-check-input" type="checkbox" id="new_topic_tag_active" checked>
+                                            <label class="form-check-label" for="new_topic_tag_active">
                                                 Active
                                             </label>
                                         </div>
@@ -94,7 +98,71 @@
             </div>
         </div>
 
+        <!-- Edit Modal -->
+        <div class="modal fade"
+             id="editTopicTagModal"
+             tabindex="-1"
+             data-bs-backdrop="static"
+             aria-labelledby="editTopicTagModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header text-bg-dark">
+                        <h1 class="modal-title fs-5" id="editTopicTagModalLabel">Edit Topic Tag</h1>
+                        <button type="button" class="btn-close btn-close-whiten" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control" id="edit_topic_tag_name" type="text" placeholder="topic tag name">
+                                            <label class="text-secondary" for="edit_topic_tag_name">Name</label>
+                                            <div class="form-text fst-italic ps-2">maximum 30 digits</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating mb-3">
+                                            <textarea class="form-control" id="edit_topic_tag_description" rows="3" placeholder="topic tag description" style="height: 100px"> </textarea>
+                                            <label class="text-secondary" for="edit_topic_tag_description">Description</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="edit_topic_tag_active">
+                                            <label class="form-check-label" for="edit_topic_tag_active">
+                                                Active
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            const editTopicTagModal = document.getElementById('editTopicTagModal');
+            if (editTopicTagModal) {
+                editTopicTagModal.addEventListener('show.bs.modal', event => {
+                    const button = event.relatedTarget;
+                    const recipient = button.getAttribute('data-bs-topicTagName');
+                    const modalBodyInput = editTopicTagModal.querySelector('#edit_topic_tag_name');
+                    modalBodyInput.value = recipient;
+                });
+            }
+        </script>
+
     </th:block>
+
 
 </body>
 

@@ -12,43 +12,58 @@
 
     <th:block layout:fragment="ADMIN_DATA_SPACE">
         <h4 class="text-decoration-underline mb-5">Topic Tags</h4>
-        <button class="btn btn-primary mb-3" type="button" data-bs-toggle="modal" data-bs-target="#addNewTopicTagModal" >
+        <button class="btn btn-primary mb-3"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#addNewTopicTagModal" >
             Add New
         </button>
-        <table class="table table-sm table-light table-striped table-bordered border-primary-subtle table-hover shadow">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Actions</th>
+        <div class="col-8">
+            <table class="table table-sm table-light table-striped table-bordered border-primary-subtle table-hover shadow">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Active</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="topicTag : ${topicTags}" >
+                    <th scope="row"> <span th:text="${topicTags.indexOf(topicTag)+1}"></span>  </th>
+                    <td> <span th:text="${topicTag.topicTagId}"></span> </td>
+                    <td> <span th:text="${topicTag.topicTag}"></span> </td>
+                    <td> <span th:text="${topicTag.description}"></span> </td>
+                    <td>
+                        <label for="topicTagActive" class="visually-hidden"> </label>
+                        <input id="topicTagActive" type="checkbox" disabled="disabled" />
+                    </td>
+                    <td>
+                        <button class="btn btn-warning ms-1 me-1 py-1"
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#editTopicTagModal"
+                                th:data-topic-tag-id="${topicTag.topicTagId}"
+                                th:data-topic-tag-name="${topicTag.topicTag}"
+                                th:data-topic-tag-description="${topicTag.description}">
+                            Edit
+                        </button>
+                        <button class="btn btn-danger py-1"
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#deleteTopicTagModal"
+                                th:data-topic-tag-id="${topicTag.topicTagId}"
+                                th:data-topic-tag-name="${topicTag.topicTag}"
+                                th:data-topic-tag-description="${topicTag.description}">
+                            Delete
+                        </button>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-            <tr th:each="topicTag : ${topicTags}" >
-                <th scope="row"> <span th:text="${topicTags.indexOf(topicTag)+1}"></span>  </th>
-                <td> <span th:text="${topicTag.topicTagId}"></span> </td>
-                <td> <span th:text="${topicTag.topicTag}"></span> </td>
-                <td> <span th:text="${topicTag.description}"></span> </td>
-                <td>
-                    <button class="btn btn-warning"
-                            type="button"
-                            data-bs-toggle="modal"
-                            data-bs-target="#editTopicTagModal"
-                            th:data-topic-tag-id="${topicTag.topicTagId}"
-                            th:data-topic-tag-name="${topicTag.topicTag}"
-                            th:data-topic-tag-description="${topicTag.description}">
-                        Edit
-                    </button>
-                    <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteTopicTagModal">
-                        Delete
-                    </button>
-
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
 
         <!-- Add New Modal -->
         <div class="modal fade"
@@ -156,6 +171,61 @@
             </div>
         </div>
 
+        <!-- Delete Modal -->
+        <div class="modal fade"
+             id="deleteTopicTagModal"
+             tabindex="-1"
+             data-bs-backdrop="static"
+             aria-labelledby="deleteTopicTagModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header text-bg-dark">
+                        <h1 class="modal-title fs-5" id="deleteTopicTagModalLabel">Delete Topic Tag</h1>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-10">
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="delete_topic_tag_id" type="text" placeholder="topic tag id" disabled>
+                                        <label class="text-secondary" for="delete_topic_tag_id">Id</label>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="delete_topic_tag_name" type="text" placeholder="topic tag name" disabled>
+                                        <label class="text-secondary" for="delete_topic_tag_name">Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating mb-3">
+                                        <textarea class="form-control" id="delete_topic_tag_description" rows="3" placeholder="topic tag description" disabled style="height: 100px"> </textarea>
+                                        <label class="text-secondary" for="delete_topic_tag_description">Description</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="delete_topic_tag_active" disabled>
+                                        <label class="form-check-label" for="delete_topic_tag_active">
+                                            Active
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <script>
             const editTopicTagModal = document.getElementById('editTopicTagModal');
@@ -176,6 +246,25 @@
                     modalTagDescriptionInput.value = tagNameDescription;
                 });
             }
+            const deleteTopicTagModal = document.getElementById('deleteTopicTagModal');
+            if (deleteTopicTagModal) {
+                deleteTopicTagModal.addEventListener('show.bs.modal', event => {
+                    const button = event.relatedTarget;
+
+                    const id = button.getAttribute('data-topic-tag-id');
+                    const modalIdInput = deleteTopicTagModal.querySelector('#delete_topic_tag_id');
+                    modalIdInput.value = id;
+
+                    const tagNameData = button.getAttribute('data-topic-tag-name');
+                    const modalTagNameInput = deleteTopicTagModal.querySelector('#delete_topic_tag_name');
+                    modalTagNameInput.value = tagNameData;
+
+                    const tagNameDescription = button.getAttribute('data-topic-tag-description');
+                    const modalTagDescriptionInput = deleteTopicTagModal.querySelector('#delete_topic_tag_description');
+                    modalTagDescriptionInput.value = tagNameDescription;
+                });
+            }
+
         </script>
 
     </th:block>

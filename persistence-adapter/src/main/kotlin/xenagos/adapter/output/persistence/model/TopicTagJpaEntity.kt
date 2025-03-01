@@ -5,16 +5,19 @@ import java.util.*
 
 @Entity
 @Table(name = "topic_tags")
-open class TopicTagJpaEntity {
+open class TopicTagJpaEntity{
     @Id
     @Column(name = "topic_tag_id", nullable = false)
     open var id: UUID? = null
 
-    @Column(name = "topic_tag", length = Integer.MAX_VALUE)
+    @Column(name = "topic_tag", length = 35, nullable = false)
     open var topicTag: String? = null
 
-    @Column(name = "description", length = Integer.MAX_VALUE)
+    @Column(name = "description", length = 250, nullable = false)
     open var description: String? = null
+
+    @Column(name = "active", nullable = false)
+    open var active: Boolean? = null
 
     @ManyToMany
     @JoinTable(

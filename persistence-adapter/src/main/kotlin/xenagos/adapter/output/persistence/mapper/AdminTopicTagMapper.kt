@@ -8,14 +8,19 @@ class AdminTopicTagMapper {
     fun domainEntityToJpa(domainEntity: TopicTag): TopicTagJpaEntity {
         return TopicTagJpaEntity().apply {
             id = domainEntity.id
-            topicTag = domainEntity.tag
+            topicTag = domainEntity.name
             description = domainEntity.description
+            active = domainEntity.active
         }
     }
 
+
     //TODO check for nulls
     fun jpaEntityToDomain(jpaEntity: TopicTagJpaEntity): TopicTag {
-        return TopicTag(jpaEntity.id!!, jpaEntity.topicTag!!, jpaEntity.description!!)
+        return TopicTag(
+            jpaEntity.id!!,
+            jpaEntity.topicTag!!,
+            jpaEntity.description!!,
+            jpaEntity.active!!)
     }
-
 }

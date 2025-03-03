@@ -3,5 +3,5 @@ package xenagos.domain.model
 import java.util.*
 
 class AccessibilityTag(val id: UUID,
-                       val tag: String,
+                       val name: String,
                        val description: String)

@@ -1,6 +1,5 @@
 package xenagos.adapter.output.persistence
 
-import org.hibernate.type.descriptor.java.BooleanPrimitiveArrayJavaType
 import org.springframework.stereotype.Repository
 import xenagos.application.port.output.AdminTopicTagsOutputPort
 import xenagos.domain.model.TopicTag

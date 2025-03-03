@@ -10,10 +10,10 @@ open class AccessibilityTagJpaEntity {
     @Column(name = "accessibility_tag_id", nullable = false)
     open var id: UUID? = null
 
-    @Column(name = "accessibility_tag", length = Integer.MAX_VALUE)
+    @Column(name = "accessibility_tag", length = 35, nullable = false)
     open var accessibilityTag: String? = null
 
-    @Column(name = "description", length = Integer.MAX_VALUE)
+    @Column(name = "description", length = 250, nullable = false)
     open var description: String? = null
 
     @ManyToMany

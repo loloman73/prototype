@@ -26,17 +26,26 @@ open class AdminTopicTagsPersistence(val adminTopicTagsRepository: AdminTopicTag
     private fun mockTopic(): TopicTag {
         return TopicTag(
             id = UUID.randomUUID(),
-            name = getRandomString(25),
-            description = getRandomString(250),
+            name = getRandomWords(3),
+            description = getRandomWords(15),
             active =  Random.nextBoolean ()
         )
     }
 
     private fun getRandomString(length: Int): String {
-        val allowedChars = ('A'..'Z') + ('a'..'z') + (" ") + ('0'..'9')
+        val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')
         return (1..length)
             .map { allowedChars.random() }
             .joinToString("")
+
     }
+
+    private fun getRandomWords(words: Int): String {
+        return (1..words)
+            .map{getRandomString(Random.nextInt(15))}
+            .joinToString(" ")
+    }
+
+
 
 }

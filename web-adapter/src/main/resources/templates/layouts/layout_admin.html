@@ -1,44 +1,47 @@
 <!DOCTYPE html>
-<html   xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{/layouts/layout_main.html}"
-        lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/layout_main.html}"
+      lang="en">
 <head>
     <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Admin Page</title>
 </head>
 
 <body>
 
-    <th:block layout:fragment="HEADER_BOTTOM">
-        <div class="row py-3 px-3 shadow-sm">
-            <div class="col">
-                <h3>Administrator Page </h3>
-            </div>
+<th:block layout:fragment="HEADER_BOTTOM">
+    <div class="row py-3 px-3 shadow-sm">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item h4"><a href="/admin">Admin</a></li>
+                    <li class="breadcrumb-item active h4" aria-current="page" th:text="${childPageName}" ></li>
+                </ol>
+            </nav>
         </div>
-    </th:block>
+    </div>
+</th:block>
 
-    <th:block layout:fragment="MAIN_CONTAINER_LEFT">
-            <div class="col-2 pt-3">
-                <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/admin/accessibilityTags'">Accessibility Tags</button>
-                    <button type="button" class="btn btn-outline-primary " onclick="location.href='/admin/topicTags'">Topic Tags</button>
-                    <button type="button" class="btn btn-outline-primary " onclick="location.href='/admin/ageRanges'">Age Ranges</button>
-                    <button type="button" class="btn btn-outline-primary " onclick="location.href='/admin/languages'">Languages</button>
-                    <button type="button" class="btn btn-outline-primary " onclick="location.href='/admin/mediaTypes'">Media Types</button>
-                    <button type="button" class="btn btn-outline-primary " onclick="location.href='/admin/durationTypes'">Duration Types</button>
-                    <button type="button" class="btn btn-outline-primary " onclick="location.href='/admin/ameaFriendlyTypes'">AmeA Friendly Types</button>
-                </div>
-            </div>
-    </th:block>
-
-
-    <th:block layout:fragment="MAIN_CONTAINER_RIGHT">
-        <div class="col-10">
-            <th:block layout:fragment="ADMIN_DATA_SPACE"> </th:block>
+<th:block layout:fragment="MAIN_CONTAINER_LEFT">
+    <div class="col-2 pt-3">
+        <div class="list-group me-3 shadow">
+            <a id="accessibilitySideBarLink" href="/admin/accessibilityTags" class="list-group-item list-group-item-action list-group-item-primary">Accessibility Tags</a>
+            <a id="topicTagSideBarLink" href="/admin/topicTags" class="list-group-item list-group-item-action list-group-item-primary">Topic Tags</a>
+            <a href="/admin/ageRanges" class="list-group-item list-group-item-action list-group-item-primary">Age Ranges</a>
+            <a href="/admin/languages" class="list-group-item list-group-item-action list-group-item-primary">Languages</a>
+            <a href="/admin/mediaTypes" class="list-group-item list-group-item-action list-group-item-primary">Media Types</a>
+            <a href="/admin/durationTypes" class="list-group-item list-group-item-action list-group-item-primary">Duration Types</a>
+            <a href="/admin/ameaFriendlyTypes" class="list-group-item list-group-item-action list-group-item-primary">AmeA Friendly Types</a>
         </div>
-    </th:block>
+    </div>
+</th:block>
 
+<th:block layout:fragment="MAIN_CONTAINER_RIGHT">
+    <div class="col-10 pt-3">
+        <th:block layout:fragment="ADMIN_DATA_SPACE"></th:block>
+    </div>
+</th:block>
 
 </body>
 </html>

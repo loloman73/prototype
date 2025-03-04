@@ -1,6 +1,6 @@
 package xenagos.application.service
 
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import xenagos.application.mapper.TourMapper
 import xenagos.domain.service.SortTourListDomainService
 import xenagos.domain.model.*
@@ -8,7 +8,7 @@ import xenagos.application.port.input.model.TourDTO
 import xenagos.application.port.input.GetToursForAreaUseCase
 import xenagos.application.port.output.LoadToursForAreaOutPort
 
-@Component
+@Service
 class GetToursForAreaAppService(
     private val loadToursForArea: LoadToursForAreaOutPort,
     private val sortService: SortTourListDomainService,

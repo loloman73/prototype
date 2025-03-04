@@ -14,6 +14,8 @@ sb-starter = {group="org.springframework.boot", name="spring-boot-starter", vers
 sb-starter-web = {group="org.springframework.boot", name="spring-boot-starter-web", version.ref="springboot"}
 sb-starter-data-jpa = {group="org.springframework.boot", name="spring-boot-starter-data-jpa", version.ref="springboot"}
 sb-starter-thymeleaf={group="org.springframework.boot", name="spring-boot-starter-thymeleaf", version.ref="springboot"}
+sb-starter-test={group="org.springframework.boot", name="spring-boot-starter-test", version.ref="springboot"}
+
 #sb-dev-tools = {group="org.springframework.boot", name="spring-boot-devtools", version.ref="springboot"}
 thymeleafLD = {group="nz.net.ultraq.thymeleaf", name="thymeleaf-layout-dialect", version.ref="thymeleafLD"}
 jetbrains-kotlin-reflect = {group="org.jetbrains.kotlin", name="kotlin-reflect", version.ref="kotlinReflect"}
@@ -22,6 +24,7 @@ flywayPostgresql = {group="org.flywaydb", name="flyway-database-postgresql", ver
 #lombok = {group="org.projectlombok", name="lombok", version.ref="lombok"}
 mapstruct = {group="org.mapstruct", name="mapstruct", version.ref="mapstruct"}
 mapstruct-processor= {group="org.mapstruct", name="mapstruct-processor", version.ref="mapstruct"}
+
 
 [plugins]
 sb = {id="org.springframework.boot", version.ref="springboot"}

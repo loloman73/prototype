@@ -8,5 +8,5 @@ dependencies{
     implementation(project(":domain"))
     implementation(project(":common"))
     implementation(libs.sb.starter)
+    testImplementation(libs.sb.starter.test)
 }
-

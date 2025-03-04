@@ -1,16 +1,17 @@
 package xenagisiDomain
 
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.springframework.boot.test.context.SpringBootTest
 import xenagos.common.model.DecimalDegreeLat
 import xenagos.common.model.DecimalDegreeLon
-import kotlin.test.assertEquals
 
+@SpringBootTest
 class CoordinatesTest {
 
 
     //LATITUDE - DecimalDegreeLat class test
-
     @Test
     fun `Lat enter in-range value Should return same number`(){
         val ddLat = DecimalDegreeLat(63.0)

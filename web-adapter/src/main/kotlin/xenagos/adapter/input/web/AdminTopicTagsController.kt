@@ -15,6 +15,4 @@ class AdminTopicTagsController(private val adminTopicTagsService: AdminTopicTags
         model.addAttribute("topicTags", adminTopicTagsService.getAllTopicTags())
         return "adminTopicTags"
     }
-
-
 }

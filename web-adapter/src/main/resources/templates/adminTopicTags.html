@@ -12,16 +12,20 @@
 
     <th:block layout:fragment="ADMIN_DATA_SPACE">
 
+        <!--Add New Button-->
         <button class="btn btn-primary mt-3 mb-3"
                 type="button"
                 data-bs-toggle="modal"
                 data-bs-target="#addNewTopicTagModal" >
             Add New
         </button>
+
+        <!--Table-->
         <div class="col-10">
             <table class="table table-sm table-light table-striped table-bordered border-primary-subtle table-hover shadow">
                 <thead>
                     <tr class="text-center">
+                        <!--Column Headers -->
                         <th scope="col">#</th>
                         <th scope="col">Id</th>
                         <th scope="col">Name</th>
@@ -32,15 +36,22 @@
                 </thead>
                 <tbody>
                 <tr th:each="topicTag : ${topicTags}">
+                    <!--## column-->
                     <th scope="row"> <span th:text="${topicTags.indexOf(topicTag)+1}"></span> </th>
+                    <!--ID field column-->
                     <td class="text-nowrap"> <span th:text="${topicTag.topicTagId}"></span> </td>
+                    <!--1st field-->
                     <td> <span th:text="${topicTag.topicTag}"></span> </td>
+                    <!--2nd field-->
                     <td> <span th:text="${topicTag.description}"></span> </td>
+                    <!--3rd field-->
                     <td class="text-center">
                         <label for="topicTagActive" class="visually-hidden"> </label>
                         <input class="form-check-input" id="topicTagActive" type="checkbox" th:checked="${topicTag.active}" disabled/>
                     </td>
+                    <!--Action buttons-->
                     <td class="text-nowrap" >
+                        <!--Edit button-->
                         <button class="btn btn-warning ms-1 me-1 py-1"
                                 type="button"
                                 data-bs-toggle="modal"
@@ -51,6 +62,7 @@
                                 th:data-topic-tag-active="${topicTag.active}">
                             Edit
                         </button>
+                        <!--Delete button-->
                         <button class="btn btn-danger me-1 py-1 "
                                 type="button"
                                 data-bs-toggle="modal"
@@ -84,6 +96,7 @@
                         <form>
                             <div class="container">
                                 <div class="row">
+                                    <!--1st field-->
                                     <div class="col-9">
                                         <div class="form-floating mb-3">
                                             <input class="form-control" id="new_topic_tag_name" type="text" maxlength="35" placeholder="topic tag name">
@@ -91,6 +104,7 @@
                                             <div class="form-text fst-italic ps-2">maximum 35 digits</div>
                                         </div>
                                     </div>
+                                    <!--2nd field-->
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
                                             <textarea class="form-control" id="new_topic_tag_description" placeholder="topic tag description" maxlength="250" style="height: 150px"> </textarea>
@@ -98,6 +112,7 @@
                                             <div class="form-text fst-italic ps-2">maximum 250 digits</div>
                                         </div>
                                     </div>
+                                    <!--3rd field-->
                                     <div class="col-12">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="new_topic_tag_active" checked>
@@ -135,12 +150,14 @@
                         <form>
                             <div class="container">
                                 <div class="row">
+                                    <!--ID field-->
                                     <div class="col-10">
                                         <div class="form-floating mb-3">
                                             <input class="form-control" id="edit_topic_tag_id" type="text" placeholder="topic tag id" disabled>
                                             <label class="text-secondary" for="edit_topic_tag_id">Id</label>
                                         </div>
                                     </div>
+                                    <!--1st field-->
                                     <div class="col-9">
                                         <div class="form-floating mb-3">
                                             <input class="form-control" id="edit_topic_tag_name" type="text" maxlength="35" placeholder="topic tag name">
@@ -148,6 +165,7 @@
                                             <div class="form-text fst-italic ps-2">maximum 35 digits</div>
                                         </div>
                                     </div>
+                                    <!--2nd field-->
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
                                             <textarea class="form-control" id="edit_topic_tag_description" placeholder="topic tag description" maxlength="250" style="height: 150px"> </textarea>
@@ -155,6 +173,7 @@
                                             <div class="form-text fst-italic ps-2">maximum 250 digits</div>
                                         </div>
                                     </div>
+                                    <!--3rd field-->
                                     <div class="col-12">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="edit_topic_tag_active">
@@ -192,24 +211,28 @@
                         <form>
                         <div class="container">
                             <div class="row">
+                                <!--ID field-->
                                 <div class="col-10">
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="delete_topic_tag_id" type="text" placeholder="topic tag id" disabled>
                                         <label class="text-secondary" for="delete_topic_tag_id">Id</label>
                                     </div>
                                 </div>
+                                <!--1st field-->
                                 <div class="col-9">
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="delete_topic_tag_name" type="text" placeholder="topic tag name" disabled>
                                         <label class="text-secondary" for="delete_topic_tag_name">Name</label>
                                     </div>
                                 </div>
+                                <!--2nd field-->
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
                                         <textarea class="form-control" id="delete_topic_tag_description" placeholder="topic tag description" disabled style="height: 150px"> </textarea>
                                         <label class="text-secondary" for="delete_topic_tag_description">Description</label>
                                     </div>
                                 </div>
+                                <!--3rd field-->
                                 <div class="col-12">
                                     <div class="form-check">
                                         <input class="form-check-input disabled" type="checkbox" id="delete_topic_tag_active" disabled/>

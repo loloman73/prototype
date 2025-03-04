@@ -5,11 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
-@RequestMapping("/admin")
-class AdminPageController {
+@RequestMapping("/admin/languages")
+class AdminLanguagesController {
 
     @GetMapping
-    fun mainAdminPage(): String{
-        return "adminMain"
+    fun getLanguages(): String {
+        return "adminLanguages"
     }
+
 }

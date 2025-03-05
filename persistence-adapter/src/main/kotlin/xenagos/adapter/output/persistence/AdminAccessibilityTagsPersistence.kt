@@ -20,8 +20,8 @@ open class AdminAccessibilityTagsPersistence(val adminAccessibilityTagsRepositor
     private fun mockAccessibilityTag():AccessibilityTag {
         return AccessibilityTag(
             id = UUID.randomUUID(),
-            name = getRandomString(3),
-            description = getRandomString(15)
+            name = getRandomWords(3),
+            description = getRandomWords(15)
         )
     }
 

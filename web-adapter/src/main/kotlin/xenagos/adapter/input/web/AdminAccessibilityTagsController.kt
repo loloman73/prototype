@@ -12,7 +12,7 @@ class AdminAccessibilityTagsController(private val adminAccessibilityTagsService
 
     @GetMapping
     fun showAccessibilityTags(model: Model): String {
-        model.addAttribute("accesibilityTags", adminAccessibilityTagsService.getAllAccessibilityTags())
+        model.addAttribute("accessibilityTags", adminAccessibilityTagsService.getAllAccessibilityTags())
         return "adminAccessibilityTags"
     }
 }

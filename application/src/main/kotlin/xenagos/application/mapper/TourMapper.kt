@@ -33,7 +33,7 @@ class TourMapper {
             tourReviews=dtoTourReviews,
             avgCoordinates = dtoAvgCoordinates,
             xenagosId = dtoXenagosId,
-            xanagosName = dtoXenagosName,
+            xenagosName = dtoXenagosName,
             xenagosPhotoFileName = dtoXenagosPhotoFileName,
             tourPointsQuantity = dtoTourPointsQuantity
         )

@@ -11,5 +11,5 @@ class MediaGuide(
     val durationType: DurationType,
     val ameaFriendlyTag: AmeaFriendlyTag,
     val topicTags: Set<TopicTag>,
-    val ageRangeTags: Set<AgeRangeTag>
+    val ageGroups: Set<AgeGroup>
 )

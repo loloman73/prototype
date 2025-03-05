@@ -15,7 +15,7 @@ data class TourDTO(
     val avgCoordinates: Coordinates,
 
     val xenagosId: UUID,
-    val xanagosName: String,
+    val xenagosName: String,
     val xenagosPhotoFileName: UUID,
     val tourPointsQuantity: Short
 )

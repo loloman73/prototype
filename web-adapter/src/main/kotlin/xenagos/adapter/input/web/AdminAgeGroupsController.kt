@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
-@RequestMapping("/admin/ageRanges")
-class AdminAgeRangesController {
+@RequestMapping("/admin/ageGroups")
+class AdminAgeGroupsController {
 
     @GetMapping
-    fun getAgeRanges(): String{
-        return "adminAgeRanges"
+    fun getAgeGroups(): String{
+        return "adminAgeGroups"
     }
 }

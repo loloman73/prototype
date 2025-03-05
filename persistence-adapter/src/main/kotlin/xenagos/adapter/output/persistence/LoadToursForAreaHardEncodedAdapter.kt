@@ -49,7 +49,7 @@ class LoadToursForAreaHardEncodedAdapter : LoadToursForAreaOutPort {
                                         durationType = DurationType(UUID.randomUUID(),""),
                                         ameaFriendlyTag = AmeaFriendlyTag(UUID.randomUUID(),"",""),
                                         topicTags = setOf(TopicTag(UUID.randomUUID(),"","",true)),
-                                        ageRangeTags = setOf(AgeRangeTag(UUID.randomUUID(),"",""))
+                                        ageGroups = setOf(AgeGroup(UUID.randomUUID(),"aaa",12,19))
                                         )
                                     ),
                     accessibilityTags=setOf(AccessibilityTag(UUID.randomUUID(),"",""))

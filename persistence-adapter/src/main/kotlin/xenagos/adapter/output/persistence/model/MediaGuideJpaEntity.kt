@@ -37,7 +37,7 @@ open class MediaGuideJpaEntity {
     open var ameaFriendlyType: AmeaFriendlyTypeJpaEntity? = null
 
     @ManyToMany(mappedBy = "mediaGuides")
-    open var ageRanges: MutableSet<AgeRangeJpaEntity> = mutableSetOf()
+    open var ageGroups: MutableSet<AgeGroupJpaEntity> = mutableSetOf()
 
     @ManyToMany(mappedBy = "mediaGuides")
     open var topicTags: MutableSet<TopicTagJpaEntity> = mutableSetOf()

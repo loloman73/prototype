@@ -11,7 +11,7 @@ import xenagos.application.port.input.AdminTopicTagsUseCase
 class AdminTopicTagsController(private val adminTopicTagsService: AdminTopicTagsUseCase) {
 
     @GetMapping
-    fun showTopicTags(model: Model): String{
+    fun showTopicTags(model: Model): String {
         model.addAttribute("topicTags", adminTopicTagsService.getAllTopicTags())
         return "adminTopicTags"
     }

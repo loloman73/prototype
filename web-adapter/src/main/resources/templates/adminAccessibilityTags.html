@@ -16,7 +16,7 @@
         <button class="btn btn-primary mt-3 mb-3"
                 type="button"
                 data-bs-toggle="modal"
-                data-bs-target="#addNewAccessibilityTagModal" >
+                data-bs-target="#add_new_accessibility_tag_modal" >
             Add New
         </button>
 
@@ -38,7 +38,7 @@
                     <!--## column-->
                     <th scope="row"> <span th:text="${accessibilityTags.indexOf(accessibilityTag)+1}"></span> </th>
                     <!--ID field column-->
-                    <td class="text-nowrap"> <span th:text="${accessibilityTag.accessibilityTagId}"></span> </td>
+                    <td class="text-nowrap"> <span th:text="${accessibilityTag.id}"></span> </td>
                     <!--1st field-->
                     <td> <span th:text="${accessibilityTag.accessibilityTag}"></span> </td>
                     <!--2nd field-->
@@ -49,8 +49,8 @@
                         <button class="btn btn-warning ms-1 me-1 py-1"
                                 type="button"
                                 data-bs-toggle="modal"
-                                data-bs-target="#editAccessibilityTagModal"
-                                th:data-accessibility-tag-id="${accessibilityTag.accessibilityTagId}"
+                                data-bs-target="#edit_accessibility_tag_modal"
+                                th:data-accessibility-tag-id="${accessibilityTag.id}"
                                 th:data-accessibility-tag-name="${accessibilityTag.accessibilityTag}"
                                 th:data-accessibility-tag-description="${accessibilityTag.description}">
                             Edit
@@ -59,8 +59,8 @@
                         <button class="btn btn-danger me-1 py-1 "
                                 type="button"
                                 data-bs-toggle="modal"
-                                data-bs-target="#deleteAccessibilityTagModal"
-                                th:data-accessibility-tag-id="${accessibilityTag.accessibilityTagId}"
+                                data-bs-target="#delete_accessibility_tag_modal"
+                                th:data-accessibility-tag-id="${accessibilityTag.id}"
                                 th:data-accessibility-tag-name="${accessibilityTag.accessibilityTag}"
                                 th:data-accessibility-tag-description="${accessibilityTag.description}">
                             Delete
@@ -73,15 +73,15 @@
         
         <!-- Add New Modal -->
         <div class="modal fade"
-             id="addNewAccessibilityTagModal"
+             id="add_new_accessibility_tag_modal"
              data-bs-backdrop="static"
              tabindex="-1"
-             aria-labelledby="addNewAccessibilityTagModalLabel"
+             aria-labelledby="add_new_accessibility_tag_modal_label"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header text-bg-dark">
-                        <h1 class="modal-title fs-5" id="addNewAccessibilityTagModalLabel">Add new Accessibility Tag</h1>
+                        <h1 class="modal-title fs-5" id="add_new_accessibility_tag_modal_label">Add new Accessibility Tag</h1>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -118,15 +118,15 @@
 
         <!-- Edit Modal -->
         <div class="modal fade"
-             id="editAccessibilityTagModal"
+             id="edit_accessibility_tag_modal"
              tabindex="-1"
              data-bs-backdrop="static"
-             aria-labelledby="editAccessibilityTagModalLabel"
+             aria-labelledby="edit_accessibility_tag_modalLabel"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header text-bg-dark">
-                        <h1 class="modal-title fs-5" id="editAccessibilityTagModalLabel">Edit Accessibility Tag</h1>
+                        <h1 class="modal-title fs-5" id="edit_accessibility_tag_modalLabel">Edit Accessibility Tag</h1>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -170,15 +170,15 @@
 
         <!-- Delete Modal -->
         <div class="modal fade"
-             id="deleteAccessibilityTagModal"
+             id="delete_accessibility_tag_modal"
              tabindex="-1"
              data-bs-backdrop="static"
-             aria-labelledby="deleteAccessibilityTagModalLabel"
+             aria-labelledby="delete_accessibility_tag_modal_label"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header text-bg-dark">
-                        <h1 class="modal-title fs-5" id="deleteAccessibilityTagModalLabel">Delete Accessibility Tag</h1>
+                        <h1 class="modal-title fs-5" id="delete_accessibility_tag_modal_label">Delete Accessibility Tag</h1>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">

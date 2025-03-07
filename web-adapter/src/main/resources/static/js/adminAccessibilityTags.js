@@ -1,7 +1,7 @@
-const activeLink = document.getElementById('accessibilityTagSideBarLink');
+const activeLink = document.getElementById('accessibility_tag_sidebar_link');
 activeLink.classList.add('active');
 
-const editAccessibilityTagModal = document.getElementById('editAccessibilityTagModal');
+const editAccessibilityTagModal = document.getElementById('edit_accessibility_tag_modal');
 if (editAccessibilityTagModal) {
     editAccessibilityTagModal.addEventListener('show.bs.modal', event => {
         const button = event.relatedTarget;
@@ -19,7 +19,7 @@ if (editAccessibilityTagModal) {
         modalTagDescriptionInput.value = tagDescription;
     });
 }
-const deleteAccessibilityTagModal = document.getElementById('deleteAccessibilityTagModal');
+const deleteAccessibilityTagModal = document.getElementById('delete_accessibility_tag_modal');
 if (deleteAccessibilityTagModal) {
     deleteAccessibilityTagModal.addEventListener('show.bs.modal', event => {
         const button = event.relatedTarget;

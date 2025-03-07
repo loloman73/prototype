@@ -17,7 +17,7 @@
         <button class="btn btn-primary mt-3 mb-3"
                 type="button"
                 data-bs-toggle="modal"
-                data-bs-target="#addNewTopicTagModal" >
+                data-bs-target="#add_new_topic_tag_modal" >
             Add New
         </button>
 
@@ -40,15 +40,15 @@
                     <!--## column-->
                     <th scope="row"> <span th:text="${topicTags.indexOf(topicTag)+1}"></span> </th>
                     <!--ID field column-->
-                    <td class="text-nowrap"> <span th:text="${topicTag.topicTagId}"></span> </td>
+                    <td class="text-nowrap"> <span th:text="${topicTag.id}"></span> </td>
                     <!--1st field-->
                     <td> <span th:text="${topicTag.topicTag}"></span> </td>
                     <!--2nd field-->
                     <td> <span th:text="${topicTag.description}"></span> </td>
                     <!--3rd field-->
                     <td class="text-center">
-                        <label for="topicTagActive" class="visually-hidden"> </label>
-                        <input class="form-check-input" id="topicTagActive" type="checkbox" th:checked="${topicTag.active}" disabled/>
+                        <label for="topic_tag_active" class="visually-hidden"> </label>
+                        <input class="form-check-input" id="topic_tag_active" type="checkbox" th:checked="${topicTag.active}" disabled/>
                     </td>
                     <!--Action buttons-->
                     <td class="text-nowrap" >
@@ -56,8 +56,8 @@
                         <button class="btn btn-warning ms-1 me-1 py-1"
                                 type="button"
                                 data-bs-toggle="modal"
-                                data-bs-target="#editTopicTagModal"
-                                th:data-topic-tag-id="${topicTag.topicTagId}"
+                                data-bs-target="#edit_topic_tag_modal"
+                                th:data-topic-tag-id="${topicTag.id}"
                                 th:data-topic-tag-name="${topicTag.topicTag}"
                                 th:data-topic-tag-description="${topicTag.description}"
                                 th:data-topic-tag-active="${topicTag.active}">
@@ -67,8 +67,8 @@
                         <button class="btn btn-danger me-1 py-1 "
                                 type="button"
                                 data-bs-toggle="modal"
-                                data-bs-target="#deleteTopicTagModal"
-                                th:data-topic-tag-id="${topicTag.topicTagId}"
+                                data-bs-target="#delete_topic_tag_modal"
+                                th:data-topic-tag-id="${topicTag.id}"
                                 th:data-topic-tag-name="${topicTag.topicTag}"
                                 th:data-topic-tag-description="${topicTag.description}"
                                 th:data-topic-tag-active="${topicTag.active}">
@@ -82,15 +82,15 @@
 
         <!-- Add New Modal -->
         <div class="modal fade"
-             id="addNewTopicTagModal"
+             id="add_new_topic_tag_modal"
              data-bs-backdrop="static"
              tabindex="-1"
-             aria-labelledby="addNewTopicTagModalLabel"
+             aria-labelledby="add_new_topic_tag_modal_label"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header text-bg-dark">
-                        <h1 class="modal-title fs-5" id="addNewTopicTagModalLabel">Add new Topic Tag</h1>
+                        <h1 class="modal-title fs-5" id="add_new_topic_tag_modal_label">Add new Topic Tag</h1>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -136,15 +136,15 @@
 
         <!-- Edit Modal -->
         <div class="modal fade"
-             id="editTopicTagModal"
+             id="edit_topic_tag_modal"
              tabindex="-1"
              data-bs-backdrop="static"
-             aria-labelledby="editTopicTagModalLabel"
+             aria-labelledby="edit_topic_tag_modal_label"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header text-bg-dark">
-                        <h1 class="modal-title fs-5" id="editTopicTagModalLabel">Edit Topic Tag</h1>
+                        <h1 class="modal-title fs-5" id="edit_topic_tag_modal_label">Edit Topic Tag</h1>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -197,15 +197,15 @@
 
         <!-- Delete Modal -->
         <div class="modal fade"
-             id="deleteTopicTagModal"
+             id="delete_topic_tag_modal"
              tabindex="-1"
              data-bs-backdrop="static"
-             aria-labelledby="deleteTopicTagModalLabel"
+             aria-labelledby="delete_topic_tag_modal_label"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header text-bg-dark">
-                        <h1 class="modal-title fs-5" id="deleteTopicTagModalLabel">Delete Topic Tag</h1>
+                        <h1 class="modal-title fs-5" id="delete_topic_tag_modal_label">Delete Topic Tag</h1>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -254,6 +254,7 @@
             </div>
         </div>
 
+        <!--Script-->
         <script type="text/javascript" th:src="@{/js/adminTopicTags.js}"> </script>
 
     </th:block>

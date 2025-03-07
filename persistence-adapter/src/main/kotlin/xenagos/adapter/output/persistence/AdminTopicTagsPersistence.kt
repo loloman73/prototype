@@ -8,11 +8,13 @@ import kotlin.collections.ArrayList
 import kotlin.random.Random
 
 @Repository
-open class AdminTopicTagsPersistence(val adminTopicTagsRepository: AdminTopicTagsRepository) :
-    AdminTopicTagsOutputPort {
+open class AdminTopicTagsPersistence(
+    private val repository: AdminTopicTagsRepository
+) :  AdminTopicTagsOutputPort {
+
     override fun getAllTopicTags(): ArrayList<TopicTag> {
 
-        val mockTopicList = ArrayList<TopicTag>()
+        val mockTopicList = arrayListOf<TopicTag>()
         repeat(5) { mockTopicList.add(mockTopic()) }
 
         // TODO("call repository")
@@ -23,28 +25,13 @@ open class AdminTopicTagsPersistence(val adminTopicTagsRepository: AdminTopicTag
 
 
     private fun mockTopic(): TopicTag {
+
         return TopicTag(
             id = UUID.randomUUID(),
-            name = getRandomWords(3),
-            description = getRandomWords(15),
+            name = RandomText.getWords(3),
+            description = RandomText.getWords(15),
             active =  Random.nextBoolean ()
         )
     }
-
-    private fun getRandomString(length: Int): String {
-        val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')
-        return (1..length)
-            .map { allowedChars.random() }
-            .joinToString("")
-
-    }
-
-    private fun getRandomWords(words: Int): String {
-        return (1..words)
-            .map{getRandomString(Random.nextInt(15))}
-            .joinToString(" ")
-    }
-
-
 
 }

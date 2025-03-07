@@ -1,7 +1,7 @@
 package xenagos.application.port.input
 
-import xenagos.application.port.input.model.AdminTopicTagDto
+import xenagos.application.port.input.model.AdminTopicTagDTO
 
 interface AdminTopicTagsUseCase {
-    fun getAllTopicTags(): ArrayList<AdminTopicTagDto>
+    fun getAllTopicTags(): ArrayList<AdminTopicTagDTO>
 }

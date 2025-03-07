@@ -7,16 +7,15 @@ import xenagos.application.port.input.model.AdminAccessibilityTagDTO
 import xenagos.application.port.output.AdminAccessibilityTagsOutputPort
 
 @Service
-class AdminAccessibilityTagsService(private val adminAccessibilityTagPersistence: AdminAccessibilityTagsOutputPort) :
-    AdminAccessibilityTagsUseCase {
+class AdminAccessibilityTagsAppService(
+    private val persistence: AdminAccessibilityTagsOutputPort,
+    private val mapper: AdminAccessibilityTagMapper
+) : AdminAccessibilityTagsUseCase {
 
     override fun getAllAccessibilityTags(): ArrayList<AdminAccessibilityTagDTO> {
-        val mapper = AdminAccessibilityTagMapper()
         val adminAccessibilityTagsDTO = arrayListOf<AdminAccessibilityTagDTO>()
-        adminAccessibilityTagPersistence.getAllAccessibilityTags()
+        persistence.getAllAccessibilityTags()
             .forEach { adminAccessibilityTagsDTO.add(mapper.entityToDTO(it)) }
         return adminAccessibilityTagsDTO
     }
-
-
 }

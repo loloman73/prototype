@@ -1,7 +1,7 @@
-const activeLink = document.getElementById('topicTagSideBarLink');
+const activeLink = document.getElementById('topic_tag_sidebar_link');
 activeLink.classList.add('active');
 
-const editTopicTagModal = document.getElementById('editTopicTagModal');
+const editTopicTagModal = document.getElementById('edit_topic_tag_modal');
 if (editTopicTagModal) {
     editTopicTagModal.addEventListener('show.bs.modal', event => {
         const button = event.relatedTarget;
@@ -23,7 +23,7 @@ if (editTopicTagModal) {
         modalTagActiveInput.checked = (tagActive === 'true');
     });
 }
-const deleteTopicTagModal = document.getElementById('deleteTopicTagModal');
+const deleteTopicTagModal = document.getElementById('delete_topic_tag_modal');
 if (deleteTopicTagModal) {
     deleteTopicTagModal.addEventListener('show.bs.modal', event => {
         const button = event.relatedTarget;

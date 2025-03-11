@@ -1,5 +1,7 @@
 package xenagos.adapter.input.web
 
+import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxRequest
+import jakarta.servlet.http.HttpServletResponse
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -17,12 +19,14 @@ class AdminTopicTagsController(private val adminTopicTagsService: AdminTopicTags
         return "adminTopicTags"
     }
 
+    @HxRequest
     @PostMapping("/addNew")
-    fun addNewTopicTag(): String {
+    fun addNewTopicTag(response: HttpServletResponse): String  {
 
 //        perform validation
 //        return "/fragments/admin/add-new-topic-tag-modal-body"
-        return "redirect:/admin/topicTags"
+
+        return  "redirect:htmx:/admin/topicTags"
     }
 
 }

@@ -9,5 +9,5 @@ dependencies {
     implementation(libs.sb.starter.web)
     implementation(libs.sb.starter.thymeleaf)
     implementation(libs.thymeleafLD)
-
+    implementation("org.webjars.npm:htmx.org:2.0.4")
 }

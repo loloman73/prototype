@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html   xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{/layouts/layout_admin(childPageName='Topic Tags')}"
-        lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/layout_admin(childPageName='Topic Tags')}"
+      lang="en">
 <head>
     <title>Topic Tags</title>
-
 </head>
 
 <body>
@@ -93,42 +92,14 @@
                         <h1 class="modal-title fs-5" id="add_new_topic_tag_modal_label">Add new Topic Tag</h1>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="container">
-                                <div class="row">
-                                    <!--1st field-->
-                                    <div class="col-9">
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="new_topic_tag_name" type="text" maxlength="35" placeholder="topic tag name">
-                                            <label class="text-secondary" for="new_topic_tag_name">Name</label>
-                                            <div class="form-text fst-italic ps-2">maximum 35 digits</div>
-                                        </div>
-                                    </div>
-                                    <!--2nd field-->
-                                    <div class="col-12">
-                                        <div class="form-floating mb-3">
-                                            <textarea class="form-control" id="new_topic_tag_description" placeholder="topic tag description" maxlength="250" style="height: 150px"> </textarea>
-                                            <label class="text-secondary" for="new_topic_tag_description">Description</label>
-                                            <div class="form-text fst-italic ps-2">maximum 250 digits</div>
-                                        </div>
-                                    </div>
-                                    <!--3rd field-->
-                                    <div class="col-12">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="new_topic_tag_active" checked>
-                                            <label class="form-check-label" for="new_topic_tag_active">
-                                                Active
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                    <div class="modal-body" id="new_topic_tag_modal_body" th:insert="~{/fragments/admin/add-new-topic-tag-modal-body.html}"> </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success">Save</button>
+                        <button type="button" class="btn btn-success"
+                                hx-post="/admin/topicTags/addNew"
+                                hx-target="#new_topic_tag_modal_body"
+                                hx-swap="innerHTML">
+                            Save</button>
                     </div>
                 </div>
             </div>

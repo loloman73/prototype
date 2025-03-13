@@ -86,21 +86,25 @@
              tabindex="-1"
              aria-labelledby="add_new_topic_tag_modal_label"
              aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog" >
                 <div class="modal-content">
                     <div class="modal-header text-bg-dark">
                         <h1 class="modal-title fs-5" id="add_new_topic_tag_modal_label">Add new Topic Tag</h1>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body" id="new_topic_tag_modal_body" th:insert="~{/fragments/admin/add-new-topic-tag-modal-body.html}"> </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success"
-                                hx-post="/admin/topicTags/addNew"
-                                hx-target="#new_topic_tag_modal_body"
-                                hx-swap="innerHTML">
-                            Save</button>
-                    </div>
+
+                    <form id="add_new_topic_tag_form"
+                          hx-post="/admin/topicTags/addNew"
+                          hx-target="#new_topic_tag_modal_body"
+                          hx-swap="innerHTML"
+                          th:object="${topicTag}">
+                        <!--Body Fragment-->
+                        <div class="modal-body" id="new_topic_tag_modal_body" th:insert="~{/fragments/admin/add-new-topic-tag-modal-body.html}"> </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">Save </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

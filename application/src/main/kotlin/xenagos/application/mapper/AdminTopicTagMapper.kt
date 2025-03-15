@@ -3,6 +3,7 @@ package xenagos.application.mapper
 import org.springframework.stereotype.Component
 import xenagos.application.port.input.model.AdminTopicTagDTO
 import xenagos.domain.model.TopicTag
+import java.util.*
 
 @Component
 class AdminTopicTagMapper {

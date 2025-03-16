@@ -1,8 +1,10 @@
 package xenagos.adapter.output.persistence.mapper
 
+import org.springframework.stereotype.Component
 import xenagos.adapter.output.persistence.model.TopicTagJpaEntity
 import xenagos.domain.model.TopicTag
 
+@Component
 class AdminTopicTagMapper {
 
     fun domainEntityToJpa(domainEntity: TopicTag): TopicTagJpaEntity {
@@ -13,7 +15,6 @@ class AdminTopicTagMapper {
             active = domainEntity.active
         }
     }
-
 
     //TODO check for nulls
     fun jpaEntityToDomain(jpaEntity: TopicTagJpaEntity): TopicTag {

@@ -33,6 +33,7 @@ class AdminTopicTagsController(private val adminTopicTagsService: AdminTopicTags
             return "/fragments/admin/add-new-topic-tag-modal-form"
         }
 
+        adminTopicTagsService.saveNewTopicTag(addNewTopicTagDTO)
         //Update dB
         return "redirect:htmx:/admin/topicTags"
     }

@@ -1,0 +1,45 @@
+<form>
+    <!--ID field-->
+    <div class="col-10">
+        <div class="form-floating mb-3">
+            <input class="form-control" id="edit_topic_tag_id" type="text"
+                   placeholder="topic tag id" disabled>
+            <label class="text-secondary" for="edit_topic_tag_id">Id</label>
+        </div>
+    </div>
+    <!--1st field-->
+    <div class="col-9">
+        <div class="form-floating mb-3">
+            <input class="form-control"
+                   id="edit_topic_tag_name"
+                   type="text"
+                   maxlength="35">
+            <label class="text-secondary" for="edit_topic_tag_name">Name</label>
+            <div class="form-text fst-italic ps-2">maximum 35 digits</div>
+        </div>
+    </div>
+    <!--2nd field-->
+    <div class="col-12">
+        <div class="form-floating mb-3">
+            <textarea class="form-control"
+                      id="edit_topic_tag_description"
+                      placeholder="topic tag description"
+                      maxlength="250"
+                      style="height: 150px"></textarea>
+            <label class="text-secondary"
+                   for="edit_topic_tag_description">Description</label>
+            <div class="form-text fst-italic ps-2">maximum 250 digits</div>
+        </div>
+    </div>
+    <!--3rd field-->
+    <div class="col-12">
+        <div class="form-check">
+            <input class="form-check-input"
+                   type="checkbox"
+                   id="edit_topic_tag_active">
+            <label class="form-check-label" for="edit_topic_tag_active">
+                Active
+            </label>
+        </div>
+    </div>
+</form>

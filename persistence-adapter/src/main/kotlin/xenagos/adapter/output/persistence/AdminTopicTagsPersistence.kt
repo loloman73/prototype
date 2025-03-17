@@ -16,12 +16,11 @@ open class AdminTopicTagsPersistence(
 
     override fun getAllTopicTags(): ArrayList<TopicTag> {
 
+        val topicTagsJpa = repository.findAll()
+        val topicTagsDomain = arrayListOf<TopicTag>()
+        topicTagsJpa.forEach{topicTagsDomain.add(mapper.jpaEntityToDomain(it))}
 
-        val mockTopicList = arrayListOf<TopicTag>()
-        repeat(5) { mockTopicList.add(mockTopic()) }
-
-
-        return mockTopicList
+        return topicTagsDomain
     }
 
     override fun saveNewTopicTag(topicTag: TopicTag): TopicTag {
@@ -29,7 +28,11 @@ open class AdminTopicTagsPersistence(
         return mapper.jpaEntityToDomain(returnJpaEntity)
     }
 
+    override fun deleteTopicTag(topicTagId: UUID) {
+        repository.deleteById(topicTagId)
+    }
 
+    //TODO: delete
     private fun mockTopic(): TopicTag {
         return TopicTag(
             id = UUID.randomUUID(),

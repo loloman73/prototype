@@ -6,6 +6,8 @@ import xenagos.application.port.input.AdminTopicTagsUseCase
 import xenagos.application.port.input.model.AdminNewTopicTagDTO
 import xenagos.application.port.input.model.AdminTopicTagDTO
 import xenagos.application.port.output.AdminTopicTagsOutputPort
+import java.util.*
+import kotlin.collections.ArrayList
 
 @Service
 class AdminTopicTagsAppService(
@@ -22,6 +24,10 @@ class AdminTopicTagsAppService(
     override fun saveNewTopicTag(adminNewTopicTagDTO: AdminNewTopicTagDTO): AdminTopicTagDTO {
         val savedEntity = persistence.saveNewTopicTag(mapper.newDtoToEntity(adminNewTopicTagDTO))
         return mapper.entityToDto(savedEntity)
+    }
+
+    override fun deleteTopicTag(adminTopicTagDtoId: UUID) {
+        persistence.deleteTopicTag(adminTopicTagDtoId)
     }
 
 

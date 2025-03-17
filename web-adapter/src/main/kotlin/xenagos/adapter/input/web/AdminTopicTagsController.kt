@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 import xenagos.application.port.input.AdminTopicTagsUseCase
 import xenagos.application.port.input.model.AdminNewTopicTagDTO
+import java.util.*
 
 @Controller
 @RequestMapping("/admin/topicTags")
@@ -35,6 +36,13 @@ class AdminTopicTagsController(private val adminTopicTagsService: AdminTopicTags
 
         adminTopicTagsService.saveNewTopicTag(addNewTopicTagDTO)
         //Update dB
+        return "redirect:htmx:/admin/topicTags"
+    }
+
+    @HxRequest
+    @DeleteMapping
+    fun deleteTopicTag(id: UUID): String {
+        adminTopicTagsService.deleteTopicTag(id)
         return "redirect:htmx:/admin/topicTags"
     }
 }

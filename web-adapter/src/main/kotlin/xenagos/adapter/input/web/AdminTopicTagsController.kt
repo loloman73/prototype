@@ -40,8 +40,8 @@ class AdminTopicTagsController(private val adminTopicTagsService: AdminTopicTags
     }
 
     @HxRequest
-    @DeleteMapping
-    fun deleteTopicTag(id: UUID): String {
+    @DeleteMapping("/delete")
+    fun deleteTopicTag(@RequestParam id: UUID): String {
         adminTopicTagsService.deleteTopicTag(id)
         return "redirect:htmx:/admin/topicTags"
     }

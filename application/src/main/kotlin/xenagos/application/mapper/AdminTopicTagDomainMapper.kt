@@ -17,8 +17,8 @@ class AdminTopicTagDomainMapper {
         return TopicTag(dto.id, dto.topicTag, dto.description, dto.active)
     }
 
-    fun newDtoToEntity(dto: AdminNewTopicTagDTO): TopicTag {
-        return TopicTag(UUID.randomUUID(), dto.topicTag, dto.description, dto.active)
+    fun newDtoToEntity(dto: AdminNewTopicTagDTO, id:UUID): TopicTag {
+        return TopicTag(id, dto.topicTag, dto.description, dto.active)
     }
 
 }

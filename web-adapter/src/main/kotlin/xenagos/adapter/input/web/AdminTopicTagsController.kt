@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 import xenagos.application.port.input.AdminTopicTagsUseCase
 import xenagos.application.port.input.model.AdminNewTopicTagDTO
+import xenagos.application.port.input.model.AdminTopicTagDTO
 import java.util.*
 
 @Controller
@@ -17,7 +18,8 @@ class AdminTopicTagsController(private val adminTopicTagsService: AdminTopicTags
     @GetMapping
     fun showTopicTags(model: Model): String {
         model.addAttribute("topicTags", adminTopicTagsService.getAllTopicTags())
-        model.addAttribute("addNewTopicTag", AdminNewTopicTagDTO())
+        model.addAttribute("addNewTopicTag", AdminNewTopicTagDTO("","", false))
+        model.addAttribute("editTopicTag", AdminTopicTagDTO(UUID.randomUUID(),"","",false))
         return "adminTopicTags"
     }
 
@@ -25,17 +27,25 @@ class AdminTopicTagsController(private val adminTopicTagsService: AdminTopicTags
     @PostMapping("/addNew")
     fun addNewTopicTag(
         @Valid @ModelAttribute("addNewTopicTag") addNewTopicTagDTO: AdminNewTopicTagDTO,
-        bindingResult: BindingResult,
-        model: Model
+        bindingResult: BindingResult
     ): String {
-
-        //Perform validation
         if (bindingResult.hasErrors()) {
             return "/fragments/admin/add-new-topic-tag-modal-form"
         }
-
         adminTopicTagsService.saveNewTopicTag(addNewTopicTagDTO)
-        //Update dB
+        return "redirect:htmx:/admin/topicTags"
+    }
+
+    @HxRequest
+    @PutMapping("/edit")
+    fun updateTopicTag(
+        @Valid @ModelAttribute("editTopicTag") editTopicTagDTO: AdminTopicTagDTO,
+        bindingResult: BindingResult
+    ): String {
+        if (bindingResult.hasErrors()) {
+            return "/fragments/admin/edit-topic-tag-modal-form"
+        }
+        //TODO: Update dB
         return "redirect:htmx:/admin/topicTags"
     }
 

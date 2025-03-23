@@ -4,14 +4,14 @@ import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 
-data class AdminNewTopicTagDTO(
+data class AdminAccessibilityTagNewDTO(
 
     @field:NotBlank
-    @field:Size(max = 35)
-    val topicTag: String,
+    @field:Size(min = 3, max = 35)
+    val accessibilityTag: String,
 
     @field:NotBlank
-    @field:Size(max = 250)
+    @field:Size(min = 3, max = 250)
     val description: String,
 
     // needs default false value because html POST calls ignore checkboxes when they are unchecked

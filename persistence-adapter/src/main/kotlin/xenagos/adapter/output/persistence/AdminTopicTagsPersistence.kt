@@ -6,7 +6,6 @@ import xenagos.application.port.output.AdminTopicTagsOutputPort
 import xenagos.domain.model.TopicTag
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.random.Random
 
 @Repository
 open class AdminTopicTagsPersistence(
@@ -15,11 +14,9 @@ open class AdminTopicTagsPersistence(
 ) : AdminTopicTagsOutputPort {
 
     override fun getAllTopicTags(): ArrayList<TopicTag> {
-
         val topicTagsJpa = repository.findAll()
         val topicTagsDomain = arrayListOf<TopicTag>()
         topicTagsJpa.forEach{topicTagsDomain.add(mapper.jpaEntityToDomain(it))}
-
         return topicTagsDomain
     }
 
@@ -33,18 +30,7 @@ open class AdminTopicTagsPersistence(
         return mapper.jpaEntityToDomain(returnedJpaEntity)
     }
 
-
     override fun deleteTopicTag(topicTagId: UUID) {
         repository.deleteById(topicTagId)
     }
-
-    private fun mockTopic(): TopicTag {
-        return TopicTag(
-            id = UUID.randomUUID(),
-            name = RandomText.getWords(3),
-            description = RandomText.getWords(15),
-            active = Random.nextBoolean()
-        )
-    }
-
 }

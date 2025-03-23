@@ -7,7 +7,7 @@ import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 import xenagos.application.port.input.AdminTopicTagsUseCase
-import xenagos.application.port.input.model.AdminNewTopicTagDTO
+import xenagos.application.port.input.model.AdminTopicTagNewDTO
 import xenagos.application.port.input.model.AdminTopicTagDTO
 import java.util.*
 
@@ -18,7 +18,7 @@ class AdminTopicTagsController(private val adminTopicTagsService: AdminTopicTags
     @GetMapping
     fun showTopicTags(model: Model): String {
         model.addAttribute("topicTags", adminTopicTagsService.getAllTopicTags())
-        model.addAttribute("addNewTopicTag", AdminNewTopicTagDTO("","", false))
+        model.addAttribute("addNewTopicTag", AdminTopicTagNewDTO("","", false))
         model.addAttribute("editTopicTag", AdminTopicTagDTO(UUID.randomUUID(),"","",false))
         return "adminTopicTags"
     }
@@ -26,7 +26,7 @@ class AdminTopicTagsController(private val adminTopicTagsService: AdminTopicTags
     @HxRequest
     @PostMapping("/addNew")
     fun addNewTopicTag(
-        @Valid @ModelAttribute("addNewTopicTag") addNewTopicTagDTO: AdminNewTopicTagDTO,
+        @Valid @ModelAttribute("addNewTopicTag") addNewTopicTagDTO: AdminTopicTagNewDTO,
         bindingResult: BindingResult
     ): String {
         if (bindingResult.hasErrors()) {

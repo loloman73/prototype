@@ -30,6 +30,7 @@
                     <th scope="col">Id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Description</th>
+                    <th scope="col">Active</th>
                     <th scope="col">Actions</th>
                 </tr>
                 </thead>
@@ -43,6 +44,13 @@
                     <td> <span th:text="${accessibilityTag.accessibilityTag}"></span> </td>
                     <!--2nd field-->
                     <td> <span th:text="${accessibilityTag.description}"></span> </td>
+                    <!--3rd field-->
+                    <!--3rd field-->
+                    <td class="text-center">
+                        <label for="accessibility_tag_active" class="visually-hidden"> </label>
+                        <input class="form-check-input" id="accessibility_tag_active" type="checkbox"
+                               th:checked="${accessibilityTag.active}" disabled/>
+                    </td>
                     <!--Action buttons-->
                     <td class="text-nowrap" >
                         <!--Edit button-->

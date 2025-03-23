@@ -3,7 +3,7 @@ package xenagos.application.service
 import org.springframework.stereotype.Service
 import xenagos.application.mapper.AdminTopicTagDomainMapper
 import xenagos.application.port.input.AdminTopicTagsUseCase
-import xenagos.application.port.input.model.AdminNewTopicTagDTO
+import xenagos.application.port.input.model.AdminTopicTagNewDTO
 import xenagos.application.port.input.model.AdminTopicTagDTO
 import xenagos.application.port.output.AdminTopicTagsOutputPort
 import java.util.*
@@ -21,7 +21,7 @@ class AdminTopicTagsAppService(
         return adminTopicTagsDTO
     }
 
-    override fun saveNewTopicTag(adminNewTopicTagDTO: AdminNewTopicTagDTO): AdminTopicTagDTO {
+    override fun saveNewTopicTag(adminNewTopicTagDTO: AdminTopicTagNewDTO): AdminTopicTagDTO {
         val savedEntity = persistence.saveNewTopicTag(mapper.newDtoToEntity(adminNewTopicTagDTO, UUID.randomUUID()))
         return mapper.entityToDto(savedEntity)
     }

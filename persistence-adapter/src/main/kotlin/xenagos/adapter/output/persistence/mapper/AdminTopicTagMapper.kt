@@ -22,6 +22,7 @@ class AdminTopicTagMapper {
             jpaEntity.id!!,
             jpaEntity.topicTag!!,
             jpaEntity.description!!,
-            jpaEntity.active!!)
+            jpaEntity.active!!
+        )
     }
 }

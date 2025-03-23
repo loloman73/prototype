@@ -16,6 +16,9 @@ open class AccessibilityTagJpaEntity {
     @Column(name = "description", length = 250, nullable = false)
     open var description: String? = null
 
+    @Column(name = "active", nullable = false)
+    open var active: Boolean? = null
+
     @ManyToMany
     @JoinTable(
         name = "tour_point_accessibility_tag",

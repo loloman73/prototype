@@ -24,15 +24,20 @@ open class AdminTopicTagsPersistence(
     }
 
     override fun saveNewTopicTag(topicTag: TopicTag): TopicTag {
-        val returnJpaEntity = repository.save(mapper.domainEntityToJpa(topicTag))
-        return mapper.jpaEntityToDomain(returnJpaEntity)
+        val returnedJpaEntity = repository.save(mapper.domainEntityToJpa(topicTag))
+        return mapper.jpaEntityToDomain(returnedJpaEntity)
     }
+
+    override fun updateTopicTag(topicTag: TopicTag): TopicTag {
+        val returnedJpaEntity = repository.save(mapper.domainEntityToJpa(topicTag))
+        return mapper.jpaEntityToDomain(returnedJpaEntity)
+    }
+
 
     override fun deleteTopicTag(topicTagId: UUID) {
         repository.deleteById(topicTagId)
     }
 
-    //TODO: delete
     private fun mockTopic(): TopicTag {
         return TopicTag(
             id = UUID.randomUUID(),

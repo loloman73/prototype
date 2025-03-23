@@ -45,7 +45,7 @@ class AdminTopicTagsController(private val adminTopicTagsService: AdminTopicTags
         if (bindingResult.hasErrors()) {
             return "/fragments/admin/edit-topic-tag-modal-form"
         }
-        //TODO: Update dB
+        adminTopicTagsService.updateTopicTag(editTopicTagDTO)
         return "redirect:htmx:/admin/topicTags"
     }
 

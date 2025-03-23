@@ -26,6 +26,11 @@ class AdminTopicTagsAppService(
         return mapper.entityToDto(savedEntity)
     }
 
+    override fun updateTopicTag(adminTopicTagDTO: AdminTopicTagDTO): AdminTopicTagDTO {
+        val updatedEntity = persistence.updateTopicTag(mapper.dtoToEntity(adminTopicTagDTO))
+        return mapper.entityToDto(updatedEntity)
+    }
+
     override fun deleteTopicTag(adminTopicTagDtoId: UUID) {
         persistence.deleteTopicTag(adminTopicTagDtoId)
     }

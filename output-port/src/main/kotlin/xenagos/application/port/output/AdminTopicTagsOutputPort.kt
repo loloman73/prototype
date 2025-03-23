@@ -7,5 +7,6 @@ import kotlin.collections.ArrayList
 interface AdminTopicTagsOutputPort {
     fun getAllTopicTags(): ArrayList<TopicTag>
     fun saveNewTopicTag(topicTag: TopicTag): TopicTag
+    fun updateTopicTag(topicTag: TopicTag): TopicTag
     fun deleteTopicTag(topicTagId: UUID)
 }

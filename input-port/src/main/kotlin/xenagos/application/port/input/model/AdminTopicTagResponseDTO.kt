@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import java.util.UUID
 
-data class AdminTopicTagDTO(
+data class AdminTopicTagResponseDTO(
 
     @field:NotNull
     val id: UUID,

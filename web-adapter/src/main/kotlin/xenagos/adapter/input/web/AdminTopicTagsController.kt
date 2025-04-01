@@ -7,8 +7,9 @@ import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 import xenagos.application.port.input.AdminTopicTagsUseCase
-import xenagos.application.port.input.model.AdminTopicTagNewDTO
-import xenagos.application.port.input.model.AdminTopicTagDTO
+import xenagos.application.port.input.model.AdminTopicTagEditRequestDTO
+import xenagos.application.port.input.model.AdminTopicTagNewRequestDTO
+import xenagos.application.port.input.model.AdminTopicTagResponseDTO
 import java.util.*
 
 @Controller
@@ -18,28 +19,28 @@ class AdminTopicTagsController(private val adminTopicTagsService: AdminTopicTags
     @GetMapping
     fun showTopicTags(model: Model): String {
         model.addAttribute("topicTags", adminTopicTagsService.getAllTopicTags())
-        model.addAttribute("addNewTopicTag", AdminTopicTagNewDTO("","", false))
-        model.addAttribute("editTopicTag", AdminTopicTagDTO(UUID.randomUUID(),"","",false))
+        model.addAttribute("addNewTopicTag", AdminTopicTagNewRequestDTO("","", false))
+        model.addAttribute("editTopicTag", AdminTopicTagResponseDTO(UUID.randomUUID(),"","",false))
         return "adminTopicTags"
     }
 
     @HxRequest
     @PostMapping("/addNew")
     fun addNewTopicTag(
-        @Valid @ModelAttribute("addNewTopicTag") addNewTopicTagDTO: AdminTopicTagNewDTO,
+        @Valid @ModelAttribute("addNewTopicTag") addTopicTagNewRequestDTO: AdminTopicTagNewRequestDTO,
         bindingResult: BindingResult
     ): String {
         if (bindingResult.hasErrors()) {
             return "/fragments/admin/add-new-topic-tag-modal-form"
         }
-        adminTopicTagsService.saveNewTopicTag(addNewTopicTagDTO)
+        adminTopicTagsService.saveNewTopicTag(addTopicTagNewRequestDTO)
         return "redirect:htmx:/admin/topicTags"
     }
 
     @HxRequest
     @PutMapping("/edit")
     fun updateTopicTag(
-        @Valid @ModelAttribute("editTopicTag") editTopicTagDTO: AdminTopicTagDTO,
+        @Valid @ModelAttribute("editTopicTag") editTopicTagDTO: AdminTopicTagEditRequestDTO,
         bindingResult: BindingResult
     ): String {
         if (bindingResult.hasErrors()) {

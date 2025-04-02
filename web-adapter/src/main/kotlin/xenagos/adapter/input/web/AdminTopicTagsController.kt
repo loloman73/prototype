@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*
 import xenagos.application.port.input.AdminTopicTagsUseCase
 import xenagos.application.port.input.model.AdminTopicTagEditRequestDTO
 import xenagos.application.port.input.model.AdminTopicTagNewRequestDTO
-import xenagos.application.port.input.model.AdminTopicTagResponseDTO
 import java.util.*
 
 @Controller
@@ -20,7 +19,7 @@ class AdminTopicTagsController(private val adminTopicTagsService: AdminTopicTags
     fun showTopicTags(model: Model): String {
         model.addAttribute("topicTags", adminTopicTagsService.getAllTopicTags())
         model.addAttribute("addNewTopicTag", AdminTopicTagNewRequestDTO("","", false))
-        model.addAttribute("editTopicTag", AdminTopicTagResponseDTO(UUID.randomUUID(),"","",false))
+        model.addAttribute("editTopicTag", AdminTopicTagEditRequestDTO(UUID.randomUUID(),"","",false))
         return "adminTopicTags"
     }
 

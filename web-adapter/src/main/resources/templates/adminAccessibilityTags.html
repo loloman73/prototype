@@ -1,234 +1,230 @@
 <!DOCTYPE html>
-<html   xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{/layouts/layout_admin(childPageName='Accessibility Tags')}"
-        lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/layout_admin(childPageName='Accessibility Tags')}"
+      lang="en">
 <head>
     <title>Accessibility Tags</title>
 </head>
 
 <body>
 
-    <th:block layout:fragment="ADMIN_DATA_SPACE">
+<th:block layout:fragment="ADMIN_DATA_SPACE">
 
-        <!--Add New Button-->
-        <button class="btn btn-primary mt-3 mb-3"
-                type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#add_new_accessibility_tag_modal" >
-            Add New
-        </button>
+    <!--Add New Button-->
+    <button class="btn btn-primary mt-3 mb-3"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#add_new_accessibility_tag_modal">
+        Add New
+    </button>
 
-        <!--Table-->
-        <div class="col-10">
-            <table class="table table-sm table-light table-striped table-bordered border-primary-subtle table-hover shadow">
-                <thead>
-                <tr class="text-center">
-                    <!--Column Headers -->
-                    <th scope="col">#</th>
-                    <th scope="col">Id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Active</th>
-                    <th scope="col">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="accessibilityTag : ${accessibilityTags}">
-                    <!--## column-->
-                    <th scope="row"> <span th:text="${accessibilityTags.indexOf(accessibilityTag)+1}"></span> </th>
-                    <!--ID field column-->
-                    <td class="text-nowrap"> <span th:text="${accessibilityTag.id}"></span> </td>
-                    <!--1st field-->
-                    <td> <span th:text="${accessibilityTag.accessibilityTag}"></span> </td>
-                    <!--2nd field-->
-                    <td> <span th:text="${accessibilityTag.description}"></span> </td>
-                    <!--3rd field-->
-                    <!--3rd field-->
-                    <td class="text-center">
-                        <label for="accessibility_tag_active" class="visually-hidden"> </label>
-                        <input class="form-check-input" id="accessibility_tag_active" type="checkbox"
-                               th:checked="${accessibilityTag.active}" disabled/>
-                    </td>
-                    <!--Action buttons-->
-                    <td class="text-nowrap" >
-                        <!--Edit button-->
-                        <button class="btn btn-warning ms-1 me-1 py-1"
-                                type="button"
-                                data-bs-toggle="modal"
-                                data-bs-target="#edit_accessibility_tag_modal"
-                                th:data-accessibility-tag-id="${accessibilityTag.id}"
-                                th:data-accessibility-tag-name="${accessibilityTag.accessibilityTag}"
-                                th:data-accessibility-tag-description="${accessibilityTag.description}">
-                            Edit
-                        </button>
-                        <!--Delete button-->
-                        <button class="btn btn-danger me-1 py-1 "
-                                type="button"
-                                data-bs-toggle="modal"
-                                data-bs-target="#delete_accessibility_tag_modal"
-                                th:data-accessibility-tag-id="${accessibilityTag.id}"
-                                th:data-accessibility-tag-name="${accessibilityTag.accessibilityTag}"
-                                th:data-accessibility-tag-description="${accessibilityTag.description}">
-                            Delete
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <!-- Add New Modal -->
-        <div class="modal fade"
-             id="add_new_accessibility_tag_modal"
-             data-bs-backdrop="static"
-             tabindex="-1"
-             aria-labelledby="add_new_accessibility_tag_modal_label"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header text-bg-dark">
-                        <h1 class="modal-title fs-5" id="add_new_accessibility_tag_modal_label">Add new Accessibility Tag</h1>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!--Table-->
+    <div class="col-10">
+        <table class="table table-sm table-light table-striped table-bordered border-primary-subtle table-hover shadow">
+            <thead>
+            <tr class="text-center">
+                <!--Column Headers -->
+                <th scope="col">#</th>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Active</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="accessibilityTag : ${accessibilityTags}">
+                <!--## column-->
+                <th scope="row"><span th:text="${accessibilityTags.indexOf(accessibilityTag)+1}"></span></th>
+                <!--ID field column-->
+                <td class="text-nowrap"><span th:text="${accessibilityTag.id}"></span></td>
+                <!--1st field-->
+                <td><span th:text="${accessibilityTag.accessibilityTag}"></span></td>
+                <!--2nd field-->
+                <td><span th:text="${accessibilityTag.description}"></span></td>
+                <!--3rd field-->
+                <!--3rd field-->
+                <td class="text-center">
+                    <label for="accessibility_tag_active" class="visually-hidden"> </label>
+                    <input class="form-check-input" id="accessibility_tag_active" type="checkbox"
+                           th:checked="${accessibilityTag.active}" disabled/>
+                </td>
+                <!--Action buttons-->
+                <td class="text-nowrap">
+                    <!--Edit button-->
+                    <button class="btn btn-warning ms-1 me-1 py-1"
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#edit_accessibility_tag_modal"
+                            th:data-accessibility-tag-id="${accessibilityTag.id}"
+                            th:data-accessibility-tag-name="${accessibilityTag.accessibilityTag}"
+                            th:data-accessibility-tag-description="${accessibilityTag.description}">
+                        Edit
+                    </button>
+                    <!--Delete button-->
+                    <button class="btn btn-danger me-1 py-1 "
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#delete_accessibility_tag_modal"
+                            th:data-accessibility-tag-id="${accessibilityTag.id}"
+                            th:data-accessibility-tag-name="${accessibilityTag.accessibilityTag}"
+                            th:data-accessibility-tag-description="${accessibilityTag.description}">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add New Modal -->
+    <div class="modal fade"
+         id="add_new_accessibility_tag_modal"
+         data-bs-backdrop="static"
+         tabindex="-1"
+         aria-labelledby="add_new_accessibility_tag_modal_label"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-bg-dark">
+                    <h1 class="modal-title fs-5" id="add_new_accessibility_tag_modal_label">Add new Accessibility
+                        Tag</h1>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <!--Form Fragment-->
+                            <div th:replace="~{/fragments/admin/add-new-accessibility-tag-modal-form }"></div>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="container">
-                                <div class="row">
-                                    <!--1st field-->
-                                    <div class="col-9">
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="new_accessibility_tag_name" type="text" maxlength="35" placeholder="accessibility tag name">
-                                            <label class="text-secondary" for="new_accessibility_tag_name">Name</label>
-                                            <div class="form-text fst-italic ps-2">maximum 35 digits</div>
-                                        </div>
-                                    </div>
-                                    <!--2nd field-->
-                                    <div class="col-12">
-                                        <div class="form-floating mb-3">
-                                            <textarea class="form-control" id="new_accessibility_tag_description" placeholder="accessibility tag description" maxlength="250" style="height: 150px"> </textarea>
-                                            <label class="text-secondary" for="new_accessibility_tag_description">Description</label>
-                                            <div class="form-text fst-italic ps-2">maximum 250 digits</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success">Save</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Save</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Edit Modal -->
-        <div class="modal fade"
-             id="edit_accessibility_tag_modal"
-             tabindex="-1"
-             data-bs-backdrop="static"
-             aria-labelledby="edit_accessibility_tag_modalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header text-bg-dark">
-                        <h1 class="modal-title fs-5" id="edit_accessibility_tag_modalLabel">Edit Accessibility Tag</h1>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="container">
-                                <div class="row">
-                                    <!--ID field-->
-                                    <div class="col-10">
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="edit_accessibility_tag_id" type="text" placeholder="accessibility tag id" disabled>
-                                            <label class="text-secondary" for="edit_accessibility_tag_id">Id</label>
-                                        </div>
+    <!-- Edit Modal -->
+    <div class="modal fade"
+         id="edit_accessibility_tag_modal"
+         tabindex="-1"
+         data-bs-backdrop="static"
+         aria-labelledby="edit_accessibility_tag_modalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-bg-dark">
+                    <h1 class="modal-title fs-5" id="edit_accessibility_tag_modalLabel">Edit Accessibility Tag</h1>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="container">
+                            <div class="row">
+                                <!--ID field-->
+                                <div class="col-10">
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="edit_accessibility_tag_id" type="text"
+                                               placeholder="accessibility tag id" disabled>
+                                        <label class="text-secondary" for="edit_accessibility_tag_id">Id</label>
                                     </div>
-                                    <!--1st field-->
-                                    <div class="col-9">
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="edit_accessibility_tag_name" type="text" maxlength="35" placeholder="accessibility tag name">
-                                            <label class="text-secondary" for="edit_accessibility_tag_name">Name</label>
-                                            <div class="form-text fst-italic ps-2">maximum 35 digits</div>
-                                        </div>
+                                </div>
+                                <!--1st field-->
+                                <div class="col-9">
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="edit_accessibility_tag_name" type="text"
+                                               maxlength="35" placeholder="accessibility tag name">
+                                        <label class="text-secondary" for="edit_accessibility_tag_name">Name</label>
+                                        <div class="form-text fst-italic ps-2">maximum 35 digits</div>
                                     </div>
-                                    <!--2nd field-->
-                                    <div class="col-12">
-                                        <div class="form-floating mb-3">
-                                            <textarea class="form-control" id="edit_accessibility_tag_description" placeholder="accessibility tag description" maxlength="250" style="height: 150px"> </textarea>
-                                            <label class="text-secondary" for="edit_accessibility_tag_description">Description</label>
-                                            <div class="form-text fst-italic ps-2">maximum 250 digits</div>
-                                        </div>
+                                </div>
+                                <!--2nd field-->
+                                <div class="col-12">
+                                    <div class="form-floating mb-3">
+                                        <textarea class="form-control" id="edit_accessibility_tag_description"
+                                                  placeholder="accessibility tag description" maxlength="250"
+                                                  style="height: 150px"> </textarea>
+                                        <label class="text-secondary" for="edit_accessibility_tag_description">Description</label>
+                                        <div class="form-text fst-italic ps-2">maximum 250 digits</div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success">Save</button>
-                    </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Save</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Delete Modal -->
-        <div class="modal fade"
-             id="delete_accessibility_tag_modal"
-             tabindex="-1"
-             data-bs-backdrop="static"
-             aria-labelledby="delete_accessibility_tag_modal_label"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header text-bg-dark">
-                        <h1 class="modal-title fs-5" id="delete_accessibility_tag_modal_label">Delete Accessibility Tag</h1>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="container">
-                                <div class="row">
-                                    <!--ID field-->
-                                    <div class="col-10">
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="delete_accessibility_tag_id" type="text" placeholder="accessibility tag id" disabled>
-                                            <label class="text-secondary" for="delete_accessibility_tag_id">Id</label>
-                                        </div>
+    <!-- Delete Modal -->
+    <div class="modal fade"
+         id="delete_accessibility_tag_modal"
+         tabindex="-1"
+         data-bs-backdrop="static"
+         aria-labelledby="delete_accessibility_tag_modal_label"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-bg-dark">
+                    <h1 class="modal-title fs-5" id="delete_accessibility_tag_modal_label">Delete Accessibility Tag</h1>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="container">
+                            <div class="row">
+                                <!--ID field-->
+                                <div class="col-10">
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="delete_accessibility_tag_id" type="text"
+                                               placeholder="accessibility tag id" disabled>
+                                        <label class="text-secondary" for="delete_accessibility_tag_id">Id</label>
                                     </div>
-                                    <!--1st field-->
-                                    <div class="col-9">
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="delete_accessibility_tag_name" type="text" placeholder="accessibility tag name" disabled>
-                                            <label class="text-secondary" for="delete_accessibility_tag_name">Name</label>
-                                        </div>
+                                </div>
+                                <!--1st field-->
+                                <div class="col-9">
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="delete_accessibility_tag_name" type="text"
+                                               placeholder="accessibility tag name" disabled>
+                                        <label class="text-secondary" for="delete_accessibility_tag_name">Name</label>
                                     </div>
-                                    <!--2nd field-->
-                                    <div class="col-12">
-                                        <div class="form-floating mb-3">
-                                            <textarea class="form-control" id="delete_accessibility_tag_description" placeholder="accessibility tag description" disabled style="height: 150px"> </textarea>
-                                            <label class="text-secondary" for="delete_accessibility_tag_description">Description</label>
-                                        </div>
+                                </div>
+                                <!--2nd field-->
+                                <div class="col-12">
+                                    <div class="form-floating mb-3">
+                                        <textarea class="form-control" id="delete_accessibility_tag_description"
+                                                  placeholder="accessibility tag description" disabled
+                                                  style="height: 150px"> </textarea>
+                                        <label class="text-secondary" for="delete_accessibility_tag_description">Description</label>
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
-                    </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger">Delete</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <script type="text/javascript" th:src="@{/js/adminAccessibilityTags.js}"> </script>
+    <script type="text/javascript" th:src="@{/js/adminAccessibilityTags.js}"></script>
 
-    </th:block>
+</th:block>
 
 </body>
 

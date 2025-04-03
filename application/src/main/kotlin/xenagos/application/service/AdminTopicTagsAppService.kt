@@ -18,20 +18,20 @@ class AdminTopicTagsAppService(
 
     override fun getAllTopicTags(): ArrayList<AdminTopicTagResponseDTO> {
         val adminTopicTagsDTO = arrayListOf<AdminTopicTagResponseDTO>()
-        persistence.getAllTopicTags().forEach { adminTopicTagsDTO.add(mapper.entityToDto(it)) }
+        persistence.getAllTopicTags().forEach { adminTopicTagsDTO.add(mapper.entityToRespDto(it)) }
         return adminTopicTagsDTO
     }
 
     override fun saveNewTopicTag(adminTopicTagNewRequestDTO: AdminTopicTagNewRequestDTO): AdminTopicTagResponseDTO {
-        val newEntityToSave = mapper.newDtoToEntity(adminTopicTagNewRequestDTO, UUID.randomUUID())
+        val newEntityToSave = mapper.newReqDtoToEntity(adminTopicTagNewRequestDTO, UUID.randomUUID())
         val savedEntity = persistence.saveNewTopicTag(newEntityToSave)
-        return mapper.entityToDto(savedEntity)
+        return mapper.entityToRespDto(savedEntity)
     }
 
     override fun updateTopicTag(adminTopicTagEditRequestDTO: AdminTopicTagEditRequestDTO): AdminTopicTagResponseDTO {
-        val entityToUpdate = mapper.editDtoToEntity(adminTopicTagEditRequestDTO)
+        val entityToUpdate = mapper.editReqDtoToEntity(adminTopicTagEditRequestDTO)
         val updatedEntity = persistence.updateTopicTag(entityToUpdate)
-        return mapper.entityToDto(updatedEntity)
+        return mapper.entityToRespDto(updatedEntity)
     }
 
     override fun deleteTopicTag(topicTagId: UUID) {

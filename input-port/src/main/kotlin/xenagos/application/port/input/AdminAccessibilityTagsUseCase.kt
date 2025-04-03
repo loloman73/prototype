@@ -8,7 +8,7 @@ import kotlin.collections.ArrayList
 
 interface AdminAccessibilityTagsUseCase {
     fun getAllAccessibilityTags(): ArrayList<AdminAccessibilityTagResponseDTO>
-    fun saveNewAccessibilityTag(adminAccessibilityTagNewRequest: AdminAccessibilityTagNewRequestDTO): AdminAccessibilityTagResponseDTO
+    fun saveNewAccessibilityTag(adminAccessibilityTagNewRequestDTO: AdminAccessibilityTagNewRequestDTO): AdminAccessibilityTagResponseDTO
     fun updateAccessibilityTag(adminAccessibilityTagEditRequestDTO: AdminAccessibilityTagEditRequestDTO): AdminAccessibilityTagResponseDTO
     fun deleteAccessibilityTag(accessibilityTagId: UUID)
 }

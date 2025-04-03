@@ -19,12 +19,14 @@ class AdminAccessibilityTagsAppService(
     override fun getAllAccessibilityTags(): ArrayList<AdminAccessibilityTagResponseDTO> {
         val adminAccessibilityTagsDTO = arrayListOf<AdminAccessibilityTagResponseDTO>()
         persistence.getAllAccessibilityTags()
-            .forEach { adminAccessibilityTagsDTO.add(mapper.entityToDTO(it)) }
+            .forEach { adminAccessibilityTagsDTO.add(mapper.entityToRespDto(it)) }
         return adminAccessibilityTagsDTO
     }
 
-    override fun saveNewAccessibilityTag(adminAccessibilityTagNewRequest: AdminAccessibilityTagNewRequestDTO): AdminAccessibilityTagResponseDTO {
-        TODO("Not yet implemented")
+    override fun saveNewAccessibilityTag(adminAccessibilityTagNewRequestDTO: AdminAccessibilityTagNewRequestDTO): AdminAccessibilityTagResponseDTO {
+        val newEntityToSave = mapper.newReqDtoToEntity(adminAccessibilityTagNewRequestDTO, UUID.randomUUID())
+        val savedEntity = persistence.saveNewAccessibilityTag(newEntityToSave)
+        return mapper.entityToRespDto(savedEntity)
     }
 
     override fun updateAccessibilityTag(adminAccessibilityTagEditRequestDTO: AdminAccessibilityTagEditRequestDTO): AdminAccessibilityTagResponseDTO {

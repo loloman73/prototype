@@ -16,6 +16,7 @@ class AdminAccessibilityTagMapper {
         }
     }
 
+    //TODO: check for nulls
     fun jpaEntityToDomain(jpaEntity: AccessibilityTagJpaEntity):AccessibilityTag{
         return AccessibilityTag(
             jpaEntity.id!!,

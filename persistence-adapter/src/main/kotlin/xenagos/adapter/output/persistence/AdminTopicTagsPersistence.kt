@@ -16,7 +16,7 @@ open class AdminTopicTagsPersistence(
     override fun getAllTopicTags(): ArrayList<TopicTag> {
         val topicTagsJpa = repository.findAll()
         val topicTagsDomain = arrayListOf<TopicTag>()
-        topicTagsJpa.forEach{topicTagsDomain.add(mapper.jpaEntityToDomain(it))}
+        topicTagsJpa.forEach { topicTagsDomain.add(mapper.jpaEntityToDomain(it)) }
         return topicTagsDomain
     }
 

@@ -16,7 +16,7 @@ class AdminTopicTagMapper {
         }
     }
 
-    //TODO check for nulls
+    //TODO: check for nulls
     fun jpaEntityToDomain(jpaEntity: TopicTagJpaEntity): TopicTag {
         return TopicTag(
             jpaEntity.id!!,

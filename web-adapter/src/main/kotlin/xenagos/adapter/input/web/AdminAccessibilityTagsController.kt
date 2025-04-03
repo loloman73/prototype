@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 import xenagos.application.port.input.AdminAccessibilityTagsUseCase
 import xenagos.application.port.input.model.AdminAccessibilityTagEditRequestDTO
 import xenagos.application.port.input.model.AdminAccessibilityTagNewRequestDTO
-import xenagos.application.port.input.model.AdminTopicTagNewRequestDTO
 import java.util.*
 
 @Controller
@@ -30,16 +29,13 @@ class AdminAccessibilityTagsController(private val adminAccessibilityTagsService
     @HxRequest
     @PostMapping("/addNew")
     fun addNewAccessibilityTag(
-        @Valid @ModelAttribute("addNewAccessibilityTag") addAccessibilityTagNewRequestDTO: AdminAccessibilityTagNewRequestDTO,
+        @Valid @ModelAttribute("addNewAccessibilityTag") addNewAccessibilityTagDTO: AdminAccessibilityTagNewRequestDTO,
         bindingResult: BindingResult
     ): String {
         if (bindingResult.hasErrors()) {
             return "/fragments/admin/add-new-accessibility-tag-modal-form"
         }
-        adminAccessibilityTagsService.saveNewAccessibilityTag(addAccessibilityTagNewRequestDTO)
+        adminAccessibilityTagsService.saveNewAccessibilityTag(addNewAccessibilityTagDTO)
         return "redirect:htmx:/admin/accessibilityTags"
     }
-
-
-
 }

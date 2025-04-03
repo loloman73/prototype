@@ -104,7 +104,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-success"
+                            hx-post="/admin/accessibilityTags/addNew" hx-include="#add_new_accessibility_tag_form"
+                            hx-target="#add_new_accessibility_tag_form" hx-swap="outerHTML">Save</button>
                 </div>
             </div>
         </div>

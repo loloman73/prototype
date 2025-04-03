@@ -26,13 +26,13 @@ class AdminTopicTagsController(private val adminTopicTagsService: AdminTopicTags
     @HxRequest
     @PostMapping("/addNew")
     fun addNewTopicTag(
-        @Valid @ModelAttribute("addNewTopicTag") addTopicTagNewRequestDTO: AdminTopicTagNewRequestDTO,
+        @Valid @ModelAttribute("addNewTopicTag") addNewTopicTagDTO: AdminTopicTagNewRequestDTO,
         bindingResult: BindingResult
     ): String {
         if (bindingResult.hasErrors()) {
             return "/fragments/admin/add-new-topic-tag-modal-form"
         }
-        adminTopicTagsService.saveNewTopicTag(addTopicTagNewRequestDTO)
+        adminTopicTagsService.saveNewTopicTag(addNewTopicTagDTO)
         return "redirect:htmx:/admin/topicTags"
     }
 

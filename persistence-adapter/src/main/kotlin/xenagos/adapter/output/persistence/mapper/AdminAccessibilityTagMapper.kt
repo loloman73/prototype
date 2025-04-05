@@ -1,28 +1,23 @@
 package xenagos.adapter.output.persistence.mapper
 
-import org.springframework.stereotype.Component
 import xenagos.adapter.output.persistence.model.AccessibilityTagJpaEntity
 import xenagos.domain.model.AccessibilityTag
 
-@Component
-class AdminAccessibilityTagMapper {
-
-    fun domainEntityToJpa(domainEntity:AccessibilityTag): AccessibilityTagJpaEntity {
-        return AccessibilityTagJpaEntity().apply {
-            id = domainEntity.id
-            accessibilityTag= domainEntity.name
-            description = domainEntity.description
-            active = domainEntity.active
-        }
+fun AccessibilityTag.toJpaEntity(): AccessibilityTagJpaEntity {
+    return AccessibilityTagJpaEntity().apply {
+        id = this@toJpaEntity.id
+        accessibilityTag = this@toJpaEntity.name
+        description = this@toJpaEntity.description
+        active = this@toJpaEntity.active
     }
+}
 
-    //TODO: check for nulls
-    fun jpaEntityToDomain(jpaEntity: AccessibilityTagJpaEntity):AccessibilityTag{
-        return AccessibilityTag(
-            jpaEntity.id!!,
-            jpaEntity.accessibilityTag!!,
-            jpaEntity.description!!,
-            jpaEntity.active!!
-        )
-    }
+//TODO: check for nulls
+fun AccessibilityTagJpaEntity.toDomainEntity(): AccessibilityTag {
+    return AccessibilityTag(
+        this.id!!,
+        this.accessibilityTag!!,
+        this.description!!,
+        this.active!!
+    )
 }

@@ -6,7 +6,7 @@ import kotlin.collections.ArrayList
 
 interface AdminAccessibilityTagsOutputPort {
     fun getAllAccessibilityTags(): ArrayList<AccessibilityTag>
-    fun saveNewAccessibilityTag(accessibilityTag: AccessibilityTag): AccessibilityTag
-    fun updateAccessibilityTag(accessibilityTag: AccessibilityTag): AccessibilityTag
-    fun deleteAccessibilityTag(accessibilityTagId: UUID)
+    fun saveNewAccessibilityTag(newEntityToSave: AccessibilityTag): AccessibilityTag
+    fun updateAccessibilityTag(entityToUpdate: AccessibilityTag): AccessibilityTag
+    fun deleteAccessibilityTag(id: UUID)
 }

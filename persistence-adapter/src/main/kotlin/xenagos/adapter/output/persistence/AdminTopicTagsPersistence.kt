@@ -1,36 +1,33 @@
 package xenagos.adapter.output.persistence
 
 import org.springframework.stereotype.Repository
-import xenagos.adapter.output.persistence.mapper.AdminTopicTagMapper
+import xenagos.adapter.output.persistence.mapper.toDomainEntity
+import xenagos.adapter.output.persistence.mapper.toJpaEntity
 import xenagos.application.port.output.AdminTopicTagsOutputPort
 import xenagos.domain.model.TopicTag
 import java.util.*
 import kotlin.collections.ArrayList
 
 @Repository
-open class AdminTopicTagsPersistence(
-    private val repository: AdminTopicTagsRepository,
-    private val mapper: AdminTopicTagMapper
-) : AdminTopicTagsOutputPort {
+open class AdminTopicTagsPersistence(private val repository: AdminTopicTagsRepository) : AdminTopicTagsOutputPort {
 
     override fun getAllTopicTags(): ArrayList<TopicTag> {
-        val topicTagsJpa = repository.findAll()
         val topicTagsDomain = arrayListOf<TopicTag>()
-        topicTagsJpa.forEach { topicTagsDomain.add(mapper.jpaEntityToDomain(it)) }
+        repository.findAll().forEach { topicTagsDomain.add(it.toDomainEntity()) }
         return topicTagsDomain
     }
 
-    override fun saveNewTopicTag(topicTag: TopicTag): TopicTag {
-        val returnedJpaEntity = repository.save(mapper.domainEntityToJpa(topicTag))
-        return mapper.jpaEntityToDomain(returnedJpaEntity)
+    override fun saveNewTopicTag(newEntityToSave: TopicTag): TopicTag {
+        val returnedJpaEntity = repository.save(newEntityToSave.toJpaEntity())
+        return returnedJpaEntity.toDomainEntity()
     }
 
-    override fun updateTopicTag(topicTag: TopicTag): TopicTag {
-        val returnedJpaEntity = repository.save(mapper.domainEntityToJpa(topicTag))
-        return mapper.jpaEntityToDomain(returnedJpaEntity)
+    override fun updateTopicTag(entityToUpdate: TopicTag): TopicTag {
+        val returnedJpaEntity = repository.save(entityToUpdate.toJpaEntity())
+        return returnedJpaEntity.toDomainEntity()
     }
 
-    override fun deleteTopicTag(topicTagId: UUID) {
-        repository.deleteById(topicTagId)
+    override fun deleteTopicTag(id: UUID) {
+        repository.deleteById(id)
     }
 }

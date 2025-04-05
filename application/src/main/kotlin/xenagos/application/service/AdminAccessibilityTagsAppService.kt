@@ -1,7 +1,8 @@
 package xenagos.application.service
 
 import org.springframework.stereotype.Service
-import xenagos.application.mapper.AdminAccessibilityTagDomainMapper
+import xenagos.application.mapper.toEntity
+import xenagos.application.mapper.toResponseDto
 import xenagos.application.port.input.AdminAccessibilityTagsUseCase
 import xenagos.application.port.input.model.AdminAccessibilityTagEditRequestDTO
 import xenagos.application.port.input.model.AdminAccessibilityTagResponseDTO
@@ -11,25 +12,22 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 @Service
-class AdminAccessibilityTagsAppService(
-    private val persistence: AdminAccessibilityTagsOutputPort,
-    private val mapper: AdminAccessibilityTagDomainMapper
-) : AdminAccessibilityTagsUseCase {
+class AdminAccessibilityTagsAppService(private val persistence: AdminAccessibilityTagsOutputPort) :
+    AdminAccessibilityTagsUseCase {
 
     override fun getAllAccessibilityTags(): ArrayList<AdminAccessibilityTagResponseDTO> {
         val adminAccessibilityTagsDTO = arrayListOf<AdminAccessibilityTagResponseDTO>()
-        persistence.getAllAccessibilityTags()
-            .forEach { adminAccessibilityTagsDTO.add(mapper.entityToRespDto(it)) }
+        persistence.getAllAccessibilityTags().forEach { adminAccessibilityTagsDTO.add(it.toResponseDto()) }
         return adminAccessibilityTagsDTO
     }
 
-    override fun saveNewAccessibilityTag(adminAccessibilityTagNewRequestDTO: AdminAccessibilityTagNewRequestDTO): AdminAccessibilityTagResponseDTO {
-        val newEntityToSave = mapper.newReqDtoToEntity(adminAccessibilityTagNewRequestDTO, UUID.randomUUID())
+    override fun saveNewAccessibilityTag(requestDTO: AdminAccessibilityTagNewRequestDTO): AdminAccessibilityTagResponseDTO {
+        val newEntityToSave = requestDTO.toEntity(UUID.randomUUID())
         val savedEntity = persistence.saveNewAccessibilityTag(newEntityToSave)
-        return mapper.entityToRespDto(savedEntity)
+        return savedEntity.toResponseDto()
     }
 
-    override fun updateAccessibilityTag(adminAccessibilityTagEditRequestDTO: AdminAccessibilityTagEditRequestDTO): AdminAccessibilityTagResponseDTO {
+    override fun updateAccessibilityTag(requestDTO: AdminAccessibilityTagEditRequestDTO): AdminAccessibilityTagResponseDTO {
         TODO("Not yet implemented")
     }
 

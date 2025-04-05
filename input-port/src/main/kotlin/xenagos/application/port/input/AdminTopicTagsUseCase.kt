@@ -7,7 +7,7 @@ import java.util.UUID
 
 interface AdminTopicTagsUseCase {
     fun getAllTopicTags(): ArrayList<AdminTopicTagResponseDTO>
-    fun saveNewTopicTag(adminTopicTagNewRequestDTO: AdminTopicTagNewRequestDTO): AdminTopicTagResponseDTO
-    fun updateTopicTag(adminTopicTagEditRequestDTO: AdminTopicTagEditRequestDTO): AdminTopicTagResponseDTO
+    fun saveNewTopicTag(requestDTO: AdminTopicTagNewRequestDTO): AdminTopicTagResponseDTO
+    fun updateTopicTag(requestDTO: AdminTopicTagEditRequestDTO): AdminTopicTagResponseDTO
     fun deleteTopicTag(topicTagId: UUID)
 }

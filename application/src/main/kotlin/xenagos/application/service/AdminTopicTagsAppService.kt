@@ -1,7 +1,8 @@
 package xenagos.application.service
 
 import org.springframework.stereotype.Service
-import xenagos.application.mapper.AdminTopicTagDomainMapper
+import xenagos.application.mapper.toEntity
+import xenagos.application.mapper.toResponseDto
 import xenagos.application.port.input.AdminTopicTagsUseCase
 import xenagos.application.port.input.model.AdminTopicTagEditRequestDTO
 import xenagos.application.port.input.model.AdminTopicTagNewRequestDTO
@@ -11,27 +12,24 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 @Service
-class AdminTopicTagsAppService(
-    private val persistence: AdminTopicTagsOutputPort,
-    private val mapper: AdminTopicTagDomainMapper
-) : AdminTopicTagsUseCase {
+class AdminTopicTagsAppService(private val persistence: AdminTopicTagsOutputPort) : AdminTopicTagsUseCase {
 
     override fun getAllTopicTags(): ArrayList<AdminTopicTagResponseDTO> {
         val adminTopicTagsDTO = arrayListOf<AdminTopicTagResponseDTO>()
-        persistence.getAllTopicTags().forEach { adminTopicTagsDTO.add(mapper.entityToRespDto(it)) }
+        persistence.getAllTopicTags().forEach { adminTopicTagsDTO.add(it.toResponseDto()) }
         return adminTopicTagsDTO
     }
 
-    override fun saveNewTopicTag(adminTopicTagNewRequestDTO: AdminTopicTagNewRequestDTO): AdminTopicTagResponseDTO {
-        val newEntityToSave = mapper.newReqDtoToEntity(adminTopicTagNewRequestDTO, UUID.randomUUID())
+    override fun saveNewTopicTag(requestDTO: AdminTopicTagNewRequestDTO): AdminTopicTagResponseDTO {
+        val newEntityToSave = requestDTO.toEntity(UUID.randomUUID())
         val savedEntity = persistence.saveNewTopicTag(newEntityToSave)
-        return mapper.entityToRespDto(savedEntity)
+        return savedEntity.toResponseDto()
     }
 
-    override fun updateTopicTag(adminTopicTagEditRequestDTO: AdminTopicTagEditRequestDTO): AdminTopicTagResponseDTO {
-        val entityToUpdate = mapper.editReqDtoToEntity(adminTopicTagEditRequestDTO)
+    override fun updateTopicTag(requestDTO: AdminTopicTagEditRequestDTO): AdminTopicTagResponseDTO {
+        val entityToUpdate = requestDTO.toEntity()
         val updatedEntity = persistence.updateTopicTag(entityToUpdate)
-        return mapper.entityToRespDto(updatedEntity)
+        return updatedEntity.toResponseDto()
     }
 
     override fun deleteTopicTag(topicTagId: UUID) {

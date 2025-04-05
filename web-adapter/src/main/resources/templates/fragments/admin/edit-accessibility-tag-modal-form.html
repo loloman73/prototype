@@ -1,0 +1,56 @@
+<form id="edit_accessibility_tag_form" th:object="${editAccessibilityTag}">
+  <!--ID field-->
+  <div class="col-10">
+    <div class="form-floating mb-3">
+      <input class="form-control"
+             id="edit_accessibility_tag_id"
+             name="id"
+             type="text"
+             th:errorclass="is-invalid"
+             th:value="${editAccessibilityTag.id}"
+             readonly>
+      <label class="text-secondary" for="edit_accessibility_tag_id">Id</label>
+    </div>
+  </div>
+  <!--1st field-->
+  <div class="col-9">
+    <div class="form-floating mb-3">
+      <input class="form-control"
+             id="edit_accessibility_tag_name"
+             name="accessibilityTag"
+             type="text"
+             maxlength="35"
+             th:errorclass="is-invalid"
+             th:value="${editAccessibilityTag.accessibilityTag}">
+      <label class="text-secondary" for="edit_accessibility_tag_name">Name</label>
+      <div class="form-text fst-italic ps-2">maximum 35 digits</div>
+    </div>
+  </div>
+  <!--2nd field-->
+  <div class="col-12">
+    <div class="form-floating mb-3">
+            <textarea class="form-control"
+                      id="edit_accessibility_tag_description"
+                      name="description"
+                      maxlength="250"
+                      style="height: 150px"
+                      th:errorclass="is-invalid"
+                      th:text="${editAccessibilityTag.description}"> </textarea>
+      <label class="text-secondary" for="edit_accessibility_tag_description">Description</label>
+      <div class="form-text fst-italic ps-2">maximum 250 digits</div>
+    </div>
+  </div>
+  <!--3rd field-->
+  <div class="col-12">
+    <div class="form-check">
+      <input class="form-check-input"
+             type="checkbox"
+             id="edit_accessibility_tag_active"
+             name="active"
+             th:checked="${editAccessibilityTag.active}">
+      <label class="form-check-label" for="edit_accessibility_tag_active">
+        Active
+      </label>
+    </div>
+  </div>
+</form>

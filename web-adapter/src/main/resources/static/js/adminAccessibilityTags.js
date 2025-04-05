@@ -17,6 +17,10 @@ if (editAccessibilityTagModal) {
         const tagDescription = button.getAttribute('data-accessibility-tag-description');
         const modalTagDescriptionInput = editAccessibilityTagModal.querySelector('#edit_accessibility_tag_description');
         modalTagDescriptionInput.value = tagDescription;
+
+        const tagActive = button.getAttribute('data-accessibility-tag-active');
+        const modalTagActiveInput = editAccessibilityTagModal.querySelector('#edit_accessibility_tag_active');
+        modalTagActiveInput.checked = (tagActive === 'true');
     });
 }
 const deleteAccessibilityTagModal = document.getElementById('delete_accessibility_tag_modal');
@@ -35,5 +39,9 @@ if (deleteAccessibilityTagModal) {
         const tagDescription = button.getAttribute('data-accessibility-tag-description');
         const modalTagDescriptionInput = deleteAccessibilityTagModal.querySelector('#delete_accessibility_tag_description');
         modalTagDescriptionInput.value = tagDescription;
+
+        const tagActive = button.getAttribute('data-accessibility-tag-active');
+        const modalTagActiveInput = deleteAccessibilityTagModal.querySelector('#delete_accessibility_tag_active');
+        modalTagActiveInput.checked = (tagActive === 'true');
     });
 }

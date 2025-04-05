@@ -10,10 +10,10 @@ fun TopicTag.toResponseDto(): AdminTopicTagResponseDTO {
     return AdminTopicTagResponseDTO(this.id, this.name, this.description, this.active)
 }
 
-fun AdminTopicTagEditRequestDTO.toEntity(): TopicTag {
-    return TopicTag(this.id, this.topicTag, this.description, this.active)
-}
-
 fun AdminTopicTagNewRequestDTO.toEntity(id: UUID): TopicTag {
     return TopicTag(id, this.topicTag, this.description, this.active)
+}
+
+fun AdminTopicTagEditRequestDTO.toEntity(): TopicTag {
+    return TopicTag(this.id, this.topicTag, this.description, this.active)
 }

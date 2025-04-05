@@ -32,7 +32,7 @@ class AdminTopicTagsAppService(private val persistence: AdminTopicTagsOutputPort
         return updatedEntity.toResponseDto()
     }
 
-    override fun deleteTopicTag(topicTagId: UUID) {
-        persistence.deleteTopicTag(topicTagId)
+    override fun deleteTopicTag(id: UUID) {
+        persistence.deleteTopicTag(id)
     }
 }

@@ -10,5 +10,5 @@ interface AdminAccessibilityTagsUseCase {
     fun getAllAccessibilityTags(): ArrayList<AdminAccessibilityTagResponseDTO>
     fun saveNewAccessibilityTag(requestDTO: AdminAccessibilityTagNewRequestDTO): AdminAccessibilityTagResponseDTO
     fun updateAccessibilityTag(requestDTO: AdminAccessibilityTagEditRequestDTO): AdminAccessibilityTagResponseDTO
-    fun deleteAccessibilityTag(accessibilityTagId: UUID)
+    fun deleteAccessibilityTag(id: UUID)
 }

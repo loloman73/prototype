@@ -13,7 +13,7 @@ fun TopicTag.toJpaEntity(): TopicTagJpaEntity {
 }
 
 //TODO: check for nulls
-fun TopicTagJpaEntity.toDomainEntity():TopicTag{
+fun TopicTagJpaEntity.toDomainEntity(): TopicTag {
     return TopicTag(
         this.id!!,
         this.topicTag!!,

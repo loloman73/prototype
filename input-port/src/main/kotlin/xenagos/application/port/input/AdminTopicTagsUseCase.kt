@@ -9,5 +9,5 @@ interface AdminTopicTagsUseCase {
     fun getAllTopicTags(): ArrayList<AdminTopicTagResponseDTO>
     fun saveNewTopicTag(requestDTO: AdminTopicTagNewRequestDTO): AdminTopicTagResponseDTO
     fun updateTopicTag(requestDTO: AdminTopicTagEditRequestDTO): AdminTopicTagResponseDTO
-    fun deleteTopicTag(topicTagId: UUID)
+    fun deleteTopicTag(id: UUID)
 }

@@ -28,10 +28,12 @@ class AdminAccessibilityTagsAppService(private val persistence: AdminAccessibili
     }
 
     override fun updateAccessibilityTag(requestDTO: AdminAccessibilityTagEditRequestDTO): AdminAccessibilityTagResponseDTO {
-        TODO("Not yet implemented")
+        val entityToUpdate = requestDTO.toEntity()
+        val updatedEntity = persistence.updateAccessibilityTag(entityToUpdate)
+        return updatedEntity.toResponseDto()
     }
 
-    override fun deleteAccessibilityTag(accessibilityTagId: UUID) {
-        TODO("Not yet implemented")
+    override fun deleteAccessibilityTag(id: UUID) {
+        persistence.deleteAccessibilityTag(id)
     }
 }

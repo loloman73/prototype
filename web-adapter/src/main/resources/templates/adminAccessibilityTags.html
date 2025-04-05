@@ -60,7 +60,8 @@
                             data-bs-target="#edit_accessibility_tag_modal"
                             th:data-accessibility-tag-id="${accessibilityTag.id}"
                             th:data-accessibility-tag-name="${accessibilityTag.accessibilityTag}"
-                            th:data-accessibility-tag-description="${accessibilityTag.description}">
+                            th:data-accessibility-tag-description="${accessibilityTag.description}"
+                            th:data-accessibility-tag-active="${accessibilityTag.active}">
                         Edit
                     </button>
                     <!--Delete button-->
@@ -70,7 +71,8 @@
                             data-bs-target="#delete_accessibility_tag_modal"
                             th:data-accessibility-tag-id="${accessibilityTag.id}"
                             th:data-accessibility-tag-name="${accessibilityTag.accessibilityTag}"
-                            th:data-accessibility-tag-description="${accessibilityTag.description}">
+                            th:data-accessibility-tag-description="${accessibilityTag.description}"
+                            th:data-accessibility-tag-active="${accessibilityTag.active}">
                         Delete
                     </button>
                 </td>
@@ -106,7 +108,8 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-success"
                             hx-post="/admin/accessibilityTags/addNew" hx-include="#add_new_accessibility_tag_form"
-                            hx-target="#add_new_accessibility_tag_form" hx-swap="outerHTML">Save</button>
+                            hx-target="#add_new_accessibility_tag_form" hx-swap="outerHTML">Save
+                    </button>
                 </div>
             </div>
         </div>
@@ -127,43 +130,20 @@
                             aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="container">
-                            <div class="row">
-                                <!--ID field-->
-                                <div class="col-10">
-                                    <div class="form-floating mb-3">
-                                        <input class="form-control" id="edit_accessibility_tag_id" type="text"
-                                               placeholder="accessibility tag id" disabled>
-                                        <label class="text-secondary" for="edit_accessibility_tag_id">Id</label>
-                                    </div>
-                                </div>
-                                <!--1st field-->
-                                <div class="col-9">
-                                    <div class="form-floating mb-3">
-                                        <input class="form-control" id="edit_accessibility_tag_name" type="text"
-                                               maxlength="35" placeholder="accessibility tag name">
-                                        <label class="text-secondary" for="edit_accessibility_tag_name">Name</label>
-                                        <div class="form-text fst-italic ps-2">maximum 35 digits</div>
-                                    </div>
-                                </div>
-                                <!--2nd field-->
-                                <div class="col-12">
-                                    <div class="form-floating mb-3">
-                                        <textarea class="form-control" id="edit_accessibility_tag_description"
-                                                  placeholder="accessibility tag description" maxlength="250"
-                                                  style="height: 150px"> </textarea>
-                                        <label class="text-secondary" for="edit_accessibility_tag_description">Description</label>
-                                        <div class="form-text fst-italic ps-2">maximum 250 digits</div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="container">
+                        <div class="row">
+                            <!--Form Fragment-->
+                            <div th:replace="~{/fragments/admin/edit-accessibility-tag-modal-form}"></div>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Save</button>
+                    <button type="submit" class="btn btn-success"
+                            hx-put="/admin/accessibilityTags/edit" hx-include="#edit_accessibility_tag_form"
+                            hx-target="#edit_accessibility_tag_form" hx-swap="outerHTML">
+                        Save
+                    </button>
                 </div>
             </div>
         </div>
@@ -184,41 +164,53 @@
                             aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="container">
-                            <div class="row">
-                                <!--ID field-->
-                                <div class="col-10">
-                                    <div class="form-floating mb-3">
-                                        <input class="form-control" id="delete_accessibility_tag_id" type="text"
-                                               placeholder="accessibility tag id" disabled>
-                                        <label class="text-secondary" for="delete_accessibility_tag_id">Id</label>
-                                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <!--ID field-->
+                            <div class="col-10">
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="delete_accessibility_tag_id" type="text" name="id"
+                                           readonly>
+                                    <label class="text-secondary" for="delete_accessibility_tag_id">Id</label>
                                 </div>
-                                <!--1st field-->
-                                <div class="col-9">
-                                    <div class="form-floating mb-3">
-                                        <input class="form-control" id="delete_accessibility_tag_name" type="text"
-                                               placeholder="accessibility tag name" disabled>
-                                        <label class="text-secondary" for="delete_accessibility_tag_name">Name</label>
-                                    </div>
+                            </div>
+                            <!--1st field-->
+                            <div class="col-9">
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="delete_accessibility_tag_name" type="text" readonly>
+                                    <label class="text-secondary" for="delete_accessibility_tag_name">Name</label>
                                 </div>
-                                <!--2nd field-->
-                                <div class="col-12">
-                                    <div class="form-floating mb-3">
-                                        <textarea class="form-control" id="delete_accessibility_tag_description"
-                                                  placeholder="accessibility tag description" disabled
-                                                  style="height: 150px"> </textarea>
-                                        <label class="text-secondary" for="delete_accessibility_tag_description">Description</label>
-                                    </div>
+                            </div>
+                            <!--2nd field-->
+                            <div class="col-12">
+                                <div class="form-floating mb-3">
+                                    <textarea class="form-control"
+                                              id="delete_accessibility_tag_description"
+                                              readonly
+                                              style="height: 150px"> </textarea>
+                                    <label class="text-secondary"
+                                           for="delete_accessibility_tag_description">Description</label>
+                                </div>
+                            </div>
+                            <!--3rd field-->
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox"
+                                           id="delete_accessibility_tag_active" disabled/>
+                                    <label class="form-check-label" for="delete_accessibility_tag_active">
+                                        Active
+                                    </label>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger"
+                            hx-delete="/admin/accessibilityTags/delete" hx-include="#delete_accessibility_tag_id">
+                        Delete
+                    </button>
                 </div>
             </div>
         </div>

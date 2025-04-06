@@ -8,7 +8,7 @@ data class AdminAccessibilityTagNewRequestDTO(
 
     @field:NotBlank
     @field:Size(min = 3, max = 35)
-    val accessibilityTag: String,
+    val tagName: String,
 
     @field:NotBlank
     @field:Size(min = 3, max = 250)

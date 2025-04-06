@@ -6,7 +6,7 @@ import xenagos.domain.model.TopicTag
 fun TopicTag.toJpaEntity(): TopicTagJpaEntity {
     return TopicTagJpaEntity().apply {
         id = this@toJpaEntity.id
-        topicTag = this@toJpaEntity.name
+        topicTag = this@toJpaEntity.tagName
         description = this@toJpaEntity.description
         active = this@toJpaEntity.active
     }
@@ -15,9 +15,9 @@ fun TopicTag.toJpaEntity(): TopicTagJpaEntity {
 //TODO: check for nulls
 fun TopicTagJpaEntity.toDomainEntity(): TopicTag {
     return TopicTag(
-        this.id!!,
-        this.topicTag!!,
-        this.description!!,
-        this.active!!
+        id = this.id!!,
+        tagName = this.topicTag!!,
+        description = this.description!!,
+        active = this.active!!
     )
 }

@@ -12,7 +12,7 @@ data class AdminTopicTagResponseDTO(
 
     @field:NotBlank
     @field:Size(min = 3, max = 35)
-    val topicTag: String,
+    val tagName: String,
 
     @field:NotBlank
     @field:Size(min = 3, max = 250)

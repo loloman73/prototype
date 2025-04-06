@@ -7,13 +7,13 @@ import xenagos.domain.model.TopicTag
 import java.util.*
 
 fun TopicTag.toResponseDto(): AdminTopicTagResponseDTO {
-    return AdminTopicTagResponseDTO(this.id, this.name, this.description, this.active)
+    return AdminTopicTagResponseDTO(this.id, this.tagName, this.description, this.active)
 }
 
 fun AdminTopicTagNewRequestDTO.toEntity(id: UUID): TopicTag {
-    return TopicTag(id, this.topicTag, this.description, this.active)
+    return TopicTag(id, this.tagName, this.description, this.active)
 }
 
 fun AdminTopicTagEditRequestDTO.toEntity(): TopicTag {
-    return TopicTag(this.id, this.topicTag, this.description, this.active)
+    return TopicTag(this.id, this.tagName, this.description, this.active)
 }

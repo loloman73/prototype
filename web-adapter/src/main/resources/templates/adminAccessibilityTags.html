@@ -41,7 +41,7 @@
                 <!--ID field column-->
                 <td class="text-nowrap"><span th:text="${accessibilityTag.id}"></span></td>
                 <!--1st field-->
-                <td><span th:text="${accessibilityTag.accessibilityTag}"></span></td>
+                <td><span th:text="${accessibilityTag.tagName}"></span></td>
                 <!--2nd field-->
                 <td><span th:text="${accessibilityTag.description}"></span></td>
                 <!--3rd field-->
@@ -59,7 +59,7 @@
                             data-bs-toggle="modal"
                             data-bs-target="#edit_accessibility_tag_modal"
                             th:data-accessibility-tag-id="${accessibilityTag.id}"
-                            th:data-accessibility-tag-name="${accessibilityTag.accessibilityTag}"
+                            th:data-accessibility-tag-name="${accessibilityTag.tagName}"
                             th:data-accessibility-tag-description="${accessibilityTag.description}"
                             th:data-accessibility-tag-active="${accessibilityTag.active}">
                         Edit
@@ -70,7 +70,7 @@
                             data-bs-toggle="modal"
                             data-bs-target="#delete_accessibility_tag_modal"
                             th:data-accessibility-tag-id="${accessibilityTag.id}"
-                            th:data-accessibility-tag-name="${accessibilityTag.accessibilityTag}"
+                            th:data-accessibility-tag-name="${accessibilityTag.tagName}"
                             th:data-accessibility-tag-description="${accessibilityTag.description}"
                             th:data-accessibility-tag-active="${accessibilityTag.active}">
                         Delete
@@ -166,42 +166,8 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row">
-                            <!--ID field-->
-                            <div class="col-10">
-                                <div class="form-floating mb-3">
-                                    <input class="form-control" id="delete_accessibility_tag_id" type="text" name="id"
-                                           readonly>
-                                    <label class="text-secondary" for="delete_accessibility_tag_id">Id</label>
-                                </div>
-                            </div>
-                            <!--1st field-->
-                            <div class="col-9">
-                                <div class="form-floating mb-3">
-                                    <input class="form-control" id="delete_accessibility_tag_name" type="text" readonly>
-                                    <label class="text-secondary" for="delete_accessibility_tag_name">Name</label>
-                                </div>
-                            </div>
-                            <!--2nd field-->
-                            <div class="col-12">
-                                <div class="form-floating mb-3">
-                                    <textarea class="form-control"
-                                              id="delete_accessibility_tag_description"
-                                              readonly
-                                              style="height: 150px"> </textarea>
-                                    <label class="text-secondary"
-                                           for="delete_accessibility_tag_description">Description</label>
-                                </div>
-                            </div>
-                            <!--3rd field-->
-                            <div class="col-12">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox"
-                                           id="delete_accessibility_tag_active" disabled/>
-                                    <label class="form-check-label" for="delete_accessibility_tag_active">
-                                        Active
-                                    </label>
-                                </div>
-                            </div>
+                            <!--Form Fragment-->
+                            <div th:replace="~{/fragments/admin/delete-accessibility-tag-modal-form}"></div>
                         </div>
                     </div>
                 </div>

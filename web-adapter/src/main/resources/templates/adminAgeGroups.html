@@ -41,7 +41,7 @@
                     <!--ID field column-->
                     <td class="text-nowrap"> <span th:text="${ageGroup.id}"></span> </td>
                     <!--1st field-->
-                    <td> <span th:text="${ageGroup.ageGroup}"></span> </td>
+                    <td> <span th:text="${ageGroup.groupName}"></span> </td>
                     <!--2nd field-->
                     <td> <span th:text="${ageGroup.minAge}"></span> </td>
                     <!--3rd field-->
@@ -54,7 +54,7 @@
                                 data-bs-toggle="modal"
                                 data-bs-target="#edit_age_group_modal"
                                 th:data-age-group-id="${ageGroup.id}"
-                                th:data-age-group-name="${ageGroup.ageGroup}"
+                                th:data-age-group-name="${ageGroup.groupName}"
                                 th:data-age-group-min="${ageGroup.minAge}"
                                 th:data-age-group-max="${ageGroup.maxAge}">
                             Edit
@@ -65,7 +65,7 @@
                                 data-bs-toggle="modal"
                                 data-bs-target="#delete_age_group_modal"
                                 th:data-age-group-id="${ageGroup.id}"
-                                th:data-age-group-name="${ageGroup.ageGroup}"
+                                th:data-age-group-name="${ageGroup.groupName}"
                                 th:data-age-group-min="${ageGroup.minAge}"
                                 th:data-age-group-max="${ageGroup.maxAge}">
                             Delete

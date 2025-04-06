@@ -3,7 +3,7 @@ package xenagos.application.service
 import org.springframework.stereotype.Service
 import xenagos.application.mapper.AdminAgeGroupsMapper
 import xenagos.application.port.input.AdminAgeGroupUseCase
-import xenagos.application.port.input.model.AdminAgeGroupDTO
+import xenagos.application.port.input.model.AdminAgeGroupResponseDTO
 import xenagos.application.port.output.AdminAgeGroupsOutputPort
 
 @Service
@@ -12,8 +12,8 @@ class AdminAgeGroupsAppService(
     private val mapper: AdminAgeGroupsMapper
 ) : AdminAgeGroupUseCase {
 
-    override fun getAllAgeGroups(): ArrayList<AdminAgeGroupDTO> {
-        val adminAgeGroupsDTO = arrayListOf<AdminAgeGroupDTO>()
+    override fun getAllAgeGroups(): ArrayList<AdminAgeGroupResponseDTO> {
+        val adminAgeGroupsDTO = arrayListOf<AdminAgeGroupResponseDTO>()
         persistence.getAllAgeGroups().forEach { adminAgeGroupsDTO.add(mapper.entityToDTO(it)) }
         return adminAgeGroupsDTO
     }

@@ -2,10 +2,13 @@ package xenagos.domain.model
 
 import java.util.*
 
-data class AgeGroup(val id: UUID,
-                    val ageGroup: String,
-                    val minAge:Byte,
-                    val maxAge:Byte)
+data class AgeGroup(
+    val id: UUID,
+    val groupName: String,
+    val minAge: Byte,
+    val maxAge: Byte,
+    val active: Boolean
+)
 
 //    SmallChild("6-8"),
 //    PreTeen("9-12"),

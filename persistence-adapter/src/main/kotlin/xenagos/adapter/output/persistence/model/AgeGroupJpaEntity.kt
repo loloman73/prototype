@@ -19,6 +19,9 @@ open class AgeGroupJpaEntity {
     @Column(name = "max_age", nullable = false)
     open var maxAge: Byte? = null
 
+    @Column(name = "active", nullable = false)
+    open var active: Boolean? = null
+
     @ManyToMany
     @JoinTable(
         name = "media_guide_age_group",

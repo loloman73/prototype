@@ -22,9 +22,10 @@ open class AdminAgeGroupsPersistence(
     private fun mockAgeGroup(): AgeGroup {
         return AgeGroup(
             id = UUID.randomUUID(),
-            ageGroup = RandomText.getWords(2),
+            groupName = RandomText.getWords(2),
             minAge = Random.nextBytes(1)[0],
-            maxAge = Random.nextBytes(1)[0]
+            maxAge = Random.nextBytes(1)[0],
+            active = true
         )
     }
 }

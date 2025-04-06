@@ -1,18 +1,58 @@
 package xenagos.adapter.input.web
 
+import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxRequest
+import jakarta.validation.Valid
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.validation.BindingResult
+import org.springframework.web.bind.annotation.*
 import xenagos.application.port.input.AdminAgeGroupUseCase
+import xenagos.application.port.input.model.AdminAgeGroupEditRequestDTO
+import xenagos.application.port.input.model.AdminAgeGroupNewRequestDTO
+import java.util.*
 
 @Controller
 @RequestMapping("/admin/ageGroups")
-class AdminAgeGroupsController(private val adminAgeGroupsService: AdminAgeGroupUseCase) {
+class AdminAgeGroupsController(private val service: AdminAgeGroupUseCase) {
 
     @GetMapping
-    fun showAgeGroups(model: Model): String {
-        model.addAttribute("ageGroups", adminAgeGroupsService.getAllAgeGroups())
+    fun showAll(model: Model): String {
+        model.addAttribute("ageGroups", service.getAllAgeGroups())
+        model.addAttribute("addNewAgeGroup", AdminAgeGroupNewRequestDTO("",0, 0,false))
+        model.addAttribute("editAgeGroup", AdminAgeGroupEditRequestDTO(UUID.randomUUID(),"",0, 0,false))
         return "adminAgeGroups"
+    }
+
+    @HxRequest
+    @PostMapping("/addNew")
+    fun addOneNew(
+        @Valid @ModelAttribute("addNewAgeGroup") addNewAgeGroupDTO: AdminAgeGroupNewRequestDTO,
+        bindingResult: BindingResult
+    ): String {
+        if (bindingResult.hasErrors()) {
+            return "/fragments/admin/add-new-age-group-modal-form"
+        }
+        service.saveNewAgeGroup(addNewAgeGroupDTO)
+        return "redirect:htmx:/admin/ageGroups"
+    }
+
+    @HxRequest
+    @PutMapping("/edit")
+    fun updateOne(
+        @Valid @ModelAttribute("editAgeGroup") editAgeGroupDTO: AdminAgeGroupEditRequestDTO,
+        bindingResult: BindingResult
+    ): String {
+        if (bindingResult.hasErrors()) {
+            return "/fragments/admin/edit-age-group-modal-form"
+        }
+        service.updateAgeGroup(editAgeGroupDTO)
+        return "redirect:htmx:/admin/ageGroups"
+    }
+
+    @HxRequest
+    @DeleteMapping("/delete")
+    fun deleteOne(@RequestParam id: UUID): String {
+        service.deleteAgeGroup(id)
+        return "redirect:htmx:/admin/ageGroups"
     }
 }

@@ -8,7 +8,7 @@ data class AdminTopicTagNewRequestDTO(
 
     @field:NotBlank
     @field:Size(min = 3, max = 35)
-    val tagName: String,
+    val name: String,
 
     @field:NotBlank
     @field:Size(min = 3, max = 250)

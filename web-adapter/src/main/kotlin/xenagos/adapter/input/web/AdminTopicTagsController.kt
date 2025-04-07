@@ -30,6 +30,7 @@ class AdminTopicTagsController(private val service: AdminTopicTagsUseCase) {
         bindingResult: BindingResult
     ): String {
         if (bindingResult.hasErrors()) {
+            println(bindingResult.fieldErrors)
             return "/fragments/admin/add-new-topic-tag-modal-form"
         }
         service.saveNewTopicTag(addNewTopicTagDTO)

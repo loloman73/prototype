@@ -3,12 +3,12 @@
     <div class="col-9">
         <div class="form-floating mb-3">
             <input class="form-control"
-                   id="new_accessibility_tag_name"
-                   name="tagName"
                    type="text"
+                   id="new_accessibility_tag_name"
+                   name="name"
                    maxlength="35"
                    th:errorclass="is-invalid"
-                   th:value="${addNewAccessibilityTag.tagName}">
+                   th:value="${addNewAccessibilityTag.name}">
             <label class="text-secondary" for="new_accessibility_tag_name">Name</label>
             <div class="form-text fst-italic ps-2">maximum 35 digits</div>
         </div>

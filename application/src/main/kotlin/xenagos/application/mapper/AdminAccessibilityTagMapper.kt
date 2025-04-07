@@ -11,10 +11,10 @@ fun AccessibilityTag.toResponseDto(): AdminAccessibilityTagResponseDTO {
 }
 
 fun AdminAccessibilityTagNewRequestDTO.toEntity(id: UUID): AccessibilityTag {
-    return AccessibilityTag(id, this.tagName, this.description, this.active)
+    return AccessibilityTag(id, this.name, this.description, this.active)
 
 }
 fun AdminAccessibilityTagEditRequestDTO.toEntity(): AccessibilityTag {
-    return AccessibilityTag(this.id, this.tagName, this.description, this.active)
+    return AccessibilityTag(this.id, this.name, this.description, this.active)
 }
 

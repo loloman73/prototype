@@ -11,9 +11,9 @@ fun TopicTag.toResponseDto(): AdminTopicTagResponseDTO {
 }
 
 fun AdminTopicTagNewRequestDTO.toEntity(id: UUID): TopicTag {
-    return TopicTag(id, this.tagName, this.description, this.active)
+    return TopicTag(id, this.name, this.description, this.active)
 }
 
 fun AdminTopicTagEditRequestDTO.toEntity(): TopicTag {
-    return TopicTag(this.id, this.tagName, this.description, this.active)
+    return TopicTag(this.id, this.name, this.description, this.active)
 }

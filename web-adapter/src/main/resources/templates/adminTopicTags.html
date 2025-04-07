@@ -41,7 +41,7 @@
                 <!--ID field column-->
                 <td class="text-nowrap"><span th:text="${topicTag.id}"></span></td>
                 <!--1st field-->
-                <td><span th:text="${topicTag.tagName}"></span></td>
+                <td><span th:text="${topicTag.name}"></span></td>
                 <!--2nd field-->
                 <td><span th:text="${topicTag.description}"></span></td>
                 <!--3rd field-->
@@ -58,7 +58,7 @@
                             data-bs-toggle="modal"
                             data-bs-target="#edit_topic_tag_modal"
                             th:data-topic-tag-id="${topicTag.id}"
-                            th:data-topic-tag-name="${topicTag.tagName}"
+                            th:data-topic-tag-name="${topicTag.name}"
                             th:data-topic-tag-description="${topicTag.description}"
                             th:data-topic-tag-active="${topicTag.active}">
                         Edit
@@ -69,7 +69,7 @@
                             data-bs-toggle="modal"
                             data-bs-target="#delete_topic_tag_modal"
                             th:data-topic-tag-id="${topicTag.id}"
-                            th:data-topic-tag-name="${topicTag.tagName}"
+                            th:data-topic-tag-name="${topicTag.name}"
                             th:data-topic-tag-description="${topicTag.description}"
                             th:data-topic-tag-active="${topicTag.active}">
                         Delete

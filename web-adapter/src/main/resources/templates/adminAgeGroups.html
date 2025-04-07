@@ -1,253 +1,194 @@
 <!DOCTYPE html>
-<html   xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{/layouts/layout_admin(childPageName='Age Groups')}"
-        lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/layout_admin(childPageName='Age Groups')}"
+      lang="en">
 <head>
     <title>Age Groups</title>
 </head>
 
 <body>
 
-    <th:block layout:fragment="ADMIN_DATA_SPACE">
+<th:block layout:fragment="ADMIN_DATA_SPACE">
 
-        <!--Add New / Button-->
-        <button class="btn btn-primary mt-3 mb-3"
-                type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#add_new_age_group_modal" >
-            Add New
-        </button>
+    <!--Add New / Button-->
+    <button class="btn btn-primary mt-3 mb-3"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#add_new_age_group_modal">
+        Add New
+    </button>
 
-        <!--Table-->
-        <div class="col-10">
-            <table class="table table-sm table-light table-striped table-bordered border-primary-subtle table-hover shadow">
-                <thead>
-                <tr class="text-center">
-                    <!--Column Headers -->
-                    <th scope="col">#</th>
-                    <th scope="col">Id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Min Age </th>
-                    <th scope="col">Max Age</th>
-                    <th scope="col">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="ageGroup : ${ageGroups}">
-                    <!--## column-->
-                    <th scope="row"> <span th:text="${ageGroups.indexOf(ageGroup)+1}"></span> </th>
-                    <!--ID field column-->
-                    <td class="text-nowrap"> <span th:text="${ageGroup.id}"></span> </td>
-                    <!--1st field-->
-                    <td> <span th:text="${ageGroup.groupName}"></span> </td>
-                    <!--2nd field-->
-                    <td> <span th:text="${ageGroup.minAge}"></span> </td>
-                    <!--3rd field-->
-                    <td> <span th:text="${ageGroup.maxAge}"></span> </td>
-                    <!--Action buttons-->
-                    <td class="text-nowrap" >
-                        <!--Edit button-->
-                        <button class="btn btn-warning ms-1 me-1 py-1"
-                                type="button"
-                                data-bs-toggle="modal"
-                                data-bs-target="#edit_age_group_modal"
-                                th:data-age-group-id="${ageGroup.id}"
-                                th:data-age-group-name="${ageGroup.groupName}"
-                                th:data-age-group-min="${ageGroup.minAge}"
-                                th:data-age-group-max="${ageGroup.maxAge}">
-                            Edit
-                        </button>
-                        <!--Delete button-->
-                        <button class="btn btn-danger me-1 py-1 "
-                                type="button"
-                                data-bs-toggle="modal"
-                                data-bs-target="#delete_age_group_modal"
-                                th:data-age-group-id="${ageGroup.id}"
-                                th:data-age-group-name="${ageGroup.groupName}"
-                                th:data-age-group-min="${ageGroup.minAge}"
-                                th:data-age-group-max="${ageGroup.maxAge}">
-                            Delete
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+    <!--Table-->
+    <div class="col-10">
+        <table class="table table-sm table-light table-striped table-bordered border-primary-subtle table-hover shadow">
+            <thead>
+            <tr class="text-center">
+                <!--Column Headers -->
+                <th scope="col">#</th>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Min Age</th>
+                <th scope="col">Max Age</th>
+                <th scope="col">Active</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="ageGroup : ${ageGroups}">
+                <!--## column-->
+                <th scope="row"><span th:text="${ageGroups.indexOf(ageGroup)+1}"></span></th>
+                <!--ID field column-->
+                <td class="text-nowrap"><span th:text="${ageGroup.id}"></span></td>
+                <!--1st field-->
+                <td><span th:text="${ageGroup.groupName}"></span></td>
+                <!--2nd field-->
+                <td><span th:text="${ageGroup.minAge}"></span></td>
+                <!--3rd field-->
+                <td><span th:text="${ageGroup.maxAge}"></span></td>
+                <!--4th field-->
+                <td class="text-center">
+                    <label for="age_group_active" class="visually-hidden"> </label>
+                    <input class="form-check-input" id="age_group_active" type="checkbox"
+                           th:checked="${ageGroup.active}" disabled/>
+                </td>
+                <!--Action buttons-->
+                <td class="text-nowrap">
+                    <!--Edit button-->
+                    <button class="btn btn-warning ms-1 me-1 py-1"
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#edit_age_group_modal"
+                            th:data-age-group-id="${ageGroup.id}"
+                            th:data-age-group-name="${ageGroup.groupName}"
+                            th:data-age-group-min="${ageGroup.minAge}"
+                            th:data-age-group-max="${ageGroup.maxAge}"
+                            th:data-age-group-active="${ageGroup.active}">
+                        Edit
+                    </button>
+                    <!--Delete button-->
+                    <button class="btn btn-danger me-1 py-1 "
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#delete_age_group_modal"
+                            th:data-age-group-id="${ageGroup.id}"
+                            th:data-age-group-name="${ageGroup.groupName}"
+                            th:data-age-group-min="${ageGroup.minAge}"
+                            th:data-age-group-max="${ageGroup.maxAge}"
+                            th:data-age-group-active="${ageGroup.active}">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-        <!-- Add New / Modal -->
-        <div class="modal fade"
-             id="add_new_age_group_modal"
-             data-bs-backdrop="static"
-             tabindex="-1"
-             aria-labelledby="add_new_age_group_modal_label"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header text-bg-dark">
-                        <h1 class="modal-title fs-5" id="add_new_age_group_modal_label">Add new Age Group</h1>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- Add New / Modal -->
+    <div class="modal fade"
+         id="add_new_age_group_modal"
+         data-bs-backdrop="static"
+         tabindex="-1"
+         aria-labelledby="add_new_age_group_modal_label"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-bg-dark">
+                    <h1 class="modal-title fs-5" id="add_new_age_group_modal_label">Add new Age Group</h1>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <!--Form Fragment-->
+                            <div th:replace="~{/fragments/admin/add-new-age-group-modal-form}"></div>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="container">
-                                <div class="row">
-                                    <!--1st field-->
-                                    <div class="col-9">
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="new_age_group_name" type="text" maxlength="20" placeholder="age group name">
-                                            <label class="text-secondary" for="new_age_group_name">Age Group Name</label>
-                                            <div class="form-text fst-italic ps-2">maximum 20 digits</div>
-                                        </div>
-                                    </div>
-                                    <!--2nd field-->
-                                    <div class="col-4">
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="new_age_group_min" type="number" min="5" max="100">
-                                            <label class="text-secondary" for="new_age_group_min">Minimum age</label>
-                                        </div>
-                                    </div>
-                                    <!--3rd field-->
-                                    <div class="col-4">
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="new_age_group_max" type="number" min="5" max="100">
-                                            <label class="text-secondary" for="new_age_group_max">Maximum age</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success">Save</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success"
+                            hx-post="/admin/ageGroups/addNew" hx-include="#add_new_age_group_form"
+                            hx-target="#add_new_age_group_form" hx-swap="outerHTML">
+                        Save
+                    </button>
                 </div>
             </div>
         </div>
-        
-        <!-- Edit Modal -->
-        <div class="modal fade"
-             id="edit_age_group_modal"
-             tabindex="-1"
-             data-bs-backdrop="static"
-             aria-labelledby="edit_age_group_modal_label"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header text-bg-dark">
-                        <h1 class="modal-title fs-5" id="edit_age_group_modal_label">Edit Age Group</h1>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="container">
-                                <div class="row">
-                                    <!--ID field-->
-                                    <div class="col-10">
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="edit_age_group_id" type="text" placeholder="age group id" disabled>
-                                            <label class="text-secondary" for="edit_age_group_id">Id</label>
-                                        </div>
-                                    </div>
-                                    <!--1st field-->
-                                    <div class="col-9">
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="edit_age_group_name" type="text" maxlength="20" placeholder="age group name">
-                                            <label class="text-secondary" for="edit_age_group_name">Age Group Name</label>
-                                            <div class="form-text fst-italic ps-2">maximum 20 digits</div>
-                                        </div>
-                                    </div>
-                                    <!--2nd field-->
-                                    <div class="col-4">
-                                        <div class="form-floating mb-3">
-                                            <div class="form-floating mb-3">
-                                                <input class="form-control" id="edit_age_group_min" type="number" min="5" max="100">
-                                                <label class="text-secondary" for="edit_age_group_min">Minimum age</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--3rd field-->
-                                    <div class="col-4">
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="edit_age_group_max" type="number" min="5" max="100">
-                                            <label class="text-secondary" for="edit_age_group_max">Maximum age</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success">Save</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Delete Modal -->
-        <div class="modal fade"
-             id="delete_age_group_modal"
-             tabindex="-1"
-             data-bs-backdrop="static"
-             aria-labelledby="delete_age_group_modal_label"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header text-bg-dark">
-                        <h1 class="modal-title fs-5" id="delete_age_group_modal_label">Delete Age Group</h1>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="container">
-                                <div class="row">
-                                    <!--ID field-->
-                                    <div class="col-10">
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="delete_age_group_id" type="text" placeholder="age group id" disabled>
-                                            <label class="text-secondary" for="delete_age_group_id">Id</label>
-                                        </div>
-                                    </div>
-                                    <!--1st field-->
-                                    <div class="col-9">
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="delete_age_group_name" type="text" placeholder="age group name" disabled>
-                                            <label class="text-secondary" for="delete_age_group_name">Age Group Name</label>
-                                        </div>
-                                    </div>
-                                    <!--2nd field-->
-                                    <div class="col-4">
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="delete_age_group_min" type="number" disabled>
-                                            <label class="text-secondary" for="delete_age_group_min">Minimum age</label>
-                                        </div>
-                                    </div>
-                                    <!--3rd field-->
-                                    <div class="col-4">
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="delete_age_group_max" type="number" disabled>
-                                            <label class="text-secondary" for="delete_age_group_max">Maximum age</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!--Script-->
-        <script type="text/javascript" th:src="@{/js/adminAgeGroups.js}"> </script>
+    </div>
 
-    </th:block>
+    <!-- Edit Modal -->
+    <div class="modal fade"
+         id="edit_age_group_modal"
+         tabindex="-1"
+         data-bs-backdrop="static"
+         aria-labelledby="edit_age_group_modal_label"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-bg-dark">
+                    <h1 class="modal-title fs-5" id="edit_age_group_modal_label">Edit Age Group</h1>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <!--Form Fragment-->
+                            <div th:replace="~{/fragments/admin/edit-age-group-modal-form}"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success"
+                            hx-put="/admin/ageGroups/edit" hx-include="#edit_age_group_form"
+                            hx-target="#edit_age_group_form" hx-swap="outerHTML">Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="modal fade"
+         id="delete_age_group_modal"
+         tabindex="-1"
+         data-bs-backdrop="static"
+         aria-labelledby="delete_age_group_modal_label"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-bg-dark">
+                    <h1 class="modal-title fs-5" id="delete_age_group_modal_label">Delete Age Group</h1>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <!--Form Fragment-->
+                            <div th:replace="~{/fragments/admin/delete-age-group-modal-form}"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger"
+                            hx-delete="/admin/ageGroups/delete" hx-include="#delete_age_group_id">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Script-->
+    <script type="text/javascript" th:src="@{/js/adminAgeGroups.js}"></script>
+
+</th:block>
 
 </body>
 

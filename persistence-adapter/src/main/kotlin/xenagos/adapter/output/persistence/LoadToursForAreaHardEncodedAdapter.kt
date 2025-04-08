@@ -38,7 +38,7 @@ class LoadToursForAreaHardEncodedAdapter : LoadToursForAreaOutPort {
                     mediaGuides = listOf(
                         MediaGuide(
                             id = UUID.randomUUID(),
-                            language = Language(UUID.randomUUID(), "GR", "Greek", "Ελληνικά"),
+                            language = Language(UUID.randomUUID(), "GR", "Greek", "Ελληνικά", true),
                             mediaFileName = "",
                             mediaType = MediaType(UUID.randomUUID(), ""),
                             duration = Random.nextInt(1, 240).toShort(),

@@ -41,7 +41,7 @@
                 <!--ID field column-->
                 <td class="text-nowrap"><span th:text="${accessibilityTag.id}"></span></td>
                 <!--1st field-->
-                <td><span th:text="${accessibilityTag.tagName}"></span></td>
+                <td><span th:text="${accessibilityTag.name}"></span></td>
                 <!--2nd field-->
                 <td><span th:text="${accessibilityTag.description}"></span></td>
                 <!--3rd field-->
@@ -59,7 +59,7 @@
                             data-bs-toggle="modal"
                             data-bs-target="#edit_accessibility_tag_modal"
                             th:data-accessibility-tag-id="${accessibilityTag.id}"
-                            th:data-accessibility-tag-name="${accessibilityTag.tagName}"
+                            th:data-accessibility-tag-name="${accessibilityTag.name}"
                             th:data-accessibility-tag-description="${accessibilityTag.description}"
                             th:data-accessibility-tag-active="${accessibilityTag.active}">
                         Edit
@@ -70,7 +70,7 @@
                             data-bs-toggle="modal"
                             data-bs-target="#delete_accessibility_tag_modal"
                             th:data-accessibility-tag-id="${accessibilityTag.id}"
-                            th:data-accessibility-tag-name="${accessibilityTag.tagName}"
+                            th:data-accessibility-tag-name="${accessibilityTag.name}"
                             th:data-accessibility-tag-description="${accessibilityTag.description}"
                             th:data-accessibility-tag-active="${accessibilityTag.active}">
                         Delete

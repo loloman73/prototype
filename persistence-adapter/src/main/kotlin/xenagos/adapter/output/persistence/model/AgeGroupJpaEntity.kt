@@ -10,7 +10,7 @@ open class AgeGroupJpaEntity {
     @Column(name = "age_group_id", nullable = false)
     open var id: UUID? = null
 
-    @Column(name = "age_group", nullable = false, length = 20)
+    @Column(name = "age_group", nullable = false, length = 35)
     open var ageGroup: String? = null
 
     @Column(name = "min_age", nullable = false)

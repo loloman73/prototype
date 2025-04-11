@@ -15,9 +15,9 @@ import kotlin.collections.ArrayList
 class AdminTopicTagsAppService(private val persistence: AdminTopicTagsOutputPort) : AdminTopicTagsUseCase {
 
     override fun getAllTopicTags(): ArrayList<AdminTopicTagResponseDTO> {
-        val adminTopicTagsDTO = arrayListOf<AdminTopicTagResponseDTO>()
-        persistence.getAllTopicTags().forEach { adminTopicTagsDTO.add(it.toResponseDto()) }
-        return adminTopicTagsDTO
+        val responseDTO = arrayListOf<AdminTopicTagResponseDTO>()
+        persistence.getAllTopicTags().forEach { responseDTO.add(it.toResponseDto()) }
+        return responseDTO
     }
 
     override fun saveNewTopicTag(requestDTO: AdminTopicTagNewRequestDTO): AdminTopicTagResponseDTO {

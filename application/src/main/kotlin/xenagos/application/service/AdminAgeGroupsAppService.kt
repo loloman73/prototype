@@ -15,9 +15,9 @@ import kotlin.collections.ArrayList
 class AdminAgeGroupsAppService(private val persistence: AdminAgeGroupsOutputPort) : AdminAgeGroupUseCase {
 
     override fun getAllAgeGroups(): ArrayList<AdminAgeGroupResponseDTO> {
-        val adminAgeGroupsDTO = arrayListOf<AdminAgeGroupResponseDTO>()
-        persistence.getAllAgeGroups().forEach { adminAgeGroupsDTO.add(it.toResponseDto()) }
-        return adminAgeGroupsDTO
+        val responseDTO = arrayListOf<AdminAgeGroupResponseDTO>()
+        persistence.getAllAgeGroups().forEach { responseDTO.add(it.toResponseDto()) }
+        return responseDTO
     }
 
     override fun saveNewAgeGroup(requestDTO: AdminAgeGroupNewRequestDTO): AdminAgeGroupResponseDTO {

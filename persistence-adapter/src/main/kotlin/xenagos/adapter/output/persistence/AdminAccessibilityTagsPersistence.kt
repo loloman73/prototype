@@ -14,9 +14,9 @@ open class AdminAccessibilityTagsPersistence(
 ) : AdminAccessibilityTagsOutputPort {
 
     override fun getAllAccessibilityTags(): ArrayList<AccessibilityTag> {
-        val accessibilityTagsDomain = arrayListOf<AccessibilityTag>()
-        repository.findAll().forEach { accessibilityTagsDomain.add(it.toDomainEntity()) }
-        return accessibilityTagsDomain
+        val domainEntityList = arrayListOf<AccessibilityTag>()
+        repository.findAll().forEach { domainEntityList.add(it.toDomainEntity()) }
+        return domainEntityList
     }
 
     override fun saveNewAccessibilityTag(newEntityToSave: AccessibilityTag): AccessibilityTag {

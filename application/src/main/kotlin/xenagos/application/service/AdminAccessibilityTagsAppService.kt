@@ -16,9 +16,9 @@ class AdminAccessibilityTagsAppService(private val persistence: AdminAccessibili
     AdminAccessibilityTagsUseCase {
 
     override fun getAllAccessibilityTags(): ArrayList<AdminAccessibilityTagResponseDTO> {
-        val adminAccessibilityTagsDTO = arrayListOf<AdminAccessibilityTagResponseDTO>()
-        persistence.getAllAccessibilityTags().forEach { adminAccessibilityTagsDTO.add(it.toResponseDto()) }
-        return adminAccessibilityTagsDTO
+        val responseDTO = arrayListOf<AdminAccessibilityTagResponseDTO>()
+        persistence.getAllAccessibilityTags().forEach { responseDTO.add(it.toResponseDto()) }
+        return responseDTO
     }
 
     override fun saveNewAccessibilityTag(requestDTO: AdminAccessibilityTagNewRequestDTO): AdminAccessibilityTagResponseDTO {

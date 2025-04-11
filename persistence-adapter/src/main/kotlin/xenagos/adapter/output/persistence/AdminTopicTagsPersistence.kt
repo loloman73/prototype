@@ -12,9 +12,9 @@ import kotlin.collections.ArrayList
 open class AdminTopicTagsPersistence(private val repository: AdminTopicTagsRepository) : AdminTopicTagsOutputPort {
 
     override fun getAllTopicTags(): ArrayList<TopicTag> {
-        val topicTagsDomain = arrayListOf<TopicTag>()
-        repository.findAll().forEach { topicTagsDomain.add(it.toDomainEntity()) }
-        return topicTagsDomain
+        val domainEntityList = arrayListOf<TopicTag>()
+        repository.findAll().forEach { domainEntityList.add(it.toDomainEntity()) }
+        return domainEntityList
     }
 
     override fun saveNewTopicTag(newEntityToSave: TopicTag): TopicTag {

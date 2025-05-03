@@ -1,0 +1,57 @@
+<form id="add_new_form" th:object="${addNewLanguage}">
+    <!--1st field-->
+    <div class="col-6">
+        <div class="form-floating mb-3">
+            <input class="form-control"
+                   type="text"
+                   id="new_field1"
+                   name="code"
+                   maxlength="3"
+                   th:errorclass="is-invalid"
+                   th:value="${addNewLanguage.code}">
+            <label class="text-secondary" for="new_field1">ISO 639-3 code</label>
+            <div class="form-text fst-italic ps-2">maximum 3 digits</div>
+        </div>
+    </div>
+    <!--2nd field-->
+    <div class="col-12">
+        <div class="form-floating mb-3">
+            <input class="form-control"
+                   type="text"
+                   id="new_field2"
+                   name="englishName"
+                   maxlength="3"
+                   th:errorclass="is-invalid"
+                   th:value="${addNewLanguage.englishName}">
+            <label class="text-secondary" for="new_field2">English Name</label>
+            <div class="form-text fst-italic ps-2">maximum 35 digits</div>
+        </div>
+    </div>
+    <!--3rd field-->
+    <div class="col-12">
+        <div class="form-floating mb-3">
+            <input class="form-control"
+                   type="text"
+                   id="new_field3"
+                   name="nativeName"
+                   maxlength="3"
+                   th:errorclass="is-invalid"
+                   th:value="${addNewLanguage.nativeName}">
+            <label class="text-secondary" for="new_field3">Native Name</label>
+            <div class="form-text fst-italic ps-2">maximum 35 digits</div>
+        </div>
+    </div>
+    <!--4th field-->
+    <div class="col-12">
+        <div class="form-check">
+            <input class="form-check-input"
+                   type="checkbox"
+                   id="new_active"
+                   name="active"
+                   th:checked="${addNewLanguage.active}">
+            <label class="form-check-label" for="new_active">
+                Active
+            </label>
+        </div>
+    </div>
+</form>

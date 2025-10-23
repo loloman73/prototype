@@ -9,15 +9,12 @@ import xenagos.application.port.input.model.AdminLanguageNewRequestDTO
 import xenagos.application.port.input.model.AdminLanguageResponseDTO
 import xenagos.application.port.output.AdminLanguagesOutputPort
 import java.util.*
-import kotlin.collections.ArrayList
 
 @Service
 class AdminLanguagesAppService(private val persistence: AdminLanguagesOutputPort) : AdminLanguagesUseCase {
 
-    override fun getAllLanguages(): ArrayList<AdminLanguageResponseDTO> {
-        val responseDTO = arrayListOf<AdminLanguageResponseDTO>()
-        persistence.getAllLanguages().forEach { responseDTO.add(it.toResponseDto()) }
-        return responseDTO
+    override fun getAllLanguages() = arrayListOf<AdminLanguageResponseDTO>().apply {
+        persistence.getAllLanguages().forEach { add(it.toResponseDto()) }
     }
 
     override fun saveNewLanguage(requestDTO: AdminLanguageNewRequestDTO): AdminLanguageResponseDTO {
@@ -32,7 +29,5 @@ class AdminLanguagesAppService(private val persistence: AdminLanguagesOutputPort
         return updatedEntity.toResponseDto()
     }
 
-    override fun deleteLanguage(id: UUID) {
-        persistence.deleteLanguage(id)
-    }
+    override fun deleteLanguage(id: UUID) = persistence.deleteLanguage(id)
 }

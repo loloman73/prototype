@@ -9,15 +9,12 @@ import xenagos.application.port.input.model.AdminAgeGroupNewRequestDTO
 import xenagos.application.port.input.model.AdminAgeGroupResponseDTO
 import xenagos.application.port.output.AdminAgeGroupsOutputPort
 import java.util.*
-import kotlin.collections.ArrayList
 
 @Service
 class AdminAgeGroupsAppService(private val persistence: AdminAgeGroupsOutputPort) : AdminAgeGroupUseCase {
 
-    override fun getAllAgeGroups(): ArrayList<AdminAgeGroupResponseDTO> {
-        val responseDTO = arrayListOf<AdminAgeGroupResponseDTO>()
-        persistence.getAllAgeGroups().forEach { responseDTO.add(it.toResponseDto()) }
-        return responseDTO
+    override fun getAllAgeGroups() = arrayListOf<AdminAgeGroupResponseDTO>().apply {
+        persistence.getAllAgeGroups().forEach { add(it.toResponseDto()) }
     }
 
     override fun saveNewAgeGroup(requestDTO: AdminAgeGroupNewRequestDTO): AdminAgeGroupResponseDTO {
@@ -32,7 +29,5 @@ class AdminAgeGroupsAppService(private val persistence: AdminAgeGroupsOutputPort
         return updatedEntity.toResponseDto()
     }
 
-    override fun deleteAgeGroup(id: UUID) {
-        persistence.deleteAgeGroup(id)
-    }
+    override fun deleteAgeGroup(id: UUID) = persistence.deleteAgeGroup(id)
 }

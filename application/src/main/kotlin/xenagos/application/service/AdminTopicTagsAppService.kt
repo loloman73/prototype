@@ -9,15 +9,12 @@ import xenagos.application.port.input.model.AdminTopicTagNewRequestDTO
 import xenagos.application.port.input.model.AdminTopicTagResponseDTO
 import xenagos.application.port.output.AdminTopicTagsOutputPort
 import java.util.*
-import kotlin.collections.ArrayList
 
 @Service
 class AdminTopicTagsAppService(private val persistence: AdminTopicTagsOutputPort) : AdminTopicTagsUseCase {
 
-    override fun getAllTopicTags(): ArrayList<AdminTopicTagResponseDTO> {
-        val responseDTO = arrayListOf<AdminTopicTagResponseDTO>()
-        persistence.getAllTopicTags().forEach { responseDTO.add(it.toResponseDto()) }
-        return responseDTO
+    override fun getAllTopicTags() = arrayListOf<AdminTopicTagResponseDTO>().apply {
+        persistence.getAllTopicTags().forEach { add(it.toResponseDto()) }
     }
 
     override fun saveNewTopicTag(requestDTO: AdminTopicTagNewRequestDTO): AdminTopicTagResponseDTO {
@@ -32,7 +29,5 @@ class AdminTopicTagsAppService(private val persistence: AdminTopicTagsOutputPort
         return updatedEntity.toResponseDto()
     }
 
-    override fun deleteTopicTag(id: UUID) {
-        persistence.deleteTopicTag(id)
-    }
+    override fun deleteTopicTag(id: UUID) = persistence.deleteTopicTag(id)
 }

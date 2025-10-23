@@ -6,14 +6,11 @@ import xenagos.application.port.input.model.AdminTopicTagResponseDTO
 import xenagos.domain.model.TopicTag
 import java.util.*
 
-fun TopicTag.toResponseDto(): AdminTopicTagResponseDTO {
-    return AdminTopicTagResponseDTO(this.id, this.tagName, this.description, this.active)
-}
+fun TopicTag.toResponseDto() =
+    AdminTopicTagResponseDTO(this.id, this.tagName, this.description, this.active)
 
-fun AdminTopicTagNewRequestDTO.toEntity(id: UUID): TopicTag {
-    return TopicTag(id, this.name, this.description, this.active)
-}
+fun AdminTopicTagNewRequestDTO.toEntity(id: UUID) =
+    TopicTag(id, this.name, this.description, this.active)
 
-fun AdminTopicTagEditRequestDTO.toEntity(): TopicTag {
-    return TopicTag(this.id, this.name, this.description, this.active)
-}
+fun AdminTopicTagEditRequestDTO.toEntity() =
+    TopicTag(this.id, this.name, this.description, this.active)

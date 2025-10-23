@@ -9,16 +9,13 @@ import xenagos.application.port.input.model.AdminAccessibilityTagResponseDTO
 import xenagos.application.port.input.model.AdminAccessibilityTagNewRequestDTO
 import xenagos.application.port.output.AdminAccessibilityTagsOutputPort
 import java.util.*
-import kotlin.collections.ArrayList
 
 @Service
 class AdminAccessibilityTagsAppService(private val persistence: AdminAccessibilityTagsOutputPort) :
     AdminAccessibilityTagsUseCase {
 
-    override fun getAllAccessibilityTags(): ArrayList<AdminAccessibilityTagResponseDTO> {
-        val responseDTO = arrayListOf<AdminAccessibilityTagResponseDTO>()
-        persistence.getAllAccessibilityTags().forEach { responseDTO.add(it.toResponseDto()) }
-        return responseDTO
+    override fun getAllAccessibilityTags() = arrayListOf<AdminAccessibilityTagResponseDTO>().apply {
+        persistence.getAllAccessibilityTags().forEach { add(it.toResponseDto()) }
     }
 
     override fun saveNewAccessibilityTag(requestDTO: AdminAccessibilityTagNewRequestDTO): AdminAccessibilityTagResponseDTO {
@@ -33,7 +30,5 @@ class AdminAccessibilityTagsAppService(private val persistence: AdminAccessibili
         return updatedEntity.toResponseDto()
     }
 
-    override fun deleteAccessibilityTag(id: UUID) {
-        persistence.deleteAccessibilityTag(id)
-    }
+    override fun deleteAccessibilityTag(id: UUID) = persistence.deleteAccessibilityTag(id)
 }

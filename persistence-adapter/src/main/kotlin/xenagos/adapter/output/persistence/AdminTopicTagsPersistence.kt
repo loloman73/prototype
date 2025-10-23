@@ -6,28 +6,18 @@ import xenagos.adapter.output.persistence.mapper.toJpaEntity
 import xenagos.application.port.output.AdminTopicTagsOutputPort
 import xenagos.domain.model.TopicTag
 import java.util.*
-import kotlin.collections.ArrayList
 
 @Repository
 open class AdminTopicTagsPersistence(private val repository: AdminTopicTagsRepository) : AdminTopicTagsOutputPort {
 
-    override fun getAllTopicTags(): ArrayList<TopicTag> {
-        val domainEntityList = arrayListOf<TopicTag>()
-        repository.findAll().forEach { domainEntityList.add(it.toDomainEntity()) }
-        return domainEntityList
+    override fun getAllTopicTags() = arrayListOf<TopicTag>().apply {
+        repository.findAll().forEach { add(it.toDomainEntity()) }
     }
+    override fun saveNewTopicTag(newEntityToSave: TopicTag): TopicTag =
+        repository.save(newEntityToSave.toJpaEntity()).toDomainEntity()
 
-    override fun saveNewTopicTag(newEntityToSave: TopicTag): TopicTag {
-        val returnedJpaEntity = repository.save(newEntityToSave.toJpaEntity())
-        return returnedJpaEntity.toDomainEntity()
-    }
+    override fun updateTopicTag(entityToUpdate: TopicTag): TopicTag =
+        repository.save(entityToUpdate.toJpaEntity()).toDomainEntity()
 
-    override fun updateTopicTag(entityToUpdate: TopicTag): TopicTag {
-        val returnedJpaEntity = repository.save(entityToUpdate.toJpaEntity())
-        return returnedJpaEntity.toDomainEntity()
-    }
-
-    override fun deleteTopicTag(id: UUID) {
-        repository.deleteById(id)
-    }
+    override fun deleteTopicTag(id: UUID) = repository.deleteById(id)
 }

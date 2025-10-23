@@ -6,30 +6,19 @@ import xenagos.adapter.output.persistence.mapper.toJpaEntity
 import xenagos.application.port.output.AdminAccessibilityTagsOutputPort
 import xenagos.domain.model.AccessibilityTag
 import java.util.*
-import kotlin.collections.ArrayList
 
 @Repository
-open class AdminAccessibilityTagsPersistence(
-    private val repository: AdminAccessibilityTagsRepository
-) : AdminAccessibilityTagsOutputPort {
+open class AdminAccessibilityTagsPersistence(private val repository: AdminAccessibilityTagsRepository) :
+    AdminAccessibilityTagsOutputPort {
 
-    override fun getAllAccessibilityTags(): ArrayList<AccessibilityTag> {
-        val domainEntityList = arrayListOf<AccessibilityTag>()
-        repository.findAll().forEach { domainEntityList.add(it.toDomainEntity()) }
-        return domainEntityList
+    override fun getAllAccessibilityTags() = arrayListOf<AccessibilityTag>().apply {
+        repository.findAll().forEach { add(it.toDomainEntity()) }
     }
+    override fun saveNewAccessibilityTag(newEntityToSave: AccessibilityTag): AccessibilityTag =
+        repository.save(newEntityToSave.toJpaEntity()).toDomainEntity()
 
-    override fun saveNewAccessibilityTag(newEntityToSave: AccessibilityTag): AccessibilityTag {
-        val returnedJpaEntity = repository.save(newEntityToSave.toJpaEntity())
-        return returnedJpaEntity.toDomainEntity()
-    }
+    override fun updateAccessibilityTag(entityToUpdate: AccessibilityTag): AccessibilityTag =
+        repository.save(entityToUpdate.toJpaEntity()).toDomainEntity()
 
-    override fun updateAccessibilityTag(entityToUpdate: AccessibilityTag): AccessibilityTag {
-        val returnedJpaEntity = repository.save(entityToUpdate.toJpaEntity())
-        return returnedJpaEntity.toDomainEntity()
-    }
-
-    override fun deleteAccessibilityTag(id: UUID) {
-        repository.deleteById(id)
-    }
+    override fun deleteAccessibilityTag(id: UUID) = repository.deleteById(id)
 }

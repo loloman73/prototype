@@ -6,30 +6,19 @@ import xenagos.adapter.output.persistence.mapper.toJpaEntity
 import xenagos.application.port.output.AdminAgeGroupsOutputPort
 import xenagos.domain.model.AgeGroup
 import java.util.*
-import kotlin.collections.ArrayList
 
 @Repository
-open class AdminAgeGroupsPersistence(private val repository: AdminAgeGroupsRepository): AdminAgeGroupsOutputPort {
+open class AdminAgeGroupsPersistence(private val repository: AdminAgeGroupsRepository) : AdminAgeGroupsOutputPort {
 
-    override fun getAllAgeGroups(): ArrayList<AgeGroup> {
-        val domainEntityList = arrayListOf<AgeGroup>()
-        repository.findAll().forEach { domainEntityList.add(it.toDomainEntity()) }
-        return domainEntityList
+    override fun getAllAgeGroups() = arrayListOf<AgeGroup>().apply {
+        repository.findAll().forEach { add(it.toDomainEntity()) }
     }
+    override fun saveNewAgeGroup(newEntityToSave: AgeGroup): AgeGroup =
+        repository.save(newEntityToSave.toJpaEntity()).toDomainEntity()
 
-    override fun saveNewAgeGroup(newEntityToSave: AgeGroup): AgeGroup {
-        val returnedJpaEntity = repository.save(newEntityToSave.toJpaEntity())
-        return returnedJpaEntity.toDomainEntity()
-    }
+    override fun updateAgeGroup(entityToUpdate: AgeGroup): AgeGroup =
+        repository.save(entityToUpdate.toJpaEntity()).toDomainEntity()
 
-    override fun updateAgeGroup(entityToUpdate: AgeGroup): AgeGroup {
-        val returnedJpaEntity = repository.save(entityToUpdate.toJpaEntity())
-        return returnedJpaEntity.toDomainEntity()
-    }
-
-    override fun deleteAgeGroup(id: UUID) {
-        repository.deleteById(id)
-    }
-
+    override fun deleteAgeGroup(id: UUID) = repository.deleteById(id)
 
 }

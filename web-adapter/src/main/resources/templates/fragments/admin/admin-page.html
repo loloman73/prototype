@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Templates</title>
+</head>
+<body>
+
+<!--Add New Button-->
+<button th:fragment="ADD_NEW_BTN" class="btn btn-primary mt-3 mb-3"
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#add_new_modal">
+    Add New
+</button>
+
+<!-- Add New Modal -->
+<div th:fragment="ADD_NEW_MODAL(title,form_fragment_link,endpoint_link)" class="modal fade"
+     id="add_new_modal"
+     data-bs-backdrop="static"
+     tabindex="-1"
+     aria-labelledby="add_new_modal_label"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-bg-dark">
+                <h1 class="modal-title fs-5" id="add_new_modal_label"> Add new [[${title}]]  </h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <!--Form Fragment-->
+                        <div th:replace="__${form_fragment_link}__"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success"
+                        th:attr="hx-post='__${endpoint_link}__'"
+                        hx-include="#add_new_form"
+                        hx-target="#add_new_form"
+                        hx-swap="outerHTML">Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit Modal -->
+<div th:fragment="EDIT_MODAL(title,form_fragment_link,endpoint_link)" class="modal fade"
+     id="edit_modal"
+     tabindex="-1"
+     data-bs-backdrop="static"
+     aria-labelledby="edit_modal_label"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-bg-dark">
+                <h1 class="modal-title fs-5" id="edit_modal_label">Edit [[${title}]]</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <!--Form Fragment-->
+                        <div th:replace="__${form_fragment_link}__"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success"
+                        th:attr="hx-put='__${endpoint_link}__'"
+                        hx-include="#edit_form"
+                        hx-target="#edit_form"
+                        hx-swap="outerHTML">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div th:fragment="DELETE_MODAL(title,form_fragment_link,endpoint_link)" class="modal fade"
+     id="delete_modal"
+     tabindex="-1"
+     data-bs-backdrop="static"
+     aria-labelledby="delete_modal_label"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-bg-dark">
+                <h1 class="modal-title fs-5" id="delete_modal_label">Delete [[${title}]]</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <!--Form Fragment-->
+                        <div th:replace="__${form_fragment_link}__"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger"
+                        th:attr="hx-delete='__${endpoint_link}__'"
+                        hx-include="#delete_id">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

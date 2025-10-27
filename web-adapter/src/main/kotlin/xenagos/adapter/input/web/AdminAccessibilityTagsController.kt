@@ -49,6 +49,7 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
         return "redirect:htmx:/admin/accessibilityTags"
     }
 
+    //TODO: in case there is error in deletion -> return feedback
     @HxRequest
     @DeleteMapping("/delete")
     fun deleteOne(@RequestParam id: UUID): String {

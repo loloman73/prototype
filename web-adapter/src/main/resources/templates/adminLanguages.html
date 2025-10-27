@@ -47,11 +47,11 @@
                 <td><span th:text="${language.englishName}"></span></td>
                 <!--3rd field-->
                 <td><span th:text="${language.nativeName}"></span></td>
-                <!--4th field-->
+                <!--active field-->
                 <td class="text-center">
-                    <label for="show_active" class="visually-hidden"> </label>
-                    <input class="form-check-input" id="show_active" type="checkbox"
-                           th:checked="${language.active}" disabled/>
+                    <label >
+                        <input class="form-check-input" type="checkbox" th:checked="${language.active}" disabled>
+                    </label>
                 </td>
                 <!--Action buttons-->
                 <td class="text-nowrap">
@@ -190,7 +190,6 @@
     <script type="text/javascript" th:src="@{/js/adminLanguages.js}"></script>
 
 </th:block>
-
 
 </body>
 

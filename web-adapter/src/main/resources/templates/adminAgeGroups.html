@@ -13,12 +13,7 @@
 <th:block layout:fragment="ADMIN_DATA_SPACE">
 
     <!--Add New Button-->
-    <button class="btn btn-primary mt-3 mb-3"
-            type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#add_new_modal">
-        Add New
-    </button>
+    <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_BTN}"></div>
 
     <!--Table-->
     <div class="col-10">
@@ -39,13 +34,13 @@
             <tr th:each="ageGroup : ${ageGroups}">
                 <!--## column-->
                 <th scope="row"><span th:text="${ageGroups.indexOf(ageGroup)+1}"></span></th>
-                <!--ID field column-->
+                <!--field ID-->
                 <td class="text-nowrap"><span th:text="${ageGroup.id}"></span></td>
-                <!--1st field-->
+                <!--field 1-->
                 <td><span th:text="${ageGroup.groupName}"></span></td>
-                <!--2nd field-->
+                <!--field 2-->
                 <td><span th:text="${ageGroup.minAge}"></span></td>
-                <!--3rd field-->
+                <!--field 3-->
                 <td><span th:text="${ageGroup.maxAge}"></span></td>
                 <!--active field-->
                 <td class="text-center">
@@ -60,23 +55,23 @@
                             type="button"
                             data-bs-toggle="modal"
                             data-bs-target="#edit_modal"
-                            th:data-age-group-id="${ageGroup.id}"
-                            th:data-age-group-name="${ageGroup.groupName}"
-                            th:data-age-group-min="${ageGroup.minAge}"
-                            th:data-age-group-max="${ageGroup.maxAge}"
-                            th:data-age-group-active="${ageGroup.active}">
+                            th:data-id="${ageGroup.id}"
+                            th:data-field1="${ageGroup.groupName}"
+                            th:data-field2="${ageGroup.minAge}"
+                            th:data-field3="${ageGroup.maxAge}"
+                            th:data-active="${ageGroup.active}">
                         Edit
                     </button>
                     <!--Delete button-->
                     <button class="btn btn-danger me-1 py-1 "
                             type="button"
                             data-bs-toggle="modal"
-                            data-bs-target="#delete_age_group_modal"
-                            th:data-age-group-id="${ageGroup.id}"
-                            th:data-age-group-name="${ageGroup.groupName}"
-                            th:data-age-group-min="${ageGroup.minAge}"
-                            th:data-age-group-max="${ageGroup.maxAge}"
-                            th:data-age-group-active="${ageGroup.active}">
+                            data-bs-target="#delete_modal"
+                            th:data-id="${ageGroup.id}"
+                            th:data-field1="${ageGroup.groupName}"
+                            th:data-field2="${ageGroup.minAge}"
+                            th:data-field3="${ageGroup.maxAge}"
+                            th:data-active="${ageGroup.active}">
                         Delete
                     </button>
                 </td>
@@ -86,107 +81,17 @@
     </div>
 
     <!-- Add New Modal -->
-    <div class="modal fade"
-         id="add_new_modal"
-         data-bs-backdrop="static"
-         tabindex="-1"
-         aria-labelledby="add_new_modal_label"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header text-bg-dark">
-                    <h1 class="modal-title fs-5" id="add_new_modal_label">Add new Age Group</h1>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <!--Form Fragment-->
-                            <div th:replace="~{/fragments/admin/add-new-age-group-modal-form}"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success"
-                            hx-post="/admin/ageGroups/addNew" hx-include="#add_new_age_group_form"
-                            hx-target="#add_new_age_group_form" hx-swap="outerHTML">
-                        Save
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_MODAL('Age Group','~{/fragments/admin/add-new-age-group-modal-form}','/admin/ageGroups/addNew')}"></div>
 
     <!-- Edit Modal -->
-    <div class="modal fade"
-         id="edit_modal"
-         tabindex="-1"
-         data-bs-backdrop="static"
-         aria-labelledby="edit_modal_label"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header text-bg-dark">
-                    <h1 class="modal-title fs-5" id="edit_modal_label">Edit Age Group</h1>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <!--Form Fragment-->
-                            <div th:replace="~{/fragments/admin/edit-age-group-modal-form}"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success"
-                            hx-put="/admin/ageGroups/edit" hx-include="#edit_age_group_form"
-                            hx-target="#edit_age_group_form" hx-swap="outerHTML">Save
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div th:replace="~{fragments/admin/admin-page.html :: EDIT_MODAL('Age Group','~{/fragments/admin/edit-age-group-modal-form}','/admin/ageGroups/edit')}"></div>
 
     <!-- Delete Modal -->
-    <div class="modal fade"
-         id="delete_age_group_modal"
-         tabindex="-1"
-         data-bs-backdrop="static"
-         aria-labelledby="delete_age_group_modal_label"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header text-bg-dark">
-                    <h1 class="modal-title fs-5" id="delete_age_group_modal_label">Delete Age Group</h1>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <!--Form Fragment-->
-                            <div th:replace="~{/fragments/admin/delete-age-group-modal-form}"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger"
-                            hx-delete="/admin/ageGroups/delete" hx-include="#delete_age_group_id">
-                        Delete
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div th:replace="~{fragments/admin/admin-page.html :: DELETE_MODAL('Age Group','~{/fragments/admin/delete-age-group-modal-form}','/admin/ageGroups/delete')}"></div>
 
     <!--Script-->
     <script type="text/javascript" th:src="@{/js/adminAgeGroups.js}"></script>
+    <script type="text/javascript" th:src="@{/js/adminActionButtons.js}"></script>
 
 </th:block>
 

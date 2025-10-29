@@ -13,12 +13,7 @@
 <th:block layout:fragment="ADMIN_DATA_SPACE">
 
     <!--Add New Button-->
-    <button class="btn btn-primary mt-3 mb-3"
-            type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#add_new_modal">
-        Add New
-    </button>
+    <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_BTN}"></div>
 
     <!--Table-->
     <div class="col-10">
@@ -81,105 +76,13 @@
     </div>
 
     <!-- Add New Modal -->
-    <div class="modal fade"
-         id="add_new_modal"
-         data-bs-backdrop="static"
-         tabindex="-1"
-         aria-labelledby="add_new_modal_label"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header text-bg-dark">
-                    <h1 class="modal-title fs-5" id="add_new_modal_label">Add new Topic Tag</h1>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <!--Form Fragment-->
-                            <div th:replace="~{/fragments/admin/add-new-topic-tag-modal-form}"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success"
-                            hx-post="/admin/topicTags/addNew" hx-include="#add_new_form"
-                            hx-target="#add_new_form" hx-swap="outerHTML">
-                        Save
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_MODAL('Topic Tag','~{/fragments/admin/add-new-topic-tag-modal-form}','/admin/topicTags/addNew')}"></div>
 
     <!-- Edit Modal -->
-    <div class="modal fade"
-         id="edit_modal"
-         tabindex="-1"
-         data-bs-backdrop="static"
-         aria-labelledby="edit_modal_label"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header text-bg-dark">
-                    <h1 class="modal-title fs-5" id="edit_modal_label">Edit Topic Tag</h1>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <!--Form Fragment-->
-                            <div th:replace="~{/fragments/admin/edit-topic-tag-modal-form}"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success"
-                            hx-put="/admin/topicTags/edit" hx-include="#edit_form"
-                            hx-target="#edit_form" hx-swap="outerHTML">
-                        Save
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div th:replace="~{fragments/admin/admin-page.html :: EDIT_MODAL('Topic Tag','~{/fragments/admin/edit-topic-tag-modal-form}','/admin/topicTags/edit')}"></div>
 
     <!-- Delete Modal -->
-    <div class="modal fade"
-         id="delete_topic_tag_modal"
-         tabindex="-1"
-         data-bs-backdrop="static"
-         aria-labelledby="delete_modal_label"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header text-bg-dark">
-                    <h1 class="modal-title fs-5" id="delete_modal_label">Delete Topic Tag</h1>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <!--Form Fragment-->
-                            <div th:replace="~{/fragments/admin/delete-topic-tag-modal-form}"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger"
-                            hx-delete="/admin/topicTags/delete" hx-include="#delete_id">
-                        Delete
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div th:replace="~{fragments/admin/admin-page.html :: DELETE_MODAL('Topic Tag','~{/fragments/admin/delete-topic-tag-modal-form}','/admin/topicTags/delete')}"></div>
 
     <!--Script-->
     <script type="text/javascript" th:src="@{/js/adminTopicTags.js}"></script>

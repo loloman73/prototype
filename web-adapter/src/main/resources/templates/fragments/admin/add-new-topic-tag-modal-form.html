@@ -1,41 +1,41 @@
-<form id="add_new_topic_tag_form" th:object="${addNewTopicTag}">
-    <!--1st field-->
+<form id="add_new_form" th:object="${addNewTopicTag}">
+    <!--field 1-->
     <div class="col-9">
         <div class="form-floating mb-3">
             <input class="form-control"
                    type="text"
-                   id="new_topic_tag_name"
+                   id="new_field1"
                    name="name"
                    maxlength="35"
                    th:errorclass="is-invalid"
                    th:value="${addNewTopicTag.name}">
-            <label class="text-secondary" for="new_topic_tag_name">Name</label>
-            <div class="form-text fst-italic ps-2">maximum 35 digits</div>
+            <label class="text-secondary" for="new_field1">Name</label>
+            <div class="form-text fst-italic ps-2">min 3, max 35 digits</div>
         </div>
     </div>
-    <!--2nd field-->
+    <!--field 2-->
     <div class="col-12">
         <div class="form-floating mb-3">
             <textarea class="form-control"
-                      id="new_topic_tag_description"
+                      id="new_field2"
                       name="description"
                       maxlength="250"
                       style="height: 150px"
                       th:errorclass="is-invalid"
                       th:text="${addNewTopicTag.description}"></textarea>
-            <label class="text-secondary" for="new_topic_tag_description">Description</label>
-            <div class="form-text fst-italic ps-2">maximum 250 digits</div>
+            <label class="text-secondary" for="new_field2">Description</label>
+            <div class="form-text fst-italic ps-2">min 3, max 250 digits</div>
         </div>
     </div>
-    <!--3rd field-->
+    <!--field active-->
     <div class="col-12">
         <div class="form-check">
             <input class="form-check-input"
                    type="checkbox"
-                   id="new_topic_tag_active"
+                   id="new_active"
                    name="active"
                    th:checked="${addNewTopicTag.active}">
-            <label class="form-check-label" for="new_topic_tag_active">
+            <label class="form-check-label" for="new_active">
                 Active
             </label>
         </div>

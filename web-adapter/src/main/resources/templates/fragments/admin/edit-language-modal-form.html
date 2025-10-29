@@ -1,6 +1,18 @@
 <form id="edit_form" th:object="${editLanguage}">
-
-  <!--1st field-->
+    <!--field ID-->
+    <div class="col-10">
+        <div class="form-floating mb-3">
+            <input class="form-control"
+                   type="text"
+                   id="edit_id"
+                   name="id"
+                   th:errorclass="is-invalid"
+                   th:value="${editLanguage.id}"
+                   readonly>
+            <label class="text-secondary" for="edit_id">Id</label>
+        </div>
+    </div>
+  <!--field 1-->
   <div class="col-6">
     <div class="form-floating mb-3">
       <input class="form-control"
@@ -14,7 +26,7 @@
       <div class="form-text fst-italic ps-2">maximum 3 digits</div>
     </div>
   </div>
-  <!--2nd field-->
+  <!--field 2-->
   <div class="col-12">
     <div class="form-floating mb-3">
       <input class="form-control"
@@ -25,10 +37,10 @@
              th:errorclass="is-invalid"
              th:value="${editLanguage.englishName}">
       <label class="text-secondary" for="edit_field2">English Name</label>
-      <div class="form-text fst-italic ps-2">maximum 35 digits</div>
+      <div class="form-text fst-italic ps-2">maximum 3 digits</div>
     </div>
   </div>
-  <!--3rd field-->
+  <!--field 3-->
   <div class="col-12">
     <div class="form-floating mb-3">
       <input class="form-control"
@@ -39,10 +51,10 @@
              th:errorclass="is-invalid"
              th:value="${editLanguage.nativeName}">
       <label class="text-secondary" for="edit_field3">Native Name</label>
-      <div class="form-text fst-italic ps-2">maximum 35 digits</div>
+      <div class="form-text fst-italic ps-2">maximum 3 digits</div>
     </div>
   </div>
-  <!--4th field-->
+  <!--field active-->
   <div class="col-12">
     <div class="form-check">
       <input class="form-check-input"
@@ -50,9 +62,7 @@
              id="edit_active"
              name="active"
              th:checked="${editLanguage.active}">
-      <label class="form-check-label" for="edit_active">
-        Active
-      </label>
+      <label class="form-check-label" for="edit_active">Active</label>
     </div>
   </div>
 </form>

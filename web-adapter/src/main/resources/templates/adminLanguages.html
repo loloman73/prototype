@@ -13,12 +13,7 @@
 <th:block layout:fragment="ADMIN_DATA_SPACE">
 
     <!--Add New Button-->
-    <button class="btn btn-primary mt-3 mb-3"
-            type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#add_new_modal">
-        Add New
-    </button>
+    <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_BTN}"></div>
 
     <!--Table-->
     <div class="col-10">
@@ -39,15 +34,15 @@
             <tr th:each="language : ${languages}">
                 <!--## column-->
                 <th scope="row"><span th:text="${languages.indexOf(language)+1}"></span></th>
-                <!--ID field column-->
+                <!--field ID-->
                 <td class="text-nowrap"><span th:text="${language.id}"></span></td>
-                <!--1st field-->
+                <!--field 1-->
                 <td><span th:text="${language.code}"></span></td>
-                <!--2nd field-->
+                <!--field 2-->
                 <td><span th:text="${language.englishName}"></span></td>
-                <!--3rd field-->
+                <!--field 3-->
                 <td><span th:text="${language.nativeName}"></span></td>
-                <!--active field-->
+                <!--field active-->
                 <td class="text-center">
                     <label >
                         <input class="form-check-input" type="checkbox" th:checked="${language.active}" disabled>
@@ -86,108 +81,17 @@
     </div>
 
     <!-- Add New Modal -->
-    <div class="modal fade"
-         id="add_new_modal"
-         data-bs-backdrop="static"
-         tabindex="-1"
-         aria-labelledby="add_new_modal_label"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header text-bg-dark">
-                    <h1 class="modal-title fs-5" id="add_new_modal_label">Add new Language</h1>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <!--Form Fragment-->
-                            <div th:replace="~{/fragments/admin/add-new-language-modal-form}"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success"
-                            hx-post="/admin/languages/addNew" hx-include="#add_new_form"
-                            hx-target="#add_new_form" hx-swap="outerHTML">
-                        Save
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_MODAL('Language','~{/fragments/admin/add-new-language-modal-form}','/admin/languages/addNew')}"></div>
 
     <!-- Edit Modal -->
-    <div class="modal fade"
-         id="edit_modal"
-         tabindex="-1"
-         data-bs-backdrop="static"
-         aria-labelledby="edit_modal_label"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header text-bg-dark">
-                    <h1 class="modal-title fs-5" id="edit_modal_label">Edit Language</h1>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <!--Form Fragment-->
-                            <div th:replace="~{/fragments/admin/edit-language-modal-form}"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success"
-                            hx-put="/admin/languages/edit" hx-include="#edit_form"
-                            hx-target="#edit_form" hx-swap="outerHTML">
-                        Save
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div th:replace="~{fragments/admin/admin-page.html :: EDIT_MODAL('Language','~{/fragments/admin/edit-language-modal-form}','/admin/languages/edit')}"></div>
 
     <!-- Delete Modal -->
-    <div class="modal fade"
-         id="delete_modal"
-         tabindex="-1"
-         data-bs-backdrop="static"
-         aria-labelledby="delete_modal_label"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header text-bg-dark">
-                    <h1 class="modal-title fs-5" id="delete_modal_label">Delete Language</h1>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <!--Form Fragment-->
-                            <div th:replace="~{/fragments/admin/delete-language-modal-form}"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger"
-                            hx-delete="/admin/languages/delete" hx-include="#delete_id">
-                        Delete
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div th:replace="~{fragments/admin/admin-page.html :: DELETE_MODAL('Language','~{/fragments/admin/delete-language-modal-form}','/admin/languages/delete')}"></div>
 
     <!--Script-->
     <script type="text/javascript" th:src="@{/js/adminLanguages.js}"></script>
+    <script type="text/javascript" th:src="@{/js/adminActionButtons.js}"></script>
 
 </th:block>
 

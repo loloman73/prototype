@@ -76,13 +76,13 @@
     </div>
 
     <!-- Add New Modal -->
-    <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_MODAL('Topic Tag','~{/fragments/admin/add-new-topic-tag-modal-form}','/admin/topicTags/addNew')}"></div>
+    <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_MODAL('Topic Tag','~{/fragments/admin/topic-tag-modal-form-add-new}','/admin/topicTags/addNew')}"></div>
 
     <!-- Edit Modal -->
-    <div th:replace="~{fragments/admin/admin-page.html :: EDIT_MODAL('Topic Tag','~{/fragments/admin/edit-topic-tag-modal-form}','/admin/topicTags/edit')}"></div>
+    <div th:replace="~{fragments/admin/admin-page.html :: EDIT_MODAL('Topic Tag','~{/fragments/admin/topic-tag-modal-form-edit}','/admin/topicTags/edit')}"></div>
 
     <!-- Delete Modal -->
-    <div th:replace="~{fragments/admin/admin-page.html :: DELETE_MODAL('Topic Tag','~{/fragments/admin/delete-topic-tag-modal-form}','/admin/topicTags/delete')}"></div>
+    <div th:replace="~{fragments/admin/admin-page.html :: DELETE_MODAL('Topic Tag','~{/fragments/admin/topic-tag-modal-form-delete}','/admin/topicTags/delete')}"></div>
 
     <!--Script-->
     <script type="text/javascript" th:src="@{/js/adminTopicTags.js}"></script>

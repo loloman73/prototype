@@ -81,13 +81,13 @@
     </div>
 
     <!-- Add New Modal -->
-    <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_MODAL('Age Group','~{/fragments/admin/add-new-age-group-modal-form}','/admin/ageGroups/addNew')}"></div>
+    <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_MODAL('Age Group','~{/fragments/admin/age-group-modal-form-add-new}','/admin/ageGroups/addNew')}"></div>
 
     <!-- Edit Modal -->
-    <div th:replace="~{fragments/admin/admin-page.html :: EDIT_MODAL('Age Group','~{/fragments/admin/edit-age-group-modal-form}','/admin/ageGroups/edit')}"></div>
+    <div th:replace="~{fragments/admin/admin-page.html :: EDIT_MODAL('Age Group','~{/fragments/admin/age-group-modal-form-edit}','/admin/ageGroups/edit')}"></div>
 
     <!-- Delete Modal -->
-    <div th:replace="~{fragments/admin/admin-page.html :: DELETE_MODAL('Age Group','~{/fragments/admin/delete-age-group-modal-form}','/admin/ageGroups/delete')}"></div>
+    <div th:replace="~{fragments/admin/admin-page.html :: DELETE_MODAL('Age Group','~{/fragments/admin/age-group-modal-form-delete}','/admin/ageGroups/delete')}"></div>
 
     <!--Script-->
     <script type="text/javascript" th:src="@{/js/adminAgeGroups.js}"></script>

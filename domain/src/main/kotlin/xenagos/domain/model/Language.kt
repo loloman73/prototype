@@ -2,6 +2,7 @@ package xenagos.domain.model
 
 import java.util.*
 
+//code: ISO 639-3
 data class Language(
     val id: UUID,
     val code: String,
@@ -9,12 +10,3 @@ data class Language(
     val nativeName: String,
     val active: Boolean
 )
-
-//code: ISO 639-3
-//eng, "English", "English"
-//ell, "Greek", "Ελληνικά"
-//deu, "German", "Deutsch"
-//fra, "French", "Français"
-//rus, "Russian", "Русский"
-//spa, "Spanish", "Español"
-//tur, "Turkish", "Türkçe"

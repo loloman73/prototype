@@ -1,7 +1,7 @@
 package xenagos.application.port.output
 
 import xenagos.domain.model.TopicTag
-import java.util.*
+import java.util.UUID
 import kotlin.collections.ArrayList
 
 interface AdminTopicTagsOutputPort {

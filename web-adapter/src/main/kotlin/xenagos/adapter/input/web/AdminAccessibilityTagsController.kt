@@ -30,7 +30,7 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
         bindingResult: BindingResult
     ): String {
         if (bindingResult.hasErrors()) {
-            return "/fragments/admin/add-new-accessibility-tag-modal-form"
+            return "accessibility-tag-modal-form-add-new"
         }
         service.saveNewAccessibilityTag(addNewAccessibilityTagDTO)
         return "redirect:htmx:/admin/accessibilityTags"
@@ -43,7 +43,7 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
         bindingResult: BindingResult
     ): String {
         if (bindingResult.hasErrors()) {
-            return "/fragments/admin/edit-accessibility-tag-modal-form"
+            return "accessibility-tag-modal-form-edit"
         }
         service.updateAccessibilityTag(editAccessibilityTagDTO)
         return "redirect:htmx:/admin/accessibilityTags"

@@ -19,11 +19,12 @@
              type="text"
              id="edit_field1"
              name="code"
+             minlength="3"
              maxlength="3"
              th:errorclass="is-invalid"
              th:value="${editLanguage.code}">
       <label class="text-secondary" for="edit_field1">ISO 639-3 code</label>
-      <div class="form-text fst-italic ps-2">maximum 3 digits</div>
+      <div class="form-text fst-italic ps-2">3 digits</div>
     </div>
   </div>
   <!--field 2-->
@@ -33,11 +34,12 @@
              type="text"
              id="edit_field2"
              name="englishName"
-             maxlength="3"
+             minlength="3"
+             maxlength="35"
              th:errorclass="is-invalid"
              th:value="${editLanguage.englishName}">
       <label class="text-secondary" for="edit_field2">English Name</label>
-      <div class="form-text fst-italic ps-2">maximum 3 digits</div>
+      <div class="form-text fst-italic ps-2">min 3, max 35 digits</div>
     </div>
   </div>
   <!--field 3-->
@@ -47,11 +49,12 @@
              type="text"
              id="edit_field3"
              name="nativeName"
-             maxlength="3"
+             minlength="3"
+             maxlength="35"
              th:errorclass="is-invalid"
              th:value="${editLanguage.nativeName}">
       <label class="text-secondary" for="edit_field3">Native Name</label>
-      <div class="form-text fst-italic ps-2">maximum 3 digits</div>
+      <div class="form-text fst-italic ps-2">min 3, max 35 digits</div>
     </div>
   </div>
   <!--field active-->

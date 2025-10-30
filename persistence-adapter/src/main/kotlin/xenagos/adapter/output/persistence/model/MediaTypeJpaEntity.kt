@@ -10,7 +10,7 @@ open class MediaTypeJpaEntity {
     @Column(name = "media_type_id", nullable = false)
     open var id: UUID? = null
 
-    @Column(name = "media_type", length = Integer.MAX_VALUE)
+    @Column(name = "media_type", length = 35)
     open var mediaType: String? = null
 
     @OneToMany(mappedBy = "mediaType")

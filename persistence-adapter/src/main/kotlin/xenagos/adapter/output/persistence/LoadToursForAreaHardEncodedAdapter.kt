@@ -40,7 +40,7 @@ class LoadToursForAreaHardEncodedAdapter : LoadToursForAreaOutPort {
                             id = UUID.randomUUID(),
                             language = Language(UUID.randomUUID(), "GR", "Greek", "Ελληνικά", true),
                             mediaFileName = "",
-                            mediaType = MediaType(UUID.randomUUID(), ""),
+                            mediaType = MediaType(UUID.randomUUID(), "",  true),
                             duration = Random.nextInt(1, 240).toShort(),
                             durationType = DurationType(UUID.randomUUID(), ""),
                             ameaFriendlyTag = AmeaFriendlyTag(UUID.randomUUID(), "", ""),

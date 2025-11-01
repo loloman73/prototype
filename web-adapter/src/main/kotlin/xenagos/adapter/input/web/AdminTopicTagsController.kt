@@ -31,7 +31,7 @@ class AdminTopicTagsController(private val service: AdminTopicTagsUseCase) {
     ): String {
         if (bindingResult.hasErrors()) {
             println(bindingResult.fieldErrors)
-            return "topic-tag-modal-form-add-new"
+            return "./fragments/admin/topic-tag-modal-form-add-new"
         }
         service.saveNewTopicTag(addNewTopicTagDTO)
         return "redirect:htmx:/admin/topicTags"
@@ -44,7 +44,7 @@ class AdminTopicTagsController(private val service: AdminTopicTagsUseCase) {
         bindingResult: BindingResult
     ): String {
         if (bindingResult.hasErrors()) {
-            return "topic-tag-modal-form-edit"
+            return "./fragments/admin/topic-tag-modal-form-edit"
         }
         service.updateTopicTag(editTopicTagDTO)
         return "redirect:htmx:/admin/topicTags"

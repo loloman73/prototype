@@ -30,7 +30,7 @@ class AdminAgeGroupsController(private val service: AdminAgeGroupUseCase) {
         bindingResult: BindingResult
     ): String {
         if (bindingResult.hasErrors()) {
-            return "age-group-modal-form-add-new"
+            return "./fragments/admin/age-group-modal-form-add-new"
         }
         service.saveNewAgeGroup(addNewAgeGroupDTO)
         return "redirect:htmx:/admin/ageGroups"
@@ -43,7 +43,7 @@ class AdminAgeGroupsController(private val service: AdminAgeGroupUseCase) {
         bindingResult: BindingResult
     ): String {
         if (bindingResult.hasErrors()) {
-            return "age-group-modal-form-edit"
+            return "./fragments/admin/age-group-modal-form-edit"
         }
         service.updateAgeGroup(editAgeGroupDTO)
         return "redirect:htmx:/admin/ageGroups"

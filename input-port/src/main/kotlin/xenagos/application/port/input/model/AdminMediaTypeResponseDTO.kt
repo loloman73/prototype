@@ -4,6 +4,6 @@ import java.util.UUID
 
 data class AdminMediaTypeResponseDTO(
     val id: UUID,
-    val name: String,
+    val mediaType: String,
     val active: Boolean
 )

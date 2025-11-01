@@ -2,7 +2,6 @@ package xenagos.application.port.output
 
 import xenagos.domain.model.AccessibilityTag
 import java.util.*
-import kotlin.collections.ArrayList
 
 interface AdminAccessibilityTagsOutputPort {
     fun getAllAccessibilityTags(): ArrayList<AccessibilityTag>

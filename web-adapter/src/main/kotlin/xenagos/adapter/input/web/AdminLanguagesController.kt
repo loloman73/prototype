@@ -31,7 +31,7 @@ class AdminLanguagesController(private val service: AdminLanguagesUseCase) {
     ): String {
         if (bindingResult.hasErrors()) {
             println(bindingResult.fieldErrors)
-            return "language-modal-form-add-new"
+            return "./fragments/admin/language-modal-form-add-new"
         }
         service.saveNewLanguage(addNewLanguageDTO)
         return "redirect:htmx:/admin/languages"
@@ -44,7 +44,7 @@ class AdminLanguagesController(private val service: AdminLanguagesUseCase) {
         bindingResult: BindingResult
     ): String {
         if (bindingResult.hasErrors()) {
-            return "language-modal-form-edit"
+            return "./fragments/admin/language-modal-form-edit"
         }
         service.updateLanguage(editLanguageDTO)
         return "redirect:htmx:/admin/languages"

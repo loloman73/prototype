@@ -13,6 +13,10 @@ open class MediaTypeJpaEntity {
     @Column(name = "media_type", length = 35)
     open var mediaType: String? = null
 
+    @Column(name = "active", nullable = false)
+    open var active: Boolean? = null
+
     @OneToMany(mappedBy = "mediaType")
     open var mediaGuides: MutableSet<MediaGuideJpaEntity> = mutableSetOf()
+
 }

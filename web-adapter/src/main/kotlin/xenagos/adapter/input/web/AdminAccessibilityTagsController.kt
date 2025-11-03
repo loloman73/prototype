@@ -19,7 +19,9 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
     fun showAll(model: Model): String {
         model.addAttribute("accessibilityTags", service.getAllAccessibilityTags())
         model.addAttribute("addNewAccessibilityTag", AdminAccessibilityTagNewRequestDTO("", "", false))
-        model.addAttribute("editAccessibilityTag", AdminAccessibilityTagEditRequestDTO(UUID.randomUUID(), "", "", false))
+        model.addAttribute(
+            "editAccessibilityTag", AdminAccessibilityTagEditRequestDTO(UUID.randomUUID(), "", "", false)
+        )
         return "adminAccessibilityTags"
     }
 

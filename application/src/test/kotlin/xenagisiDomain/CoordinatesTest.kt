@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import xenagos.common.model.DecimalDegreeLat
 import xenagos.common.model.DecimalDegreeLon
 
-@SpringBootTest
+//@SpringBootTest
 class CoordinatesTest {
 
 

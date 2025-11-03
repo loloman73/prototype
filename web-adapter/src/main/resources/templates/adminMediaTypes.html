@@ -2,17 +2,81 @@
 <html   xmlns="http://www.w3.org/1999/xhtml"
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{/layouts/layout_admin}"
+        layout:decorate="~{/layouts/layout_admin(childPageName='Media Types')}"
         lang="en">
 <head>
-    <title>Main Admin Page</title>
+    <title>Media Types</title>
 </head>
 
 <body>
 
     <th:block layout:fragment="ADMIN_DATA_SPACE">
-        <h4>Media Types</h4>
-        <br> <br>
+
+        <!--Add New Button-->
+        <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_BTN}"></div>
+
+        <!--Table-->
+        <div class="col-10">
+            <table class="table table-sm table-light table-striped table-bordered border-primary-subtle table-hover shadow">
+                <thead>
+                <tr class="text-center">
+                    <!--Column Headers -->
+                    <th scope="col">#</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Active</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="mediaType : ${mediaTypes}">
+                    <!--## column-->
+                    <th scope="row"><span th:text="${mediaTypes.indexOf(mediaType)+1}"></span></th>
+                    <!--field ID-->
+                    <td class="text-nowrap"><span th:text="${mediaType.id}"></span></td>
+                    <!--field 1-->
+                    <td><span th:text="${mediaType.name}"></span></td>
+                    <!--field active-->
+                    <td class="text-center">
+                        <label>
+                            <input class="form-check-input" type="checkbox" th:checked="${mediaType.active}"
+                                   disabled>
+                        </label>
+                    </td>
+                    <!--Action buttons-->
+                    <td class="text-nowrap">
+                        <!--Edit button-->
+                        <button class="btn btn-warning ms-1 me-1 py-1"
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#edit_modal"
+                                th:data-id="${mediaType.id}"
+                                th:data-field1="${mediaType.name}"
+                                th:data-active="${mediaType.active}">
+                            Edit
+                        </button>
+                        <!--Delete button-->
+                        <button class="btn btn-danger me-1 py-1 "
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#delete_modal"
+                                th:data-id="${mediaType.id}"
+                                th:data-field1="${mediaType.name}"
+                                th:data-active="${mediaType.active}">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Add New Modal -->
+        <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_MODAL('Media Type','~{/fragments/admin/media-type-modal-form-add-new}','/admin/mediaTypes/addNew')}"></div>
+
+        <!--Script-->
+        <script type="text/javascript" th:src="@{/js/adminMediaTypes.js}"></script>
+
     </th:block>
 
 </body>

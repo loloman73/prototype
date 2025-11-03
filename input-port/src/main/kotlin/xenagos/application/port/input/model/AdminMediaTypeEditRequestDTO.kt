@@ -12,7 +12,7 @@ data class AdminMediaTypeEditRequestDTO(
 
     @field:NotBlank
     @field:Size(min = 3, max = 35)
-    val mediaType: String,
+    val name: String,
 
     // needs default false value because html POST calls ignore checkboxes when they are unchecked
     // ** Leaked dependency on implementation **

@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import java.util.UUID
 
-data class AdminAccessibilityTagEditRequestDTO(
+data class AdminAccessibilityTagUpdateRequestDTO(
 
     @field:NotNull
     val id: UUID,
@@ -23,4 +23,4 @@ data class AdminAccessibilityTagEditRequestDTO(
     // TODO: find solution to send unchecked checkbox status with POST calls
     @field:NotNull
     val active: Boolean = false
-)
+) : AdminUpdateRequestDTO

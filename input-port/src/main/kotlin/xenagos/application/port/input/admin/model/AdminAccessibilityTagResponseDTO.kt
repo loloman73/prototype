@@ -7,4 +7,4 @@ data class AdminAccessibilityTagResponseDTO(
     val name: String,
     val description: String,
     val active: Boolean
-)
+) : AdminResponseDTO

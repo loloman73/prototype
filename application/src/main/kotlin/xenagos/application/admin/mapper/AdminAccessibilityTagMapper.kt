@@ -1,6 +1,6 @@
 package xenagos.application.admin.mapper
 
-import xenagos.application.port.input.admin.model.AdminAccessibilityTagEditRequestDTO
+import xenagos.application.port.input.admin.model.AdminAccessibilityTagUpdateRequestDTO
 import xenagos.application.port.input.admin.model.AdminAccessibilityTagNewRequestDTO
 import xenagos.application.port.input.admin.model.AdminAccessibilityTagResponseDTO
 import xenagos.domain.model.AccessibilityTag
@@ -12,5 +12,5 @@ fun AccessibilityTag.toResponseDto() =
 fun AdminAccessibilityTagNewRequestDTO.toEntity(id: UUID) =
     AccessibilityTag(id, this.name, this.description, this.active)
 
-fun AdminAccessibilityTagEditRequestDTO.toEntity() =
+fun AdminAccessibilityTagUpdateRequestDTO.toEntity() =
     AccessibilityTag(this.id, this.name, this.description, this.active)

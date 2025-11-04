@@ -7,7 +7,7 @@ import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 import xenagos.application.port.input.admin.AdminAccessibilityTagsUseCase
-import xenagos.application.port.input.admin.model.AdminAccessibilityTagEditRequestDTO
+import xenagos.application.port.input.admin.model.AdminAccessibilityTagUpdateRequestDTO
 import xenagos.application.port.input.admin.model.AdminAccessibilityTagNewRequestDTO
 import java.util.*
 
@@ -17,10 +17,10 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
 
     @GetMapping
     fun showAll(model: Model): String {
-        model.addAttribute("accessibilityTags", service.getAllAccessibilityTags())
+        model.addAttribute("accessibilityTags", service.getAll())
         model.addAttribute("addNewAccessibilityTag", AdminAccessibilityTagNewRequestDTO("", "", false))
         model.addAttribute(
-            "editAccessibilityTag", AdminAccessibilityTagEditRequestDTO(UUID.randomUUID(), "", "", false)
+            "editAccessibilityTag", AdminAccessibilityTagUpdateRequestDTO(UUID.randomUUID(), "", "", false)
         )
         return "adminAccessibilityTags"
     }
@@ -34,20 +34,20 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
         if (bindingResult.hasErrors()) {
             return "./fragments/admin/accessibility-tag-modal-form-add-new"
         }
-        service.saveNewAccessibilityTag(addNewAccessibilityTagDTO)
+        service.saveOneNew(addNewAccessibilityTagDTO)
         return "redirect:htmx:/admin/accessibilityTags"
     }
 
     @HxRequest
     @PutMapping("/edit")
     fun updateOne(
-        @Valid @ModelAttribute("editAccessibilityTag") editAccessibilityTagDTO: AdminAccessibilityTagEditRequestDTO,
+        @Valid @ModelAttribute("editAccessibilityTag") editAccessibilityTagDTO: AdminAccessibilityTagUpdateRequestDTO,
         bindingResult: BindingResult
     ): String {
         if (bindingResult.hasErrors()) {
             return "./fragments/admin/accessibility-tag-modal-form-edit"
         }
-        service.updateAccessibilityTag(editAccessibilityTagDTO)
+        service.updateOne(editAccessibilityTagDTO)
         return "redirect:htmx:/admin/accessibilityTags"
     }
 
@@ -55,7 +55,7 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
     @HxRequest
     @DeleteMapping("/delete")
     fun deleteOne(@RequestParam id: UUID): String {
-        service.deleteAccessibilityTag(id)
+        service.deleteOne(id)
         return "redirect:htmx:/admin/accessibilityTags"
     }
 }

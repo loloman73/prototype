@@ -1,0 +1,10 @@
+package xenagos.application.port.input.admin.model
+
+import java.util.UUID
+
+data class AdminTopicTagResponseDTO(
+    val id: UUID,
+    val name: String,
+    val description: String,
+    val active: Boolean
+)

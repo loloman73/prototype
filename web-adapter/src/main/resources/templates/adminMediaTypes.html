@@ -74,8 +74,15 @@
         <!-- Add New Modal -->
         <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_MODAL('Media Type','~{/fragments/admin/media-type-modal-form-add-new}','/admin/mediaTypes/addNew')}"></div>
 
+        <!-- Edit Modal -->
+        <div th:replace="~{fragments/admin/admin-page.html :: EDIT_MODAL('Media Type','~{/fragments/admin/media-type-modal-form-edit}','/admin/mediaTypes/edit')}"></div>
+
+        <!-- Delete Modal -->
+        <div th:replace="~{fragments/admin/admin-page.html :: DELETE_MODAL('Media Type','~{/fragments/admin/media-type-modal-form-delete}','/admin/mediaTypes/delete')}"></div>
+
         <!--Script-->
         <script type="text/javascript" th:src="@{/js/adminMediaTypes.js}"></script>
+        <script type="text/javascript" th:src="@{/js/adminActionButtons.js}"></script>
 
     </th:block>
 

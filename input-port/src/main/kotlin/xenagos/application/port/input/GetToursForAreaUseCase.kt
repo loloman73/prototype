@@ -1,6 +1,6 @@
 package xenagos.application.port.input
 
-import xenagos.application.port.input.model.TourDTO
+import xenagos.application.port.input.TourDTO
 
 interface GetToursForAreaUseCase {
 

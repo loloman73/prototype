@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
-import xenagos.application.port.input.model.TourDTO
+import xenagos.application.port.input.TourDTO
 import xenagos.application.port.input.GetToursForAreaUseCase
 
 @Controller

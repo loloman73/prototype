@@ -8,4 +8,4 @@ data class AdminAgeGroupResponseDTO(
     val minAge: Byte,
     val maxAge: Byte,
     val active: Boolean
-)
+):BaseAdminResponseDTO

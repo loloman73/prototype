@@ -7,7 +7,7 @@ import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 import xenagos.application.port.input.admin.AdminLanguagesUseCase
-import xenagos.application.port.input.admin.model.AdminLanguageEditRequestDTO
+import xenagos.application.port.input.admin.model.AdminLanguageUpdateRequestDTO
 import xenagos.application.port.input.admin.model.AdminLanguageNewRequestDTO
 import java.util.*
 
@@ -17,9 +17,9 @@ class AdminLanguagesController(private val service: AdminLanguagesUseCase) {
 
     @GetMapping
     fun showAll(model: Model): String {
-        model.addAttribute("languages", service.getAllLanguages())
+        model.addAttribute("languages", service.getAll())
         model.addAttribute("addNewLanguage", AdminLanguageNewRequestDTO("", "", "", false ))
-        model.addAttribute("editLanguage", AdminLanguageEditRequestDTO(UUID.randomUUID(),"","", "", false))
+        model.addAttribute("editLanguage", AdminLanguageUpdateRequestDTO(UUID.randomUUID(),"","", "", false))
         return "adminLanguages"
     }
 
@@ -33,30 +33,27 @@ class AdminLanguagesController(private val service: AdminLanguagesUseCase) {
             println(bindingResult.fieldErrors)
             return "./fragments/admin/language-modal-form-add-new"
         }
-        service.saveNewLanguage(addNewLanguageDTO)
+        service.saveOneNew(addNewLanguageDTO)
         return "redirect:htmx:/admin/languages"
     }
 
     @HxRequest
     @PutMapping("/edit")
     fun updateOne(
-        @Valid @ModelAttribute("editLanguage") editLanguageDTO: AdminLanguageEditRequestDTO,
+        @Valid @ModelAttribute("editLanguage") editLanguageDTO: AdminLanguageUpdateRequestDTO,
         bindingResult: BindingResult
     ): String {
         if (bindingResult.hasErrors()) {
             return "./fragments/admin/language-modal-form-edit"
         }
-        service.updateLanguage(editLanguageDTO)
+        service.updateOne(editLanguageDTO)
         return "redirect:htmx:/admin/languages"
     }
 
     @HxRequest
     @DeleteMapping("/delete")
     fun deleteOne(@RequestParam id: UUID): String {
-        service.deleteLanguage(id)
+        service.deleteOne(id)
         return "redirect:htmx:/admin/languages"
     }
-
-
-
 }

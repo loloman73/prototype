@@ -19,4 +19,4 @@ data class AdminTopicTagNewRequestDTO(
     // TODO: find solution to send unchecked checkbox status with POST calls
     @field:NotNull
     val active: Boolean = false
-)
+): BaseAdminNewRequestDTO

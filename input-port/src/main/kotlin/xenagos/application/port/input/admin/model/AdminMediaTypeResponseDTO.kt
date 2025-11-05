@@ -6,4 +6,4 @@ data class AdminMediaTypeResponseDTO(
     val id: UUID,
     val name: String,
     val active: Boolean
-)
+):BaseAdminResponseDTO

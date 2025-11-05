@@ -7,4 +7,4 @@ data class AdminTopicTagResponseDTO(
     val name: String,
     val description: String,
     val active: Boolean
-)
+):BaseAdminResponseDTO

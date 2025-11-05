@@ -7,7 +7,7 @@ import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 import xenagos.application.port.input.admin.AdminAgeGroupUseCase
-import xenagos.application.port.input.admin.model.AdminAgeGroupEditRequestDTO
+import xenagos.application.port.input.admin.model.AdminAgeGroupUpdateRequestDTO
 import xenagos.application.port.input.admin.model.AdminAgeGroupNewRequestDTO
 import java.util.*
 
@@ -17,9 +17,9 @@ class AdminAgeGroupsController(private val service: AdminAgeGroupUseCase) {
 
     @GetMapping
     fun showAll(model: Model): String {
-        model.addAttribute("ageGroups", service.getAllAgeGroups())
+        model.addAttribute("ageGroups", service.getAll())
         model.addAttribute("addNewAgeGroup", AdminAgeGroupNewRequestDTO("",0, 0,false))
-        model.addAttribute("editAgeGroup", AdminAgeGroupEditRequestDTO(UUID.randomUUID(),"",0, 0,false))
+        model.addAttribute("editAgeGroup", AdminAgeGroupUpdateRequestDTO(UUID.randomUUID(),"",0, 0,false))
         return "adminAgeGroups"
     }
 
@@ -32,27 +32,27 @@ class AdminAgeGroupsController(private val service: AdminAgeGroupUseCase) {
         if (bindingResult.hasErrors()) {
             return "./fragments/admin/age-group-modal-form-add-new"
         }
-        service.saveNewAgeGroup(addNewAgeGroupDTO)
+        service.saveOneNew(addNewAgeGroupDTO)
         return "redirect:htmx:/admin/ageGroups"
     }
 
     @HxRequest
     @PutMapping("/edit")
     fun updateOne(
-        @Valid @ModelAttribute("editAgeGroup") editAgeGroupDTO: AdminAgeGroupEditRequestDTO,
+        @Valid @ModelAttribute("editAgeGroup") editAgeGroupDTO: AdminAgeGroupUpdateRequestDTO,
         bindingResult: BindingResult
     ): String {
         if (bindingResult.hasErrors()) {
             return "./fragments/admin/age-group-modal-form-edit"
         }
-        service.updateAgeGroup(editAgeGroupDTO)
+        service.updateOne(editAgeGroupDTO)
         return "redirect:htmx:/admin/ageGroups"
     }
 
     @HxRequest
     @DeleteMapping("/delete")
     fun deleteOne(@RequestParam id: UUID): String {
-        service.deleteAgeGroup(id)
+        service.deleteOne(id)
         return "redirect:htmx:/admin/ageGroups"
     }
 }

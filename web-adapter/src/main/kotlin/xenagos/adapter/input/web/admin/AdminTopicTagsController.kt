@@ -7,7 +7,7 @@ import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 import xenagos.application.port.input.admin.AdminTopicTagsUseCase
-import xenagos.application.port.input.admin.model.AdminTopicTagEditRequestDTO
+import xenagos.application.port.input.admin.model.AdminTopicTagUpdateRequestDTO
 import xenagos.application.port.input.admin.model.AdminTopicTagNewRequestDTO
 import java.util.*
 
@@ -17,9 +17,9 @@ class AdminTopicTagsController(private val service: AdminTopicTagsUseCase) {
 
     @GetMapping
     fun showAll(model: Model): String {
-        model.addAttribute("topicTags", service.getAllTopicTags())
+        model.addAttribute("topicTags", service.getAll())
         model.addAttribute("addNewTopicTag", AdminTopicTagNewRequestDTO("","", false))
-        model.addAttribute("editTopicTag", AdminTopicTagEditRequestDTO(UUID.randomUUID(),"","",false))
+        model.addAttribute("editTopicTag", AdminTopicTagUpdateRequestDTO(UUID.randomUUID(),"","",false))
         return "adminTopicTags"
     }
 
@@ -33,27 +33,27 @@ class AdminTopicTagsController(private val service: AdminTopicTagsUseCase) {
             println(bindingResult.fieldErrors)
             return "./fragments/admin/topic-tag-modal-form-add-new"
         }
-        service.saveNewTopicTag(addNewTopicTagDTO)
+        service.saveOneNew(addNewTopicTagDTO)
         return "redirect:htmx:/admin/topicTags"
     }
 
     @HxRequest
     @PutMapping("/edit")
     fun updateOne(
-        @Valid @ModelAttribute("editTopicTag") editTopicTagDTO: AdminTopicTagEditRequestDTO,
+        @Valid @ModelAttribute("editTopicTag") editTopicTagDTO: AdminTopicTagUpdateRequestDTO,
         bindingResult: BindingResult
     ): String {
         if (bindingResult.hasErrors()) {
             return "./fragments/admin/topic-tag-modal-form-edit"
         }
-        service.updateTopicTag(editTopicTagDTO)
+        service.updateOne(editTopicTagDTO)
         return "redirect:htmx:/admin/topicTags"
     }
 
     @HxRequest
     @DeleteMapping("/delete")
     fun deleteOne(@RequestParam id: UUID): String {
-        service.deleteTopicTag(id)
+        service.deleteOne(id)
         return "redirect:htmx:/admin/topicTags"
     }
 }

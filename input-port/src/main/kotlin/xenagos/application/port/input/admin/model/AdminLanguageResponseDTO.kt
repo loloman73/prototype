@@ -8,4 +8,4 @@ data class AdminLanguageResponseDTO(
     val englishName: String,
     val nativeName: String,
     val active: Boolean
-)
+):BaseAdminResponseDTO

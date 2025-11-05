@@ -1,6 +1,6 @@
 package xenagos.application.admin.mapper
 
-import xenagos.application.port.input.admin.model.AdminAgeGroupEditRequestDTO
+import xenagos.application.port.input.admin.model.AdminAgeGroupUpdateRequestDTO
 import xenagos.application.port.input.admin.model.AdminAgeGroupNewRequestDTO
 import xenagos.application.port.input.admin.model.AdminAgeGroupResponseDTO
 import xenagos.domain.model.AgeGroup
@@ -11,5 +11,5 @@ fun AgeGroup.toResponseDto() = AdminAgeGroupResponseDTO(this.id, this.groupName,
 fun AdminAgeGroupNewRequestDTO.toEntity(id: UUID) =
     AgeGroup(id, this.groupName, this.minAge, this.maxAge, this.active)
 
-fun AdminAgeGroupEditRequestDTO.toEntity() =
+fun AdminAgeGroupUpdateRequestDTO.toEntity() =
     AgeGroup(this.id, this.groupName, this.minAge, this.maxAge, this.active)

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import xenagos.application.port.input.admin.AdminMediaTypesUseCase
-import xenagos.application.port.input.admin.model.AdminMediaTypeEditRequestDTO
+import xenagos.application.port.input.admin.model.AdminMediaTypeUpdateRequestDTO
 import xenagos.application.port.input.admin.model.AdminMediaTypeNewRequestDTO
 import java.util.UUID
 
@@ -23,9 +23,9 @@ class AdminMediaTypesController(private val service: AdminMediaTypesUseCase) {
 
     @GetMapping
     fun showAll(model: Model): String {
-        model.addAttribute("mediaTypes", service.getAllMediaTypes())
+        model.addAttribute("mediaTypes", service.getAll())
         model.addAttribute("addNewMediaType", AdminMediaTypeNewRequestDTO("", false))
-        model.addAttribute("editMediaType", AdminMediaTypeEditRequestDTO(UUID.randomUUID(), "", false))
+        model.addAttribute("editMediaType", AdminMediaTypeUpdateRequestDTO(UUID.randomUUID(), "", false))
         return "adminMediaTypes"
     }
 
@@ -38,20 +38,20 @@ class AdminMediaTypesController(private val service: AdminMediaTypesUseCase) {
         if (bindingResult.hasErrors()) {
             return "./fragments/admin/media-type-modal-form-add-new"
         }
-        service.saveNewMediaType(addNewMediaTypeDTO)
+        service.saveOneNew(addNewMediaTypeDTO)
         return "redirect:htmx:/admin/mediaTypes"
     }
 
     @HxRequest
     @PutMapping("/edit")
     fun updateOne(
-        @Valid @ModelAttribute("editMediaType") editMediaTypeDTO: AdminMediaTypeEditRequestDTO,
+        @Valid @ModelAttribute("editMediaType") editMediaTypeDTO: AdminMediaTypeUpdateRequestDTO,
         bindingResult: BindingResult
     ): String {
         if (bindingResult.hasErrors()) {
             return "./fragments/admin/media-type-modal-form-edit"
         }
-        service.updateMediaType(editMediaTypeDTO)
+        service.updateOne(editMediaTypeDTO)
         return "redirect:htmx:/admin/mediaTypes"
     }
 
@@ -59,7 +59,7 @@ class AdminMediaTypesController(private val service: AdminMediaTypesUseCase) {
     @HxRequest
     @DeleteMapping("/delete")
     fun deleteOne(@RequestParam id: UUID): String {
-        service.deleteMediaType(id)
+        service.deleteOne(id)
         return "redirect:htmx:/admin/mediaTypes"
     }
 

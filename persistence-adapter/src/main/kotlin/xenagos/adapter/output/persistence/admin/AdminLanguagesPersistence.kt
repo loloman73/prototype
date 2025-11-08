@@ -10,15 +10,15 @@ import java.util.*
 @Repository
 open class AdminLanguagesPersistence(private val repository: AdminLanguagesRepository) : AdminLanguagesOutputPort {
 
-    override fun getAllLanguages() = arrayListOf<Language>().apply {
+    override fun getAll() = arrayListOf<Language>().apply {
         repository.findAll().forEach { add(it.toDomainEntity()) }
     }
-    override fun saveNewLanguage(newEntityToSave: Language): Language =
+    override fun saveOneNew(newEntityToSave: Language): Language =
         repository.save(newEntityToSave.toJpaEntity()).toDomainEntity()
 
-    override fun updateLanguage(entityToUpdate: Language): Language =
+    override fun updateOne(entityToUpdate: Language): Language =
         repository.save(entityToUpdate.toJpaEntity()).toDomainEntity()
 
-    override fun deleteLanguage(id: UUID) = repository.deleteById(id)
+    override fun deleteOne(id: UUID) = repository.deleteById(id)
 
 }

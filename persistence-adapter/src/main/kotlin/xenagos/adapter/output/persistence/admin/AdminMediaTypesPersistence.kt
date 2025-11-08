@@ -10,14 +10,14 @@ import java.util.UUID
 @Service
 class AdminMediaTypesPersistence(private val repository: AdminMediaTypesRepository): AdminMediaTypesOutputPort {
 
-    override fun getAllMediaTypes() = arrayListOf<MediaType>().apply {
+    override fun getAll() = arrayListOf<MediaType>().apply {
         repository.findAll().forEach { add(it.toDomainEntity()) }
     }
-    override fun saveNewMediaType(newEntityToSave: MediaType): MediaType =
+    override fun saveOneNew(newEntityToSave: MediaType): MediaType =
         repository.save(newEntityToSave.toJpaEntity()).toDomainEntity()
 
-    override fun updateMediaType(entityToUpdate: MediaType): MediaType =
+    override fun updateOne(entityToUpdate: MediaType): MediaType =
         repository.save(entityToUpdate.toJpaEntity()).toDomainEntity()
 
-    override fun deleteMediaType(id: UUID) = repository.deleteById(id)
+    override fun deleteOne(id: UUID) = repository.deleteById(id)
 }

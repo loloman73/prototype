@@ -1,16 +1,25 @@
 package xenagos.application.admin.mapper
 
+import org.springframework.stereotype.Component
 import xenagos.application.port.input.admin.model.AdminAccessibilityTagUpdateRequestDTO
 import xenagos.application.port.input.admin.model.AdminAccessibilityTagNewRequestDTO
 import xenagos.application.port.input.admin.model.AdminAccessibilityTagResponseDTO
 import xenagos.domain.model.AccessibilityTag
 import java.util.UUID
 
-fun AccessibilityTag.toResponseDto() =
-    AdminAccessibilityTagResponseDTO(this.id, this.name, this.description, this.active)
+@Component
+class AdminAccessibilityTagMapper : AdminMapper<
+        AccessibilityTag,
+        AdminAccessibilityTagNewRequestDTO,
+        AdminAccessibilityTagUpdateRequestDTO,
+        AdminAccessibilityTagResponseDTO> {
 
-fun AdminAccessibilityTagNewRequestDTO.toEntity(id: UUID) =
-    AccessibilityTag(id, this.name, this.description, this.active)
+     override fun toResponseDto(entity: AccessibilityTag): AdminAccessibilityTagResponseDTO =
+        AdminAccessibilityTagResponseDTO(entity.id, entity.name, entity.description, entity.active)
 
-fun AdminAccessibilityTagUpdateRequestDTO.toEntity() =
-    AccessibilityTag(this.id, this.name, this.description, this.active)
+    override fun toEntity(dto: AdminAccessibilityTagNewRequestDTO, id: UUID): AccessibilityTag =
+        AccessibilityTag(id, dto.name, dto.description, dto.active)
+
+    override fun toEntity(dto: AdminAccessibilityTagUpdateRequestDTO): AccessibilityTag =
+        AccessibilityTag(dto.id, dto.name, dto.description, dto.active)
+}

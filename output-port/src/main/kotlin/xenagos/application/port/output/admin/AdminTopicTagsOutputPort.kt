@@ -1,12 +1,5 @@
 package xenagos.application.port.output.admin
 
 import xenagos.domain.model.TopicTag
-import java.util.UUID
-import kotlin.collections.ArrayList
 
-interface AdminTopicTagsOutputPort {
-    fun getAllTopicTags(): ArrayList<TopicTag>
-    fun saveNewTopicTag(newEntityToSave: TopicTag): TopicTag
-    fun updateTopicTag(entityToUpdate: TopicTag): TopicTag
-    fun deleteTopicTag(id: UUID)
-}
+interface AdminTopicTagsOutputPort: BaseAdminOutputPort<TopicTag>

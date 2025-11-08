@@ -11,14 +11,14 @@ import java.util.*
 open class AdminAccessibilityTagsPersistence(private val repository: AdminAccessibilityTagsRepository) :
     AdminAccessibilityTagsOutputPort {
 
-    override fun getAllAccessibilityTags() = arrayListOf<AccessibilityTag>().apply {
+    override fun getAll() = arrayListOf<AccessibilityTag>().apply {
         repository.findAll().forEach { add(it.toDomainEntity()) }
     }
-    override fun saveNewAccessibilityTag(newEntityToSave: AccessibilityTag): AccessibilityTag =
+    override fun saveOneNew(newEntityToSave: AccessibilityTag): AccessibilityTag =
         repository.save(newEntityToSave.toJpaEntity()).toDomainEntity()
 
-    override fun updateAccessibilityTag(entityToUpdate: AccessibilityTag): AccessibilityTag =
+    override fun updateOne(entityToUpdate: AccessibilityTag): AccessibilityTag =
         repository.save(entityToUpdate.toJpaEntity()).toDomainEntity()
 
-    override fun deleteAccessibilityTag(id: UUID) = repository.deleteById(id)
+    override fun deleteOne(id: UUID) = repository.deleteById(id)
 }

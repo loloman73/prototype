@@ -10,15 +10,15 @@ import java.util.*
 @Repository
 open class AdminAgeGroupsPersistence(private val repository: AdminAgeGroupsRepository) : AdminAgeGroupsOutputPort {
 
-    override fun getAllAgeGroups() = arrayListOf<AgeGroup>().apply {
+    override fun getAll() = arrayListOf<AgeGroup>().apply {
         repository.findAll().forEach { add(it.toDomainEntity()) }
     }
-    override fun saveNewAgeGroup(newEntityToSave: AgeGroup): AgeGroup =
+    override fun saveOneNew(newEntityToSave: AgeGroup): AgeGroup =
         repository.save(newEntityToSave.toJpaEntity()).toDomainEntity()
 
-    override fun updateAgeGroup(entityToUpdate: AgeGroup): AgeGroup =
+    override fun updateOne(entityToUpdate: AgeGroup): AgeGroup =
         repository.save(entityToUpdate.toJpaEntity()).toDomainEntity()
 
-    override fun deleteAgeGroup(id: UUID) = repository.deleteById(id)
+    override fun deleteOne(id: UUID) = repository.deleteById(id)
 
 }

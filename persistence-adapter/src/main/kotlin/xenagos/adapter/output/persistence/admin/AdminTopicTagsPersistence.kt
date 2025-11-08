@@ -10,14 +10,14 @@ import java.util.*
 @Repository
 open class AdminTopicTagsPersistence(private val repository: AdminTopicTagsRepository) : AdminTopicTagsOutputPort {
 
-    override fun getAllTopicTags() = arrayListOf<TopicTag>().apply {
+    override fun getAll() = arrayListOf<TopicTag>().apply {
         repository.findAll().forEach { add(it.toDomainEntity()) }
     }
-    override fun saveNewTopicTag(newEntityToSave: TopicTag): TopicTag =
+    override fun saveOneNew(newEntityToSave: TopicTag): TopicTag =
         repository.save(newEntityToSave.toJpaEntity()).toDomainEntity()
 
-    override fun updateTopicTag(entityToUpdate: TopicTag): TopicTag =
+    override fun updateOne(entityToUpdate: TopicTag): TopicTag =
         repository.save(entityToUpdate.toJpaEntity()).toDomainEntity()
 
-    override fun deleteTopicTag(id: UUID) = repository.deleteById(id)
+    override fun deleteOne(id: UUID) = repository.deleteById(id)
 }

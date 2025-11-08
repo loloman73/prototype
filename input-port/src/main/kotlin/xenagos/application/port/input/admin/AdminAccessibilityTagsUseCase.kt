@@ -8,5 +8,3 @@ interface AdminAccessibilityTagsUseCase : BaseAdminUseCase<
         AdminAccessibilityTagNewRequestDTO,
         AdminAccessibilityTagUpdateRequestDTO,
         AdminAccessibilityTagResponseDTO>
-
-

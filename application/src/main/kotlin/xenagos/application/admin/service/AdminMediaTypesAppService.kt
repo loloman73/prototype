@@ -1,33 +1,20 @@
 package xenagos.application.admin.service
 
 import org.springframework.stereotype.Service
-import xenagos.application.admin.mapper.toEntity
-import xenagos.application.admin.mapper.toResponseDto
+import xenagos.application.admin.mapper.AdminMediaTypeMapper
 import xenagos.application.port.input.admin.AdminMediaTypesUseCase
 import xenagos.application.port.input.admin.model.AdminMediaTypeUpdateRequestDTO
 import xenagos.application.port.input.admin.model.AdminMediaTypeNewRequestDTO
 import xenagos.application.port.input.admin.model.AdminMediaTypeResponseDTO
 import xenagos.application.port.output.admin.AdminMediaTypesOutputPort
-import java.util.UUID
+import xenagos.domain.model.MediaType
 
 @Service
-class AdminMediaTypesAppService(private val persistence: AdminMediaTypesOutputPort): AdminMediaTypesUseCase {
-
-    override fun getAll() = arrayListOf<AdminMediaTypeResponseDTO>().apply {
-        persistence.getAll().forEach { add(it.toResponseDto()) }
-    }
-
-    override fun saveOneNew(requestDTO: AdminMediaTypeNewRequestDTO): AdminMediaTypeResponseDTO {
-        val newEntityToSave = requestDTO.toEntity(UUID.randomUUID())
-        val savedEntity = persistence.saveOneNew(newEntityToSave)
-        return savedEntity.toResponseDto()
-    }
-
-    override fun updateOne(requestDTO: AdminMediaTypeUpdateRequestDTO): AdminMediaTypeResponseDTO {
-        val entityToUpdate = requestDTO.toEntity()
-        val updatedEntity = persistence.updateOne(entityToUpdate)
-        return updatedEntity.toResponseDto()
-    }
-
-    override fun deleteOne(id: UUID) = persistence.deleteOne(id)
-}
+//implements Input-Port UseCase Interface AND abstract base class BaseAdminAppService
+class AdminMediaTypesAppService(persistence: AdminMediaTypesOutputPort, mapper: AdminMediaTypeMapper) :
+    BaseAdminAppService<
+            MediaType,
+            AdminMediaTypeNewRequestDTO,
+            AdminMediaTypeUpdateRequestDTO,
+            AdminMediaTypeResponseDTO>(persistence, mapper),
+    AdminMediaTypesUseCase

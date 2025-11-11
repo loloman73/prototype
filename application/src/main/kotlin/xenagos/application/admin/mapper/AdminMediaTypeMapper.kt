@@ -1,13 +1,25 @@
 package xenagos.application.admin.mapper
 
+import org.springframework.stereotype.Component
 import xenagos.application.port.input.admin.model.AdminMediaTypeUpdateRequestDTO
 import xenagos.application.port.input.admin.model.AdminMediaTypeNewRequestDTO
 import xenagos.application.port.input.admin.model.AdminMediaTypeResponseDTO
 import xenagos.domain.model.MediaType
 import java.util.UUID
 
-fun MediaType.toResponseDto() = AdminMediaTypeResponseDTO(this.id, this.type, this.active)
+@Component
+class AdminMediaTypeMapper : BaseAdminMapper<
+        MediaType,
+        AdminMediaTypeNewRequestDTO,
+        AdminMediaTypeUpdateRequestDTO,
+        AdminMediaTypeResponseDTO> {
 
-fun AdminMediaTypeNewRequestDTO.toEntity(id: UUID) = MediaType(id, this.name, this.active)
+    override fun toResponseDto(entity: MediaType): AdminMediaTypeResponseDTO =
+        AdminMediaTypeResponseDTO(entity.id, entity.type, entity.active)
 
-fun AdminMediaTypeUpdateRequestDTO.toEntity() = MediaType(id, this.name, this.active)
+    override fun toEntity(dto: AdminMediaTypeNewRequestDTO, id: UUID): MediaType =
+        MediaType(id, dto.name, dto.active)
+
+    override fun toEntity(dto: AdminMediaTypeUpdateRequestDTO): MediaType =
+        MediaType(dto.id, dto.name, dto.active)
+}

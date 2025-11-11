@@ -1,16 +1,25 @@
 package xenagos.application.admin.mapper
 
+import org.springframework.stereotype.Component
 import xenagos.application.port.input.admin.model.AdminTopicTagUpdateRequestDTO
 import xenagos.application.port.input.admin.model.AdminTopicTagNewRequestDTO
 import xenagos.application.port.input.admin.model.AdminTopicTagResponseDTO
 import xenagos.domain.model.TopicTag
 import java.util.*
 
-fun TopicTag.toResponseDto() =
-    AdminTopicTagResponseDTO(this.id, this.tagName, this.description, this.active)
+@Component
+class AdminTopicTagMapper : BaseAdminMapper<
+        TopicTag,
+        AdminTopicTagNewRequestDTO,
+        AdminTopicTagUpdateRequestDTO,
+        AdminTopicTagResponseDTO> {
 
-fun AdminTopicTagNewRequestDTO.toEntity(id: UUID) =
-    TopicTag(id, this.name, this.description, this.active)
+    override fun toResponseDto(entity: TopicTag): AdminTopicTagResponseDTO =
+        AdminTopicTagResponseDTO(entity.id, entity.tagName, entity.description, entity.active)
 
-fun AdminTopicTagUpdateRequestDTO.toEntity() =
-    TopicTag(this.id, this.name, this.description, this.active)
+    override fun toEntity(dto: AdminTopicTagNewRequestDTO, id: UUID ): TopicTag =
+        TopicTag(id, dto.name, dto.description, dto.active)
+
+    override fun toEntity(dto: AdminTopicTagUpdateRequestDTO): TopicTag =
+        TopicTag(dto.id, dto.name, dto.description, dto.active)
+}

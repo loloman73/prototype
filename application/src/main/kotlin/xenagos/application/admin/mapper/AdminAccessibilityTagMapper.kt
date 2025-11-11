@@ -8,13 +8,13 @@ import xenagos.domain.model.AccessibilityTag
 import java.util.UUID
 
 @Component
-class AdminAccessibilityTagMapper : AdminMapper<
+class AdminAccessibilityTagMapper : BaseAdminMapper<
         AccessibilityTag,
         AdminAccessibilityTagNewRequestDTO,
         AdminAccessibilityTagUpdateRequestDTO,
         AdminAccessibilityTagResponseDTO> {
 
-     override fun toResponseDto(entity: AccessibilityTag): AdminAccessibilityTagResponseDTO =
+    override fun toResponseDto(entity: AccessibilityTag): AdminAccessibilityTagResponseDTO =
         AdminAccessibilityTagResponseDTO(entity.id, entity.name, entity.description, entity.active)
 
     override fun toEntity(dto: AdminAccessibilityTagNewRequestDTO, id: UUID): AccessibilityTag =

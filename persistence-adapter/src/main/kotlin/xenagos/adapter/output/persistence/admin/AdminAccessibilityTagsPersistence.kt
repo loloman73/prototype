@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository
 import xenagos.adapter.output.persistence.admin.mapper.AdminAccessibilityTagJPAMapper
 import xenagos.application.port.output.admin.AdminAccessibilityTagsOutputPort
 import xenagos.domain.model.AccessibilityTag
-import java.util.*
+import java.util.UUID
 
 @Repository
 open class AdminAccessibilityTagsPersistence(
@@ -13,9 +13,8 @@ open class AdminAccessibilityTagsPersistence(
 ) : AdminAccessibilityTagsOutputPort {
 
     override fun getAll() = arrayListOf<AccessibilityTag>().apply {
-        repository.findAll().forEach { mapper.toDomainEntity(it) }
+        repository.findAll().forEach { add(mapper.toDomainEntity(it)) }
     }
-
     override fun saveOneNew(newEntityToSave: AccessibilityTag): AccessibilityTag =
         mapper.toDomainEntity(repository.save(mapper.toJpaEntity(newEntityToSave)))
 

@@ -5,7 +5,7 @@ import java.util.*
 
 @Entity
 @Table(name = "accessibility_tags")
-open class AccessibilityTagJpaEntity {
+open class AccessibilityTagJpaEntity : BaseJPAEntity {
     @Id
     @Column(name = "accessibility_tag_id", nullable = false)
     open var id: UUID? = null

@@ -7,4 +7,4 @@ class Xenagos(
     val name: String,
     val photoFileName: String,
     val tours: List<Tour>
-)
+) : BaseDomainEntity

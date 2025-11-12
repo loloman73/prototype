@@ -11,10 +11,12 @@ import xenagos.domain.model.AccessibilityTag
 
 @Service
 //implements Input-Port UseCase Interface AND abstract base class BaseAdminAppService
-class AdminAccessibilityTagsAppService(persistence: AdminAccessibilityTagsOutputPort, mapper: AdminAccessibilityTagMapper) :
-    BaseAdminAppService<
-            AccessibilityTag,
-            AdminAccessibilityTagNewRequestDTO,
-            AdminAccessibilityTagUpdateRequestDTO,
-            AdminAccessibilityTagResponseDTO>(persistence, mapper),
+class AdminAccessibilityTagsAppService(
+    persistence: AdminAccessibilityTagsOutputPort,
+    mapper: AdminAccessibilityTagMapper
+) : BaseAdminAppService<
+        AccessibilityTag,
+        AdminAccessibilityTagNewRequestDTO,
+        AdminAccessibilityTagUpdateRequestDTO,
+        AdminAccessibilityTagResponseDTO>(persistence, mapper),
     AdminAccessibilityTagsUseCase

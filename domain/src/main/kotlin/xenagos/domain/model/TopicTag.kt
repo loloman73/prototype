@@ -7,7 +7,7 @@ class TopicTag(
     val tagName: String,
     val description: String,
     val active: Boolean
-)
+) : BaseDomainEntity
 
 //    Architecture
 //    Religion

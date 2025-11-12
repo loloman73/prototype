@@ -9,4 +9,4 @@ data class Language(
     val englishName: String,
     val nativeName: String,
     val active: Boolean
-)
+) : BaseDomainEntity

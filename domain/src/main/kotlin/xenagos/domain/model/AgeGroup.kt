@@ -8,7 +8,7 @@ data class AgeGroup(
     val minAge: Byte,
     val maxAge: Byte,
     val active: Boolean
-)
+) : BaseDomainEntity
 
 //    SmallChild("6-8"),
 //    PreTeen("9-12"),

@@ -10,4 +10,4 @@ class TourPoint(
     val coordinates: Coordinates,
     val mediaGuides: List<MediaGuide>,
     val accessibilityTags: Set<AccessibilityTag>
-)
+) : BaseDomainEntity

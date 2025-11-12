@@ -8,7 +8,8 @@ import xenagos.domain.model.Language
 import java.util.*
 
 @Repository
-open class AdminLanguagesPersistence(private val repository: AdminLanguagesRepository) : AdminLanguagesOutputPort {
+open class AdminLanguagesPersistence(private val repository: AdminLanguagesRepository) :
+    AdminLanguagesOutputPort {
 
     override fun getAll() = arrayListOf<Language>().apply {
         repository.findAll().forEach { add(it.toDomainEntity()) }
@@ -20,5 +21,4 @@ open class AdminLanguagesPersistence(private val repository: AdminLanguagesRepos
         repository.save(entityToUpdate.toJpaEntity()).toDomainEntity()
 
     override fun deleteOne(id: UUID) = repository.deleteById(id)
-
 }

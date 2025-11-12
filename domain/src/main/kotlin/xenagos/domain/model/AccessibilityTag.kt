@@ -7,4 +7,4 @@ class AccessibilityTag(
     val name: String,
     val description: String,
     val active: Boolean
-)
+) : BaseDomainEntity

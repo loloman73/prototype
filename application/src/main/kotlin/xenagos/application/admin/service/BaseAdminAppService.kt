@@ -6,10 +6,11 @@ import xenagos.application.port.input.admin.model.BaseAdminNewRequestDTO
 import xenagos.application.port.input.admin.model.BaseAdminResponseDTO
 import xenagos.application.port.input.admin.model.BaseAdminUpdateRequestDTO
 import xenagos.application.port.output.admin.BaseAdminOutputPort
+import xenagos.domain.model.BaseDomainEntity
 import java.util.UUID
 
 abstract class BaseAdminAppService<
-        TEntity,
+        TEntity: BaseDomainEntity,
         TNew : BaseAdminNewRequestDTO,
         TUpdate : BaseAdminUpdateRequestDTO,
         TResponse : BaseAdminResponseDTO>

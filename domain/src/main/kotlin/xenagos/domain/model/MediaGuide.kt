@@ -12,4 +12,4 @@ class MediaGuide(
     val ameaFriendlyTag: AmeaFriendlyTag,
     val topicTags: Set<TopicTag>,
     val ageGroups: Set<AgeGroup>
-)
+) : BaseDomainEntity

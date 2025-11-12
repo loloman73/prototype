@@ -1,24 +1,26 @@
 package xenagos.adapter.output.persistence.admin
 
 import org.springframework.stereotype.Repository
-import xenagos.adapter.output.persistence.admin.mapper.toDomainEntity
-import xenagos.adapter.output.persistence.admin.mapper.toJpaEntity
+import xenagos.adapter.output.persistence.admin.mapper.AdminAccessibilityTagJPAMapper
 import xenagos.application.port.output.admin.AdminAccessibilityTagsOutputPort
 import xenagos.domain.model.AccessibilityTag
 import java.util.*
 
 @Repository
-open class AdminAccessibilityTagsPersistence(private val repository: AdminAccessibilityTagsRepository) :
-    AdminAccessibilityTagsOutputPort {
+open class AdminAccessibilityTagsPersistence(
+    private val repository: AdminAccessibilityTagsRepository,
+    private val mapper: AdminAccessibilityTagJPAMapper
+) : AdminAccessibilityTagsOutputPort {
 
     override fun getAll() = arrayListOf<AccessibilityTag>().apply {
-        repository.findAll().forEach { add(it.toDomainEntity()) }
+        repository.findAll().forEach { mapper.toDomainEntity(it) }
     }
+
     override fun saveOneNew(newEntityToSave: AccessibilityTag): AccessibilityTag =
-        repository.save(newEntityToSave.toJpaEntity()).toDomainEntity()
+        mapper.toDomainEntity(repository.save(mapper.toJpaEntity(newEntityToSave)))
 
     override fun updateOne(entityToUpdate: AccessibilityTag): AccessibilityTag =
-        repository.save(entityToUpdate.toJpaEntity()).toDomainEntity()
+        mapper.toDomainEntity(repository.save(mapper.toJpaEntity(entityToUpdate)))
 
     override fun deleteOne(id: UUID) = repository.deleteById(id)
 }

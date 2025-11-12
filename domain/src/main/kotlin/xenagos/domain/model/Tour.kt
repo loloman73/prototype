@@ -14,4 +14,4 @@ class Tour(
     val totalReviews: Int?,
     val avgCoordinates: Coordinates,
     val tourPoints: List<TourPoint>
-)
+) : BaseDomainEntity

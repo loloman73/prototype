@@ -5,7 +5,7 @@ import java.util.*
 
 @Entity
 @Table(name = "languages")
-open class LanguageJpaEntity {
+open class LanguageJpaEntity : BaseJPAEntity  {
     @Id
     @Column(name = "language_id", nullable = false)
     open var id: UUID? = null

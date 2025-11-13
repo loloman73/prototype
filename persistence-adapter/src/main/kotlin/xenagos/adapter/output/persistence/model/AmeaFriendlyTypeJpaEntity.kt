@@ -5,7 +5,7 @@ import java.util.*
 
 @Entity
 @Table(name = "amea_friendly_types")
-open class AmeaFriendlyTypeJpaEntity {
+open class AmeaFriendlyTypeJpaEntity : BaseJPAEntity  {
     @Id
     @Column(name = "amea_friendly_type_id", nullable = false)
     open var id: UUID? = null

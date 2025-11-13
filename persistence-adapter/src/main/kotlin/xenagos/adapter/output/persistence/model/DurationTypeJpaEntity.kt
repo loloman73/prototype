@@ -5,7 +5,7 @@ import java.util.*
 
 @Entity
 @Table(name = "duration_types")
-open class DurationTypeJpaEntity {
+open class DurationTypeJpaEntity : BaseJPAEntity  {
     @Id
     @Column(name = "duration_type_id", nullable = false)
     open var id: UUID? = null

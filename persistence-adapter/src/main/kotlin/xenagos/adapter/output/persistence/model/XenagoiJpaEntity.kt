@@ -5,7 +5,7 @@ import java.util.*
 
 @Entity
 @Table(name = "xenagoi")
-open class XenagoiJpaEntity {
+open class XenagoiJpaEntity : BaseJPAEntity  {
     @Id
     @Column(name = "xenagos_id", nullable = false)
     open var id: UUID? = null

@@ -5,7 +5,7 @@ import java.util.*
 
 @Entity
 @Table(name = "topic_tags")
-open class TopicTagJpaEntity{
+open class TopicTagJpaEntity : BaseJPAEntity {
     @Id
     @Column(name = "topic_tag_id", nullable = false)
     open var id: UUID? = null

@@ -5,7 +5,7 @@ import java.util.*
 
 @Entity
 @Table(name = "media_guides")
-open class MediaGuideJpaEntity {
+open class MediaGuideJpaEntity : BaseJPAEntity  {
     @Id
     @Column(name = "media_guide_id", nullable = false)
     open var id: UUID? = null

@@ -5,7 +5,7 @@ import java.util.*
 
 @Entity
 @Table(name = "tour_points")
-open class TourPointJpaEntity {
+open class TourPointJpaEntity : BaseJPAEntity  {
     @Id
     @Column(name = "tour_point_id", nullable = false)
     open var id: UUID? = null

@@ -12,6 +12,8 @@ dependencies {
     implementation(libs.flywayPostgresql)
 
     runtimeOnly(libs.postgres)
+
+    testImplementation(libs.sb.starter.test)
 }
 
 noArg{

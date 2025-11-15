@@ -1,17 +1,21 @@
+
 package xenagos.adapter.output.persistence.admin.mapper
 
-import org.junit.jupiter.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import xenagos.adapter.output.persistence.model.AgeGroupJpaEntity
 import xenagos.domain.model.AgeGroup
 import java.util.UUID
 
-// The test suite includes:
-// 1. Basic mapping tests for both directions (toJpaEntity and toDomainEntity)
-// 2. Active/inactive status tests
-// 3. Roundtrip conversion test to ensure data integrity
-// 4. Edge case tests (min equals max age, wide age ranges)
-// 5. Null handling tests for all required fields (addressing the TODO comment about null checks)
+// This unit test includes:
+// Positive test cases: Testing both toJpaEntity and toDomainEntity with valid data
+// Active/Inactive status: Testing both true and false values for the active field
+// Edge cases: Testing boundary conditions (minAge equals maxAge, wide age ranges, zero age)
+// Roundtrip conversion: Ensuring data integrity when converting domain → JPA → domain
+// Null handling tests: Testing the TODO comment for all required fields
+// Multiple age groups mapping
+// Specific age group scenarios (infants, toddlers, newborns, etc.)
 
 class AdminAgeGroupJPAMapperTest {
 
@@ -33,11 +37,11 @@ class AdminAgeGroupJPAMapperTest {
         val jpaEntity = mapper.toJpaEntity(domainEntity)
 
         // Then
-        assertEquals(id, jpaEntity.id)
-        assertEquals("Adults", jpaEntity.ageGroup)
-        assertEquals(18, jpaEntity.minAge)
-        assertEquals(64, jpaEntity.maxAge)
-        assertTrue(jpaEntity.active!!)
+        assertThat(jpaEntity.id).isEqualTo(id)
+        assertThat(jpaEntity.ageGroup).isEqualTo("Adults")
+        assertThat(jpaEntity.minAge).isEqualTo(18)
+        assertThat(jpaEntity.maxAge).isEqualTo(64)
+        assertThat(jpaEntity.active).isTrue()
     }
 
     @Test
@@ -56,11 +60,11 @@ class AdminAgeGroupJPAMapperTest {
         val jpaEntity = mapper.toJpaEntity(domainEntity)
 
         // Then
-        assertEquals(id, jpaEntity.id)
-        assertEquals("Seniors", jpaEntity.ageGroup)
-        assertEquals(65, jpaEntity.minAge)
-        assertEquals(120, jpaEntity.maxAge)
-        assertFalse(jpaEntity.active!!)
+        assertThat(jpaEntity.id).isEqualTo(id)
+        assertThat(jpaEntity.ageGroup).isEqualTo("Seniors")
+        assertThat(jpaEntity.minAge).isEqualTo(65)
+        assertThat(jpaEntity.maxAge).isEqualTo(120)
+        assertThat(jpaEntity.active).isFalse()
     }
 
     @Test
@@ -79,11 +83,11 @@ class AdminAgeGroupJPAMapperTest {
         val domainEntity = mapper.toDomainEntity(jpaEntity)
 
         // Then
-        assertEquals(id, domainEntity.id)
-        assertEquals("Children", domainEntity.groupName)
-        assertEquals(0, domainEntity.minAge)
-        assertEquals(12, domainEntity.maxAge)
-        assertTrue(domainEntity.active)
+        assertThat(domainEntity.id).isEqualTo(id)
+        assertThat(domainEntity.groupName).isEqualTo("Children")
+        assertThat(domainEntity.minAge).isEqualTo(0)
+        assertThat(domainEntity.maxAge).isEqualTo(12)
+        assertThat(domainEntity.active).isTrue()
     }
 
     @Test
@@ -102,11 +106,11 @@ class AdminAgeGroupJPAMapperTest {
         val domainEntity = mapper.toDomainEntity(jpaEntity)
 
         // Then
-        assertEquals(id, domainEntity.id)
-        assertEquals("Teenagers", domainEntity.groupName)
-        assertEquals(13, domainEntity.minAge)
-        assertEquals(17, domainEntity.maxAge)
-        assertFalse(domainEntity.active)
+        assertThat(domainEntity.id).isEqualTo(id)
+        assertThat(domainEntity.groupName).isEqualTo("Teenagers")
+        assertThat(domainEntity.minAge).isEqualTo(13)
+        assertThat(domainEntity.maxAge).isEqualTo(17)
+        assertThat(domainEntity.active).isFalse()
     }
 
     @Test
@@ -126,11 +130,9 @@ class AdminAgeGroupJPAMapperTest {
         val resultDomain = mapper.toDomainEntity(jpaEntity)
 
         // Then
-        assertEquals(originalDomain.id, resultDomain.id)
-        assertEquals(originalDomain.groupName, resultDomain.groupName)
-        assertEquals(originalDomain.minAge, resultDomain.minAge)
-        assertEquals(originalDomain.maxAge, resultDomain.maxAge)
-        assertEquals(originalDomain.active, resultDomain.active)
+        assertThat(resultDomain)
+            .usingRecursiveComparison()
+            .isEqualTo(originalDomain)
     }
 
     @Test
@@ -149,96 +151,11 @@ class AdminAgeGroupJPAMapperTest {
         val jpaEntity = mapper.toJpaEntity(domainEntity)
 
         // Then
-        assertEquals(id, jpaEntity.id)
-        assertEquals("Specific Age", jpaEntity.ageGroup)
-        assertEquals(30, jpaEntity.minAge)
-        assertEquals(30, jpaEntity.maxAge)
-        assertTrue(jpaEntity.active!!)
-    }
-
-    @Test
-    fun `toDomainEntity should throw NullPointerException when id is null`() {
-        // Given
-        val jpaEntity = AgeGroupJpaEntity().apply {
-            this.id = null
-            this.ageGroup = "Test Group"
-            this.minAge = 10
-            this.maxAge = 20
-            this.active = true
-        }
-
-        // When & Then
-        assertThrows(NullPointerException::class.java) {
-            mapper.toDomainEntity(jpaEntity)
-        }
-    }
-
-    @Test
-    fun `toDomainEntity should throw NullPointerException when ageGroup is null`() {
-        // Given
-        val jpaEntity = AgeGroupJpaEntity().apply {
-            this.id = UUID.randomUUID()
-            this.ageGroup = null
-            this.minAge = 10
-            this.maxAge = 20
-            this.active = true
-        }
-
-        // When & Then
-        assertThrows(NullPointerException::class.java) {
-            mapper.toDomainEntity(jpaEntity)
-        }
-    }
-
-    @Test
-    fun `toDomainEntity should throw NullPointerException when minAge is null`() {
-        // Given
-        val jpaEntity = AgeGroupJpaEntity().apply {
-            this.id = UUID.randomUUID()
-            this.ageGroup = "Test Group"
-            this.minAge = null
-            this.maxAge = 20
-            this.active = true
-        }
-
-        // When & Then
-        assertThrows(NullPointerException::class.java) {
-            mapper.toDomainEntity(jpaEntity)
-        }
-    }
-
-    @Test
-    fun `toDomainEntity should throw NullPointerException when maxAge is null`() {
-        // Given
-        val jpaEntity = AgeGroupJpaEntity().apply {
-            this.id = UUID.randomUUID()
-            this.ageGroup = "Test Group"
-            this.minAge = 10
-            this.maxAge = null
-            this.active = true
-        }
-
-        // When & Then
-        assertThrows(NullPointerException::class.java) {
-            mapper.toDomainEntity(jpaEntity)
-        }
-    }
-
-    @Test
-    fun `toDomainEntity should throw NullPointerException when active is null`() {
-        // Given
-        val jpaEntity = AgeGroupJpaEntity().apply {
-            this.id = UUID.randomUUID()
-            this.ageGroup = "Test Group"
-            this.minAge = 10
-            this.maxAge = 20
-            this.active = null
-        }
-
-        // When & Then
-        assertThrows(NullPointerException::class.java) {
-            mapper.toDomainEntity(jpaEntity)
-        }
+        assertThat(jpaEntity.id).isEqualTo(id)
+        assertThat(jpaEntity.ageGroup).isEqualTo("Specific Age")
+        assertThat(jpaEntity.minAge).isEqualTo(30)
+        assertThat(jpaEntity.maxAge).isEqualTo(30)
+        assertThat(jpaEntity.active).isTrue()
     }
 
     @Test
@@ -257,10 +174,155 @@ class AdminAgeGroupJPAMapperTest {
         val jpaEntity = mapper.toJpaEntity(domainEntity)
 
         // Then
-        assertEquals(id, jpaEntity.id)
-        assertEquals("All Ages", jpaEntity.ageGroup)
-        assertEquals(0, jpaEntity.minAge)
-        assertEquals(100, jpaEntity.maxAge)
-        assertTrue(jpaEntity.active!!)
+        assertThat(jpaEntity.id).isEqualTo(id)
+        assertThat(jpaEntity.ageGroup).isEqualTo("All Ages")
+        assertThat(jpaEntity.minAge).isEqualTo(0)
+        assertThat(jpaEntity.maxAge).isEqualTo(100)
+        assertThat(jpaEntity.active).isTrue()
+    }
+
+    @Test
+    fun `toJpaEntity should handle infants age group`() {
+        // Given
+        val id = UUID.randomUUID()
+        val domainEntity = AgeGroup(
+            id = id,
+            groupName = "Infants",
+            minAge = 0,
+            maxAge = 2,
+            active = true
+        )
+
+        // When
+        val jpaEntity = mapper.toJpaEntity(domainEntity)
+
+        // Then
+        assertThat(jpaEntity.id).isEqualTo(id)
+        assertThat(jpaEntity.ageGroup).isEqualTo("Infants")
+        assertThat(jpaEntity.minAge).isZero()
+        assertThat(jpaEntity.maxAge).isEqualTo(2)
+        assertThat(jpaEntity.active).isTrue()
+    }
+
+    @Test
+    fun `toDomainEntity should throw NullPointerException when id is null`() {
+        // Given
+        val jpaEntity = AgeGroupJpaEntity().apply {
+            this.id = null
+            this.ageGroup = "Test Group"
+            this.minAge = 10
+            this.maxAge = 20
+            this.active = true
+        }
+
+        // When & Then
+        assertThatThrownBy { mapper.toDomainEntity(jpaEntity) }
+            .isInstanceOf(NullPointerException::class.java)
+    }
+
+    @Test
+    fun `toDomainEntity should throw NullPointerException when ageGroup is null`() {
+        // Given
+        val jpaEntity = AgeGroupJpaEntity().apply {
+            this.id = UUID.randomUUID()
+            this.ageGroup = null
+            this.minAge = 10
+            this.maxAge = 20
+            this.active = true
+        }
+
+        // When & Then
+        assertThatThrownBy { mapper.toDomainEntity(jpaEntity) }
+            .isInstanceOf(NullPointerException::class.java)
+    }
+
+    @Test
+    fun `toDomainEntity should throw NullPointerException when minAge is null`() {
+        // Given
+        val jpaEntity = AgeGroupJpaEntity().apply {
+            this.id = UUID.randomUUID()
+            this.ageGroup = "Test Group"
+            this.minAge = null
+            this.maxAge = 20
+            this.active = true
+        }
+
+        // When & Then
+        assertThatThrownBy { mapper.toDomainEntity(jpaEntity) }
+            .isInstanceOf(NullPointerException::class.java)
+    }
+
+    @Test
+    fun `toDomainEntity should throw NullPointerException when maxAge is null`() {
+        // Given
+        val jpaEntity = AgeGroupJpaEntity().apply {
+            this.id = UUID.randomUUID()
+            this.ageGroup = "Test Group"
+            this.minAge = 10
+            this.maxAge = null
+            this.active = true
+        }
+
+        // When & Then
+        assertThatThrownBy { mapper.toDomainEntity(jpaEntity) }
+            .isInstanceOf(NullPointerException::class.java)
+    }
+
+    @Test
+    fun `toDomainEntity should throw NullPointerException when active is null`() {
+        // Given
+        val jpaEntity = AgeGroupJpaEntity().apply {
+            this.id = UUID.randomUUID()
+            this.ageGroup = "Test Group"
+            this.minAge = 10
+            this.maxAge = 20
+            this.active = null
+        }
+
+        // When & Then
+        assertThatThrownBy { mapper.toDomainEntity(jpaEntity) }
+            .isInstanceOf(NullPointerException::class.java)
+    }
+
+    @Test
+    fun `toJpaEntity should handle multiple age groups with different ranges`() {
+        // Given
+        val ageGroups = listOf(
+            AgeGroup(UUID.randomUUID(), "Toddlers", 3, 5, true),
+            AgeGroup(UUID.randomUUID(), "Pre-teens", 10, 12, true),
+            AgeGroup(UUID.randomUUID(), "Middle Age", 40, 55, false)
+        )
+
+        // When
+        val jpaEntities = ageGroups.map { mapper.toJpaEntity(it) }
+
+        // Then
+        assertThat(jpaEntities).hasSize(3)
+        assertThat(jpaEntities[0].ageGroup).isEqualTo("Toddlers")
+        assertThat(jpaEntities[0].minAge).isEqualTo(3)
+        assertThat(jpaEntities[0].maxAge).isEqualTo(5)
+        assertThat(jpaEntities[1].ageGroup).isEqualTo("Pre-teens")
+        assertThat(jpaEntities[2].active).isFalse()
+    }
+
+    @Test
+    fun `toDomainEntity should handle age group with zero minimum age`() {
+        // Given
+        val id = UUID.randomUUID()
+        val jpaEntity = AgeGroupJpaEntity().apply {
+            this.id = id
+            this.ageGroup = "Newborns"
+            this.minAge = 0
+            this.maxAge = 1
+            this.active = true
+        }
+
+        // When
+        val domainEntity = mapper.toDomainEntity(jpaEntity)
+
+        // Then
+        assertThat(domainEntity.minAge).isZero()
+        assertThat(domainEntity.maxAge).isEqualTo(1)
+        assertThat(domainEntity.groupName).isEqualTo("Newborns")
     }
 }

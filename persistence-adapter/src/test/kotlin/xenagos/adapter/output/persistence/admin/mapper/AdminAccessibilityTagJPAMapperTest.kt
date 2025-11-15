@@ -1,16 +1,18 @@
+
 package xenagos.adapter.output.persistence.admin.mapper
 
-import org.junit.jupiter.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import xenagos.adapter.output.persistence.model.AccessibilityTagJpaEntity
 import xenagos.domain.model.AccessibilityTag
 import java.util.UUID
 
-// This unit test includes:
-// Positive test cases: Testing both toJpaEntity and toDomainEntity with valid data
-// Active/Inactive status: Testing both true and false values for the active field
-// Roundtrip conversion: Ensuring data integrity when converting domain → JPA → domain
-// Null handling tests: Testing the TODO comment
+// The test suite includes:
+// 1. Basic mapping tests for both directions (toJpaEntity and toDomainEntity)
+// 2. Active/inactive status tests
+// 3. Roundtrip conversion test to ensure data integrity
+// 4. Null handling tests for all required fields
 
 
 class AdminAccessibilityTagJPAMapperTest {
@@ -32,10 +34,10 @@ class AdminAccessibilityTagJPAMapperTest {
         val jpaEntity = mapper.toJpaEntity(domainEntity)
 
         // Then
-        assertEquals(id, jpaEntity.id)
-        assertEquals("Wheelchair Accessible", jpaEntity.accessibilityTag)
-        assertEquals("Suitable for wheelchair users", jpaEntity.description)
-        assertTrue(jpaEntity.active!!)
+        assertThat(jpaEntity.id).isEqualTo(id)
+        assertThat(jpaEntity.accessibilityTag).isEqualTo("Wheelchair Accessible")
+        assertThat(jpaEntity.description).isEqualTo("Suitable for wheelchair users")
+        assertThat(jpaEntity.active).isTrue()
     }
 
     @Test
@@ -53,10 +55,10 @@ class AdminAccessibilityTagJPAMapperTest {
         val jpaEntity = mapper.toJpaEntity(domainEntity)
 
         // Then
-        assertEquals(id, jpaEntity.id)
-        assertEquals("Visual Impairment", jpaEntity.accessibilityTag)
-        assertEquals("Suitable for visually impaired visitors", jpaEntity.description)
-        assertFalse(jpaEntity.active!!)
+        assertThat(jpaEntity.id).isEqualTo(id)
+        assertThat(jpaEntity.accessibilityTag).isEqualTo("Visual Impairment")
+        assertThat(jpaEntity.description).isEqualTo("Suitable for visually impaired visitors")
+        assertThat(jpaEntity.active).isFalse()
     }
 
     @Test
@@ -74,10 +76,10 @@ class AdminAccessibilityTagJPAMapperTest {
         val domainEntity = mapper.toDomainEntity(jpaEntity)
 
         // Then
-        assertEquals(id, domainEntity.id)
-        assertEquals("Hearing Impairment", domainEntity.name)
-        assertEquals("Suitable for hearing impaired visitors", domainEntity.description)
-        assertTrue(domainEntity.active)
+        assertThat(domainEntity.id).isEqualTo(id)
+        assertThat(domainEntity.name).isEqualTo("Hearing Impairment")
+        assertThat(domainEntity.description).isEqualTo("Suitable for hearing impaired visitors")
+        assertThat(domainEntity.active).isTrue()
     }
 
     @Test
@@ -95,10 +97,10 @@ class AdminAccessibilityTagJPAMapperTest {
         val domainEntity = mapper.toDomainEntity(jpaEntity)
 
         // Then
-        assertEquals(id, domainEntity.id)
-        assertEquals("Mobility Impairment", domainEntity.name)
-        assertEquals("Suitable for visitors with mobility issues", domainEntity.description)
-        assertFalse(domainEntity.active)
+        assertThat(domainEntity.id).isEqualTo(id)
+        assertThat(domainEntity.name).isEqualTo("Mobility Impairment")
+        assertThat(domainEntity.description).isEqualTo("Suitable for visitors with mobility issues")
+        assertThat(domainEntity.active).isFalse()
     }
 
     @Test
@@ -117,10 +119,9 @@ class AdminAccessibilityTagJPAMapperTest {
         val resultDomain = mapper.toDomainEntity(jpaEntity)
 
         // Then
-        assertEquals(originalDomain.id, resultDomain.id)
-        assertEquals(originalDomain.name, resultDomain.name)
-        assertEquals(originalDomain.description, resultDomain.description)
-        assertEquals(originalDomain.active, resultDomain.active)
+        assertThat(resultDomain)
+            .usingRecursiveComparison()
+            .isEqualTo(originalDomain)
     }
 
     @Test
@@ -134,9 +135,8 @@ class AdminAccessibilityTagJPAMapperTest {
         }
 
         // When & Then
-        assertThrows(NullPointerException::class.java) {
-            mapper.toDomainEntity(jpaEntity)
-        }
+        assertThatThrownBy { mapper.toDomainEntity(jpaEntity) }
+            .isInstanceOf(NullPointerException::class.java)
     }
 
     @Test
@@ -150,9 +150,8 @@ class AdminAccessibilityTagJPAMapperTest {
         }
 
         // When & Then
-        assertThrows(NullPointerException::class.java) {
-            mapper.toDomainEntity(jpaEntity)
-        }
+        assertThatThrownBy { mapper.toDomainEntity(jpaEntity) }
+            .isInstanceOf(NullPointerException::class.java)
     }
 
     @Test
@@ -166,9 +165,8 @@ class AdminAccessibilityTagJPAMapperTest {
         }
 
         // When & Then
-        assertThrows(NullPointerException::class.java) {
-            mapper.toDomainEntity(jpaEntity)
-        }
+        assertThatThrownBy { mapper.toDomainEntity(jpaEntity) }
+            .isInstanceOf(NullPointerException::class.java)
     }
 
     @Test
@@ -182,8 +180,7 @@ class AdminAccessibilityTagJPAMapperTest {
         }
 
         // When & Then
-        assertThrows(NullPointerException::class.java) {
-            mapper.toDomainEntity(jpaEntity)
-        }
+        assertThatThrownBy { mapper.toDomainEntity(jpaEntity) }
+            .isInstanceOf(NullPointerException::class.java)
     }
 }

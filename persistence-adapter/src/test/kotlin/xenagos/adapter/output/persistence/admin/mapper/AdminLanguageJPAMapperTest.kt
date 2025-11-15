@@ -1,19 +1,21 @@
+
 package xenagos.adapter.output.persistence.admin.mapper
 
-import org.junit.jupiter.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import xenagos.adapter.output.persistence.model.LanguageJpaEntity
 import xenagos.domain.model.Language
 import java.util.UUID
 
-// The test suite includes:
-// 1. Basic mapping tests for both directions
-// 2. Active/inactive status tests
-// 3. Different native and English names (important for internationalization)
-// 4. Roundtrip conversion test for data integrity
-// 5. ISO code handling tests (3-letter codes)
-// 6. Unicode character tests (for languages with non-Latin scripts)
-// 7. Null handling tests for all required fields (addressing the TODO comment)
+// This unit test includes:
+// Positive test cases: Testing both toJpaEntity and toDomainEntity with valid data
+// Active/Inactive status: Testing both true and false values for the active field
+// Internationalization: Testing different native and English names with various scripts
+// ISO codes: Testing three-letter language codes
+// Roundtrip conversion: Ensuring data integrity when converting domain → JPA → domain
+// Null handling tests: Testing the TODO comment for all required fields
+// Unicode support: Testing languages with non-Latin scripts (Greek, Japanese, Arabic, Chinese, etc.)
 
 class AdminLanguageJPAMapperTest {
 
@@ -35,11 +37,11 @@ class AdminLanguageJPAMapperTest {
         val jpaEntity = mapper.toJpaEntity(domainEntity)
 
         // Then
-        assertEquals(id, jpaEntity.id)
-        assertEquals("eng", jpaEntity.code)
-        assertEquals("English", jpaEntity.englishName)
-        assertEquals("English", jpaEntity.nativeName)
-        assertTrue(jpaEntity.active!!)
+        assertThat(jpaEntity.id).isEqualTo(id)
+        assertThat(jpaEntity.code).isEqualTo("eng")
+        assertThat(jpaEntity.englishName).isEqualTo("English")
+        assertThat(jpaEntity.nativeName).isEqualTo("English")
+        assertThat(jpaEntity.active).isTrue()
     }
 
     @Test
@@ -58,11 +60,11 @@ class AdminLanguageJPAMapperTest {
         val jpaEntity = mapper.toJpaEntity(domainEntity)
 
         // Then
-        assertEquals(id, jpaEntity.id)
-        assertEquals("spa", jpaEntity.code)
-        assertEquals("Spanish", jpaEntity.englishName)
-        assertEquals("Español", jpaEntity.nativeName)
-        assertFalse(jpaEntity.active!!)
+        assertThat(jpaEntity.id).isEqualTo(id)
+        assertThat(jpaEntity.code).isEqualTo("spa")
+        assertThat(jpaEntity.englishName).isEqualTo("Spanish")
+        assertThat(jpaEntity.nativeName).isEqualTo("Español")
+        assertThat(jpaEntity.active).isFalse()
     }
 
     @Test
@@ -81,11 +83,57 @@ class AdminLanguageJPAMapperTest {
         val jpaEntity = mapper.toJpaEntity(domainEntity)
 
         // Then
-        assertEquals(id, jpaEntity.id)
-        assertEquals("ell", jpaEntity.code)
-        assertEquals("Greek", jpaEntity.englishName)
-        assertEquals("Ελληνικά", jpaEntity.nativeName)
-        assertTrue(jpaEntity.active!!)
+        assertThat(jpaEntity.id).isEqualTo(id)
+        assertThat(jpaEntity.code).isEqualTo("ell")
+        assertThat(jpaEntity.englishName).isEqualTo("Greek")
+        assertThat(jpaEntity.nativeName).isEqualTo("Ελληνικά")
+        assertThat(jpaEntity.active).isTrue()
+    }
+
+    @Test
+    fun `toJpaEntity should handle three letter ISO codes`() {
+        // Given
+        val id = UUID.randomUUID()
+        val domainEntity = Language(
+            id = id,
+            code = "jpn",
+            englishName = "Japanese",
+            nativeName = "日本語",
+            active = true
+        )
+
+        // When
+        val jpaEntity = mapper.toJpaEntity(domainEntity)
+
+        // Then
+        assertThat(jpaEntity.id).isEqualTo(id)
+        assertThat(jpaEntity.code).isEqualTo("jpn")
+        assertThat(jpaEntity.englishName).isEqualTo("Japanese")
+        assertThat(jpaEntity.nativeName).isEqualTo("日本語")
+        assertThat(jpaEntity.active).isTrue()
+    }
+
+    @Test
+    fun `toJpaEntity should handle languages with unicode characters`() {
+        // Given
+        val id = UUID.randomUUID()
+        val domainEntity = Language(
+            id = id,
+            code = "ara",
+            englishName = "Arabic",
+            nativeName = "العربية",
+            active = true
+        )
+
+        // When
+        val jpaEntity = mapper.toJpaEntity(domainEntity)
+
+        // Then
+        assertThat(jpaEntity.id).isEqualTo(id)
+        assertThat(jpaEntity.code).isEqualTo("ara")
+        assertThat(jpaEntity.englishName).isEqualTo("Arabic")
+        assertThat(jpaEntity.nativeName).isEqualTo("العربية")
+        assertThat(jpaEntity.active).isTrue()
     }
 
     @Test
@@ -104,11 +152,11 @@ class AdminLanguageJPAMapperTest {
         val domainEntity = mapper.toDomainEntity(jpaEntity)
 
         // Then
-        assertEquals(id, domainEntity.id)
-        assertEquals("fra", domainEntity.code)
-        assertEquals("French", domainEntity.englishName)
-        assertEquals("Français", domainEntity.nativeName)
-        assertTrue(domainEntity.active)
+        assertThat(domainEntity.id).isEqualTo(id)
+        assertThat(domainEntity.code).isEqualTo("fra")
+        assertThat(domainEntity.englishName).isEqualTo("French")
+        assertThat(domainEntity.nativeName).isEqualTo("Français")
+        assertThat(domainEntity.active).isTrue()
     }
 
     @Test
@@ -127,11 +175,11 @@ class AdminLanguageJPAMapperTest {
         val domainEntity = mapper.toDomainEntity(jpaEntity)
 
         // Then
-        assertEquals(id, domainEntity.id)
-        assertEquals("deu", domainEntity.code)
-        assertEquals("German", domainEntity.englishName)
-        assertEquals("Deutsch", domainEntity.nativeName)
-        assertFalse(domainEntity.active)
+        assertThat(domainEntity.id).isEqualTo(id)
+        assertThat(domainEntity.code).isEqualTo("deu")
+        assertThat(domainEntity.englishName).isEqualTo("German")
+        assertThat(domainEntity.nativeName).isEqualTo("Deutsch")
+        assertThat(domainEntity.active).isFalse()
     }
 
     @Test
@@ -151,22 +199,20 @@ class AdminLanguageJPAMapperTest {
         val resultDomain = mapper.toDomainEntity(jpaEntity)
 
         // Then
-        assertEquals(originalDomain.id, resultDomain.id)
-        assertEquals(originalDomain.code, resultDomain.code)
-        assertEquals(originalDomain.englishName, resultDomain.englishName)
-        assertEquals(originalDomain.nativeName, resultDomain.nativeName)
-        assertEquals(originalDomain.active, resultDomain.active)
+        assertThat(resultDomain)
+            .usingRecursiveComparison()
+            .isEqualTo(originalDomain)
     }
 
     @Test
-    fun `toJpaEntity should handle three letter ISO codes`() {
+    fun `toJpaEntity should handle Cyrillic script languages`() {
         // Given
         val id = UUID.randomUUID()
         val domainEntity = Language(
             id = id,
-            code = "jpn",
-            englishName = "Japanese",
-            nativeName = "日本語",
+            code = "rus",
+            englishName = "Russian",
+            nativeName = "Русский",
             active = true
         )
 
@@ -174,11 +220,74 @@ class AdminLanguageJPAMapperTest {
         val jpaEntity = mapper.toJpaEntity(domainEntity)
 
         // Then
-        assertEquals(id, jpaEntity.id)
-        assertEquals("jpn", jpaEntity.code)
-        assertEquals("Japanese", jpaEntity.englishName)
-        assertEquals("日本語", jpaEntity.nativeName)
-        assertTrue(jpaEntity.active!!)
+        assertThat(jpaEntity.code).isEqualTo("rus")
+        assertThat(jpaEntity.englishName).isEqualTo("Russian")
+        assertThat(jpaEntity.nativeName).isEqualTo("Русский")
+        assertThat(jpaEntity.active).isTrue()
+    }
+
+    @Test
+    fun `toJpaEntity should handle Chinese language`() {
+        // Given
+        val id = UUID.randomUUID()
+        val domainEntity = Language(
+            id = id,
+            code = "zho",
+            englishName = "Chinese",
+            nativeName = "中文",
+            active = true
+        )
+
+        // When
+        val jpaEntity = mapper.toJpaEntity(domainEntity)
+
+        // Then
+        assertThat(jpaEntity.code).isEqualTo("zho")
+        assertThat(jpaEntity.englishName).isEqualTo("Chinese")
+        assertThat(jpaEntity.nativeName).isEqualTo("中文")
+    }
+
+    @Test
+    fun `toJpaEntity should handle Korean language`() {
+        // Given
+        val id = UUID.randomUUID()
+        val domainEntity = Language(
+            id = id,
+            code = "kor",
+            englishName = "Korean",
+            nativeName = "한국어",
+            active = true
+        )
+
+        // When
+        val jpaEntity = mapper.toJpaEntity(domainEntity)
+
+        // Then
+        assertThat(jpaEntity.code).isEqualTo("kor")
+        assertThat(jpaEntity.englishName).isEqualTo("Korean")
+        assertThat(jpaEntity.nativeName).isEqualTo("한국어")
+    }
+
+    @Test
+    fun `toJpaEntity should handle multiple languages mapping`() {
+        // Given
+        val languages = listOf(
+            Language(UUID.randomUUID(), "por", "Portuguese", "Português", true),
+            Language(UUID.randomUUID(), "nld", "Dutch", "Nederlands", true),
+            Language(UUID.randomUUID(), "pol", "Polish", "Polski", false)
+        )
+
+        // When
+        val jpaEntities = languages.map { mapper.toJpaEntity(it) }
+
+        // Then
+        assertThat(jpaEntities).hasSize(3)
+        assertThat(jpaEntities[0].code).isEqualTo("por")
+        assertThat(jpaEntities[0].nativeName).isEqualTo("Português")
+        assertThat(jpaEntities[1].code).isEqualTo("nld")
+        assertThat(jpaEntities[1].nativeName).isEqualTo("Nederlands")
+        assertThat(jpaEntities[2].code).isEqualTo("pol")
+        assertThat(jpaEntities[2].active).isFalse()
     }
 
     @Test
@@ -193,9 +302,8 @@ class AdminLanguageJPAMapperTest {
         }
 
         // When & Then
-        assertThrows(NullPointerException::class.java) {
-            mapper.toDomainEntity(jpaEntity)
-        }
+        assertThatThrownBy { mapper.toDomainEntity(jpaEntity) }
+            .isInstanceOf(NullPointerException::class.java)
     }
 
     @Test
@@ -210,9 +318,8 @@ class AdminLanguageJPAMapperTest {
         }
 
         // When & Then
-        assertThrows(NullPointerException::class.java) {
-            mapper.toDomainEntity(jpaEntity)
-        }
+        assertThatThrownBy { mapper.toDomainEntity(jpaEntity) }
+            .isInstanceOf(NullPointerException::class.java)
     }
 
     @Test
@@ -227,9 +334,8 @@ class AdminLanguageJPAMapperTest {
         }
 
         // When & Then
-        assertThrows(NullPointerException::class.java) {
-            mapper.toDomainEntity(jpaEntity)
-        }
+        assertThatThrownBy { mapper.toDomainEntity(jpaEntity) }
+            .isInstanceOf(NullPointerException::class.java)
     }
 
     @Test
@@ -244,9 +350,8 @@ class AdminLanguageJPAMapperTest {
         }
 
         // When & Then
-        assertThrows(NullPointerException::class.java) {
-            mapper.toDomainEntity(jpaEntity)
-        }
+        assertThatThrownBy { mapper.toDomainEntity(jpaEntity) }
+            .isInstanceOf(NullPointerException::class.java)
     }
 
     @Test
@@ -261,20 +366,40 @@ class AdminLanguageJPAMapperTest {
         }
 
         // When & Then
-        assertThrows(NullPointerException::class.java) {
-            mapper.toDomainEntity(jpaEntity)
-        }
+        assertThatThrownBy { mapper.toDomainEntity(jpaEntity) }
+            .isInstanceOf(NullPointerException::class.java)
     }
 
     @Test
-    fun `toJpaEntity should handle languages with unicode characters`() {
+    fun `toDomainEntity should handle Hebrew language with right-to-left script`() {
+        // Given
+        val id = UUID.randomUUID()
+        val jpaEntity = LanguageJpaEntity().apply {
+            this.id = id
+            this.code = "heb"
+            this.englishName = "Hebrew"
+            this.nativeName = "עברית"
+            this.active = true
+        }
+
+        // When
+        val domainEntity = mapper.toDomainEntity(jpaEntity)
+
+        // Then
+        assertThat(domainEntity.code).isEqualTo("heb")
+        assertThat(domainEntity.englishName).isEqualTo("Hebrew")
+        assertThat(domainEntity.nativeName).isEqualTo("עברית")
+    }
+
+    @Test
+    fun `toJpaEntity should handle Hindi language with Devanagari script`() {
         // Given
         val id = UUID.randomUUID()
         val domainEntity = Language(
             id = id,
-            code = "ara",
-            englishName = "Arabic",
-            nativeName = "العربية",
+            code = "hin",
+            englishName = "Hindi",
+            nativeName = "हिन्दी",
             active = true
         )
 
@@ -282,10 +407,30 @@ class AdminLanguageJPAMapperTest {
         val jpaEntity = mapper.toJpaEntity(domainEntity)
 
         // Then
-        assertEquals(id, jpaEntity.id)
-        assertEquals("ara", jpaEntity.code)
-        assertEquals("Arabic", jpaEntity.englishName)
-        assertEquals("العربية", jpaEntity.nativeName)
-        assertTrue(jpaEntity.active!!)
+        assertThat(jpaEntity.code).isEqualTo("hin")
+        assertThat(jpaEntity.englishName).isEqualTo("Hindi")
+        assertThat(jpaEntity.nativeName).isEqualTo("हिन्दी")
+    }
+
+    @Test
+    fun `roundtrip conversion should preserve unicode characters`() {
+        // Given
+        val id = UUID.randomUUID()
+        val originalDomain = Language(
+            id = id,
+            code = "tha",
+            englishName = "Thai",
+            nativeName = "ไทย",
+            active = true
+        )
+
+        // When
+        val jpaEntity = mapper.toJpaEntity(originalDomain)
+        val resultDomain = mapper.toDomainEntity(jpaEntity)
+
+        // Then
+        assertThat(resultDomain.nativeName)
+            .isEqualTo(originalDomain.nativeName)
+            .isEqualTo("ไทย")
     }
 }

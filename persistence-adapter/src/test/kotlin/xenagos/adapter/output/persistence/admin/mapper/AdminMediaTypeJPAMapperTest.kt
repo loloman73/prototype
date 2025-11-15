@@ -1,20 +1,21 @@
+
 package xenagos.adapter.output.persistence.admin.mapper
 
-import org.junit.jupiter.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import xenagos.adapter.output.persistence.model.MediaTypeJpaEntity
 import xenagos.domain.model.MediaType
 import java.util.UUID
 
-// The test suite includes:
-// 1. Basic mapping tests for both directions
-// 2. Active/inactive status tests
-// 3. Different media type names (Audio, Video, Text, Image, etc.)
-// 4. Special characters and spaces in media type names
-// 5. Roundtrip conversion tests for data integrity
-// 6. Multiple test cases with different formats (PDF, MP3, MP4, etc.)
-// 7. Null handling tests for all required fields (addressing the TODO comment)
-
+// This unit test includes:
+// Positive test cases: Testing both toJpaEntity and toDomainEntity with valid data
+// Active/Inactive status: Testing both true and false values for the active field
+// Various media types: Testing different types (Audio, Video, Image, Text, 3D, VR, AR, etc.)
+// Special characters: Testing media types with spaces, slashes, and special characters
+// Roundtrip conversion: Ensuring data integrity when converting domain → JPA → domain
+// Null handling tests: Testing the TODO comment for all required fields
+// File formats: Testing common file format names (JPEG, MP3, MP4, PDF, etc.)
 
 class AdminMediaTypeJPAMapperTest {
 
@@ -34,9 +35,9 @@ class AdminMediaTypeJPAMapperTest {
         val jpaEntity = mapper.toJpaEntity(domainEntity)
 
         // Then
-        assertEquals(id, jpaEntity.id)
-        assertEquals("Audio", jpaEntity.mediaType)
-        assertTrue(jpaEntity.active!!)
+        assertThat(jpaEntity.id).isEqualTo(id)
+        assertThat(jpaEntity.mediaType).isEqualTo("Audio")
+        assertThat(jpaEntity.active).isTrue()
     }
 
     @Test
@@ -53,9 +54,9 @@ class AdminMediaTypeJPAMapperTest {
         val jpaEntity = mapper.toJpaEntity(domainEntity)
 
         // Then
-        assertEquals(id, jpaEntity.id)
-        assertEquals("Video", jpaEntity.mediaType)
-        assertFalse(jpaEntity.active!!)
+        assertThat(jpaEntity.id).isEqualTo(id)
+        assertThat(jpaEntity.mediaType).isEqualTo("Video")
+        assertThat(jpaEntity.active).isFalse()
     }
 
     @Test
@@ -72,9 +73,66 @@ class AdminMediaTypeJPAMapperTest {
         val jpaEntity = mapper.toJpaEntity(domainEntity)
 
         // Then
-        assertEquals(id, jpaEntity.id)
-        assertEquals("Text", jpaEntity.mediaType)
-        assertTrue(jpaEntity.active!!)
+        assertThat(jpaEntity.id).isEqualTo(id)
+        assertThat(jpaEntity.mediaType).isEqualTo("Text")
+        assertThat(jpaEntity.active).isTrue()
+    }
+
+    @Test
+    fun `toJpaEntity should handle media type with special characters`() {
+        // Given
+        val id = UUID.randomUUID()
+        val domainEntity = MediaType(
+            id = id,
+            type = "Audio/Video",
+            active = true
+        )
+
+        // When
+        val jpaEntity = mapper.toJpaEntity(domainEntity)
+
+        // Then
+        assertThat(jpaEntity.id).isEqualTo(id)
+        assertThat(jpaEntity.mediaType).isEqualTo("Audio/Video")
+        assertThat(jpaEntity.active).isTrue()
+    }
+
+    @Test
+    fun `toJpaEntity should handle media type with spaces`() {
+        // Given
+        val id = UUID.randomUUID()
+        val domainEntity = MediaType(
+            id = id,
+            type = "Virtual Reality",
+            active = true
+        )
+
+        // When
+        val jpaEntity = mapper.toJpaEntity(domainEntity)
+
+        // Then
+        assertThat(jpaEntity.id).isEqualTo(id)
+        assertThat(jpaEntity.mediaType).isEqualTo("Virtual Reality")
+        assertThat(jpaEntity.active).isTrue()
+    }
+
+    @Test
+    fun `toJpaEntity should handle file format types`() {
+        // Given
+        val id = UUID.randomUUID()
+        val domainEntity = MediaType(
+            id = id,
+            type = "MP3",
+            active = true
+        )
+
+        // When
+        val jpaEntity = mapper.toJpaEntity(domainEntity)
+
+        // Then
+        assertThat(jpaEntity.id).isEqualTo(id)
+        assertThat(jpaEntity.mediaType).isEqualTo("MP3")
+        assertThat(jpaEntity.active).isTrue()
     }
 
     @Test
@@ -91,9 +149,9 @@ class AdminMediaTypeJPAMapperTest {
         val domainEntity = mapper.toDomainEntity(jpaEntity)
 
         // Then
-        assertEquals(id, domainEntity.id)
-        assertEquals("Image", domainEntity.type)
-        assertTrue(domainEntity.active)
+        assertThat(domainEntity.id).isEqualTo(id)
+        assertThat(domainEntity.type).isEqualTo("Image")
+        assertThat(domainEntity.active).isTrue()
     }
 
     @Test
@@ -110,9 +168,9 @@ class AdminMediaTypeJPAMapperTest {
         val domainEntity = mapper.toDomainEntity(jpaEntity)
 
         // Then
-        assertEquals(id, domainEntity.id)
-        assertEquals("3D Model", domainEntity.type)
-        assertFalse(domainEntity.active)
+        assertThat(domainEntity.id).isEqualTo(id)
+        assertThat(domainEntity.type).isEqualTo("3D Model")
+        assertThat(domainEntity.active).isFalse()
     }
 
     @Test
@@ -130,117 +188,9 @@ class AdminMediaTypeJPAMapperTest {
         val resultDomain = mapper.toDomainEntity(jpaEntity)
 
         // Then
-        assertEquals(originalDomain.id, resultDomain.id)
-        assertEquals(originalDomain.type, resultDomain.type)
-        assertEquals(originalDomain.active, resultDomain.active)
-    }
-
-    @Test
-    fun `toJpaEntity should handle media type with special characters`() {
-        // Given
-        val id = UUID.randomUUID()
-        val domainEntity = MediaType(
-            id = id,
-            type = "Audio/Video",
-            active = true
-        )
-
-        // When
-        val jpaEntity = mapper.toJpaEntity(domainEntity)
-
-        // Then
-        assertEquals(id, jpaEntity.id)
-        assertEquals("Audio/Video", jpaEntity.mediaType)
-        assertTrue(jpaEntity.active!!)
-    }
-
-    @Test
-    fun `toJpaEntity should handle media type with spaces`() {
-        // Given
-        val id = UUID.randomUUID()
-        val domainEntity = MediaType(
-            id = id,
-            type = "Virtual Reality",
-            active = true
-        )
-
-        // When
-        val jpaEntity = mapper.toJpaEntity(domainEntity)
-
-        // Then
-        assertEquals(id, jpaEntity.id)
-        assertEquals("Virtual Reality", jpaEntity.mediaType)
-        assertTrue(jpaEntity.active!!)
-    }
-
-    @Test
-    fun `toDomainEntity should throw NullPointerException when id is null`() {
-        // Given
-        val jpaEntity = MediaTypeJpaEntity().apply {
-            this.id = null
-            this.mediaType = "Audio"
-            this.active = true
-        }
-
-        // When & Then
-        assertThrows(NullPointerException::class.java) {
-            mapper.toDomainEntity(jpaEntity)
-        }
-    }
-
-    @Test
-    fun `toDomainEntity should throw NullPointerException when mediaType is null`() {
-        // Given
-        val jpaEntity = MediaTypeJpaEntity().apply {
-            this.id = UUID.randomUUID()
-            this.mediaType = null
-            this.active = true
-        }
-
-        // When & Then
-        assertThrows(NullPointerException::class.java) {
-            mapper.toDomainEntity(jpaEntity)
-        }
-    }
-
-    @Test
-    fun `toDomainEntity should throw NullPointerException when active is null`() {
-        // Given
-        val jpaEntity = MediaTypeJpaEntity().apply {
-            this.id = UUID.randomUUID()
-            this.mediaType = "Audio"
-            this.active = null
-        }
-
-        // When & Then
-        assertThrows(NullPointerException::class.java) {
-            mapper.toDomainEntity(jpaEntity)
-        }
-    }
-
-    @Test
-    fun `toJpaEntity should handle multiple media types with different formats`() {
-        // Given
-        val testCases = listOf(
-            "PDF" to true,
-            "MP3" to false,
-            "MP4" to true,
-            "JPEG" to false,
-            "HTML5" to true
-        )
-
-        testCases.forEach { (type, active) ->
-            val id = UUID.randomUUID()
-            val domainEntity = MediaType(id, type, active)
-
-            // When
-            val jpaEntity = mapper.toJpaEntity(domainEntity)
-
-            // Then
-            assertEquals(id, jpaEntity.id)
-            assertEquals(type, jpaEntity.mediaType)
-            assertEquals(active, jpaEntity.active)
-        }
+        assertThat(resultDomain)
+            .usingRecursiveComparison()
+            .isEqualTo(originalDomain)
     }
 
     @Test
@@ -258,9 +208,292 @@ class AdminMediaTypeJPAMapperTest {
         val resultDomain = mapper.toDomainEntity(jpaEntity)
 
         // Then
-        assertEquals(originalDomain.id, resultDomain.id)
-        assertEquals(originalDomain.type, resultDomain.type)
-        assertEquals(originalDomain.active, resultDomain.active)
-        assertFalse(resultDomain.active)
+        assertThat(resultDomain)
+            .usingRecursiveComparison()
+            .isEqualTo(originalDomain)
+        assertThat(resultDomain.active).isFalse()
+    }
+
+    @Test
+    fun `toJpaEntity should handle multiple media types with different formats`() {
+        // Given
+        val mediaTypes = listOf(
+            MediaType(UUID.randomUUID(), "PDF", true),
+            MediaType(UUID.randomUUID(), "MP3", false),
+            MediaType(UUID.randomUUID(), "MP4", true),
+            MediaType(UUID.randomUUID(), "JPEG", false),
+            MediaType(UUID.randomUUID(), "HTML5", true)
+        )
+
+        // When
+        val jpaEntities = mediaTypes.map { mapper.toJpaEntity(it) }
+
+        // Then
+        assertThat(jpaEntities).hasSize(5)
+        assertThat(jpaEntities[0].mediaType).isEqualTo("PDF")
+        assertThat(jpaEntities[0].active).isTrue()
+        assertThat(jpaEntities[1].mediaType).isEqualTo("MP3")
+        assertThat(jpaEntities[1].active).isFalse()
+        assertThat(jpaEntities[2].mediaType).isEqualTo("MP4")
+        assertThat(jpaEntities[3].mediaType).isEqualTo("JPEG")
+        assertThat(jpaEntities[4].mediaType).isEqualTo("HTML5")
+    }
+
+    @Test
+    fun `toJpaEntity should handle common image formats`() {
+        // Given
+        val formats = listOf("JPEG", "PNG", "GIF", "SVG", "WebP")
+
+        formats.forEach { format ->
+            val id = UUID.randomUUID()
+            val domainEntity = MediaType(id, format, true)
+
+            // When
+            val jpaEntity = mapper.toJpaEntity(domainEntity)
+
+            // Then
+            assertThat(jpaEntity.mediaType).isEqualTo(format)
+            assertThat(jpaEntity.active).isTrue()
+        }
+    }
+
+    @Test
+    fun `toJpaEntity should handle common audio formats`() {
+        // Given
+        val formats = listOf("MP3", "WAV", "AAC", "FLAC", "OGG")
+
+        formats.forEach { format ->
+            val id = UUID.randomUUID()
+            val domainEntity = MediaType(id, format, true)
+
+            // When
+            val jpaEntity = mapper.toJpaEntity(domainEntity)
+
+            // Then
+            assertThat(jpaEntity.mediaType).isEqualTo(format)
+        }
+    }
+
+    @Test
+    fun `toJpaEntity should handle common video formats`() {
+        // Given
+        val formats = listOf("MP4", "AVI", "MOV", "WMV", "WebM")
+
+        formats.forEach { format ->
+            val id = UUID.randomUUID()
+            val domainEntity = MediaType(id, format, true)
+
+            // When
+            val jpaEntity = mapper.toJpaEntity(domainEntity)
+
+            // Then
+            assertThat(jpaEntity.mediaType).isEqualTo(format)
+        }
+    }
+
+    @Test
+    fun `toJpaEntity should handle modern media types`() {
+        // Given
+        val id = UUID.randomUUID()
+        val domainEntity = MediaType(
+            id = id,
+            type = "360° Video",
+            active = true
+        )
+
+        // When
+        val jpaEntity = mapper.toJpaEntity(domainEntity)
+
+        // Then
+        assertThat(jpaEntity.mediaType).isEqualTo("360° Video")
+        assertThat(jpaEntity.active).isTrue()
+    }
+
+    @Test
+    fun `toJpaEntity should handle hyphenated media type names`() {
+        // Given
+        val id = UUID.randomUUID()
+        val domainEntity = MediaType(
+            id = id,
+            type = "Stop-Motion",
+            active = true
+        )
+
+        // When
+        val jpaEntity = mapper.toJpaEntity(domainEntity)
+
+        // Then
+        assertThat(jpaEntity.mediaType).isEqualTo("Stop-Motion")
+    }
+
+    @Test
+    fun `toDomainEntity should throw NullPointerException when id is null`() {
+        // Given
+        val jpaEntity = MediaTypeJpaEntity().apply {
+            this.id = null
+            this.mediaType = "Audio"
+            this.active = true
+        }
+
+        // When & Then
+        assertThatThrownBy { mapper.toDomainEntity(jpaEntity) }
+            .isInstanceOf(NullPointerException::class.java)
+    }
+
+    @Test
+    fun `toDomainEntity should throw NullPointerException when mediaType is null`() {
+        // Given
+        val jpaEntity = MediaTypeJpaEntity().apply {
+            this.id = UUID.randomUUID()
+            this.mediaType = null
+            this.active = true
+        }
+
+        // When & Then
+        assertThatThrownBy { mapper.toDomainEntity(jpaEntity) }
+            .isInstanceOf(NullPointerException::class.java)
+    }
+
+    @Test
+    fun `toDomainEntity should throw NullPointerException when active is null`() {
+        // Given
+        val jpaEntity = MediaTypeJpaEntity().apply {
+            this.id = UUID.randomUUID()
+            this.mediaType = "Audio"
+            this.active = null
+        }
+
+        // When & Then
+        assertThatThrownBy { mapper.toDomainEntity(jpaEntity) }
+            .isInstanceOf(NullPointerException::class.java)
+    }
+
+    @Test
+    fun `toDomainEntity should handle various media type categories`() {
+        // Given
+        val categories = listOf(
+            "Podcast" to true,
+            "Documentary" to false,
+            "Tutorial" to true,
+            "Animation" to true,
+            "Slideshow" to false
+        )
+
+        categories.forEach { (mediaTypeName, isActive) ->
+            val id = UUID.randomUUID()
+            val jpaEntity = MediaTypeJpaEntity().apply {
+                this.id = id
+                this.mediaType = mediaTypeName
+                this.active = isActive
+            }
+
+            // When
+            val domainEntity = mapper.toDomainEntity(jpaEntity)
+
+            // Then
+            assertThat(domainEntity.type).isEqualTo(mediaTypeName)
+            assertThat(domainEntity.active).isEqualTo(isActive)
+        }
+    }
+
+    @Test
+    fun `toJpaEntity should handle descriptive media types`() {
+        // Given
+        val id = UUID.randomUUID()
+        val domainEntity = MediaType(
+            id = id,
+            type = "Interactive Exhibit",
+            active = true
+        )
+
+        // When
+        val jpaEntity = mapper.toJpaEntity(domainEntity)
+
+        // Then
+        assertThat(jpaEntity.mediaType).isEqualTo("Interactive Exhibit")
+    }
+
+    @Test
+    fun `roundtrip conversion should preserve special characters`() {
+        // Given
+        val id = UUID.randomUUID()
+        val originalDomain = MediaType(
+            id = id,
+            type = "Audio/Video Mix",
+            active = true
+        )
+
+        // When
+        val jpaEntity = mapper.toJpaEntity(originalDomain)
+        val resultDomain = mapper.toDomainEntity(jpaEntity)
+
+        // Then
+        assertThat(resultDomain.type)
+            .isEqualTo(originalDomain.type)
+            .isEqualTo("Audio/Video Mix")
+    }
+
+    @Test
+    fun `toJpaEntity should handle emerging media formats`() {
+        // Given
+        val formats = listOf(
+            "Hologram",
+            "AR Experience",
+            "VR Tour",
+            "Mixed Reality",
+            "Haptic Feedback"
+        )
+
+        formats.forEach { format ->
+            val id = UUID.randomUUID()
+            val domainEntity = MediaType(id, format, true)
+
+            // When
+            val jpaEntity = mapper.toJpaEntity(domainEntity)
+
+            // Then
+            assertThat(jpaEntity.mediaType).isEqualTo(format)
+        }
+    }
+
+    @Test
+    fun `toDomainEntity should map all fields correctly from JPA entity`() {
+        // Given
+        val id = UUID.randomUUID()
+        val jpaEntity = MediaTypeJpaEntity().apply {
+            this.id = id
+            this.mediaType = "Infographic"
+            this.active = false
+        }
+
+        // When
+        val domainEntity = mapper.toDomainEntity(jpaEntity)
+
+        // Then
+        assertThat(domainEntity)
+            .extracting("id", "type", "active")
+            .containsExactly(id, "Infographic", false)
+    }
+
+    @Test
+    fun `toJpaEntity should handle legacy media formats`() {
+        // Given
+        val legacyFormats = listOf(
+            "Flash" to false,
+            "Shockwave" to false,
+            "RealPlayer" to false
+        )
+
+        legacyFormats.forEach { (format, isActive) ->
+            val id = UUID.randomUUID()
+            val domainEntity = MediaType(id, format, isActive)
+
+            // When
+            val jpaEntity = mapper.toJpaEntity(domainEntity)
+
+            // Then
+            assertThat(jpaEntity.mediaType).isEqualTo(format)
+            assertThat(jpaEntity.active).isFalse()
+        }
     }
 }

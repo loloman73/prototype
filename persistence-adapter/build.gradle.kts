@@ -9,9 +9,9 @@ dependencies {
     implementation(project(":common"))
     implementation(libs.sb.starter)
     implementation(libs.sb.starter.data.jpa)
+    implementation (libs.jetbrains.kotlin.reflect)
     implementation(libs.flywayCore)
     implementation(libs.flywayPostgresql)
-
     runtimeOnly(libs.postgres)
 
     testImplementation(libs.sb.starter.test)

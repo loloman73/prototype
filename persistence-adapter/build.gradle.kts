@@ -9,11 +9,16 @@ dependencies {
     implementation(project(":common"))
     implementation(libs.sb.starter)
     implementation(libs.sb.starter.data.jpa)
+    implementation(libs.flywayCore)
     implementation(libs.flywayPostgresql)
 
     runtimeOnly(libs.postgres)
 
     testImplementation(libs.sb.starter.test)
+    // Testcontainers for integration tests
+    testImplementation(platform(libs.testcontainers.bom))
+    testImplementation(libs.testcontainers.junit)
+    testImplementation(libs.testcontainers.postgresql)
 }
 
 noArg{

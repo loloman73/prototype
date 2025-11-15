@@ -7,6 +7,8 @@ kotlinReflect="2.1.0"
 kotlinSpring="1.9.24"
 kotlinNoarg="2.1.0"
 mapstruct="1.6.3"
+# Testcontainers
+testcontainers="1.20.4"
 #lombok="1.18.36"
 
 [libraries]
@@ -21,10 +23,16 @@ sb-starter-test={group="org.springframework.boot", name="spring-boot-starter-tes
 thymeleafLD = {group="nz.net.ultraq.thymeleaf", name="thymeleaf-layout-dialect", version.ref="thymeleafLD"}
 jetbrains-kotlin-reflect = {group="org.jetbrains.kotlin", name="kotlin-reflect", version.ref="kotlinReflect"}
 postgres = {group="org.postgresql", name="postgresql", version.ref="postgres"}
+flywayCore = {group="org.flywaydb", name="flyway-core", version.ref="flyway"}
 flywayPostgresql = {group="org.flywaydb", name="flyway-database-postgresql", version.ref="flyway"}
 #lombok = {group="org.projectlombok", name="lombok", version.ref="lombok"}
 mapstruct = {group="org.mapstruct", name="mapstruct", version.ref="mapstruct"}
 mapstruct-processor= {group="org.mapstruct", name="mapstruct-processor", version.ref="mapstruct"}
+
+# Testcontainers
+testcontainers-bom = {group="org.testcontainers", name="testcontainers-bom", version.ref="testcontainers"}
+testcontainers-junit = {group="org.testcontainers", name="junit-jupiter", version.ref="testcontainers"}
+testcontainers-postgresql = {group="org.testcontainers", name="postgresql", version.ref="testcontainers"}
 
 
 [plugins]

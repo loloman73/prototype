@@ -7,12 +7,16 @@ import org.springframework.test.context.DynamicPropertySource
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.utility.DockerImageName
 
-//reusable code for integration tests
+// Reusable code for integration tests
+
+// if use @Testcontainers, the container will be started once and stopped once for all tests
 abstract class BasePersistenceIT {
 
     companion object {
         private val image: DockerImageName = DockerImageName.parse("postgres:16-alpine")
 
+        // if use @Container, the container will be started and stopped automatically
+        // if use @ServiceConnection, there will be no need to register the datasource properties manually
         @JvmStatic
         val postgres: PostgreSQLContainer<*> = PostgreSQLContainer(image)
             .withDatabaseName("xenagos_test")

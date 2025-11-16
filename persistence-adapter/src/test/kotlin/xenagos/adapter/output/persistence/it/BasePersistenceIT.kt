@@ -7,6 +7,7 @@ import org.springframework.test.context.DynamicPropertySource
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.utility.DockerImageName
 
+//reusable code for integration tests
 abstract class BasePersistenceIT {
 
     companion object {

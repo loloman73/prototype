@@ -4,5 +4,5 @@ plugins {
 
 dependencies {
     implementation(project(":common"))
-    implementation(libs.sb.starter.validation)
+    api(libs.jakarta.validation)
 }

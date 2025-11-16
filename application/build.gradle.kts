@@ -1,5 +1,6 @@
 plugins {
     id("general-conventions")
+    alias(libs.plugins.jetbrains.kotlin.spring)
 }
 
 dependencies{
@@ -7,6 +8,8 @@ dependencies{
     implementation(project(":output-port"))
     implementation(project(":domain"))
     implementation(project(":common"))
-    implementation(libs.sb.starter)
-    testImplementation(libs.sb.starter.test)
+    implementation(libs.spring.context)
+
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.assertj)
 }

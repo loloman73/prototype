@@ -15,14 +15,15 @@ import java.util.*
 @RequestMapping("/admin/accessibilityTags")
 class AdminAccessibilityTagsController(private val service: AdminAccessibilityTagsUseCase) : BaseAdminController() {
 
+    private val errorFragmentForAddNewRequest: String = "accessibility-tag-modal-form-add-new"
+    private val errorFragmentForUpdateRequest: String = "accessibility-tag-modal-form-edit"
+    private val redirectHTMXPath: String = "accessibilityTags"
+
     @GetMapping
     fun showAll(model: Model): String {
-        model.addAttribute("accessibilityTags", service.getAll())
+        model.addAttribute("listAll", service.getAll())
         model.addAttribute("addNewAccessibilityTag", AdminAccessibilityTagNewRequestDTO("", "", false))
-        model.addAttribute(
-            "editAccessibilityTag",
-            AdminAccessibilityTagUpdateRequestDTO(UUID.randomUUID(), "", "", false)
-        )
+        model.addAttribute("editAccessibilityTag", AdminAccessibilityTagUpdateRequestDTO(UUID.randomUUID(), "", "", false))
         return "adminAccessibilityTags"
     }
 
@@ -31,26 +32,28 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
     fun addOneNew(
         @Valid @ModelAttribute("addNewAccessibilityTag") addNewAccessibilityTagDTO: AdminAccessibilityTagNewRequestDTO,
         bindingResult: BindingResult
-    ): String = handleAddNew(
-        bindingResult = bindingResult,
-        errorFragmentName = "accessibility-tag-modal-form-add-new",
-        redirectPath = "accessibilityTags"
-    ) {
-        service.saveOneNew(addNewAccessibilityTagDTO)
-    }
+    ): String =
+        handleAddNew(
+            bindingResult = bindingResult,
+            errorFragmentName = errorFragmentForAddNewRequest,
+            redirectPath = "accessibilityTags"
+        ) {
+            service.saveOneNew(addNewAccessibilityTagDTO)
+        }
 
     @HxRequest
     @PutMapping("/edit")
     fun updateOne(
         @Valid @ModelAttribute("editAccessibilityTag") editAccessibilityTagDTO: AdminAccessibilityTagUpdateRequestDTO,
         bindingResult: BindingResult
-    ): String = handleUpdate(
-        bindingResult = bindingResult,
-        errorFragmentName = "accessibility-tag-modal-form-edit",
-        redirectPath = "accessibilityTags"
-    ) {
-        service.updateOne(editAccessibilityTagDTO)
-    }
+    ): String =
+        handleUpdate(
+            bindingResult = bindingResult,
+            errorFragmentName = errorFragmentForUpdateRequest,
+            redirectPath = "accessibilityTags"
+        ) {
+            service.updateOne(editAccessibilityTagDTO)
+        }
 
     @HxRequest
     @DeleteMapping("/delete")

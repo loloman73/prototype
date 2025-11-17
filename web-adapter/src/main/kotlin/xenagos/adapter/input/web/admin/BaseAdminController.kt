@@ -12,8 +12,7 @@ abstract class BaseAdminController {
     }
 
     // Builds a fragment path for admin fragments.
-    protected fun adminFragment(fragmentName: String): String =
-        "./fragments/admin/$fragmentName"
+    protected fun adminFragment(fragmentName: String): String = "./fragments/admin/$fragmentName"
 
     // Returns the admin fragment if validation errors exist, otherwise null.
     // Combines adminFragment() and returnFragmentOnErrors() for convenience.

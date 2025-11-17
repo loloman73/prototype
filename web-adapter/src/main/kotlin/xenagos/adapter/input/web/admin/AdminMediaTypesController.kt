@@ -19,7 +19,7 @@ import java.util.UUID
 
 @Controller
 @RequestMapping("/admin/mediaTypes")
-class AdminMediaTypesController(private val service: AdminMediaTypesUseCase) {
+class AdminMediaTypesController(private val service: AdminMediaTypesUseCase) : BaseAdminController() {
 
     @GetMapping
     fun showAll(model: Model): String {
@@ -55,7 +55,6 @@ class AdminMediaTypesController(private val service: AdminMediaTypesUseCase) {
         return "redirect:htmx:/admin/mediaTypes"
     }
 
-    //TODO: in case there is error in deletion -> return feedback
     @HxRequest
     @DeleteMapping("/delete")
     fun deleteOne(@RequestParam id: UUID): String {

@@ -44,7 +44,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
             get("/admin/accessibilityTags")
         )
             .andExpect(status().isOk)
-            .andExpect(model().attributeExists("listAll", "addNewAccessibilityTag", "editAccessibilityTag"))
+            .andExpect(model().attributeExists("listAllModel", "addOneNewModel", "updateOneModel"))
             .andReturn()
 
         // Sanity: the template name isn't directly accessible via MockMvc without a view resolver asserting it,

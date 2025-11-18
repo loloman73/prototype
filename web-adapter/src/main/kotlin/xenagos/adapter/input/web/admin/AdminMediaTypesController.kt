@@ -62,4 +62,11 @@ class AdminMediaTypesController(private val service: AdminMediaTypesUseCase) : B
         return "redirect:htmx:/admin/mediaTypes"
     }
 
+    override val fragmentForAddOneNewRequest: String
+        get() = TODO("Not yet implemented")
+    override val fragmentForUpdateOneRequest: String
+        get() = TODO("Not yet implemented")
+    override val myPath: String
+        get() = TODO("Not yet implemented")
+
 }

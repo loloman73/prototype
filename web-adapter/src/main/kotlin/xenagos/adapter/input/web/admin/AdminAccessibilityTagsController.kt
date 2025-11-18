@@ -15,51 +15,38 @@ import java.util.*
 @RequestMapping("/admin/accessibilityTags")
 class AdminAccessibilityTagsController(private val service: AdminAccessibilityTagsUseCase) : BaseAdminController() {
 
-    private val errorFragmentForAddNewRequest: String = "accessibility-tag-modal-form-add-new"
-    private val errorFragmentForUpdateRequest: String = "accessibility-tag-modal-form-edit"
-    private val redirectHTMXPath: String = "accessibilityTags"
+    override val fragmentForAddOneNewRequest: String = "accessibility-tag-modal-form-add-new"
+    override val fragmentForUpdateOneRequest: String = "accessibility-tag-modal-form-edit"
+    override val myPath: String = "accessibilityTags"
+
+    private val emptyNewRequestDTO = AdminAccessibilityTagNewRequestDTO("", "", false)
+    private val emptyUpdateRequestDTO = AdminAccessibilityTagUpdateRequestDTO(UUID.randomUUID(), "", "", false)
 
     @GetMapping
     fun showAll(model: Model): String {
-        model.addAttribute("listAll", service.getAll())
-        model.addAttribute("addNewAccessibilityTag", AdminAccessibilityTagNewRequestDTO("", "", false))
-        model.addAttribute("editAccessibilityTag", AdminAccessibilityTagUpdateRequestDTO(UUID.randomUUID(), "", "", false))
+        model.addAttribute("listAllModel", service.getAll())
+        model.addAttribute("addOneNewModel", emptyNewRequestDTO)
+        model.addAttribute("updateOneModel", emptyUpdateRequestDTO)
         return "adminAccessibilityTags"
     }
 
     @HxRequest
     @PostMapping("/addNew")
     fun addOneNew(
-        @Valid @ModelAttribute("addNewAccessibilityTag") addNewAccessibilityTagDTO: AdminAccessibilityTagNewRequestDTO,
+        @Valid @ModelAttribute("addOneNewModel")
+        requestDTO: AdminAccessibilityTagNewRequestDTO,
         bindingResult: BindingResult
-    ): String =
-        handleAddNew(
-            bindingResult = bindingResult,
-            errorFragmentName = errorFragmentForAddNewRequest,
-            redirectPath = "accessibilityTags"
-        ) {
-            service.saveOneNew(addNewAccessibilityTagDTO)
-        }
+    ): String = handleAddNew(bindingResult = bindingResult) { service.saveOneNew(requestDTO) }
 
     @HxRequest
     @PutMapping("/edit")
     fun updateOne(
-        @Valid @ModelAttribute("editAccessibilityTag") editAccessibilityTagDTO: AdminAccessibilityTagUpdateRequestDTO,
+        @Valid @ModelAttribute("updateOneModel")
+        requestDTO: AdminAccessibilityTagUpdateRequestDTO,
         bindingResult: BindingResult
-    ): String =
-        handleUpdate(
-            bindingResult = bindingResult,
-            errorFragmentName = errorFragmentForUpdateRequest,
-            redirectPath = "accessibilityTags"
-        ) {
-            service.updateOne(editAccessibilityTagDTO)
-        }
+    ): String = handleUpdate(bindingResult = bindingResult) { service.updateOne(requestDTO) }
 
     @HxRequest
     @DeleteMapping("/delete")
-    fun deleteOne(@RequestParam id: UUID): String = handleDelete(
-        redirectPath = "accessibilityTags"
-    ) {
-        service.deleteOne(id)
-    }
+    fun deleteOne(@RequestParam id: UUID): String = handleDelete() { service.deleteOne(id) }
 }

@@ -17,10 +17,9 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
 
     override val fragmentForAddOneNewRequest: String = "accessibility-tag-modal-form-add-new"
     override val fragmentForUpdateOneRequest: String = "accessibility-tag-modal-form-edit"
-    override val myPath: String = "accessibilityTags"
-
-    private val emptyNewRequestDTO = AdminAccessibilityTagNewRequestDTO("", "", false)
-    private val emptyUpdateRequestDTO = AdminAccessibilityTagUpdateRequestDTO(UUID.randomUUID(), "", "", false)
+    override val myEndpointPath: String = "accessibilityTags"
+    override val emptyNewRequestDTO = AdminAccessibilityTagNewRequestDTO("", "", false)
+    override val emptyUpdateRequestDTO = AdminAccessibilityTagUpdateRequestDTO(UUID.randomUUID(), "", "", false)
 
     @GetMapping
     fun showAll(model: Model): String {
@@ -49,4 +48,5 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
     @HxRequest
     @DeleteMapping("/delete")
     fun deleteOne(@RequestParam id: UUID): String = handleDelete() { service.deleteOne(id) }
+
 }

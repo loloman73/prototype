@@ -1,4 +1,5 @@
-<form id="edit_form" th:object="${editAgeGroup}">
+<!--/*@thymesVar id="updateOneModel" type="xenagos.application.port.input.admin.model.AdminAgeGroupUpdateRequestDTO"*/-->
+<form id="edit_form" th:object="${updateOneModel}">
     <!--field ID-->
     <div class="col-10">
         <div class="form-floating mb-3">
@@ -7,7 +8,7 @@
                    id="edit_id"
                    name="id"
                    th:errorclass="is-invalid"
-                   th:value="${editAgeGroup.id}"
+                   th:value="${updateOneModel.id}"
                    readonly>
             <label class="text-secondary" for="edit_id">Id</label>
         </div>
@@ -21,7 +22,7 @@
                    name="groupName"
                    maxlength="35"
                    th:errorclass="is-invalid"
-                   th:value="${editAgeGroup.groupName}">
+                   th:value="${updateOneModel.groupName}">
             <label class="text-secondary" for="edit_field1">Age Group Name</label>
             <div class="form-text fst-italic ps-2">maximum 35 digits</div>
         </div>
@@ -36,7 +37,7 @@
                    min="5"
                    max="100"
                    th:errorclass="is-invalid"
-                   th:value="${editAgeGroup.minAge}">
+                   th:value="${updateOneModel.minAge}">
             <label class="text-secondary" for="edit_field2">Minimum age</label>
             <div class="form-text fst-italic ps-2">min 5, max 100</div>
         </div>
@@ -51,7 +52,7 @@
                    min="5"
                    max="100"
                    th:errorclass="is-invalid"
-                   th:value="${editAgeGroup.maxAge}">
+                   th:value="${updateOneModel.maxAge}">
             <label class="text-secondary" for="edit_field3">Maximum age</label>
             <div class="form-text fst-italic ps-2">min 5, max 100</div>
         </div>
@@ -63,7 +64,7 @@
                    type="checkbox"
                    id="edit_active"
                    name="active"
-                   th:checked="${editAgeGroup.active}">
+                   th:checked="${updateOneModel.active}">
             <label class="form-check-label" for="edit_active">Active</label>
         </div>
     </div>

@@ -21,52 +21,37 @@ import java.util.UUID
 @RequestMapping("/admin/mediaTypes")
 class AdminMediaTypesController(private val service: AdminMediaTypesUseCase) : BaseAdminController() {
 
+    override val fragmentForAddOneNewRequest: String = "topic-tag-modal-form-add-new"
+    override val fragmentForUpdateOneRequest: String = "media-type-modal-form-edit"
+    override val myEndpointPath: String = "mediaTypes"
+    override val emptyNewRequestDTO = AdminMediaTypeNewRequestDTO("", false)
+    override val emptyUpdateRequestDTO = AdminMediaTypeUpdateRequestDTO(UUID.randomUUID(), "", false)
+
     @GetMapping
     fun showAll(model: Model): String {
-        model.addAttribute("mediaTypes", service.getAll())
-        model.addAttribute("addNewMediaType", AdminMediaTypeNewRequestDTO("", false))
-        model.addAttribute("editMediaType", AdminMediaTypeUpdateRequestDTO(UUID.randomUUID(), "", false))
+        model.addAttribute("listAllModel", service.getAll())
+        model.addAttribute("addOneNewModel", emptyNewRequestDTO)
+        model.addAttribute("updateOneModel", emptyUpdateRequestDTO)
         return "adminMediaTypes"
     }
 
     @HxRequest
     @PostMapping("/addNew")
     fun addOneNew(
-        @Valid @ModelAttribute("addNewMediaType") addNewMediaTypeDTO: AdminMediaTypeNewRequestDTO,
+        @Valid @ModelAttribute("addOneNewModel")
+        requestDTO: AdminMediaTypeNewRequestDTO,
         bindingResult: BindingResult
-    ): String {
-        if (bindingResult.hasErrors()) {
-            return "./fragments/admin/media-type-modal-form-add-new"
-        }
-        service.saveOneNew(addNewMediaTypeDTO)
-        return "redirect:htmx:/admin/mediaTypes"
-    }
+    ): String = handleAddNew(bindingResult = bindingResult) { service.saveOneNew(requestDTO) }
 
     @HxRequest
     @PutMapping("/edit")
     fun updateOne(
-        @Valid @ModelAttribute("editMediaType") editMediaTypeDTO: AdminMediaTypeUpdateRequestDTO,
+        @Valid @ModelAttribute("updateOneModel")
+        requestDTO: AdminMediaTypeUpdateRequestDTO,
         bindingResult: BindingResult
-    ): String {
-        if (bindingResult.hasErrors()) {
-            return "./fragments/admin/media-type-modal-form-edit"
-        }
-        service.updateOne(editMediaTypeDTO)
-        return "redirect:htmx:/admin/mediaTypes"
-    }
+    ): String = handleUpdate(bindingResult = bindingResult) { service.updateOne(requestDTO) }
 
     @HxRequest
     @DeleteMapping("/delete")
-    fun deleteOne(@RequestParam id: UUID): String {
-        service.deleteOne(id)
-        return "redirect:htmx:/admin/mediaTypes"
-    }
-
-    override val fragmentForAddOneNewRequest: String
-        get() = TODO("Not yet implemented")
-    override val fragmentForUpdateOneRequest: String
-        get() = TODO("Not yet implemented")
-    override val myPath: String
-        get() = TODO("Not yet implemented")
-
+    fun deleteOne(@RequestParam id: UUID): String = handleDelete() { service.deleteOne(id) }
 }

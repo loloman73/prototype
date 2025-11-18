@@ -1,4 +1,5 @@
-<form id="add_new_form" th:object="${addNewLanguage}">
+<!--/*@thymesVar id="addOneNewModel" type="xenagos.application.port.input.admin.model.AdminLanguageNewRequestDTO"*/-->
+<form id="add_new_form" th:object="${addOneNewModel}">
     <!--field 1-->
     <div class="col-6">
         <div class="form-floating mb-3">
@@ -9,7 +10,7 @@
                    minlength="3"
                    maxlength="3"
                    th:errorclass="is-invalid"
-                   th:value="${addNewLanguage.code}">
+                   th:value="${addOneNewModel.code}">
             <label class="text-secondary" for="new_field1">ISO 639-3 code</label>
             <div class="form-text fst-italic ps-2">3 digits</div>
         </div>
@@ -24,7 +25,7 @@
                    minlength="3"
                    maxlength="35"
                    th:errorclass="is-invalid"
-                   th:value="${addNewLanguage.englishName}">
+                   th:value="${addOneNewModel.englishName}">
             <label class="text-secondary" for="new_field2">English Name</label>
             <div class="form-text fst-italic ps-2">min 3, max 35 digits</div>
         </div>
@@ -39,7 +40,7 @@
                    minlength="3"
                    maxlength="35"
                    th:errorclass="is-invalid"
-                   th:value="${addNewLanguage.nativeName}">
+                   th:value="${addOneNewModel.nativeName}">
             <label class="text-secondary" for="new_field3">Native Name</label>
             <div class="form-text fst-italic ps-2">min 3, max 35 digits</div>
         </div>
@@ -51,7 +52,7 @@
                    type="checkbox"
                    id="new_active"
                    name="active"
-                   th:checked="${addNewLanguage.active}">
+                   th:checked="${addOneNewModel.active}">
             <label class="form-check-label" for="new_active">Active</label>
         </div>
     </div>

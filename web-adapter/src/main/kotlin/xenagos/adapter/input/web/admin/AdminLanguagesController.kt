@@ -13,47 +13,39 @@ import java.util.*
 
 @Controller
 @RequestMapping("/admin/languages")
-class AdminLanguagesController(private val service: AdminLanguagesUseCase) {
+class AdminLanguagesController(private val service: AdminLanguagesUseCase) : BaseAdminController() {
+
+    override val fragmentForAddOneNewRequest = "language-modal-form-add-new"
+    override val fragmentForUpdateOneRequest = "language-modal-form-edit"
+    override val myEndpointPath: String = "languages"
+    override val emptyNewRequestDTO = AdminLanguageNewRequestDTO("", "", "", false)
+    override val emptyUpdateRequestDTO = AdminLanguageUpdateRequestDTO(UUID.randomUUID(), "", "", "", false)
 
     @GetMapping
     fun showAll(model: Model): String {
-        model.addAttribute("languages", service.getAll())
-        model.addAttribute("addNewLanguage", AdminLanguageNewRequestDTO("", "", "", false ))
-        model.addAttribute("editLanguage", AdminLanguageUpdateRequestDTO(UUID.randomUUID(),"","", "", false))
+        model.addAttribute("listAllModel", service.getAll())
+        model.addAttribute("addOneNewModel", emptyNewRequestDTO)
+        model.addAttribute("updateOneModel", emptyUpdateRequestDTO)
         return "adminLanguages"
     }
 
     @HxRequest
     @PostMapping("/addNew")
     fun addOneNew(
-        @Valid @ModelAttribute("addNewLanguage") addNewLanguageDTO: AdminLanguageNewRequestDTO,
+        @Valid @ModelAttribute("addOneNewModel")
+        requestDTO: AdminLanguageNewRequestDTO,
         bindingResult: BindingResult
-    ): String {
-        if (bindingResult.hasErrors()) {
-            println(bindingResult.fieldErrors)
-            return "./fragments/admin/language-modal-form-add-new"
-        }
-        service.saveOneNew(addNewLanguageDTO)
-        return "redirect:htmx:/admin/languages"
-    }
+    ): String = handleAddNew(bindingResult = bindingResult) { service.saveOneNew(requestDTO) }
 
     @HxRequest
     @PutMapping("/edit")
     fun updateOne(
-        @Valid @ModelAttribute("editLanguage") editLanguageDTO: AdminLanguageUpdateRequestDTO,
+        @Valid @ModelAttribute("updateOneModel")
+        requestDTO: AdminLanguageUpdateRequestDTO,
         bindingResult: BindingResult
-    ): String {
-        if (bindingResult.hasErrors()) {
-            return "./fragments/admin/language-modal-form-edit"
-        }
-        service.updateOne(editLanguageDTO)
-        return "redirect:htmx:/admin/languages"
-    }
+    ): String = handleUpdate(bindingResult = bindingResult) { service.updateOne(requestDTO) }
 
     @HxRequest
     @DeleteMapping("/delete")
-    fun deleteOne(@RequestParam id: UUID): String {
-        service.deleteOne(id)
-        return "redirect:htmx:/admin/languages"
-    }
+    fun deleteOne(@RequestParam id: UUID): String = handleDelete() { service.deleteOne(id) }
 }

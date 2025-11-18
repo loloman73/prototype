@@ -30,9 +30,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="topicTag : ${topicTags}">
+            <tr th:each="topicTag : ${listAllModel}">
                 <!--## column-->
-                <th scope="row"><span th:text="${topicTags.indexOf(topicTag)+1}"></span></th>
+                <th scope="row"><span th:text="${listAllModel.indexOf(topicTag)+1}"></span></th>
                 <!--field ID-->
                 <td class="text-nowrap"><span th:text="${topicTag.id}"></span></td>
                 <!--field 1-->

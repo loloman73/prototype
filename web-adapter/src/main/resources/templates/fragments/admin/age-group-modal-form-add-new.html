@@ -1,4 +1,5 @@
-<form id="add_new_form" th:object="${addNewAgeGroup}">
+<!--/*@thymesVar id="addOneNewModel" type="xenagos.application.port.input.admin.model.AdminAgeGroupNewRequestDTO"*/-->
+<form id="add_new_form" th:object="${addOneNewModel}">
     <!--field 1-->
     <div class="col-9">
         <div class="form-floating mb-3">
@@ -8,7 +9,7 @@
                    name="groupName"
                    maxlength="35"
                    th:errorclass="is-invalid"
-                   th:value="${addNewAgeGroup.groupName}">
+                   th:value="${addOneNewModel.groupName}">
             <label class="text-secondary" for="new_field1">Age Group Name</label>
             <div class="form-text fst-italic ps-2">min 3, max 35 digits</div>
         </div>
@@ -23,7 +24,7 @@
                    min="5"
                    max="100"
                    th:errorclass="is-invalid"
-                   th:value="${addNewAgeGroup.minAge}">
+                   th:value="${addOneNewModel.minAge}">
             <label class="text-secondary" for="new_field2">Minimum age</label>
             <div class="form-text fst-italic ps-2">min 5, max 100</div>
         </div>
@@ -38,7 +39,7 @@
                    min="5"
                    max="100"
                    th:errorclass="is-invalid"
-                   th:value="${addNewAgeGroup.maxAge}">
+                   th:value="${addOneNewModel.maxAge}">
             <label class="text-secondary" for="new_field3">Maximum age</label>
             <div class="form-text fst-italic ps-2">min 5, max 100</div>
         </div>
@@ -50,7 +51,7 @@
                    type="checkbox"
                    id="new_active"
                    name="active"
-                   th:checked="${addNewAgeGroup.active}">
+                   th:checked="${addOneNewModel.active}">
             <label class="form-check-label" for="new_active">Active</label>
         </div>
     </div>

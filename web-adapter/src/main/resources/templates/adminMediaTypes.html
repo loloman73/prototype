@@ -29,9 +29,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="mediaType : ${mediaTypes}">
+                <tr th:each="mediaType : ${listAllModel}">
                     <!--## column-->
-                    <th scope="row"><span th:text="${mediaTypes.indexOf(mediaType)+1}"></span></th>
+                    <th scope="row"><span th:text="${listAllModel.indexOf(mediaType)+1}"></span></th>
                     <!--field ID-->
                     <td class="text-nowrap"><span th:text="${mediaType.id}"></span></td>
                     <!--field 1-->

@@ -13,47 +13,39 @@ import java.util.*
 
 @Controller
 @RequestMapping("/admin/topicTags")
-class AdminTopicTagsController(private val service: AdminTopicTagsUseCase) {
+class AdminTopicTagsController(private val service: AdminTopicTagsUseCase) : BaseAdminController() {
+
+    override val fragmentForAddOneNewRequest: String = "topic-tag-modal-form-add-new"
+    override val fragmentForUpdateOneRequest: String = "topic-tag-modal-form-edit"
+    override val myEndpointPath: String = "topicTags"
+    override val emptyNewRequestDTO = AdminTopicTagNewRequestDTO("", "", false)
+    override val emptyUpdateRequestDTO = AdminTopicTagUpdateRequestDTO(UUID.randomUUID(), "", "", false)
 
     @GetMapping
     fun showAll(model: Model): String {
-        model.addAttribute("topicTags", service.getAll())
-        model.addAttribute("addNewTopicTag", AdminTopicTagNewRequestDTO("","", false))
-        model.addAttribute("editTopicTag", AdminTopicTagUpdateRequestDTO(UUID.randomUUID(),"","",false))
+        model.addAttribute("listAllModel", service.getAll())
+        model.addAttribute("addOneNewModel", emptyNewRequestDTO)
+        model.addAttribute("updateOneModel", emptyUpdateRequestDTO)
         return "adminTopicTags"
     }
 
     @HxRequest
     @PostMapping("/addNew")
     fun addOneNew(
-        @Valid @ModelAttribute("addNewTopicTag") addNewTopicTagDTO: AdminTopicTagNewRequestDTO,
+        @Valid @ModelAttribute("addOneNewModel")
+        requestDTO: AdminTopicTagNewRequestDTO,
         bindingResult: BindingResult
-    ): String {
-        if (bindingResult.hasErrors()) {
-            println(bindingResult.fieldErrors)
-            return "./fragments/admin/topic-tag-modal-form-add-new"
-        }
-        service.saveOneNew(addNewTopicTagDTO)
-        return "redirect:htmx:/admin/topicTags"
-    }
+    ): String = handleAddNew(bindingResult = bindingResult) { service.saveOneNew(requestDTO) }
 
     @HxRequest
     @PutMapping("/edit")
     fun updateOne(
-        @Valid @ModelAttribute("editTopicTag") editTopicTagDTO: AdminTopicTagUpdateRequestDTO,
+        @Valid @ModelAttribute("updateOneModel")
+        requestDTO: AdminTopicTagUpdateRequestDTO,
         bindingResult: BindingResult
-    ): String {
-        if (bindingResult.hasErrors()) {
-            return "./fragments/admin/topic-tag-modal-form-edit"
-        }
-        service.updateOne(editTopicTagDTO)
-        return "redirect:htmx:/admin/topicTags"
-    }
+    ): String = handleUpdate(bindingResult = bindingResult) { service.updateOne(requestDTO) }
 
     @HxRequest
     @DeleteMapping("/delete")
-    fun deleteOne(@RequestParam id: UUID): String {
-        service.deleteOne(id)
-        return "redirect:htmx:/admin/topicTags"
-    }
+    fun deleteOne(@RequestParam id: UUID): String = handleDelete() { service.deleteOne(id) }
 }

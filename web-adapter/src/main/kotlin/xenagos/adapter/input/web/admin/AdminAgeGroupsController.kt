@@ -13,46 +13,39 @@ import java.util.*
 
 @Controller
 @RequestMapping("/admin/ageGroups")
-class AdminAgeGroupsController(private val service: AdminAgeGroupUseCase) {
+class AdminAgeGroupsController(private val service: AdminAgeGroupUseCase) : BaseAdminController() {
+
+    override val fragmentForAddOneNewRequest: String = "age-group-modal-form-add-new"
+    override val fragmentForUpdateOneRequest: String = "age-group-modal-form-edit"
+    override val myEndpointPath: String = "ageGroups"
+    override val emptyNewRequestDTO = AdminAgeGroupNewRequestDTO("", 0, 0, false)
+    override val emptyUpdateRequestDTO = AdminAgeGroupUpdateRequestDTO(UUID.randomUUID(), "", 0, 0, false)
 
     @GetMapping
     fun showAll(model: Model): String {
-        model.addAttribute("ageGroups", service.getAll())
-        model.addAttribute("addNewAgeGroup", AdminAgeGroupNewRequestDTO("",0, 0,false))
-        model.addAttribute("editAgeGroup", AdminAgeGroupUpdateRequestDTO(UUID.randomUUID(),"",0, 0,false))
+        model.addAttribute("listAllModel", service.getAll())
+        model.addAttribute("addOneNewModel",emptyNewRequestDTO )
+        model.addAttribute("updateOneModel",emptyUpdateRequestDTO )
         return "adminAgeGroups"
     }
 
     @HxRequest
     @PostMapping("/addNew")
     fun addOneNew(
-        @Valid @ModelAttribute("addNewAgeGroup") addNewAgeGroupDTO: AdminAgeGroupNewRequestDTO,
+        @Valid @ModelAttribute("addOneNewModel")
+        requestDTO: AdminAgeGroupNewRequestDTO,
         bindingResult: BindingResult
-    ): String {
-        if (bindingResult.hasErrors()) {
-            return "./fragments/admin/age-group-modal-form-add-new"
-        }
-        service.saveOneNew(addNewAgeGroupDTO)
-        return "redirect:htmx:/admin/ageGroups"
-    }
+    ): String = handleAddNew(bindingResult = bindingResult) { service.saveOneNew(requestDTO) }
 
     @HxRequest
     @PutMapping("/edit")
     fun updateOne(
-        @Valid @ModelAttribute("editAgeGroup") editAgeGroupDTO: AdminAgeGroupUpdateRequestDTO,
+        @Valid @ModelAttribute("editAgeGroup")
+        requestDTO: AdminAgeGroupUpdateRequestDTO,
         bindingResult: BindingResult
-    ): String {
-        if (bindingResult.hasErrors()) {
-            return "./fragments/admin/age-group-modal-form-edit"
-        }
-        service.updateOne(editAgeGroupDTO)
-        return "redirect:htmx:/admin/ageGroups"
-    }
+    ): String = handleUpdate(bindingResult = bindingResult) { service.updateOne(requestDTO) }
 
     @HxRequest
     @DeleteMapping("/delete")
-    fun deleteOne(@RequestParam id: UUID): String {
-        service.deleteOne(id)
-        return "redirect:htmx:/admin/ageGroups"
-    }
+    fun deleteOne(@RequestParam id: UUID): String = handleDelete() { service.deleteOne(id) }
 }

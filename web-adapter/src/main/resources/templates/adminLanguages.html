@@ -31,9 +31,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="language : ${languages}">
+            <tr th:each="language : ${listAllModel}">
                 <!--## column-->
-                <th scope="row"><span th:text="${languages.indexOf(language)+1}"></span></th>
+                <th scope="row"><span th:text="${listAllModel.indexOf(language)+1}"></span></th>
                 <!--field ID-->
                 <td class="text-nowrap"><span th:text="${language.id}"></span></td>
                 <!--field 1-->

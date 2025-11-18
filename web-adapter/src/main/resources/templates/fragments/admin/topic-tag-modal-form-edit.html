@@ -1,4 +1,5 @@
-<form id="edit_form" th:object="${editTopicTag}">
+<!--/*@thymesVar id="updateOneModel" type="xenagos.application.port.input.admin.model.AdminTopicTagUpdateRequestDTO"*/-->
+<form id="edit_form" th:object="${updateOneModel}">
     <!--field ID-->
     <div class="col-10">
         <div class="form-floating mb-3">
@@ -7,7 +8,7 @@
                    name="id"
                    type="text"
                    th:errorclass="is-invalid"
-                   th:value="${editTopicTag.id}"
+                   th:value="${updateOneModel.id}"
                    readonly>
             <label class="text-secondary" for="edit_id">Id</label>
         </div>
@@ -21,7 +22,7 @@
                    type="text"
                    maxlength="35"
                    th:errorclass="is-invalid"
-                   th:value="${editTopicTag.name}">
+                   th:value="${updateOneModel.name}">
             <label class="text-secondary" for="edit_field1">Name</label>
             <div class="form-text fst-italic ps-2">min 3, max 35 digits</div>
         </div>
@@ -35,7 +36,7 @@
                       maxlength="250"
                       style="height: 150px"
                       th:errorclass="is-invalid"
-                      th:text="${editTopicTag.description}"></textarea>
+                      th:text="${updateOneModel.description}"></textarea>
             <label class="text-secondary" for="edit_field2">Description</label>
             <div class="form-text fst-italic ps-2">min 3, max 250 digits</div>
         </div>
@@ -47,7 +48,7 @@
                    type="checkbox"
                    id="edit_active"
                    name="active"
-                   th:checked="${editTopicTag.active}">
+                   th:checked="${updateOneModel.active}">
             <label class="form-check-label" for="edit_active">Active</label>
         </div>
     </div>

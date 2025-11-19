@@ -154,8 +154,8 @@ class AdminTopicTagMapperTest {
         val id = UUID.randomUUID()
         val newRequestDto = AdminTopicTagNewRequestDTO(
             name = "Culture",
-            description = "Cultural heritage and traditions"
-            // active defaults to false
+            description = "Cultural heritage and traditions",
+            active = false
         )
 
         // When

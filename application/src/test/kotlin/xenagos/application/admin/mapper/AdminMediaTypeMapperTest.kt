@@ -135,8 +135,8 @@ class AdminMediaTypeMapperTest {
         // Given
         val id = UUID.randomUUID()
         val newRequestDto = AdminMediaTypeNewRequestDTO(
-            name = "Interactive"
-            // active defaults to false
+            name = "Interactive",
+            active = false
         )
 
         // When

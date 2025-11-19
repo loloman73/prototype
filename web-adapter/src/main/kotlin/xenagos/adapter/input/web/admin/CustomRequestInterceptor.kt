@@ -5,23 +5,24 @@ import jakarta.servlet.http.HttpServletResponse
 import org.springframework.stereotype.Component
 import org.springframework.web.servlet.HandlerInterceptor
 
+//Problem to solve: When in the HTML form exist unchecked checkbox, the POST request does not contain the checkbox parameter.
+//Solution: Intercept the request and append the checkbox parameter if it is not present, with value false.
+
 @Component
-class CustomRequestInterceptor: HandlerInterceptor {
+class CustomRequestInterceptor : HandlerInterceptor {
+
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
-        // Only handle POST requests for AdminAccessibilityTagsController endpoints
-        if (request.method.equals("POST", ignoreCase = true)) {
-            val uri = request.requestURI ?: ""
-            // Specifically handle addNew on accessibility tags
-            if (uri == "/admin/accessibilityTags/addNew") {
-                val activeParam = request.getParameter("active")
-                if (activeParam == null || activeParam.isBlank()) {
-                    // Forward the request to the same path while appending active=false as a query parameter.
-                    // Forward keeps it a POST and preserves original form parameters; query param will be merged.
-                    val dispatcher = request.getRequestDispatcher("$uri?active=false")
-                    dispatcher.forward(request, response)
-                    return false
-                }
-            }
+
+        val requestMethodIsPOST = request.method.equals("POST", ignoreCase = true)
+        val uri = request.requestURI
+        val uriIsAdmin = uri.contains("/admin/accessibilityTags/addNew")
+        val activeParamIsNull = request.getParameter("active") == null
+
+        if (requestMethodIsPOST && uriIsAdmin && activeParamIsNull) {
+            // Forward the request to the same path while appending active=false as a query parameter.
+            val dispatcher = request.getRequestDispatcher("$uri?active=false")
+            dispatcher.forward(request, response)
+            return false
         }
         return true
     }

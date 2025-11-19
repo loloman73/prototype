@@ -157,8 +157,8 @@ class AdminLanguageMapperTest {
         val newRequestDto = AdminLanguageNewRequestDTO(
             code = "ita",
             englishName = "Italian",
-            nativeName = "Italiano"
-            // active defaults to false
+            nativeName = "Italiano",
+            active = false
         )
 
         // When

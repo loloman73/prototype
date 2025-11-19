@@ -18,8 +18,8 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
     override val fragmentForAddOneNewRequest: String = "accessibility-tag-modal-form-add-new"
     override val fragmentForUpdateOneRequest: String = "accessibility-tag-modal-form-edit"
     override val myEndpointPath: String = "accessibilityTags"
-    override val emptyNewRequestDTO = AdminAccessibilityTagNewRequestDTO("", "", false)
-    override val emptyUpdateRequestDTO = AdminAccessibilityTagUpdateRequestDTO(UUID.randomUUID(), "", "", false)
+    override val emptyNewRequestDTO = AdminAccessibilityTagNewRequestDTO.createEmptyDeactivated()
+    override val emptyUpdateRequestDTO = AdminAccessibilityTagUpdateRequestDTO.createEmptyDeactivated()
 
     @GetMapping
     fun showAll(model: Model): String {
@@ -32,7 +32,8 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
     @HxRequest
     @PostMapping("/addNew")
     fun addOneNew(
-        @Valid @ModelAttribute("addOneNewModel")
+        @ModelAttribute("addOneNewModel")
+        @Valid
         requestDTO: AdminAccessibilityTagNewRequestDTO,
         bindingResult: BindingResult
     ): String = handleAddNew(bindingResult = bindingResult) { service.saveOneNew(requestDTO) }

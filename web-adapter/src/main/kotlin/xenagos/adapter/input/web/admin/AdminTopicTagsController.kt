@@ -18,8 +18,8 @@ class AdminTopicTagsController(private val service: AdminTopicTagsUseCase) : Bas
     override val fragmentForAddOneNewRequest: String = "topic-tag-modal-form-add-new"
     override val fragmentForUpdateOneRequest: String = "topic-tag-modal-form-edit"
     override val myEndpointPath: String = "topicTags"
-    override val emptyNewRequestDTO = AdminTopicTagNewRequestDTO("", "", false)
-    override val emptyUpdateRequestDTO = AdminTopicTagUpdateRequestDTO(UUID.randomUUID(), "", "", false)
+    override val emptyNewRequestDTO = AdminTopicTagNewRequestDTO.createEmptyDeactivated()
+    override val emptyUpdateRequestDTO = AdminTopicTagUpdateRequestDTO.createEmptyDeactivated()
 
     @GetMapping
     fun showAll(model: Model): String {

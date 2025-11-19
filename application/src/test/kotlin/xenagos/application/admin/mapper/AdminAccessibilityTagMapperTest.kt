@@ -108,8 +108,8 @@ class AdminAccessibilityTagMapperTest {
         val id = UUID.randomUUID()
         val newRequestDto = AdminAccessibilityTagNewRequestDTO(
             name = "Test Tag",
-            description = "Test Description"
-            // active defaults to false
+            description = "Test Description",
+            active = false
         )
 
         // When

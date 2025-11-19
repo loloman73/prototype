@@ -19,9 +19,11 @@ data class AdminAgeGroupNewRequestDTO(
     @field:Positive
     val maxAge: Byte,
 
-    // needs default false value because html POST calls ignore checkboxes when they are unchecked
-    // ** Leaked dependency on implementation **
-    // TODO: find solution to send unchecked checkbox status with POST calls
     @field:NotNull
-    val active: Boolean = false
-): BaseAdminNewRequestDTO
+    val active: Boolean
+
+) : BaseAdminNewRequestDTO {
+    companion object {
+        fun createEmptyDeactivated() = AdminAgeGroupNewRequestDTO("", 0, 0, false)
+    }
+}

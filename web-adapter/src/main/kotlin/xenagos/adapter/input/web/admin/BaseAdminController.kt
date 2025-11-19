@@ -34,6 +34,7 @@ abstract class BaseAdminController {
 
     protected fun handleAddNew(bindingResult: BindingResult, saveAction: () -> Unit): String {
         getValidationErrorFragment(bindingResult, fragmentForAddOneNewRequest)?.let { return it }
+
         saveAction()
         return redirectToAdminHtmx(myEndpointPath)
     }

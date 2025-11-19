@@ -24,8 +24,8 @@ class AdminMediaTypesController(private val service: AdminMediaTypesUseCase) : B
     override val fragmentForAddOneNewRequest: String = "topic-tag-modal-form-add-new"
     override val fragmentForUpdateOneRequest: String = "media-type-modal-form-edit"
     override val myEndpointPath: String = "mediaTypes"
-    override val emptyNewRequestDTO = AdminMediaTypeNewRequestDTO("", false)
-    override val emptyUpdateRequestDTO = AdminMediaTypeUpdateRequestDTO(UUID.randomUUID(), "", false)
+    override val emptyNewRequestDTO = AdminMediaTypeNewRequestDTO.createEmptyDeactivated()
+    override val emptyUpdateRequestDTO = AdminMediaTypeUpdateRequestDTO.createEmptyDeactivated()
 
     @GetMapping
     fun showAll(model: Model): String {

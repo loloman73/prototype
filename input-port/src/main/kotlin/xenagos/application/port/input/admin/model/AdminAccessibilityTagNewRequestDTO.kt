@@ -14,10 +14,11 @@ data class AdminAccessibilityTagNewRequestDTO(
     @field:Size(min = 3, max = 250)
     val description: String,
 
-    // needs default false value because html POST calls ignore checkboxes when they are unchecked
-    // ** Leaked dependency on implementation **
-    // TODO: find solution to send unchecked checkbox status with POST calls
     @field:NotNull
-    val active: Boolean = false
+    val active: Boolean
 
-) : BaseAdminNewRequestDTO
+) : BaseAdminNewRequestDTO {
+    companion object {
+        fun createEmptyDeactivated() = AdminAccessibilityTagNewRequestDTO("", "", false)
+    }
+}

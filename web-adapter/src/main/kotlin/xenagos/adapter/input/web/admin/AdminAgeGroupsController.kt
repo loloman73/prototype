@@ -18,8 +18,8 @@ class AdminAgeGroupsController(private val service: AdminAgeGroupUseCase) : Base
     override val fragmentForAddOneNewRequest: String = "age-group-modal-form-add-new"
     override val fragmentForUpdateOneRequest: String = "age-group-modal-form-edit"
     override val myEndpointPath: String = "ageGroups"
-    override val emptyNewRequestDTO = AdminAgeGroupNewRequestDTO("", 0, 0, false)
-    override val emptyUpdateRequestDTO = AdminAgeGroupUpdateRequestDTO(UUID.randomUUID(), "", 0, 0, false)
+    override val emptyNewRequestDTO = AdminAgeGroupNewRequestDTO.createEmptyDeactivated()
+    override val emptyUpdateRequestDTO = AdminAgeGroupUpdateRequestDTO.createEmptyDeactivated()
 
     @GetMapping
     fun showAll(model: Model): String {

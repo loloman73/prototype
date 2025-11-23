@@ -11,6 +11,7 @@ import kotlin.reflect.full.companionObjectInstance
 import kotlin.reflect.full.functions
 import kotlin.reflect.full.memberProperties
 
+//uses reflection to find all DTOs and test that createEmptyDeactivated() returns active = false
 class AdminDTOsCreateEmptyDeactivatedDynamicTest {
 
     @TestFactory

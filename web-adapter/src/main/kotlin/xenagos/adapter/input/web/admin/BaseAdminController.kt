@@ -1,7 +1,6 @@
 package xenagos.adapter.input.web.admin
 
 import org.springframework.validation.BindingResult
-import xenagos.application.port.input.admin.model.AdminLanguageUpdateRequestDTO
 import xenagos.application.port.input.admin.model.BaseAdminNewRequestDTO
 import xenagos.application.port.input.admin.model.BaseAdminUpdateRequestDTO
 
@@ -34,7 +33,6 @@ abstract class BaseAdminController {
 
     protected fun handleAddNew(bindingResult: BindingResult, saveAction: () -> Unit): String {
         getValidationErrorFragment(bindingResult, fragmentForAddOneNewRequest)?.let { return it }
-
         saveAction()
         return redirectToAdminHtmx(myEndpointPath)
     }

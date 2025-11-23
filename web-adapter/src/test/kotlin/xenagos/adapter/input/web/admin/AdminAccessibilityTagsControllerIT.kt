@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.header
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.model
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import xenagos.PrototypeApplication
+import xenagos.adapter.input.web.BaseWebIT
 import xenagos.application.port.input.admin.AdminAccessibilityTagsUseCase
 import xenagos.application.port.input.admin.model.AdminAccessibilityTagNewRequestDTO
 import java.util.*
@@ -37,9 +38,18 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
     @Autowired
     lateinit var useCase: AdminAccessibilityTagsUseCase
 
+    private fun createOne() = useCase.saveOneNew(
+        AdminAccessibilityTagNewRequestDTO(
+            name = "Wheelchair Accessible",
+            description = "Suitable for wheelchair users",
+            active = true
+        )
+    )
+
     @Test
     @Order(1)
     fun `GET showAll returns page with required model attributes`() {
+        createOne()
         val result = mockMvc.perform(
             get("/admin/accessibilityTags")
         )
@@ -47,8 +57,6 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
             .andExpect(model().attributeExists("listAllModel", "addOneNewModel", "updateOneModel"))
             .andReturn()
 
-        // Sanity: the template name isn't directly accessible via MockMvc without a view resolver asserting it,
-        // but we can assert that initially the DB is empty.
         val all = useCase.getAll()
         assertThat(all).isNotNull
     }
@@ -76,13 +84,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
     @Order(3)
     fun `PUT edit via HTMX updates an existing accessibility tag`() {
         // Arrange: ensure one exists
-        val created = useCase.saveOneNew(
-            AdminAccessibilityTagNewRequestDTO(
-                name = "Signage",
-                description = "Basic signage",
-                active = true
-            )
-        )
+        val created = createOne()
 
         mockMvc.perform(
             put("/admin/accessibilityTags/edit")
@@ -105,13 +107,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
     @Test
     @Order(4)
     fun `DELETE delete via HTMX removes a tag`() {
-        val created = useCase.saveOneNew(
-            AdminAccessibilityTagNewRequestDTO(
-                name = "Temp Tag",
-                description = "To be deleted",
-                active = true
-            )
-        )
+        val created = createOne()
 
         mockMvc.perform(
             delete("/admin/accessibilityTags/delete")
@@ -125,3 +121,12 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
         assertThat(remainingIds).doesNotContain(UUID.fromString(created.id.toString()))
     }
 }
+
+//Rewrite the AdminAccessibilityTagsControllerIT. I want to test:
+//
+//A. The GET endpoint.
+//1) Add 1 valid entry using the UseCase. Τhen call the GET endpoint to test the return and assert if all the parameters of the entry are the same in the listAllModel attribute. Check also if the addOneNewModel and updateOneModel attributes return empty DTOs
+//2) Add 2 more valid entries using the UseCase. Τhen call the GET endpoint and assert if all the parameters of the entries exist and they are the same in the listAllModel attribute
+//
+//B. The PUT endpoint
+//1) Add 1 valid entry using the UseCase. Then Update the entry using the PUT endpoint. Test using the Use Case.

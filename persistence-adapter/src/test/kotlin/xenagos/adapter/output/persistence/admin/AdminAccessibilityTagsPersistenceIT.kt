@@ -7,7 +7,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.context.annotation.Import
 import xenagos.adapter.output.persistence.admin.mapper.AdminAccessibilityTagJPAMapper
-import xenagos.adapter.output.persistence.it.BasePersistenceIT
+import xenagos.adapter.output.persistence.BasePersistenceIT
 import xenagos.domain.model.AccessibilityTag
 import java.util.UUID
 

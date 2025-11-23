@@ -5,8 +5,9 @@ import jakarta.servlet.http.HttpServletResponse
 import org.springframework.stereotype.Component
 import org.springframework.web.servlet.HandlerInterceptor
 
-//Problem to solve: When in the HTML form exist unchecked checkbox, the POST request does not contain the checkbox parameter.
+//Problem to solve: When at the HTML form exist unchecked checkbox, the POST request does not contain the checkbox parameter.
 //Solution: Intercept the request and append the checkbox parameter if it is not present, with value false.
+// Better solution: Apply filter
 
 @Component
 class CustomRequestInterceptor : HandlerInterceptor {

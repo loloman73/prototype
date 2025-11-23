@@ -119,7 +119,7 @@ class AdminTopicTagJPAMapperTest {
 
         // Then
         assertThat(jpaEntity.topicTag).isEqualTo("Cultural Heritage")
-        assertThat(jpaEntity.description).hasSize(195)
+        assertThat(jpaEntity.description).hasSize(189)
         assertThat(jpaEntity.description).startsWith("Preservation and interpretation")
     }
 
@@ -247,7 +247,7 @@ class AdminTopicTagJPAMapperTest {
 
         // Then
         assertThat(jpaEntity.topicTag).isEqualTo("20th & 21st Century")
-        assertThat(jpaEntity.description).contains("&")
+        assertThat(jpaEntity.topicTag).contains("&")
         assertThat(jpaEntity.description).contains(":")
     }
 

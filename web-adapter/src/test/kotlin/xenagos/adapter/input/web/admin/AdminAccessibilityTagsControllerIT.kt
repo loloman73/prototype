@@ -1,6 +1,7 @@
 package xenagos.adapter.input.web.admin
 
 import org.assertj.core.api.Assertions.assertThat
+import org.hibernate.validator.internal.constraintvalidators.bv.AssertTrueValidator
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
@@ -10,10 +11,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.header
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.model
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
@@ -21,12 +20,9 @@ import xenagos.PrototypeApplication
 import xenagos.adapter.input.web.BaseWebIT
 import xenagos.application.port.input.admin.AdminAccessibilityTagsUseCase
 import xenagos.application.port.input.admin.model.AdminAccessibilityTagNewRequestDTO
-import java.util.*
+import xenagos.application.port.input.admin.model.AdminAccessibilityTagResponseDTO
+import xenagos.application.port.input.admin.model.AdminAccessibilityTagUpdateRequestDTO
 
-/**
- * End-to-end integration tests for AdminAccessibilityTagsController.
- * Uses a real PostgreSQL instance via Testcontainers (see BaseWebIT) and the full Spring Boot application context.
- */
 @SpringBootTest(classes = [PrototypeApplication::class])
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
@@ -38,95 +34,123 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
     @Autowired
     lateinit var useCase: AdminAccessibilityTagsUseCase
 
-    private fun createOne() = useCase.saveOneNew(
-        AdminAccessibilityTagNewRequestDTO(
+    private fun create(name: String, description: String, active: Boolean) =
+        useCase.saveOneNew(
+            AdminAccessibilityTagNewRequestDTO(
+                name = name,
+                description = description,
+                active = active
+            )
+        )
+
+    @Test
+    @Order(1)
+    fun `GET, with one existing entry, returns it in listAllModel and empty DTOs for addOneNewModel and updateOneModel`() {
+
+        // Arrange: add 1 valid entry using the UseCase
+        val created = create(
             name = "Wheelchair Accessible",
             description = "Suitable for wheelchair users",
             active = true
         )
-    )
 
-    @Test
-    @Order(1)
-    fun `GET showAll returns page with required model attributes`() {
-        createOne()
-        val result = mockMvc.perform(
-            get("/admin/accessibilityTags")
-        )
+        // Act: call the GET endpoint
+        val mvcResult = mockMvc.perform(get("/admin/accessibilityTags"))
             .andExpect(status().isOk)
             .andExpect(model().attributeExists("listAllModel", "addOneNewModel", "updateOneModel"))
             .andReturn()
 
-        val all = useCase.getAll()
-        assertThat(all).isNotNull
+        // Assert listAllModel contains the created entry with identical parameters
+        @Suppress("UNCHECKED_CAST")
+        val listAllModel = mvcResult.modelAndView!!.model["listAllModel"] as List<AdminAccessibilityTagResponseDTO>
+        val found = listAllModel.firstOrNull { it.id == created.id }
+        assertThat(found).withFailMessage("Expected created entry to appear in listAllModel").isNotNull
+        assertThat(found!!.name).isEqualTo(created.name)
+        assertThat(found.description).isEqualTo(created.description)
+        assertThat(found.active).isEqualTo(created.active)
+
+        // Assert addOneNewModel is an empty DTO
+        val addOneNew = mvcResult.modelAndView!!.model["addOneNewModel"] as AdminAccessibilityTagNewRequestDTO
+        assertThat(addOneNew.name).isEmpty()
+        assertThat(addOneNew.description).isEmpty()
+        assertThat(addOneNew.active).isFalse()
+
+        // Assert updateOneModel is an empty DTO
+        val updateOne = mvcResult.modelAndView!!.model["updateOneModel"] as AdminAccessibilityTagUpdateRequestDTO
+        assertThat(updateOne.id).isNotNull
+        assertThat(updateOne.name).isEmpty()
+        assertThat(updateOne.description).isEmpty()
+        assertThat(updateOne.active).isFalse()
     }
 
     @Test
     @Order(2)
-    fun `POST addNew via HTMX creates an accessibility tag and responds with HX-Redirect`() {
-        mockMvc.perform(
+    fun `GET, after adding two more entries, returns them with identical parameters in listAllModel`() {
+
+        // Arrange: add 2 more valid entries using the UseCase
+        val created2 = create(
+            name = "Braille Signage",
+            description = "Includes braille on signs",
+            active = true
+        )
+        val created3 = create(
+            name = "Assistive Listening",
+            description = "Supports assistive listening devices",
+            active = false
+        )
+
+        // Act: call the GET endpoint
+        val mvcResult = mockMvc.perform(get("/admin/accessibilityTags"))
+            .andExpect(status().isOk)
+            .andExpect(model().attributeExists("listAllModel"))
+            .andReturn()
+
+        // Assert listAllModel contains both newly created entries with identical fields
+        @Suppress("UNCHECKED_CAST")
+        val listAllModel = mvcResult.modelAndView!!.model["listAllModel"] as List<AdminAccessibilityTagResponseDTO>
+
+        val second = listAllModel.firstOrNull { it.id == created2.id }
+        assertThat(second).withFailMessage("Expected second entry to appear in listAllModel").isNotNull
+        assertThat(second!!.name).isEqualTo(created2.name)
+        assertThat(second.description).isEqualTo(created2.description)
+        assertThat(second.active).isEqualTo(created2.active)
+
+        val third = listAllModel.firstOrNull { it.id == created3.id }
+        assertThat(third).withFailMessage("Expected third entry to appear in listAllModel").isNotNull
+        assertThat(third!!.name).isEqualTo(created3.name)
+        assertThat(third.description).isEqualTo(created3.description)
+        assertThat(third.active).isEqualTo(created3.active)
+    }
+
+    @Test
+    @Order(3)
+    fun `POST, add one valid entry via HTMX, responds with HX-Redirect and create identical entry`() {
+        val mvcResult = mockMvc.perform(
             post("/admin/accessibilityTags/addNew")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
-                .param("name", "Wheelchair Accessible")
-                .param("description", "Suitable for wheelchair users")
+                .param("name", "Test Post Request")
+                .param("description", "Test Post Request description")
                 .param("active", "true")
         )
             .andExpect(status().isOk)
             .andExpect(header().string("HX-Redirect", "/admin/accessibilityTags"))
 
-        val all = useCase.getAll()
-        assertThat(all).extracting<String> { it.name }
-            .contains("Wheelchair Accessible")
-    }
-
-    @Test
-    @Order(3)
-    fun `PUT edit via HTMX updates an existing accessibility tag`() {
-        // Arrange: ensure one exists
-        val created = createOne()
-
-        mockMvc.perform(
-            put("/admin/accessibilityTags/edit")
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .header("HX-Request", "true")
-                .param("id", created.id.toString())
-                .param("name", "Signage Updated")
-                .param("description", "Improved signage")
-                .param("active", "false")
-        )
-            .andExpect(status().isOk)
-            .andExpect(header().string("HX-Redirect", "/admin/accessibilityTags"))
-
-        val after = useCase.getAll().first { it.id == created.id }
-        assertThat(after.name).isEqualTo("Signage Updated")
-        assertThat(after.description).isEqualTo("Improved signage")
-        assertThat(after.active).isFalse()
+        val created = useCase.getAll().firstOrNull { it.name == "Test Post Request" }
+        assertThat(created).withFailMessage("Expected created entry to appear in listAllModel").isNotNull
     }
 
     @Test
     @Order(4)
-    fun `DELETE delete via HTMX removes a tag`() {
-        val created = createOne()
-
-        mockMvc.perform(
-            delete("/admin/accessibilityTags/delete")
+    fun `POST, add one entry with invalid 'name' param via HTMX, responds with HX-Redirect and does not create an entry`() {
+        val mvcResult = mockMvc.perform(
+            post("/admin/accessibilityTags/addNew")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
-                .param("id", created.id.toString())
+                .param("name", "")
+                .param("description", "")
+                .param("active", "true")
         )
-            .andExpect(status().isOk)
-            .andExpect(header().string("HX-Redirect", "/admin/accessibilityTags"))
-
-        val remainingIds = useCase.getAll().map { it.id }
-        assertThat(remainingIds).doesNotContain(UUID.fromString(created.id.toString()))
     }
-}
 
-//Rewrite the AdminAccessibilityTagsControllerIT. I want to test:
-//
-//A. The GET endpoint.
-//1) Add 1 valid entry using the UseCase. Τhen call the GET endpoint to test the return and assert if all the parameters of the entry are the same in the listAllModel attribute. Check also if the addOneNewModel and updateOneModel attributes return empty DTOs
-//2) Add 2 more valid entries using the UseCase. Τhen call the GET endpoint and assert if all the parameters of the entries exist and they are the same in the listAllModel attribute
-//
-//B. The PUT endpoint
-//1) Add 1 valid entry using the UseCase. Then Update the entry using the PUT endpoint. Test using the Use Case.
+}

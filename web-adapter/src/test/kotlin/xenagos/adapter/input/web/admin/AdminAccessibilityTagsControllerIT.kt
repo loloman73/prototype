@@ -45,7 +45,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
 
     @Test
     @Order(1)
-    fun `GET, with one existing entry, returns it in listAllModel and empty DTOs for addOneNewModel and updateOneModel`() {
+    fun `GET -With one existing entry, returns it in listAllModel -Returns empty DTOs for addOneNewModel and updateOneModel`() {
 
         // Arrange: add 1 valid entry using the UseCase
         val created = create(
@@ -85,7 +85,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
 
     @Test
     @Order(2)
-    fun `GET, after adding two more entries, returns them with identical parameters in listAllModel`() {
+    fun `GET -After adding two more entries, returns them with identical parameters in listAllModel`() {
 
         // Arrange: add 2 more valid entries using the UseCase
         val created2 = create(
@@ -124,7 +124,9 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
 
     @Test
     @Order(3)
-    fun `POST, add one valid entry via HTMX, responds with HX-Redirect and create identical entry`() {
+    fun `POST -Add one valid entry via HTMX, responds with HX-Redirect and create identical entry`() {
+        // Act: call the POST endpoint, using HTMX, with one valid entry
+        // Assert status and Header
         val mvcResult = mockMvc.perform(
             post("/admin/accessibilityTags/addNew")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -136,19 +138,20 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
             .andExpect(status().isOk)
             .andExpect(header().string("HX-Redirect", "/admin/accessibilityTags"))
 
+        //Assert entry created
         val created = useCase.getAll().firstOrNull { it.name == "Test Post Request" }
         assertThat(created).withFailMessage("Expected created entry to appear in listAllModel").isNotNull
     }
 
     @Test
     @Order(4)
-    fun `POST, add one entry with invalid 'name' param via HTMX, responds with HX-Redirect and does not create an entry`() {
+    fun `POST -Add one entry with invalid 'name' param, via HTMX, responds with HX-Redirect and does not create an entry`() {
         val mvcResult = mockMvc.perform(
             post("/admin/accessibilityTags/addNew")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("name", "")
-                .param("description", "")
+                .param("description", "This is a valid description")
                 .param("active", "true")
         )
     }

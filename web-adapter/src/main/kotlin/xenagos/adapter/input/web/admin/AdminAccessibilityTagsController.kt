@@ -1,8 +1,8 @@
 package xenagos.adapter.input.web.admin
 
+import jakarta.servlet.http.HttpServletResponse
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxRequest
 import jakarta.validation.Valid
-import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
@@ -36,8 +36,9 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
         @ModelAttribute("addOneNewModel")
         @Valid
         requestDTO: AdminAccessibilityTagNewRequestDTO,
-        bindingResult: BindingResult
-    ): ResponseEntity<String> = handleAddNew(bindingResult = bindingResult) { service.saveOneNew(requestDTO) }
+        bindingResult: BindingResult,
+        response: HttpServletResponse
+    ): String = handleAddNew(bindingResult = bindingResult, response = response) { service.saveOneNew(requestDTO) }
 
     @HxRequest
     @PutMapping("/edit")

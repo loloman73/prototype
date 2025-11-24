@@ -1,8 +1,7 @@
 package xenagos.adapter.input.web.admin
 
-import org.springframework.http.HttpHeaders
+import jakarta.servlet.http.HttpServletResponse
 import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.validation.BindingResult
 import xenagos.application.port.input.admin.model.BaseAdminNewRequestDTO
 import xenagos.application.port.input.admin.model.BaseAdminUpdateRequestDTO
@@ -18,33 +17,39 @@ abstract class BaseAdminController {
     abstract val emptyNewRequestDTO: BaseAdminNewRequestDTO
     abstract val emptyUpdateRequestDTO: BaseAdminUpdateRequestDTO
 
-    protected fun handleAddNew(bindingResult: BindingResult, saveAction: () -> Unit): ResponseEntity<String> {
-        val htmlResponseOrFragment: String =""
-        if (bindingResult.hasErrors()) {
-            htmlResponseOrFragment = "./fragments/admin/$fragmentForAddOneNewRequest"
+    protected fun handleAddNew(
+        bindingResult: BindingResult,
+        response: HttpServletResponse,
+        saveAction: () -> Unit
+    ): String {
+        val htmlResponseOrFragment: String
 
+        if (bindingResult.hasErrors()) {
+            // Use 422 (Unprocessable Entity) for validation errors so HTMX can swap the returned fragment
+            // without triggering generic error handling that can interfere with fragment rendering.
+            response.status = HttpStatus.UNPROCESSABLE_ENTITY.value()
+            htmlResponseOrFragment = "./fragments/admin/$fragmentForAddOneNewRequest"
         } else {
             saveAction()
-            val headers = HttpHeaders()
-            headers.set("HX-Redirect", "/admin/$myEndpointPath")
-            return ResponseEntity(headers, HttpStatus.OK)
+            response.status = HttpStatus.CREATED.value()
+            htmlResponseOrFragment = "redirect:htmx:/admin/$myEndpointPath"
         }
+        return htmlResponseOrFragment
     }
 
     protected fun handleUpdate(bindingResult: BindingResult, saveAction: () -> Unit): String {
         val htmlResponseOrFragment: String
         if (bindingResult.hasErrors()) {
-            htmlResponseOrFragment =  "./fragments/admin/$fragmentForUpdateOneRequest"
+            htmlResponseOrFragment = "./fragments/admin/$fragmentForUpdateOneRequest"
         } else {
             saveAction()
             htmlResponseOrFragment = "redirect:htmx:/admin/$myEndpointPath"
         }
-
+        return htmlResponseOrFragment
     }
 
     protected fun handleDelete(deleteAction: () -> Unit): String {
         deleteAction()
         return "redirect:htmx:/admin/$myEndpointPath"
     }
-
 }

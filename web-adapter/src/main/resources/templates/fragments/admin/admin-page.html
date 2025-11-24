@@ -21,7 +21,7 @@
      tabindex="-1"
      aria-labelledby="add_new_modal_label"
      aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog" >
         <div class="modal-content">
             <div class="modal-header text-bg-dark">
                 <h1 class="modal-title fs-5" id="add_new_modal_label"> Add new [[${title}]]  </h1>
@@ -42,6 +42,7 @@
                         th:attr="hx-post='__${endpoint_link}__'"
                         hx-include="#add_new_form"
                         hx-target="#add_new_form"
+                        hx-target-error="#add_new_form"
                         hx-swap="outerHTML">Save
                 </button>
             </div>

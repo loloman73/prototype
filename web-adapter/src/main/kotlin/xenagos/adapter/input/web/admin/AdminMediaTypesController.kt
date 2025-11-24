@@ -1,5 +1,6 @@
 package xenagos.adapter.input.web.admin
 
+import jakarta.servlet.http.HttpServletResponse
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxRequest
 import jakarta.validation.Valid
 import org.springframework.stereotype.Controller
@@ -40,8 +41,9 @@ class AdminMediaTypesController(private val service: AdminMediaTypesUseCase) : B
     fun addOneNew(
         @Valid @ModelAttribute("addOneNewModel")
         requestDTO: AdminMediaTypeNewRequestDTO,
-        bindingResult: BindingResult
-    ): String = handleAddNew(bindingResult = bindingResult) { service.saveOneNew(requestDTO) }
+        bindingResult: BindingResult,
+        response: HttpServletResponse
+    ): String = handleAddNew(bindingResult = bindingResult, response = response) { service.saveOneNew(requestDTO) }
 
     @HxRequest
     @PutMapping("/edit")

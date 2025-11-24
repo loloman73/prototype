@@ -11,6 +11,7 @@ dependencies {
     implementation(libs.thymeleafLD)
     implementation(libs.sb.starter.validation)
     implementation("org.webjars.npm:htmx.org:2.0.4")
+    implementation("org.webjars.npm:htmx-ext-response-targets:2.0.0")
     implementation("io.github.wimdeblauwe:htmx-spring-boot-thymeleaf:4.0.1")
 
     testImplementation(libs.sb.starter.test)

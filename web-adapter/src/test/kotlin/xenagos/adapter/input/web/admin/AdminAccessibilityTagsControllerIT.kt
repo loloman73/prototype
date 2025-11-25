@@ -124,60 +124,67 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
 
     @Test
     @Order(3)
-    fun `POST -Add one valid entry via HTMX with active=true, responds with HX-Redirect and create identical entry`() {
+    fun `POST -Add one valid entry via HTMX with active=TRUE, responds with HX-Redirect and create identical entry`() {
 
+        val nameParam = "Test Post Request 1"
         val existCountBefore = useCase.getAll().count()
 
-        val mvcResult = mockMvc.perform(
+        // Act: call the POST endpoint
+        mockMvc.perform(
             post("/admin/accessibilityTags/addNew")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
-                .param("name", "Test Post Request 1")
+                .param("name", nameParam)
                 .param("description", "Test Post Request description")
                 .param("active", "true")
         )
             .andExpect(status().isCreated)
             .andExpect(header().string("HX-Redirect", "/admin/accessibilityTags"))
 
-        //Assert only one created
+        // Assert only one created
         val existCountAfter = useCase.getAll().count()
         assertThat(existCountAfter).isEqualTo(existCountBefore + 1)
 
-        //Assert entry created same as posted
-        val created = useCase.getAll().firstOrNull { it.name == "Test Post Request 1" }
+        // Assert entry created is same as posted
+        val created = useCase.getAll().firstOrNull { it.name == nameParam }
         assertThat(created).withFailMessage("Expected created entry to appear in listAllModel").isNotNull
     }
 
     @Test
     @Order(4)
-    fun `POST -Add one valid entry via HTMX with active=false (missing), responds with HX-Redirect and create identical entry`() {
+    fun `POST -Add valid entry via HTMX with active=FALSE (missing), responds with HX-Redirect and create identical entry`() {
 
+        val nameParam = "Test Post Request 2"
         val existCountBefore = useCase.getAll().count()
 
-        val mvcResult = mockMvc.perform(
+        // Act: call the POST endpoint
+        mockMvc.perform(
             post("/admin/accessibilityTags/addNew")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
-                .param("name", "Test Post Request 2")
+                .param("name", nameParam)
                 .param("description", "Test Post Request description")
         )
             .andExpect(status().isCreated)
             .andExpect(header().string("HX-Redirect", "/admin/accessibilityTags"))
 
-        //Assert only one created
+        // Assert only one created
         val existCountAfter = useCase.getAll().count()
         assertThat(existCountAfter).isEqualTo(existCountBefore + 1)
 
-        //Assert entry created same as posted
-        val created = useCase.getAll().firstOrNull { it.name == "Test Post Request 2" }
+        // Assert entry created is same as posted
+        val created = useCase.getAll().firstOrNull { it.name == nameParam }
         assertThat(created).withFailMessage("Expected created entry to appear in listAllModel").isNotNull
         assertThat(created!!.active).isFalse()
     }
 
-
     @Test
     @Order(5)
-    fun `POST -Add one entry with invalid 'name' param, via HTMX, responds with HX-Redirect and does not create an entry`() {
+    fun `POST -Add entry with invalid 'name' param, via HTMX, response with is-invalid and does not create an entry`() {
+
+        val existCountBefore = useCase.getAll().count()
+
+        // Act: call the POST endpoint
         val mvcResult = mockMvc.perform(
             post("/admin/accessibilityTags/addNew")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -185,7 +192,61 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
                 .param("name", "")
                 .param("description", "This is a valid description")
                 .param("active", "true")
-        )
+        ).andExpect(status().isUnprocessableEntity)
+
+        assertThat(mvcResult.andReturn().response.contentAsString).containsOnlyOnce("is-invalid")
+
+        // Assert not created
+        val existCountAfter = useCase.getAll().count()
+        assertThat(existCountAfter).isEqualTo(existCountBefore)
     }
+
+    @Test
+    @Order(6)
+    fun `POST -Add entry with invalid 'description' param, via HTMX, response with is-invalid and does not create an entry`() {
+
+        val existCountBefore = useCase.getAll().count()
+
+        // Act: call the POST endpoint
+        val mvcResult = mockMvc.perform(
+            post("/admin/accessibilityTags/addNew")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .header("HX-Request", "true")
+                .param("name", "Valid Name")
+                .param("description", "")
+                .param("active", "true")
+        ).andExpect(status().isUnprocessableEntity)
+
+        assertThat(mvcResult.andReturn().response.contentAsString).containsOnlyOnce("is-invalid")
+
+        // Assert not created
+        val existCountAfter = useCase.getAll().count()
+        assertThat(existCountAfter).isEqualTo(existCountBefore)
+    }
+
+    @Test
+    @Order(7)
+    fun `POST -Add entry with 2 invalid params, via HTMX, response with is-invalid and does not create an entry`() {
+
+        val existCountBefore = useCase.getAll().count()
+
+        // Act: call the POST endpoint
+        val mvcResult = mockMvc.perform(
+            post("/admin/accessibilityTags/addNew")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .header("HX-Request", "true")
+                .param("name", "")
+                .param("description", "")
+                .param("active", "true")
+        ).andExpect(status().isUnprocessableEntity)
+
+        assertThat(mvcResult.andReturn().response.contentAsString).contains("is-invalid")
+
+        // Assert not created
+        val existCountAfter = useCase.getAll().count()
+        assertThat(existCountAfter).isEqualTo(existCountBefore)
+    }
+
+
 
 }

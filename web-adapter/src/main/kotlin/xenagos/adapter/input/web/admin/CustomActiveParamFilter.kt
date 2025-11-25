@@ -9,8 +9,7 @@ import org.springframework.web.filter.OncePerRequestFilter
 
 /**
  * Ensures that when submitting the add-new form via HTMX and the checkbox "active" is unchecked
- * (thus missing from the form body), the request still contains active=false so validation/binding
- * works and the controller can return the final response (201 + HX-Redirect) without using a forward.
+ * (thus missing from the form body), the request still contains active=false so validation/binding works
  */
 @Component
 class CustomActiveParamFilter : OncePerRequestFilter() {

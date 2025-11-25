@@ -25,8 +25,8 @@ class AdminAgeGroupsController(private val service: AdminAgeGroupUseCase) : Base
     @GetMapping
     fun showAll(model: Model): String {
         model.addAttribute("listAllModel", service.getAll())
-        model.addAttribute("addOneNewModel",emptyNewRequestDTO )
-        model.addAttribute("updateOneModel",emptyUpdateRequestDTO )
+        model.addAttribute("addOneNewModel", emptyNewRequestDTO)
+        model.addAttribute("updateOneModel", emptyUpdateRequestDTO)
         return "adminAgeGroups"
     }
 
@@ -37,17 +37,19 @@ class AdminAgeGroupsController(private val service: AdminAgeGroupUseCase) : Base
         requestDTO: AdminAgeGroupNewRequestDTO,
         bindingResult: BindingResult,
         response: HttpServletResponse
-    ): String = handleAddNew(bindingResult = bindingResult, response = response) { service.saveOneNew(requestDTO) }
+    ): String = handleAddOneNew(bindingResult, response) { service.saveOneNew(requestDTO) }
 
     @HxRequest
     @PutMapping("/edit")
     fun updateOne(
         @Valid @ModelAttribute("editAgeGroup")
         requestDTO: AdminAgeGroupUpdateRequestDTO,
-        bindingResult: BindingResult
-    ): String = handleUpdate(bindingResult = bindingResult) { service.updateOne(requestDTO) }
+        bindingResult: BindingResult,
+        response: HttpServletResponse
+    ): String = handleUpdateOne(bindingResult, response) { service.updateOne(requestDTO) }
 
     @HxRequest
     @DeleteMapping("/delete")
-    fun deleteOne(@RequestParam id: UUID): String = handleDelete() { service.deleteOne(id) }
+    fun deleteOne(@RequestParam id: UUID, response: HttpServletResponse): String =
+        handleDeleteOne(response) { service.deleteOne(id) }
 }

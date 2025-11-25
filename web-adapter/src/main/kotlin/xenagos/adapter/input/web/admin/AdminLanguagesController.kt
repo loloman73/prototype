@@ -37,17 +37,19 @@ class AdminLanguagesController(private val service: AdminLanguagesUseCase) : Bas
         requestDTO: AdminLanguageNewRequestDTO,
         bindingResult: BindingResult,
         response: HttpServletResponse
-    ): String = handleAddNew(bindingResult = bindingResult, response = response) { service.saveOneNew(requestDTO) }
+    ): String = handleAddOneNew(bindingResult, response) { service.saveOneNew(requestDTO) }
 
     @HxRequest
     @PutMapping("/edit")
     fun updateOne(
         @Valid @ModelAttribute("updateOneModel")
         requestDTO: AdminLanguageUpdateRequestDTO,
-        bindingResult: BindingResult
-    ): String = handleUpdate(bindingResult = bindingResult) { service.updateOne(requestDTO) }
+        bindingResult: BindingResult,
+        response: HttpServletResponse
+    ): String = handleUpdateOne(bindingResult, response) { service.updateOne(requestDTO) }
 
     @HxRequest
     @DeleteMapping("/delete")
-    fun deleteOne(@RequestParam id: UUID): String = handleDelete() { service.deleteOne(id) }
+    fun deleteOne(@RequestParam id: UUID, response: HttpServletResponse): String =
+        handleDeleteOne(response) { service.deleteOne(id) }
 }

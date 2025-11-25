@@ -6,13 +6,7 @@ import jakarta.validation.Valid
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.*
 import xenagos.application.port.input.admin.AdminMediaTypesUseCase
 import xenagos.application.port.input.admin.model.AdminMediaTypeUpdateRequestDTO
 import xenagos.application.port.input.admin.model.AdminMediaTypeNewRequestDTO
@@ -43,17 +37,19 @@ class AdminMediaTypesController(private val service: AdminMediaTypesUseCase) : B
         requestDTO: AdminMediaTypeNewRequestDTO,
         bindingResult: BindingResult,
         response: HttpServletResponse
-    ): String = handleAddNew(bindingResult = bindingResult, response = response) { service.saveOneNew(requestDTO) }
+    ): String = handleAddOneNew(bindingResult, response) { service.saveOneNew(requestDTO) }
 
     @HxRequest
     @PutMapping("/edit")
     fun updateOne(
         @Valid @ModelAttribute("updateOneModel")
         requestDTO: AdminMediaTypeUpdateRequestDTO,
-        bindingResult: BindingResult
-    ): String = handleUpdate(bindingResult = bindingResult) { service.updateOne(requestDTO) }
+        bindingResult: BindingResult,
+        response: HttpServletResponse
+    ): String = handleUpdateOne(bindingResult, response) { service.updateOne(requestDTO) }
 
     @HxRequest
     @DeleteMapping("/delete")
-    fun deleteOne(@RequestParam id: UUID): String = handleDelete() { service.deleteOne(id) }
+    fun deleteOne(@RequestParam id: UUID, response: HttpServletResponse): String =
+        handleDeleteOne(response) { service.deleteOne(id) }
 }

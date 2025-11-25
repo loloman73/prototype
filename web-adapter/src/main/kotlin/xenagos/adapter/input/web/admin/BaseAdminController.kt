@@ -17,16 +17,13 @@ abstract class BaseAdminController {
     abstract val emptyNewRequestDTO: BaseAdminNewRequestDTO
     abstract val emptyUpdateRequestDTO: BaseAdminUpdateRequestDTO
 
-    protected fun handleAddNew(
+    protected fun handleAddOneNew(
         bindingResult: BindingResult,
         response: HttpServletResponse,
         saveAction: () -> Unit
     ): String {
         val htmlResponseOrFragment: String
-
         if (bindingResult.hasErrors()) {
-            // Use 422 (Unprocessable Entity) for validation errors so HTMX can swap the returned fragment
-            // without triggering generic error handling that can interfere with fragment rendering.
             response.status = HttpStatus.UNPROCESSABLE_ENTITY.value()
             htmlResponseOrFragment = "./fragments/admin/$fragmentForAddOneNewRequest"
         } else {
@@ -37,19 +34,29 @@ abstract class BaseAdminController {
         return htmlResponseOrFragment
     }
 
-    protected fun handleUpdate(bindingResult: BindingResult, saveAction: () -> Unit): String {
+    protected fun handleUpdateOne(
+        bindingResult: BindingResult,
+        response: HttpServletResponse,
+        saveAction: () -> Unit
+    ): String {
         val htmlResponseOrFragment: String
         if (bindingResult.hasErrors()) {
+            response.status = HttpStatus.UNPROCESSABLE_ENTITY.value()
             htmlResponseOrFragment = "./fragments/admin/$fragmentForUpdateOneRequest"
         } else {
             saveAction()
+            response.status = HttpStatus.OK.value()
             htmlResponseOrFragment = "redirect:htmx:/admin/$myEndpointPath"
         }
         return htmlResponseOrFragment
     }
 
-    protected fun handleDelete(deleteAction: () -> Unit): String {
+    protected fun handleDeleteOne(
+        response: HttpServletResponse,
+        deleteAction: () -> Unit
+    ): String {
         deleteAction()
+        response.status = HttpStatus.OK.value()
         return "redirect:htmx:/admin/$myEndpointPath"
     }
 }

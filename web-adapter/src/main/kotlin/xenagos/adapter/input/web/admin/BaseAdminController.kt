@@ -56,7 +56,7 @@ abstract class BaseAdminController {
         deleteAction: () -> Unit
     ): String {
         deleteAction()
-        response.status = HttpStatus.OK.value()
+        response.status = HttpStatus.NO_CONTENT.value()
         return "redirect:htmx:/admin/$myEndpointPath"
     }
 }

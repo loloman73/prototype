@@ -1,16 +1,13 @@
 package xenagos.adapter.input.web.admin
 
 import org.assertj.core.api.Assertions.assertThat
-import org.hibernate.validator.internal.constraintvalidators.bv.AssertTrueValidator
-import org.junit.jupiter.api.MethodOrderer
-import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestMethodOrder
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put
@@ -43,7 +40,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
             )
         )
 
-    
+
     //GET tests
     @Test
     fun `GET -With one existing entry`() {
@@ -124,9 +121,8 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
         assertThat(third.active).isEqualTo(created3.active)
     }
 
-    
-    //TODO: when params are missing    
-    //POST tests
+
+    //POST tests TODO: when params are missing
     @Test
     fun `POST -Add one valid entry with active=TRUE`() {
 
@@ -251,18 +247,17 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
             .andReturn()
 
         // Assert response body (form fragment) contains text "is-invalid" 2 times
-        assertThat(mvcResult.response.contentAsString.split("is-invalid").size-1).isEqualTo(2)
+        assertThat(mvcResult.response.contentAsString.split("is-invalid").size - 1).isEqualTo(2)
 
         // Assert entry not created
         val existCountAfter = useCase.getAll().count()
         assertThat(existCountAfter).isEqualTo(existCountBefore)
     }
 
-    
-    //TODO: when params are missing
-    //PUT tests
+
+    //PUT tests TODO: when params are missing
     @Test
-    fun `PUT -all new params valid, dont change active=TRUE `() {
+    fun `PUT -all new params valid, dont change active=TRUE`() {
 
         // Arrange: create an entry with active=true
         val created = create(
@@ -425,6 +420,31 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
         assertThat(after.description).isEqualTo(created.description)
         assertThat(after.active).isEqualTo(created.active)
     }
-    
 
+
+    //DELETE tests TODO: when params are missing
+    @Test
+    fun `DELETE -valid entry`() {
+
+        // Arrange
+        val created = create(
+            name = "Delete Me",
+            description = "Original description",
+            active = true
+        )
+
+        // Act: call the DELETE endpoint
+        // Expect: HTTP status code, header HX-Redirect to admin page
+        mockMvc.perform(
+            delete("/admin/accessibilityTags/delete")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .header("HX-Request", "true")
+                .param("id", created.id.toString())
+        )
+            .andExpect(status().isNoContent)
+            .andExpect(header().string("HX-Redirect", "/admin/accessibilityTags"))
+
+        // Assert: entry deleted
+        assertThat(useCase.getAll().find { it.id == created.id }).isNull()
+    }
 }

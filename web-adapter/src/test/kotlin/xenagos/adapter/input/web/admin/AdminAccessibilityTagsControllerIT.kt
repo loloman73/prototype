@@ -13,6 +13,7 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.header
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.model
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
@@ -25,7 +26,6 @@ import xenagos.application.port.input.admin.model.AdminAccessibilityTagUpdateReq
 
 @SpringBootTest(classes = [PrototypeApplication::class])
 @AutoConfigureMockMvc
-@TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 class AdminAccessibilityTagsControllerIT : BaseWebIT() {
 
     @Autowired
@@ -43,9 +43,10 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
             )
         )
 
+    
+    //GET tests
     @Test
-    @Order(1)
-    fun `GET -With one existing entry, returns it in listAllModel -Returns empty DTOs for addOneNewModel and updateOneModel`() {
+    fun `GET -With one existing entry`() {
 
         // Arrange: add 1 valid entry using the UseCase
         val created = create(
@@ -55,6 +56,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
         )
 
         // Act: call the GET endpoint
+        // Expect: HTTP status code, model attributes names
         val mvcResult = mockMvc.perform(get("/admin/accessibilityTags"))
             .andExpect(status().isOk)
             .andExpect(model().attributeExists("listAllModel", "addOneNewModel", "updateOneModel"))
@@ -84,8 +86,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
     }
 
     @Test
-    @Order(2)
-    fun `GET -After adding two more entries, returns them with identical parameters in listAllModel`() {
+    fun `GET -After adding two more entries`() {
 
         // Arrange: add 2 more valid entries using the UseCase
         val created2 = create(
@@ -100,6 +101,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
         )
 
         // Act: call the GET endpoint
+        // Expect: HTTP status code, model attribute name
         val mvcResult = mockMvc.perform(get("/admin/accessibilityTags"))
             .andExpect(status().isOk)
             .andExpect(model().attributeExists("listAllModel"))
@@ -122,14 +124,17 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
         assertThat(third.active).isEqualTo(created3.active)
     }
 
+    
+    //TODO: when params are missing    
+    //POST tests
     @Test
-    @Order(3)
-    fun `POST -Add one valid entry via HTMX with active=TRUE, responds with HX-Redirect and create identical entry`() {
+    fun `POST -Add one valid entry with active=TRUE`() {
 
         val nameParam = "Test Post Request 1"
         val existCountBefore = useCase.getAll().count()
 
         // Act: call the POST endpoint
+        // Expect: HTTP status code, header HX-Redirect to admin page
         mockMvc.perform(
             post("/admin/accessibilityTags/addNew")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -151,13 +156,13 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
     }
 
     @Test
-    @Order(4)
-    fun `POST -Add valid entry via HTMX with active=FALSE (missing), responds with HX-Redirect and create identical entry`() {
+    fun `POST -Add valid entry with active=FALSE (missing)`() {
 
         val nameParam = "Test Post Request 2"
         val existCountBefore = useCase.getAll().count()
 
         // Act: call the POST endpoint
+        // Expect: HTTP status code, header HX-Redirect to admin page
         mockMvc.perform(
             post("/admin/accessibilityTags/addNew")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -179,12 +184,12 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
     }
 
     @Test
-    @Order(5)
-    fun `POST -Add entry with invalid 'name' param, via HTMX, response with is-invalid and does not create an entry`() {
+    fun `POST -Add entry with invalid 'name' param`() {
 
         val existCountBefore = useCase.getAll().count()
 
         // Act: call the POST endpoint
+        // Expect: HTTP status code
         val mvcResult = mockMvc.perform(
             post("/admin/accessibilityTags/addNew")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -192,22 +197,25 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
                 .param("name", "")
                 .param("description", "This is a valid description")
                 .param("active", "true")
-        ).andExpect(status().isUnprocessableEntity)
+        )
+            .andExpect(status().isUnprocessableEntity)
+            .andReturn()
 
-        assertThat(mvcResult.andReturn().response.contentAsString).containsOnlyOnce("is-invalid")
+        // Assert response body (form fragment) contains text "is-invalid"
+        assertThat(mvcResult.response.contentAsString).containsOnlyOnce("is-invalid")
 
-        // Assert not created
+        // Assert entry not created
         val existCountAfter = useCase.getAll().count()
         assertThat(existCountAfter).isEqualTo(existCountBefore)
     }
 
     @Test
-    @Order(6)
-    fun `POST -Add entry with invalid 'description' param, via HTMX, response with is-invalid and does not create an entry`() {
+    fun `POST -Add entry with invalid 'description' param`() {
 
         val existCountBefore = useCase.getAll().count()
 
         // Act: call the POST endpoint
+        // Expect: HTTP status code
         val mvcResult = mockMvc.perform(
             post("/admin/accessibilityTags/addNew")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -217,16 +225,16 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
                 .param("active", "true")
         ).andExpect(status().isUnprocessableEntity)
 
+        // Assert response body (form fragment) contains text "is-invalid"
         assertThat(mvcResult.andReturn().response.contentAsString).containsOnlyOnce("is-invalid")
 
-        // Assert not created
+        // Assert entry not created
         val existCountAfter = useCase.getAll().count()
         assertThat(existCountAfter).isEqualTo(existCountBefore)
     }
 
     @Test
-    @Order(7)
-    fun `POST -Add entry with 2 invalid params, via HTMX, response with is-invalid and does not create an entry`() {
+    fun `POST -Add entry with all params invalid`() {
 
         val existCountBefore = useCase.getAll().count()
 
@@ -238,15 +246,185 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
                 .param("name", "")
                 .param("description", "")
                 .param("active", "true")
-        ).andExpect(status().isUnprocessableEntity)
+        )
+            .andExpect(status().isUnprocessableEntity)
+            .andReturn()
 
-        assertThat(mvcResult.andReturn().response.contentAsString).contains("is-invalid")
+        // Assert response body (form fragment) contains text "is-invalid" 2 times
+        assertThat(mvcResult.response.contentAsString.split("is-invalid").size-1).isEqualTo(2)
 
-        // Assert not created
+        // Assert entry not created
         val existCountAfter = useCase.getAll().count()
         assertThat(existCountAfter).isEqualTo(existCountBefore)
     }
 
+    
+    //TODO: when params are missing
+    //PUT tests
+    @Test
+    fun `PUT -all new params valid, dont change active=TRUE `() {
 
+        // Arrange: create an entry with active=true
+        val created = create(
+            name = "Update Me",
+            description = "Original description",
+            active = true
+        )
+
+        val newName = "Updated Name"
+        val newDesc = "Updated description"
+
+        // Act: call the PUT endpoint with all valid fields and keep active=true
+        // Expect: HTTP status code, header HX-Redirect to admin page
+        mockMvc.perform(
+            put("/admin/accessibilityTags/edit")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .header("HX-Request", "true")
+                .param("id", created.id.toString())
+                .param("name", newName)
+                .param("description", newDesc)
+                .param("active", "true")
+        )
+            .andExpect(status().isOk)
+            .andExpect(header().string("HX-Redirect", "/admin/accessibilityTags"))
+
+        // Assert: entity updated
+        val after = useCase.getAll().first { it.id == created.id }
+        assertThat(after.name).isEqualTo(newName)
+        assertThat(after.description).isEqualTo(newDesc)
+        assertThat(after.active).isTrue()
+    }
+
+    @Test
+    fun `PUT -only change active from TRUE to FALSE (missing)`() {
+
+        // Arrange: create an entry with active=true
+        val created = create(
+            name = "Toggle Active",
+            description = "Keep other fields",
+            active = true
+        )
+
+        // Act: call the PUT endpoint changing only active to false, keep other fields same
+        // Expect: HTTP status code, header HX-Redirect to admin page
+        mockMvc.perform(
+            put("/admin/accessibilityTags/edit")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .header("HX-Request", "true")
+                .param("id", created.id.toString())
+                .param("name", created.name)
+                .param("description", created.description)
+        )
+            .andExpect(status().isOk)
+            .andExpect(header().string("HX-Redirect", "/admin/accessibilityTags"))
+
+        // Assert: only active changed
+        val after = useCase.getAll().first { it.id == created.id }
+        assertThat(after.name).isEqualTo(created.name)
+        assertThat(after.description).isEqualTo(created.description)
+        assertThat(after.active).isFalse()
+    }
+
+    @Test
+    fun `PUT -change 'name' param with invalid`() {
+
+        // Arrange
+        val created = create(
+            name = "Valid Name",
+            description = "Valid description",
+            active = true
+        )
+
+        // Act: invalid name (blank)
+        // Expect: HTTP status code
+        val mvcResult = mockMvc.perform(
+            put("/admin/accessibilityTags/edit")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .header("HX-Request", "true")
+                .param("id", created.id.toString())
+                .param("name", "")
+                .param("description", created.description)
+                .param("active", created.active.toString())
+        )
+            .andExpect(status().isUnprocessableEntity)
+            .andReturn()
+
+        // Assert response body (fragment) contains one invalid marker
+        assertThat(mvcResult.response.contentAsString).containsOnlyOnce("is-invalid")
+
+        // Assert not updated
+        val after = useCase.getAll().first { it.id == created.id }
+        assertThat(after.name).isEqualTo(created.name)
+        assertThat(after.description).isEqualTo(created.description)
+        assertThat(after.active).isEqualTo(created.active)
+    }
+
+    @Test
+    fun `PUT -change 'description' param with invalid`() {
+
+        // Arrange
+        val created = create(
+            name = "Another Valid Name",
+            description = "Initial description",
+            active = true
+        )
+
+        // Act: invalid description (blank)
+        // Expect: HTTP status code
+        val mvcResult = mockMvc.perform(
+            put("/admin/accessibilityTags/edit")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .header("HX-Request", "true")
+                .param("id", created.id.toString())
+                .param("name", created.name)
+                .param("description", "")
+                .param("active", created.active.toString())
+        )
+            .andExpect(status().isUnprocessableEntity)
+            .andReturn()
+
+        // Assert response body (fragment) contains one invalid marker
+        assertThat(mvcResult.response.contentAsString).containsOnlyOnce("is-invalid")
+
+        // Assert not updated
+        val after = useCase.getAll().first { it.id == created.id }
+        assertThat(after.name).isEqualTo(created.name)
+        assertThat(after.description).isEqualTo(created.description)
+        assertThat(after.active).isEqualTo(created.active)
+    }
+
+    @Test
+    fun `PUT -change all params with invalid`() {
+
+        // Arrange
+        val created = create(
+            name = "Base Name",
+            description = "Base description",
+            active = true
+        )
+
+        // Act: invalid name and description
+        val mvcResult = mockMvc.perform(
+            put("/admin/accessibilityTags/edit")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .header("HX-Request", "true")
+                .param("id", created.id.toString())
+                .param("name", "")
+                .param("description", "")
+                .param("active", created.active.toString())
+        )
+            .andExpect(status().isUnprocessableEntity)
+            .andReturn()
+
+        // Assert response body (fragment) contains text "is-invalid" 2 times
+        assertThat(mvcResult.response.contentAsString.split("is-invalid").size - 1).isEqualTo(2)
+
+        // Assert not updated
+        val after = useCase.getAll().first { it.id == created.id }
+        assertThat(after.name).isEqualTo(created.name)
+        assertThat(after.description).isEqualTo(created.description)
+        assertThat(after.active).isEqualTo(created.active)
+    }
+    
 
 }

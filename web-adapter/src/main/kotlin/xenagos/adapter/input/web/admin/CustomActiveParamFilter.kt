@@ -16,10 +16,11 @@ class CustomActiveParamFilter : OncePerRequestFilter() {
 
     override fun shouldNotFilter(request: HttpServletRequest): Boolean {
         val isPost = request.method.equals("POST", ignoreCase = true)
+        val isPut = request.method.equals("PUT", ignoreCase = true)
         val uri = request.requestURI ?: ""
-        val pathMatches = uri.contains("/admin/accessibilityTags/addNew")
+        val pathMatches = uri.contains("/admin/accessibilityTags/addNew") || uri.contains("/admin/accessibilityTags/edit")
         val activeMissing = request.getParameter("active") == null
-        return !(isPost && pathMatches && activeMissing)
+        return !((isPost || isPut ) && pathMatches && activeMissing)
     }
 
     override fun doFilterInternal(

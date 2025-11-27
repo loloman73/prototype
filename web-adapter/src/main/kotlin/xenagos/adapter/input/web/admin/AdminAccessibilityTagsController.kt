@@ -13,12 +13,12 @@ import xenagos.application.port.input.admin.model.AdminAccessibilityTagNewReques
 import java.util.*
 
 @Controller
-@RequestMapping("/admin/accessibilityTags")
+@RequestMapping("/admin/accessibility-tags")
 class AdminAccessibilityTagsController(private val service: AdminAccessibilityTagsUseCase) : BaseAdminController() {
 
     override val fragmentForAddOneNewRequest: String = "accessibility-tag-modal-form-add-new"
     override val fragmentForUpdateOneRequest: String = "accessibility-tag-modal-form-edit"
-    override val myEndpointPath: String = "accessibilityTags"
+    override val myEndpointPath: String = "accessibility-tags"
     override val emptyNewRequestDTO = AdminAccessibilityTagNewRequestDTO.createEmptyDeactivated()
     override val emptyUpdateRequestDTO = AdminAccessibilityTagUpdateRequestDTO.createEmptyDeactivated()
 
@@ -31,17 +31,16 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
     }
 
     @HxRequest
-    @PostMapping("/addNew")
+    @PostMapping
     fun addOneNew(
-        @ModelAttribute("addOneNewModel")
-        @Valid
+        @Valid @ModelAttribute("addOneNewModel")
         requestDTO: AdminAccessibilityTagNewRequestDTO,
         bindingResult: BindingResult,
         response: HttpServletResponse
     ): String = handleAddOneNew(bindingResult, response) { service.saveOneNew(requestDTO) }
 
     @HxRequest
-    @PutMapping("/edit")
+    @PutMapping
     fun updateOne(
         @Valid @ModelAttribute("updateOneModel")
         requestDTO: AdminAccessibilityTagUpdateRequestDTO,
@@ -50,7 +49,7 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
     ): String = handleUpdateOne(bindingResult, response) { service.updateOne(requestDTO) }
 
     @HxRequest
-    @DeleteMapping("/delete")
+    @DeleteMapping
     fun deleteOne(@RequestParam id: UUID, response: HttpServletResponse): String =
         handleDeleteOne(response) { service.deleteOne(id) }
 

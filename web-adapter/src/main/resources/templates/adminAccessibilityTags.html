@@ -77,13 +77,13 @@
     </div>
 
     <!-- Add New Modal -->
-    <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_MODAL('Accessibility Tag','~{/fragments/admin/accessibility-tag-modal-form-add-new}','/admin/accessibilityTags/addNew')}"></div>
+    <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_MODAL('Accessibility Tag','~{/fragments/admin/accessibility-tag-modal-form-add-new}','/admin/accessibility-tags')}"></div>
 
     <!-- Edit Modal -->
-    <div th:replace="~{fragments/admin/admin-page.html :: EDIT_MODAL('Accessibility Tag','~{/fragments/admin/accessibility-tag-modal-form-edit}','/admin/accessibilityTags/edit')}"></div>
+    <div th:replace="~{fragments/admin/admin-page.html :: EDIT_MODAL('Accessibility Tag','~{/fragments/admin/accessibility-tag-modal-form-edit}','/admin/accessibility-tags')}"></div>
 
     <!-- Delete Modal -->
-    <div th:replace="~{fragments/admin/admin-page.html :: DELETE_MODAL('Accessibility Tag','~{/fragments/admin/accessibility-tag-modal-form-delete}','/admin/accessibilityTags/delete')}"></div>
+    <div th:replace="~{fragments/admin/admin-page.html :: DELETE_MODAL('Accessibility Tag','~{/fragments/admin/accessibility-tag-modal-form-delete}','/admin/accessibility-tags')}"></div>
 
     <!--Script-->
     <script type="text/javascript" th:src="@{/js/adminAccessibilityTags.js}"></script>

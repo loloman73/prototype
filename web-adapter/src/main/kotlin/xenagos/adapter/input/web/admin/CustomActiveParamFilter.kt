@@ -18,7 +18,7 @@ class CustomActiveParamFilter : OncePerRequestFilter() {
         val isPost = request.method.equals("POST", ignoreCase = true)
         val isPut = request.method.equals("PUT", ignoreCase = true)
         val uri = request.requestURI ?: ""
-        val pathMatches = uri.contains("/admin/accessibilityTags/addNew") || uri.contains("/admin/accessibilityTags/edit")
+        val pathMatches = uri.contains("/admin/accessibility-tags")
         val activeMissing = request.getParameter("active") == null
         return !((isPost || isPut ) && pathMatches && activeMissing)
     }

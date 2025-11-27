@@ -31,6 +31,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
     @Autowired
     lateinit var useCase: AdminAccessibilityTagsUseCase
 
+    private val endPoint = "/admin/accessibility-tags"
     private fun create(name: String, description: String, active: Boolean) =
         useCase.saveOneNew(
             AdminAccessibilityTagNewRequestDTO(
@@ -39,7 +40,6 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
                 active = active
             )
         )
-
 
     //GET tests
     @Test
@@ -54,7 +54,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
 
         // Act: call the GET endpoint
         // Expect: HTTP status code, model attributes names
-        val mvcResult = mockMvc.perform(get("/admin/accessibilityTags"))
+        val mvcResult = mockMvc.perform(get(endPoint))
             .andExpect(status().isOk)
             .andExpect(model().attributeExists("listAllModel", "addOneNewModel", "updateOneModel"))
             .andReturn()
@@ -99,7 +99,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
 
         // Act: call the GET endpoint
         // Expect: HTTP status code, model attribute name
-        val mvcResult = mockMvc.perform(get("/admin/accessibilityTags"))
+        val mvcResult = mockMvc.perform(get(endPoint))
             .andExpect(status().isOk)
             .andExpect(model().attributeExists("listAllModel"))
             .andReturn()
@@ -132,7 +132,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
         // Act: call the POST endpoint
         // Expect: HTTP status code, header HX-Redirect to admin page
         mockMvc.perform(
-            post("/admin/accessibilityTags/addNew")
+            post(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("name", nameParam)
@@ -140,7 +140,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
                 .param("active", "true")
         )
             .andExpect(status().isCreated)
-            .andExpect(header().string("HX-Redirect", "/admin/accessibilityTags"))
+            .andExpect(header().string("HX-Redirect", endPoint))
 
         // Assert only one created
         val existCountAfter = useCase.getAll().count()
@@ -160,14 +160,14 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
         // Act: call the POST endpoint
         // Expect: HTTP status code, header HX-Redirect to admin page
         mockMvc.perform(
-            post("/admin/accessibilityTags/addNew")
+            post(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("name", nameParam)
                 .param("description", "Test Post Request description")
         )
             .andExpect(status().isCreated)
-            .andExpect(header().string("HX-Redirect", "/admin/accessibilityTags"))
+            .andExpect(header().string("HX-Redirect", endPoint))
 
         // Assert only one created
         val existCountAfter = useCase.getAll().count()
@@ -187,7 +187,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
         // Act: call the POST endpoint
         // Expect: HTTP status code
         val mvcResult = mockMvc.perform(
-            post("/admin/accessibilityTags/addNew")
+            post(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("name", "")
@@ -213,7 +213,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
         // Act: call the POST endpoint
         // Expect: HTTP status code
         val mvcResult = mockMvc.perform(
-            post("/admin/accessibilityTags/addNew")
+            post(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("name", "Valid Name")
@@ -236,7 +236,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
 
         // Act: call the POST endpoint
         val mvcResult = mockMvc.perform(
-            post("/admin/accessibilityTags/addNew")
+            post(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("name", "")
@@ -272,7 +272,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
         // Act: call the PUT endpoint with all valid fields and keep active=true
         // Expect: HTTP status code, header HX-Redirect to admin page
         mockMvc.perform(
-            put("/admin/accessibilityTags/edit")
+            put(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("id", created.id.toString())
@@ -281,7 +281,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
                 .param("active", "true")
         )
             .andExpect(status().isOk)
-            .andExpect(header().string("HX-Redirect", "/admin/accessibilityTags"))
+            .andExpect(header().string("HX-Redirect", endPoint))
 
         // Assert: entity updated
         val after = useCase.getAll().first { it.id == created.id }
@@ -303,7 +303,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
         // Act: call the PUT endpoint changing only active to false, keep other fields same
         // Expect: HTTP status code, header HX-Redirect to admin page
         mockMvc.perform(
-            put("/admin/accessibilityTags/edit")
+            put(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("id", created.id.toString())
@@ -311,7 +311,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
                 .param("description", created.description)
         )
             .andExpect(status().isOk)
-            .andExpect(header().string("HX-Redirect", "/admin/accessibilityTags"))
+            .andExpect(header().string("HX-Redirect", endPoint))
 
         // Assert: only active changed
         val after = useCase.getAll().first { it.id == created.id }
@@ -333,7 +333,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
         // Act: invalid name (blank)
         // Expect: HTTP status code
         val mvcResult = mockMvc.perform(
-            put("/admin/accessibilityTags/edit")
+            put(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("id", created.id.toString())
@@ -367,7 +367,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
         // Act: invalid description (blank)
         // Expect: HTTP status code
         val mvcResult = mockMvc.perform(
-            put("/admin/accessibilityTags/edit")
+            put(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("id", created.id.toString())
@@ -400,7 +400,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
 
         // Act: invalid name and description
         val mvcResult = mockMvc.perform(
-            put("/admin/accessibilityTags/edit")
+            put(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("id", created.id.toString())
@@ -436,13 +436,13 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
         // Act: call the DELETE endpoint
         // Expect: HTTP status code, header HX-Redirect to admin page
         mockMvc.perform(
-            delete("/admin/accessibilityTags/delete")
+            delete(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("id", created.id.toString())
         )
             .andExpect(status().isNoContent)
-            .andExpect(header().string("HX-Redirect", "/admin/accessibilityTags"))
+            .andExpect(header().string("HX-Redirect", endPoint))
 
         // Assert: entry deleted
         assertThat(useCase.getAll().find { it.id == created.id }).isNull()

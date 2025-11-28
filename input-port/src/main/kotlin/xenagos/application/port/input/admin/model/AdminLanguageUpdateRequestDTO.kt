@@ -22,10 +22,10 @@ data class AdminLanguageUpdateRequestDTO(
     val nativeName: String,
 
     @field:NotNull
-    val active: Boolean
+    val active: Boolean = false
 
 ) : BaseAdminUpdateRequestDTO {
     companion object {
-        fun createEmptyDeactivated() = AdminLanguageUpdateRequestDTO(UUID.randomUUID(), "", "", "", false)
+        fun createEmptyDeactivated() = AdminLanguageUpdateRequestDTO(UUID.randomUUID(), "", "", "")
     }
 }

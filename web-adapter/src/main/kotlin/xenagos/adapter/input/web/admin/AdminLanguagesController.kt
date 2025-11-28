@@ -31,7 +31,7 @@ class AdminLanguagesController(private val service: AdminLanguagesUseCase) : Bas
     }
 
     @HxRequest
-    @PostMapping("/addNew")
+    @PostMapping
     fun addOneNew(
         @Valid @ModelAttribute("addOneNewModel")
         requestDTO: AdminLanguageNewRequestDTO,
@@ -40,7 +40,7 @@ class AdminLanguagesController(private val service: AdminLanguagesUseCase) : Bas
     ): String = handleAddOneNew(bindingResult, response) { service.saveOneNew(requestDTO) }
 
     @HxRequest
-    @PutMapping("/edit")
+    @PutMapping
     fun updateOne(
         @Valid @ModelAttribute("updateOneModel")
         requestDTO: AdminLanguageUpdateRequestDTO,
@@ -49,7 +49,7 @@ class AdminLanguagesController(private val service: AdminLanguagesUseCase) : Bas
     ): String = handleUpdateOne(bindingResult, response) { service.updateOne(requestDTO) }
 
     @HxRequest
-    @DeleteMapping("/delete")
+    @DeleteMapping
     fun deleteOne(@RequestParam id: UUID, response: HttpServletResponse): String =
         handleDeleteOne(response) { service.deleteOne(id) }
 }

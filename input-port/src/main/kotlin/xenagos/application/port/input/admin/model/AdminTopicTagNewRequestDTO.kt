@@ -15,10 +15,10 @@ data class AdminTopicTagNewRequestDTO(
     val description: String,
 
     @field:NotNull
-    val active: Boolean
+    val active: Boolean = false
 
 ): BaseAdminNewRequestDTO{
     companion object {
-        fun createEmptyDeactivated() = AdminTopicTagNewRequestDTO("", "", false)
+        fun createEmptyDeactivated() = AdminTopicTagNewRequestDTO("", "")
     }
 }

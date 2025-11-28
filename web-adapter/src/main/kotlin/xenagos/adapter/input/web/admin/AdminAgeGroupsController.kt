@@ -13,12 +13,12 @@ import xenagos.application.port.input.admin.model.AdminAgeGroupNewRequestDTO
 import java.util.*
 
 @Controller
-@RequestMapping("/admin/ageGroups")
+@RequestMapping("/admin/age-groups")
 class AdminAgeGroupsController(private val service: AdminAgeGroupUseCase) : BaseAdminController() {
 
     override val fragmentForAddOneNewRequest: String = "age-group-modal-form-add-new"
     override val fragmentForUpdateOneRequest: String = "age-group-modal-form-edit"
-    override val myEndpointPath: String = "ageGroups"
+    override val myEndpointPath: String = "age-groups"
     override val emptyNewRequestDTO = AdminAgeGroupNewRequestDTO.createEmptyDeactivated()
     override val emptyUpdateRequestDTO = AdminAgeGroupUpdateRequestDTO.createEmptyDeactivated()
 
@@ -31,7 +31,7 @@ class AdminAgeGroupsController(private val service: AdminAgeGroupUseCase) : Base
     }
 
     @HxRequest
-    @PostMapping("/addNew")
+    @PostMapping
     fun addOneNew(
         @Valid @ModelAttribute("addOneNewModel")
         requestDTO: AdminAgeGroupNewRequestDTO,
@@ -40,7 +40,7 @@ class AdminAgeGroupsController(private val service: AdminAgeGroupUseCase) : Base
     ): String = handleAddOneNew(bindingResult, response) { service.saveOneNew(requestDTO) }
 
     @HxRequest
-    @PutMapping("/edit")
+    @PutMapping
     fun updateOne(
         @Valid @ModelAttribute("editAgeGroup")
         requestDTO: AdminAgeGroupUpdateRequestDTO,
@@ -49,7 +49,7 @@ class AdminAgeGroupsController(private val service: AdminAgeGroupUseCase) : Base
     ): String = handleUpdateOne(bindingResult, response) { service.updateOne(requestDTO) }
 
     @HxRequest
-    @DeleteMapping("/delete")
+    @DeleteMapping
     fun deleteOne(@RequestParam id: UUID, response: HttpServletResponse): String =
         handleDeleteOne(response) { service.deleteOne(id) }
 }

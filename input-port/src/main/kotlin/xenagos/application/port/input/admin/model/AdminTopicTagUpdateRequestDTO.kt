@@ -19,10 +19,10 @@ data class AdminTopicTagUpdateRequestDTO(
     val description: String,
 
     @field:NotNull
-    val active: Boolean
+    val active: Boolean = false
 
 ) : BaseAdminUpdateRequestDTO{
     companion object {
-        fun createEmptyDeactivated() = AdminTopicTagUpdateRequestDTO(UUID.randomUUID(), "", "", false)
+        fun createEmptyDeactivated() = AdminTopicTagUpdateRequestDTO(UUID.randomUUID(), "", "")
     }
 }

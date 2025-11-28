@@ -13,12 +13,12 @@ import xenagos.application.port.input.admin.model.AdminMediaTypeNewRequestDTO
 import java.util.UUID
 
 @Controller
-@RequestMapping("/admin/mediaTypes")
+@RequestMapping("/admin/media-types")
 class AdminMediaTypesController(private val service: AdminMediaTypesUseCase) : BaseAdminController() {
 
     override val fragmentForAddOneNewRequest: String = "topic-tag-modal-form-add-new"
     override val fragmentForUpdateOneRequest: String = "media-type-modal-form-edit"
-    override val myEndpointPath: String = "mediaTypes"
+    override val myEndpointPath: String = "media-types"
     override val emptyNewRequestDTO = AdminMediaTypeNewRequestDTO.createEmptyDeactivated()
     override val emptyUpdateRequestDTO = AdminMediaTypeUpdateRequestDTO.createEmptyDeactivated()
 
@@ -31,7 +31,7 @@ class AdminMediaTypesController(private val service: AdminMediaTypesUseCase) : B
     }
 
     @HxRequest
-    @PostMapping("/addNew")
+    @PostMapping
     fun addOneNew(
         @Valid @ModelAttribute("addOneNewModel")
         requestDTO: AdminMediaTypeNewRequestDTO,
@@ -40,7 +40,7 @@ class AdminMediaTypesController(private val service: AdminMediaTypesUseCase) : B
     ): String = handleAddOneNew(bindingResult, response) { service.saveOneNew(requestDTO) }
 
     @HxRequest
-    @PutMapping("/edit")
+    @PutMapping
     fun updateOne(
         @Valid @ModelAttribute("updateOneModel")
         requestDTO: AdminMediaTypeUpdateRequestDTO,
@@ -49,7 +49,7 @@ class AdminMediaTypesController(private val service: AdminMediaTypesUseCase) : B
     ): String = handleUpdateOne(bindingResult, response) { service.updateOne(requestDTO) }
 
     @HxRequest
-    @DeleteMapping("/delete")
+    @DeleteMapping
     fun deleteOne(@RequestParam id: UUID, response: HttpServletResponse): String =
         handleDeleteOne(response) { service.deleteOne(id) }
 }

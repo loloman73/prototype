@@ -13,12 +13,12 @@ import xenagos.application.port.input.admin.model.AdminTopicTagNewRequestDTO
 import java.util.*
 
 @Controller
-@RequestMapping("/admin/topicTags")
+@RequestMapping("/admin/topic-tags")
 class AdminTopicTagsController(private val service: AdminTopicTagsUseCase) : BaseAdminController() {
 
     override val fragmentForAddOneNewRequest: String = "topic-tag-modal-form-add-new"
     override val fragmentForUpdateOneRequest: String = "topic-tag-modal-form-edit"
-    override val myEndpointPath: String = "topicTags"
+    override val myEndpointPath: String = "topic-tags"
     override val emptyNewRequestDTO = AdminTopicTagNewRequestDTO.createEmptyDeactivated()
     override val emptyUpdateRequestDTO = AdminTopicTagUpdateRequestDTO.createEmptyDeactivated()
 
@@ -31,7 +31,7 @@ class AdminTopicTagsController(private val service: AdminTopicTagsUseCase) : Bas
     }
 
     @HxRequest
-    @PostMapping("/addNew")
+    @PostMapping
     fun addOneNew(
         @Valid @ModelAttribute("addOneNewModel")
         requestDTO: AdminTopicTagNewRequestDTO,
@@ -40,7 +40,7 @@ class AdminTopicTagsController(private val service: AdminTopicTagsUseCase) : Bas
     ): String = handleAddOneNew(bindingResult, response) { service.saveOneNew(requestDTO) }
 
     @HxRequest
-    @PutMapping("/edit")
+    @PutMapping
     fun updateOne(
         @Valid @ModelAttribute("updateOneModel")
         requestDTO: AdminTopicTagUpdateRequestDTO,
@@ -49,7 +49,7 @@ class AdminTopicTagsController(private val service: AdminTopicTagsUseCase) : Bas
     ): String = handleUpdateOne(bindingResult, response) { service.updateOne(requestDTO) }
 
     @HxRequest
-    @DeleteMapping("/delete")
+    @DeleteMapping
     fun deleteOne(@RequestParam id: UUID, response: HttpServletResponse): String =
         handleDeleteOne(response) { service.deleteOne(id) }
 }

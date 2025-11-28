@@ -19,10 +19,10 @@ data class AdminAccessibilityTagUpdateRequestDTO(
     val description: String,
 
     @field:NotNull
-    val active: Boolean
+    val active: Boolean = false
 
 ) : BaseAdminUpdateRequestDTO {
     companion object {
-        fun createEmptyDeactivated() = AdminAccessibilityTagUpdateRequestDTO(UUID.randomUUID(), "", "", false)
+        fun createEmptyDeactivated() = AdminAccessibilityTagUpdateRequestDTO(UUID.randomUUID(), "", "")
     }
 }

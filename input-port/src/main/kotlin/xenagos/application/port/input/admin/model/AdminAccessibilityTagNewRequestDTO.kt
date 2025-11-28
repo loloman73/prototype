@@ -15,10 +15,10 @@ data class AdminAccessibilityTagNewRequestDTO(
     val description: String,
 
     @field:NotNull
-    val active: Boolean
+    val active: Boolean = false
 
 ) : BaseAdminNewRequestDTO {
     companion object {
-        fun createEmptyDeactivated() = AdminAccessibilityTagNewRequestDTO("", "", false)
+        fun createEmptyDeactivated() = AdminAccessibilityTagNewRequestDTO("", "" )
     }
 }

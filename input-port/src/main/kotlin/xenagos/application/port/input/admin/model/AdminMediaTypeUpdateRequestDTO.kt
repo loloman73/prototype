@@ -15,10 +15,10 @@ data class AdminMediaTypeUpdateRequestDTO(
     val name: String,
 
     @field:NotNull
-    val active: Boolean
+    val active: Boolean = false
 
 ) : BaseAdminUpdateRequestDTO {
     companion object {
-        fun createEmptyDeactivated() = AdminMediaTypeUpdateRequestDTO(UUID.randomUUID(), "", false)
+        fun createEmptyDeactivated() = AdminMediaTypeUpdateRequestDTO(UUID.randomUUID(), "")
     }
 }

@@ -72,13 +72,13 @@
         </div>
 
         <!-- Add New Modal -->
-        <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_MODAL('Media Type','~{/fragments/admin/media-type-modal-form-add-new}','/admin/mediaTypes/addNew')}"></div>
+        <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_MODAL('Media Type','~{/fragments/admin/media-type-modal-form-add-new}','/admin/media-types')}"></div>
 
         <!-- Edit Modal -->
-        <div th:replace="~{fragments/admin/admin-page.html :: EDIT_MODAL('Media Type','~{/fragments/admin/media-type-modal-form-edit}','/admin/mediaTypes/edit')}"></div>
+        <div th:replace="~{fragments/admin/admin-page.html :: EDIT_MODAL('Media Type','~{/fragments/admin/media-type-modal-form-edit}','/admin/media-types')}"></div>
 
         <!-- Delete Modal -->
-        <div th:replace="~{fragments/admin/admin-page.html :: DELETE_MODAL('Media Type','~{/fragments/admin/media-type-modal-form-delete}','/admin/mediaTypes/delete')}"></div>
+        <div th:replace="~{fragments/admin/admin-page.html :: DELETE_MODAL('Media Type','~{/fragments/admin/media-type-modal-form-delete}','/admin/media-types')}"></div>
 
         <!--Script-->
         <script type="text/javascript" th:src="@{/js/adminMediaTypes.js}"></script>

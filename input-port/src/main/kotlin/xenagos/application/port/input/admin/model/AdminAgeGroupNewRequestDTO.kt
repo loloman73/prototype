@@ -20,10 +20,10 @@ data class AdminAgeGroupNewRequestDTO(
     val maxAge: Byte,
 
     @field:NotNull
-    val active: Boolean
+    val active: Boolean = false
 
 ) : BaseAdminNewRequestDTO {
     companion object {
-        fun createEmptyDeactivated() = AdminAgeGroupNewRequestDTO("", 0, 0, false)
+        fun createEmptyDeactivated() = AdminAgeGroupNewRequestDTO("", 0, 0)
     }
 }

@@ -81,13 +81,13 @@
     </div>
 
     <!-- Add New Modal -->
-    <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_MODAL('Language','~{/fragments/admin/language-modal-form-add-new}','/admin/languages/addNew')}"></div>
+    <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_MODAL('Language','~{/fragments/admin/language-modal-form-add-new}','/admin/languages')}"></div>
 
     <!-- Edit Modal -->
-    <div th:replace="~{fragments/admin/admin-page.html :: EDIT_MODAL('Language','~{/fragments/admin/language-modal-form-edit}','/admin/languages/edit')}"></div>
+    <div th:replace="~{fragments/admin/admin-page.html :: EDIT_MODAL('Language','~{/fragments/admin/language-modal-form-edit}','/admin/languages')}"></div>
 
     <!-- Delete Modal -->
-    <div th:replace="~{fragments/admin/admin-page.html :: DELETE_MODAL('Language','~{/fragments/admin/language-modal-form-delete}','/admin/languages/delete')}"></div>
+    <div th:replace="~{fragments/admin/admin-page.html :: DELETE_MODAL('Language','~{/fragments/admin/language-modal-form-delete}','/admin/languages')}"></div>
 
     <!--Script-->
     <script type="text/javascript" th:src="@{/js/adminLanguages.js}"></script>

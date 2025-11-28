@@ -16,7 +16,7 @@ import java.util.UUID
 @RequestMapping("/admin/media-types")
 class AdminMediaTypesController(private val service: AdminMediaTypesUseCase) : BaseAdminController() {
 
-    override val fragmentForAddOneNewRequest: String = "topic-tag-modal-form-add-new"
+    override val fragmentForAddOneNewRequest: String = "media-type-modal-form-add-new"
     override val fragmentForUpdateOneRequest: String = "media-type-modal-form-edit"
     override val myEndpointPath: String = "media-types"
     override val emptyNewRequestDTO = AdminMediaTypeNewRequestDTO.createEmptyDeactivated()

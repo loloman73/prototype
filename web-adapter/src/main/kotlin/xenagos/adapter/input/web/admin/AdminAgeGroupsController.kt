@@ -42,7 +42,7 @@ class AdminAgeGroupsController(private val service: AdminAgeGroupUseCase) : Base
     @HxRequest
     @PutMapping
     fun updateOne(
-        @Valid @ModelAttribute("editAgeGroup")
+        @Valid @ModelAttribute("updateOneModel")
         requestDTO: AdminAgeGroupUpdateRequestDTO,
         bindingResult: BindingResult,
         response: HttpServletResponse

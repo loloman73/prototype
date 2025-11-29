@@ -7,9 +7,17 @@ import org.springframework.test.context.DynamicPropertySource
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.utility.DockerImageName
 
-// Base class to bootstrap a PostgreSQL Testcontainers instance.
-// With @Testcontainers, the container will be started once and stopped once for all tests
-// Now it is started and stopped manually with @BeforeAll and @AfterAll
+/**
+ Base class to bootstrap a PostgreSQL Testcontainers instance.
+ With @Testcontainers, the container will be started once and stopped once for all tests
+ Now it is started and stopped manually with @BeforeAll and @AfterAll
+**/
+/**
+@DataJpaTest at subclasses, makes each test method transactional.
+Spring opens a transaction before each test and rolls it back afterward,
+discarding any inserts/updates/deletes made during the test.
+**/
+
 abstract class BasePersistenceIT {
 
     companion object {

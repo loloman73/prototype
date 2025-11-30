@@ -6,38 +6,36 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.context.annotation.Import
-import xenagos.adapter.output.persistence.admin.mapper.AdminAccessibilityTagJPAMapper
 import xenagos.adapter.output.persistence.BasePersistenceIT
-import xenagos.domain.model.AccessibilityTag
+import xenagos.adapter.output.persistence.admin.mapper.AdminMediaTypeJPAMapper
+import xenagos.domain.model.MediaType
 import java.util.UUID
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Import(AdminAccessibilityTagJPAMapper::class, AdminAccessibilityTagsPersistence::class)
-open class AdminAccessibilityTagsPersistenceIT : BasePersistenceIT() {
+@Import(AdminMediaTypeJPAMapper::class, AdminMediaTypesPersistence::class)
+open class AdminMediaTypesPersistenceIT : BasePersistenceIT() {
 
     @Autowired
-    lateinit var persistence: AdminAccessibilityTagsPersistence
+    lateinit var persistence: AdminMediaTypesPersistence
 
     /** Happy path tests **/
     // CREATE
     @Test
-    fun `POST`() {
+    fun `saveOneNew persists a new entry and returns it`() {
         // Arrange
-        val newTag = AccessibilityTag(
+        val newEntry = MediaType(
             UUID.randomUUID(),
-            "Wheelchair Accessible",
-            "Suitable for wheelchair users",
+            "Audio Guide",
             true
         )
 
         // Act
-        val saved = persistence.saveOneNew(newTag)
+        val saved = persistence.saveOneNew(newEntry)
 
         // Assert
-        assertThat(saved.id).isEqualTo(newTag.id)
-        assertThat(saved.name).isEqualTo("Wheelchair Accessible")
-        assertThat(saved.description).isEqualTo("Suitable for wheelchair users")
+        assertThat(saved.id).isEqualTo(newEntry.id)
+        assertThat(saved.type).isEqualTo("Audio Guide")
         assertThat(saved.active).isTrue()
     }
 
@@ -45,8 +43,8 @@ open class AdminAccessibilityTagsPersistenceIT : BasePersistenceIT() {
     @Test
     fun `getAll returns persisted entries`() {
         // Arrange
-        val one = AccessibilityTag(UUID.randomUUID(), "Visual Aid", "Visual assistance", true)
-        val two = AccessibilityTag(UUID.randomUUID(), "Hearing Aid", "Audio assistance", false)
+        val one = MediaType(UUID.randomUUID(), "Audio", true)
+        val two = MediaType(UUID.randomUUID(), "Visual", false)
         persistence.saveOneNew(one)
         persistence.saveOneNew(two)
 
@@ -54,35 +52,34 @@ open class AdminAccessibilityTagsPersistenceIT : BasePersistenceIT() {
         val all = persistence.getAll()
 
         // Assert
-        assertThat(all).extracting<String> { it.name }
-            .contains("Visual Aid", "Hearing Aid")
+        assertThat(all).extracting<String> { it.type }
+            .contains("Audio", "Visual")
     }
 
     // UPDATE
     @Test
     fun `updateOne updates persisted entry fields`() {
         // Arrange
-        val original = AccessibilityTag(UUID.randomUUID(), "Signage", "Basic signage", true)
+        val original = MediaType(UUID.randomUUID(), "Original Type", true)
         persistence.saveOneNew(original)
 
         // Act
-        val updated = AccessibilityTag(original.id, "Signage Updated", "Improved signage", false)
+        val updated = MediaType(original.id, "Updated Type", false)
         val result = persistence.updateOne(updated)
 
         // Assert
         assertThat(result.id).isEqualTo(original.id)
-        assertThat(result.name).isEqualTo("Signage Updated")
-        assertThat(result.description).isEqualTo("Improved signage")
+        assertThat(result.type).isEqualTo("Updated Type")
         assertThat(result.active).isFalse()
     }
 
     // DELETE
     @Test
-    fun `deleteOne removes the tag`() {
+    fun `deleteOne removes the entry`() {
         // Arrange
         val id = UUID.randomUUID()
-        val tag = AccessibilityTag(id, "Temp Tag", "To be deleted", true)
-        persistence.saveOneNew(tag)
+        val entry = MediaType(id, "Temp Media", true)
+        persistence.saveOneNew(entry)
         // ensure present
         assertThat(persistence.getAll().any { it.id == id }).isTrue()
 
@@ -97,21 +94,18 @@ open class AdminAccessibilityTagsPersistenceIT : BasePersistenceIT() {
     /** Edge cases **/
     @Test
     fun `getAll on empty db returns empty list`() {
-        println(persistence.getAll().count())
         val all = persistence.getAll()
+        assertThat(all).isEmpty()
     }
 
     @Test
-    fun `saveOneNew accepts max-length fields`() {
-        val name35 = "x".repeat(35)
-        val desc250 = "y".repeat(250)
-        val saved = persistence.saveOneNew(AccessibilityTag(UUID.randomUUID(), name35, desc250, true))
-        assertThat(saved.name).hasSize(35)
-        assertThat(saved.description).hasSize(250)
+    fun `saveOneNew accepts max-length type`() {
+        val type35 = "x".repeat(35)
+        val saved = persistence.saveOneNew(MediaType(UUID.randomUUID(), type35, true))
+        assertThat(saved.type).hasSize(35)
     }
-    //TODO: - Repeat for description > 250
 
-    //deleteOne is a no-op on non-existing ID  confirm that `CrudRepository.deleteById` is idempotent.
+    // deleteOne is a no-op on non-existing ID
     @Test
     fun `deleteOne on non-existing id is no-op`() {
         val before = persistence.getAll().count()
@@ -120,21 +114,15 @@ open class AdminAccessibilityTagsPersistenceIT : BasePersistenceIT() {
         assertThat(after).isEqualTo(before)
     }
 
-
     @Test
-    fun `saveOneNew rejects too-long fields`() {
-        val name36 = "x".repeat(36)
-        val tag = AccessibilityTag(UUID.randomUUID(), name36, "ok".repeat(2), true)
+    fun `saveOneNew rejects too-long type`() {
+        val type36 = "x".repeat(36)
+        val entry = MediaType(UUID.randomUUID(), type36, true)
         org.junit.jupiter.api.assertThrows<org.springframework.dao.DataIntegrityViolationException> {
             // Save and then trigger a flush via a query to let the DB constraint raise the violation
+            persistence.saveOneNew(entry)
             // Hibernate flushes before queries; this will force the insert and surface the exception
-            persistence.saveOneNew(tag)
             persistence.getAll()
         }
     }
-
-
-    //TODO: - Update entity when ID does not exist in database must result in error
-    //      - Dont allow duplicate names at database
-
 }

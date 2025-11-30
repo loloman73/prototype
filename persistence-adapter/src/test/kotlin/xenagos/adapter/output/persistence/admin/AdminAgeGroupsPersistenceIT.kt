@@ -6,38 +6,40 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.context.annotation.Import
-import xenagos.adapter.output.persistence.admin.mapper.AdminAccessibilityTagJPAMapper
 import xenagos.adapter.output.persistence.BasePersistenceIT
-import xenagos.domain.model.AccessibilityTag
+import xenagos.adapter.output.persistence.admin.mapper.AdminAgeGroupJPAMapper
+import xenagos.domain.model.AgeGroup
 import java.util.UUID
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Import(AdminAccessibilityTagJPAMapper::class, AdminAccessibilityTagsPersistence::class)
-open class AdminAccessibilityTagsPersistenceIT : BasePersistenceIT() {
+@Import(AdminAgeGroupJPAMapper::class, AdminAgeGroupsPersistence::class)
+open class AdminAgeGroupsPersistenceIT : BasePersistenceIT() {
 
     @Autowired
-    lateinit var persistence: AdminAccessibilityTagsPersistence
+    lateinit var persistence: AdminAgeGroupsPersistence
 
     /** Happy path tests **/
     // CREATE
     @Test
-    fun `POST`() {
+    fun `saveOneNew persists a new entry and returns it`() {
         // Arrange
-        val newTag = AccessibilityTag(
+        val newEntry = AgeGroup(
             UUID.randomUUID(),
-            "Wheelchair Accessible",
-            "Suitable for wheelchair users",
+            "Teenagers",
+            13.toByte(),
+            17.toByte(),
             true
         )
 
         // Act
-        val saved = persistence.saveOneNew(newTag)
+        val saved = persistence.saveOneNew(newEntry)
 
         // Assert
-        assertThat(saved.id).isEqualTo(newTag.id)
-        assertThat(saved.name).isEqualTo("Wheelchair Accessible")
-        assertThat(saved.description).isEqualTo("Suitable for wheelchair users")
+        assertThat(saved.id).isEqualTo(newEntry.id)
+        assertThat(saved.groupName).isEqualTo("Teenagers")
+        assertThat(saved.minAge).isEqualTo(13)
+        assertThat(saved.maxAge).isEqualTo(17)
         assertThat(saved.active).isTrue()
     }
 
@@ -45,8 +47,8 @@ open class AdminAccessibilityTagsPersistenceIT : BasePersistenceIT() {
     @Test
     fun `getAll returns persisted entries`() {
         // Arrange
-        val one = AccessibilityTag(UUID.randomUUID(), "Visual Aid", "Visual assistance", true)
-        val two = AccessibilityTag(UUID.randomUUID(), "Hearing Aid", "Audio assistance", false)
+        val one = AgeGroup(UUID.randomUUID(), "Preteens", 10.toByte(), 12.toByte(), true)
+        val two = AgeGroup(UUID.randomUUID(), "Young Adults", 18.toByte(), 29.toByte(), false)
         persistence.saveOneNew(one)
         persistence.saveOneNew(two)
 
@@ -54,35 +56,36 @@ open class AdminAccessibilityTagsPersistenceIT : BasePersistenceIT() {
         val all = persistence.getAll()
 
         // Assert
-        assertThat(all).extracting<String> { it.name }
-            .contains("Visual Aid", "Hearing Aid")
+        assertThat(all).extracting<String> { it.groupName }
+            .contains("Preteens", "Young Adults")
     }
 
     // UPDATE
     @Test
     fun `updateOne updates persisted entry fields`() {
         // Arrange
-        val original = AccessibilityTag(UUID.randomUUID(), "Signage", "Basic signage", true)
+        val original = AgeGroup(UUID.randomUUID(), "Middle Age", 30.toByte(), 64.toByte(), true)
         persistence.saveOneNew(original)
 
         // Act
-        val updated = AccessibilityTag(original.id, "Signage Updated", "Improved signage", false)
+        val updated = AgeGroup(original.id, "Middle Age Updated", 31.toByte(), 60.toByte(), false)
         val result = persistence.updateOne(updated)
 
         // Assert
         assertThat(result.id).isEqualTo(original.id)
-        assertThat(result.name).isEqualTo("Signage Updated")
-        assertThat(result.description).isEqualTo("Improved signage")
+        assertThat(result.groupName).isEqualTo("Middle Age Updated")
+        assertThat(result.minAge).isEqualTo(31)
+        assertThat(result.maxAge).isEqualTo(60)
         assertThat(result.active).isFalse()
     }
 
     // DELETE
     @Test
-    fun `deleteOne removes the tag`() {
+    fun `deleteOne removes the entry`() {
         // Arrange
         val id = UUID.randomUUID()
-        val tag = AccessibilityTag(id, "Temp Tag", "To be deleted", true)
-        persistence.saveOneNew(tag)
+        val entry = AgeGroup(id, "Temp Group", 6.toByte(), 9.toByte(), true)
+        persistence.saveOneNew(entry)
         // ensure present
         assertThat(persistence.getAll().any { it.id == id }).isTrue()
 
@@ -97,21 +100,18 @@ open class AdminAccessibilityTagsPersistenceIT : BasePersistenceIT() {
     /** Edge cases **/
     @Test
     fun `getAll on empty db returns empty list`() {
-        println(persistence.getAll().count())
         val all = persistence.getAll()
+        assertThat(all).isEmpty()
     }
 
     @Test
-    fun `saveOneNew accepts max-length fields`() {
+    fun `saveOneNew accepts max-length groupName`() {
         val name35 = "x".repeat(35)
-        val desc250 = "y".repeat(250)
-        val saved = persistence.saveOneNew(AccessibilityTag(UUID.randomUUID(), name35, desc250, true))
-        assertThat(saved.name).hasSize(35)
-        assertThat(saved.description).hasSize(250)
+        val saved = persistence.saveOneNew(AgeGroup(UUID.randomUUID(), name35, 6.toByte(), 9.toByte(), true))
+        assertThat(saved.groupName).hasSize(35)
     }
-    //TODO: - Repeat for description > 250
 
-    //deleteOne is a no-op on non-existing ID  confirm that `CrudRepository.deleteById` is idempotent.
+    // deleteOne is a no-op on non-existing ID (CrudRepository.deleteById is idempotent)
     @Test
     fun `deleteOne on non-existing id is no-op`() {
         val before = persistence.getAll().count()
@@ -120,21 +120,15 @@ open class AdminAccessibilityTagsPersistenceIT : BasePersistenceIT() {
         assertThat(after).isEqualTo(before)
     }
 
-
     @Test
-    fun `saveOneNew rejects too-long fields`() {
+    fun `saveOneNew rejects too-long groupName`() {
         val name36 = "x".repeat(36)
-        val tag = AccessibilityTag(UUID.randomUUID(), name36, "ok".repeat(2), true)
+        val entry = AgeGroup(UUID.randomUUID(), name36, 6.toByte(), 9.toByte(), true)
         org.junit.jupiter.api.assertThrows<org.springframework.dao.DataIntegrityViolationException> {
             // Save and then trigger a flush via a query to let the DB constraint raise the violation
             // Hibernate flushes before queries; this will force the insert and surface the exception
-            persistence.saveOneNew(tag)
+            persistence.saveOneNew(entry)
             persistence.getAll()
         }
     }
-
-
-    //TODO: - Update entity when ID does not exist in database must result in error
-    //      - Dont allow duplicate names at database
-
 }

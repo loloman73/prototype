@@ -8,7 +8,8 @@ import xenagos.domain.model.AccessibilityTag
 
 @Repository
 open class AdminAccessibilityTagsPersistence(
-        repository: AdminAccessibilityTagsRepository,
-        mapper: AdminAccessibilityTagJPAMapper) :
+    repository: AdminAccessibilityTagsRepository,
+    mapper: AdminAccessibilityTagJPAMapper
+) :
     BaseAdminPersistence<AccessibilityTag, AccessibilityTagJpaEntity>(repository, mapper),
     AdminAccessibilityTagsOutputPort

@@ -16,6 +16,7 @@ abstract class BaseAdminPersistence<TEntity : BaseDomainEntity, TJPAEntity : Bas
     override fun getAll() = arrayListOf<TEntity>().apply {
         repository.findAll().forEach { add(mapper.toDomainEntity(it)) }
     }
+
     override fun saveOneNew(newEntityToSave: TEntity): TEntity =
         mapper.toDomainEntity(repository.save(mapper.toJpaEntity(newEntityToSave)))
 

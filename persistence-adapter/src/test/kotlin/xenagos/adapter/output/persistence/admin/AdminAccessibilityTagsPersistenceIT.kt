@@ -22,7 +22,7 @@ open class AdminAccessibilityTagsPersistenceIT : BasePersistenceIT() {
     /** Happy path tests **/
     // CREATE
     @Test
-    fun `POST`() {
+    fun `saveOneNew persists a new entry and returns it`() {
         // Arrange
         val newTag = AccessibilityTag(
             UUID.randomUUID(),

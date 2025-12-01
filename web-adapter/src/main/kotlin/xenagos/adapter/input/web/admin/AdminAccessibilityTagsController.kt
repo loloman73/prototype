@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 import xenagos.application.port.input.admin.AdminAccessibilityTagsUseCase
 import xenagos.application.port.input.admin.model.AdminAccessibilityTagUpdateRequestDTO
 import xenagos.application.port.input.admin.model.AdminAccessibilityTagNewRequestDTO
-import java.util.*
+import java.util.UUID
 
 @Controller
 @RequestMapping("/admin/accessibility-tags")
@@ -52,5 +52,4 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
     @DeleteMapping
     fun deleteOne(@RequestParam id: UUID, response: HttpServletResponse): String =
         handleDeleteOne(response) { service.deleteOne(id) }
-
 }

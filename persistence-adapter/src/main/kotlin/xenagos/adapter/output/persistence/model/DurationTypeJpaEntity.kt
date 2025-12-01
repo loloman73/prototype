@@ -10,8 +10,11 @@ open class DurationTypeJpaEntity : BaseJPAEntity  {
     @Column(name = "duration_type_id", nullable = false)
     open var id: UUID? = null
 
-    @Column(name = "duration_type", length = Integer.MAX_VALUE)
+    @Column(name = "duration_type", length = 35, nullable = false)
     open var durationType: String? = null
+
+    @Column(name = "active", nullable = false)
+    open var active: Boolean? = null
 
     @OneToMany(mappedBy = "durationType")
     open var mediaGuides: MutableSet<MediaGuideJpaEntity> = mutableSetOf()

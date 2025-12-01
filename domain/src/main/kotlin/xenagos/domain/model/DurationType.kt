@@ -4,5 +4,6 @@ import java.util.*
 
 data class DurationType(
     val id: UUID,
-    val type: String
+    val type: String,
+    val active: Boolean
 ) : BaseDomainEntity

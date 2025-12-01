@@ -42,7 +42,7 @@ class LoadToursForAreaHardEncodedAdapter : LoadToursForAreaOutPort {
                             mediaFileName = "",
                             mediaType = MediaType(UUID.randomUUID(), "",  true),
                             duration = Random.nextInt(1, 240).toShort(),
-                            durationType = DurationType(UUID.randomUUID(), ""),
+                            durationType = DurationType(UUID.randomUUID(), "aaa", false),
                             ameaFriendlyTag = AmeaFriendlyTag(UUID.randomUUID(), "", ""),
                             topicTags = setOf(TopicTag(UUID.randomUUID(), "", "", true)),
                             ageGroups = setOf(AgeGroup(UUID.randomUUID(), "aaa", 12, 19, true))

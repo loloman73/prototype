@@ -4,6 +4,6 @@ import java.util.UUID
 
 data class AdminDurationTypeResponseDTO(
     val id: UUID,
-    val type: String,
+    val entityName: String,
     val active: Boolean
 ) : BaseAdminResponseDTO

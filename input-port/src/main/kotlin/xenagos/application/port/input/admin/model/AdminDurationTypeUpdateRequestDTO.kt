@@ -12,10 +12,10 @@ data class AdminDurationTypeUpdateRequestDTO(
 
     @field:NotBlank
     @field:Size(min = 3, max = 35)
-    val type: String,
+    val entityName: String,
 
     @field:NotNull
-    val active: Boolean
+    val active: Boolean = false
 ):
     BaseAdminUpdateRequestDTO {
     companion object{

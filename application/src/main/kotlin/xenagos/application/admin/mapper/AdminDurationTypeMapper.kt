@@ -19,10 +19,10 @@ class AdminDurationTypeMapper : BaseAdminMapper<
 
 
     override fun toEntity(dto: AdminDurationTypeNewRequestDTO, id: UUID): DurationType =
-        DurationType(id, dto.type, dto.active)
+        DurationType(id, dto.entityName, dto.active)
 
 
     override fun toEntity(dto: AdminDurationTypeUpdateRequestDTO): DurationType =
-        DurationType(dto.id, dto.type, dto.active)
+        DurationType(dto.id, dto.entityName, dto.active)
 
 }

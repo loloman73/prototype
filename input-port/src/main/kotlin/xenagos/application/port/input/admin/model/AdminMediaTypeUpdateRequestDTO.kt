@@ -12,7 +12,7 @@ data class AdminMediaTypeUpdateRequestDTO(
 
     @field:NotBlank
     @field:Size(min = 3, max = 35)
-    val name: String,
+    val entityName: String,
 
     @field:NotNull
     val active: Boolean = false

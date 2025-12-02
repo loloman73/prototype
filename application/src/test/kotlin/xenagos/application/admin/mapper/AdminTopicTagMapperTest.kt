@@ -57,7 +57,7 @@ class AdminTopicTagMapperTest {
         // Then
         assertThat(responseDto).isNotNull
         assertThat(responseDto.id).isEqualTo(id)
-        assertThat(responseDto.name).isEqualTo("Architecture")
+        assertThat(responseDto.entityName).isEqualTo("Architecture")
         assertThat(responseDto.description).isEqualTo("Buildings and structures")
         assertThat(responseDto.active).isTrue()
     }
@@ -79,7 +79,7 @@ class AdminTopicTagMapperTest {
         // Then
         assertThat(responseDto).isNotNull
         assertThat(responseDto.id).isEqualTo(id)
-        assertThat(responseDto.name).isEqualTo("History")
+        assertThat(responseDto.entityName).isEqualTo("History")
         assertThat(responseDto.description).isEqualTo("Historical context and events")
         assertThat(responseDto.active).isFalse()
     }
@@ -101,7 +101,7 @@ class AdminTopicTagMapperTest {
         // Then
         assertThat(responseDto).isNotNull
         assertThat(responseDto.id).isEqualTo(id)
-        assertThat(responseDto.name).isEqualTo("Art")
+        assertThat(responseDto.entityName).isEqualTo("Art")
         assertThat(responseDto.description).isEqualTo("Fine arts and paintings")
         assertThat(responseDto.active).isTrue()
     }
@@ -111,7 +111,7 @@ class AdminTopicTagMapperTest {
         // Given
         val id = UUID.randomUUID()
         val newRequestDto = AdminTopicTagNewRequestDTO(
-            name = "Science",
+            entityName = "Science",
             description = "Scientific discoveries and innovations",
             active = true
         )
@@ -132,7 +132,7 @@ class AdminTopicTagMapperTest {
         // Given
         val id = UUID.randomUUID()
         val newRequestDto = AdminTopicTagNewRequestDTO(
-            name = "Technology",
+            entityName = "Technology",
             description = "Technological advancements",
             active = false
         )
@@ -153,7 +153,7 @@ class AdminTopicTagMapperTest {
         // Given
         val id = UUID.randomUUID()
         val newRequestDto = AdminTopicTagNewRequestDTO(
-            name = "Culture",
+            entityName = "Culture",
             description = "Cultural heritage and traditions",
             active = false
         )
@@ -175,7 +175,7 @@ class AdminTopicTagMapperTest {
         val id = UUID.randomUUID()
         val longDescription = "Detailed information about ancient civilizations, their customs, beliefs, and contributions to modern society"
         val newRequestDto = AdminTopicTagNewRequestDTO(
-            name = "Ancient Civilizations",
+            entityName = "Ancient Civilizations",
             description = longDescription,
             active = true
         )
@@ -196,7 +196,7 @@ class AdminTopicTagMapperTest {
         // Given
         val id = UUID.randomUUID()
         val newRequestDto = AdminTopicTagNewRequestDTO(
-            name = "Religion & Philosophy",
+            entityName = "Religion & Philosophy",
             description = "Religious beliefs, practices & philosophical thought",
             active = true
         )
@@ -218,7 +218,7 @@ class AdminTopicTagMapperTest {
         val id = UUID.randomUUID()
         val updateRequestDto = AdminTopicTagUpdateRequestDTO(
             id = id,
-            name = "Archaeology",
+            entityName = "Archaeology",
             description = "Archaeological findings and excavations",
             active = true
         )
@@ -240,7 +240,7 @@ class AdminTopicTagMapperTest {
         val id = UUID.randomUUID()
         val updateRequestDto = AdminTopicTagUpdateRequestDTO(
             id = id,
-            name = "Literature",
+            entityName = "Literature",
             description = "Literary works and authors",
             active = false
         )
@@ -262,7 +262,7 @@ class AdminTopicTagMapperTest {
         val id = UUID.randomUUID()
         val updateRequestDto = AdminTopicTagUpdateRequestDTO(
             id = id,
-            name = "Natural History",
+            entityName = "Natural History",
             description = "Natural world and biological sciences",
             active = true
         )
@@ -283,7 +283,7 @@ class AdminTopicTagMapperTest {
         // Given
         val id = UUID.randomUUID()
         val newRequestDto = AdminTopicTagNewRequestDTO(
-            name = "Music",
+            entityName = "Music",
             description = "Musical instruments and compositions",
             active = true
         )
@@ -294,7 +294,7 @@ class AdminTopicTagMapperTest {
 
         // Then
         assertThat(responseDto.id).isEqualTo(id)
-        assertThat(responseDto.name).isEqualTo(newRequestDto.name)
+        assertThat(responseDto.entityName).isEqualTo(newRequestDto.entityName)
         assertThat(responseDto.description).isEqualTo(newRequestDto.description)
         assertThat(responseDto.active).isEqualTo(newRequestDto.active)
     }
@@ -305,7 +305,7 @@ class AdminTopicTagMapperTest {
         val id = UUID.randomUUID()
         val updateRequestDto = AdminTopicTagUpdateRequestDTO(
             id = id,
-            name = "Photography",
+            entityName = "Photography",
             description = "Photographic collections and techniques",
             active = true
         )
@@ -316,7 +316,7 @@ class AdminTopicTagMapperTest {
 
         // Then
         assertThat(responseDto.id).isEqualTo(updateRequestDto.id)
-        assertThat(responseDto.name).isEqualTo(updateRequestDto.name)
+        assertThat(responseDto.entityName).isEqualTo(updateRequestDto.entityName)
         assertThat(responseDto.description).isEqualTo(updateRequestDto.description)
         assertThat(responseDto.active).isEqualTo(updateRequestDto.active)
     }
@@ -326,7 +326,7 @@ class AdminTopicTagMapperTest {
         // Given
         val id = UUID.randomUUID()
         val newRequestDto = AdminTopicTagNewRequestDTO(
-            name = "Mythology",
+            entityName = "Mythology",
             description = "Mythological stories and legends",
             active = false
         )
@@ -337,7 +337,7 @@ class AdminTopicTagMapperTest {
 
         // Then
         assertThat(responseDto.id).isEqualTo(id)
-        assertThat(responseDto.name).isEqualTo("Mythology")
+        assertThat(responseDto.entityName).isEqualTo("Mythology")
         assertThat(responseDto.description).isEqualTo("Mythological stories and legends")
         assertThat(responseDto.active).isFalse()
     }
@@ -358,7 +358,7 @@ class AdminTopicTagMapperTest {
 
         // Then
         assertThat(responseDto)
-            .extracting("id", "name", "description", "active")
+            .extracting("id", "entityName", "description", "active")
             .containsExactly(id, "Geography", "Geographical locations and maps", true)
     }
 
@@ -367,7 +367,7 @@ class AdminTopicTagMapperTest {
         // Given
         val id = UUID.randomUUID()
         val newRequestDto = AdminTopicTagNewRequestDTO(
-            name = "Paleontology",
+            entityName = "Paleontology",
             description = "Fossils and prehistoric life",
             active = true
         )
@@ -387,7 +387,7 @@ class AdminTopicTagMapperTest {
         val id = UUID.randomUUID()
         val updateRequestDto = AdminTopicTagUpdateRequestDTO(
             id = id,
-            name = "Anthropology",
+            entityName = "Anthropology",
             description = "Human societies and cultures",
             active = false
         )
@@ -416,8 +416,8 @@ class AdminTopicTagMapperTest {
         val responseDto = mapper.toResponseDto(entity)
 
         // Then - verify that entity.tagName maps to responseDto.name
-        assertThat(responseDto.name).isEqualTo(entity.tagName)
-        assertThat(responseDto.name).isEqualTo("Astronomy")
+        assertThat(responseDto.entityName).isEqualTo(entity.tagName)
+        assertThat(responseDto.entityName).isEqualTo("Astronomy")
     }
 
     @Test
@@ -425,7 +425,7 @@ class AdminTopicTagMapperTest {
         // Given
         val id = UUID.randomUUID()
         val newRequestDto = AdminTopicTagNewRequestDTO(
-            name = "Economics",
+            entityName = "Economics",
             description = "Economic systems and trade",
             active = true
         )
@@ -434,7 +434,7 @@ class AdminTopicTagMapperTest {
         val entity = mapper.toEntity(newRequestDto, id)
 
         // Then - verify that dto.name maps to entity.tagName
-        assertThat(entity.tagName).isEqualTo(newRequestDto.name)
+        assertThat(entity.tagName).isEqualTo(newRequestDto.entityName)
         assertThat(entity.tagName).isEqualTo("Economics")
     }
 
@@ -444,7 +444,7 @@ class AdminTopicTagMapperTest {
         val id = UUID.randomUUID()
         val updateRequestDto = AdminTopicTagUpdateRequestDTO(
             id = id,
-            name = "Politics",
+            entityName = "Politics",
             description = "Political systems and governance",
             active = false
         )
@@ -453,7 +453,7 @@ class AdminTopicTagMapperTest {
         val entity = mapper.toEntity(updateRequestDto)
 
         // Then - verify that dto.name maps to entity.tagName
-        assertThat(entity.tagName).isEqualTo(updateRequestDto.name)
+        assertThat(entity.tagName).isEqualTo(updateRequestDto.entityName)
         assertThat(entity.tagName).isEqualTo("Politics")
     }
 
@@ -476,7 +476,7 @@ class AdminTopicTagMapperTest {
             val responseDto = mapper.toResponseDto(entity)
 
             // Then
-            assertThat(responseDto.name).isEqualTo(name)
+            assertThat(responseDto.entityName).isEqualTo(name)
             assertThat(responseDto.description).isEqualTo(description)
             assertThat(responseDto.id).isEqualTo(id)
             assertThat(responseDto.active).isTrue()
@@ -488,7 +488,7 @@ class AdminTopicTagMapperTest {
         // Given
         val id = UUID.randomUUID()
         val newRequestDto = AdminTopicTagNewRequestDTO(
-            name = "Pre-Columbian",
+            entityName = "Pre-Columbian",
             description = "Pre-Columbian American civilizations",
             active = true
         )
@@ -508,7 +508,7 @@ class AdminTopicTagMapperTest {
         val id = UUID.randomUUID()
         val updateRequestDto = AdminTopicTagUpdateRequestDTO(
             id = id,
-            name = "20th Century Art",
+            entityName = "20th Century Art",
             description = "Art from the 20th century",
             active = true
         )
@@ -538,7 +538,7 @@ class AdminTopicTagMapperTest {
 
         // Then
         assertThat(responseDto).isNotNull
-        assertThat(responseDto.name).isEqualTo("Miscellaneous")
+        assertThat(responseDto.entityName).isEqualTo("Miscellaneous")
         assertThat(responseDto.description).isEqualTo("Other")
     }
 
@@ -547,7 +547,7 @@ class AdminTopicTagMapperTest {
         // Given
         val id = UUID.randomUUID()
         val newRequestDto = AdminTopicTagNewRequestDTO(
-            name = "War & Conflict",
+            entityName = "War & Conflict",
             description = "Military history, battles, and conflicts throughout history.",
             active = true
         )
@@ -566,7 +566,7 @@ class AdminTopicTagMapperTest {
         // Given
         val id = UUID.randomUUID()
         val newRequestDto = AdminTopicTagNewRequestDTO(
-            name = "Decorative Arts (Applied Arts)",
+            entityName = "Decorative Arts (Applied Arts)",
             description = "Functional artistic objects",
             active = true
         )

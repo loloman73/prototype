@@ -16,8 +16,8 @@ dependencies {
 
     testImplementation(libs.sb.starter.test)
     // JUnit 5 Suite API to run grouped tests from IDE
-    testImplementation("org.junit.platform:junit-platform-suite-api:1.11.3")
-    testRuntimeOnly("org.junit.platform:junit-platform-suite-engine:1.11.3")
+    testImplementation(libs.junit.platform.suite.api)
+    testRuntimeOnly(libs.junit.platform.suite.engine)
     // Testcontainers for integration tests
     testImplementation(platform(libs.testcontainers.bom))
     testImplementation(libs.testcontainers.junit)

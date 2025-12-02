@@ -13,7 +13,7 @@ data class AdminAgeGroupUpdateRequestDTO(
 
     @field:NotBlank
     @field:Size(min = 3, max = 35)
-    val groupName: String,
+    val entityName: String,
 
     @field:NotNull
     @field:Positive

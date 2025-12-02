@@ -36,7 +36,7 @@
                 <!--field ID-->
                 <td class="text-nowrap"><span th:text="${accessibilityTag.id}"></span></td>
                 <!--field 1-->
-                <td><span th:text="${accessibilityTag.name}"></span></td>
+                <td><span th:text="${accessibilityTag.entityName}"></span></td>
                 <!--field 2-->
                 <td><span th:text="${accessibilityTag.description}"></span></td>
                 <!--field active-->
@@ -54,7 +54,7 @@
                             data-bs-toggle="modal"
                             data-bs-target="#edit_modal"
                             th:data-id="${accessibilityTag.id}"
-                            th:data-field1="${accessibilityTag.name}"
+                            th:data-field1="${accessibilityTag.entityName}"
                             th:data-field2="${accessibilityTag.description}"
                             th:data-active="${accessibilityTag.active}">
                         Edit
@@ -65,7 +65,7 @@
                             data-bs-toggle="modal"
                             data-bs-target="#delete_modal"
                             th:data-id="${accessibilityTag.id}"
-                            th:data-field1="${accessibilityTag.name}"
+                            th:data-field1="${accessibilityTag.entityName}"
                             th:data-field2="${accessibilityTag.description}"
                             th:data-active="${accessibilityTag.active}">
                         Delete

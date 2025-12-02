@@ -33,10 +33,10 @@ class AdminMediaTypesControllerIT : BaseWebIT() {
 
     private val endPoint = "/admin/media-types"
 
-    private fun create(name: String, active: Boolean) =
+    private fun create(entityName: String, active: Boolean) =
         useCase.saveOneNew(
             AdminMediaTypeNewRequestDTO(
-                name = name,
+                entityName = entityName,
                 active = active
             )
         )
@@ -55,16 +55,16 @@ class AdminMediaTypesControllerIT : BaseWebIT() {
         val listAllModel = mvcResult.modelAndView!!.model["listAllModel"] as List<AdminMediaTypeResponseDTO>
         val found = listAllModel.firstOrNull { it.id == created.id }
         assertThat(found).isNotNull
-        assertThat(found!!.name).isEqualTo(created.name)
+        assertThat(found!!.entityName).isEqualTo(created.entityName)
         assertThat(found.active).isEqualTo(created.active)
 
         val addOneNew = mvcResult.modelAndView!!.model["addOneNewModel"] as AdminMediaTypeNewRequestDTO
-        assertThat(addOneNew.name).isEmpty()
+        assertThat(addOneNew.entityName).isEmpty()
         assertThat(addOneNew.active).isFalse()
 
         val updateOne = mvcResult.modelAndView!!.model["updateOneModel"] as AdminMediaTypeUpdateRequestDTO
         assertThat(updateOne.id).isNotNull
-        assertThat(updateOne.name).isEmpty()
+        assertThat(updateOne.entityName).isEmpty()
         assertThat(updateOne.active).isFalse()
     }
 
@@ -83,12 +83,12 @@ class AdminMediaTypesControllerIT : BaseWebIT() {
 
         val second = listAllModel.firstOrNull { it.id == created2.id }
         assertThat(second).isNotNull
-        assertThat(second!!.name).isEqualTo(created2.name)
+        assertThat(second!!.entityName).isEqualTo(created2.entityName)
         assertThat(second.active).isEqualTo(created2.active)
 
         val third = listAllModel.firstOrNull { it.id == created3.id }
         assertThat(third).isNotNull
-        assertThat(third!!.name).isEqualTo(created3.name)
+        assertThat(third!!.entityName).isEqualTo(created3.entityName)
         assertThat(third.active).isEqualTo(created3.active)
     }
 
@@ -102,7 +102,7 @@ class AdminMediaTypesControllerIT : BaseWebIT() {
             post(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
-                .param("name", nameParam)
+                .param("entityName", nameParam)
                 .param("active", "true")
         )
             .andExpect(status().isCreated)
@@ -111,7 +111,7 @@ class AdminMediaTypesControllerIT : BaseWebIT() {
         val existCountAfter = useCase.getAll().count()
         assertThat(existCountAfter).isEqualTo(existCountBefore + 1)
 
-        val created = useCase.getAll().firstOrNull { it.name == nameParam }
+        val created = useCase.getAll().firstOrNull { it.entityName == nameParam }
         assertThat(created).isNotNull
     }
 
@@ -124,7 +124,7 @@ class AdminMediaTypesControllerIT : BaseWebIT() {
             post(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
-                .param("name", nameParam)
+                .param("entityName", nameParam)
         )
             .andExpect(status().isCreated)
             .andExpect(header().string("HX-Redirect", endPoint))
@@ -132,7 +132,7 @@ class AdminMediaTypesControllerIT : BaseWebIT() {
         val existCountAfter = useCase.getAll().count()
         assertThat(existCountAfter).isEqualTo(existCountBefore + 1)
 
-        val created = useCase.getAll().firstOrNull { it.name == nameParam }
+        val created = useCase.getAll().firstOrNull { it.entityName == nameParam }
         assertThat(created).isNotNull
         assertThat(created!!.active).isFalse()
     }
@@ -145,7 +145,7 @@ class AdminMediaTypesControllerIT : BaseWebIT() {
             post(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
-                .param("name", "")
+                .param("entityName", "")
                 .param("active", "true")
         )
             .andExpect(status().isUnprocessableEntity)
@@ -169,14 +169,14 @@ class AdminMediaTypesControllerIT : BaseWebIT() {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("id", created.id.toString())
-                .param("name", newName)
+                .param("entityName", newName)
                 .param("active", "true")
         )
             .andExpect(status().isOk)
             .andExpect(header().string("HX-Redirect", endPoint))
 
         val after = useCase.getAll().first { it.id == created.id }
-        assertThat(after.name).isEqualTo(newName)
+        assertThat(after.entityName).isEqualTo(newName)
         assertThat(after.active).isTrue()
     }
 
@@ -189,14 +189,14 @@ class AdminMediaTypesControllerIT : BaseWebIT() {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("id", created.id.toString())
-                .param("name", created.name)
+                .param("entityName", created.entityName)
         )
             .andExpect(status().isOk)
             .andExpect(header().string("HX-Redirect", endPoint))
 
         val after = useCase.getAll().first { it.id == created.id }
         assertThat(after.active).isFalse()
-        assertThat(after.name).isEqualTo(created.name)
+        assertThat(after.entityName).isEqualTo(created.entityName)
     }
 
     @Test
@@ -208,7 +208,7 @@ class AdminMediaTypesControllerIT : BaseWebIT() {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("id", created.id.toString())
-                .param("name", "")
+                .param("entityName", "")
                 .param("active", created.active.toString())
         )
             .andExpect(status().isUnprocessableEntity)
@@ -217,7 +217,7 @@ class AdminMediaTypesControllerIT : BaseWebIT() {
         assertThat(mvcResult.response.contentAsString).contains("is-invalid")
 
         val after = useCase.getAll().first { it.id == created.id }
-        assertThat(after.name).isEqualTo(created.name)
+        assertThat(after.entityName).isEqualTo(created.entityName)
         assertThat(after.active).isEqualTo(created.active)
     }
 

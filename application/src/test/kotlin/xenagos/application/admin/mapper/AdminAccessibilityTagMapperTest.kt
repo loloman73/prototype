@@ -30,7 +30,7 @@ class AdminAccessibilityTagMapperTest {
         // Then
         assertThat(responseDto).isNotNull
         assertThat(responseDto.id).isEqualTo(id)
-        assertThat(responseDto.name).isEqualTo("Wheelchair Accessible")
+        assertThat(responseDto.entityName).isEqualTo("Wheelchair Accessible")
         assertThat(responseDto.description).isEqualTo("Suitable for wheelchair users")
         assertThat(responseDto.active).isTrue()
     }
@@ -52,7 +52,7 @@ class AdminAccessibilityTagMapperTest {
         // Then
         assertThat(responseDto).isNotNull
         assertThat(responseDto.id).isEqualTo(id)
-        assertThat(responseDto.name).isEqualTo("Visual Impairment")
+        assertThat(responseDto.entityName).isEqualTo("Visual Impairment")
         assertThat(responseDto.description).isEqualTo("Suitable for visually impaired visitors")
         assertThat(responseDto.active).isFalse()
     }
@@ -64,7 +64,7 @@ class AdminAccessibilityTagMapperTest {
         // Given
         val id = UUID.randomUUID()
         val newRequestDto = AdminAccessibilityTagNewRequestDTO(
-            name = "Hearing Impairment",
+            entityName = "Hearing Impairment",
             description = "Suitable for hearing impaired visitors",
             active = true
         )
@@ -85,7 +85,7 @@ class AdminAccessibilityTagMapperTest {
         // Given
         val id = UUID.randomUUID()
         val newRequestDto = AdminAccessibilityTagNewRequestDTO(
-            name = "Mobility Impairment",
+            entityName = "Mobility Impairment",
             description = "Suitable for visitors with mobility issues",
             active = false
         )
@@ -109,7 +109,7 @@ class AdminAccessibilityTagMapperTest {
         val id = UUID.randomUUID()
         val updateRequestDto = AdminAccessibilityTagUpdateRequestDTO(
             id = id,
-            name = "Cognitive Disability",
+            entityName = "Cognitive Disability",
             description = "Suitable for visitors with cognitive disabilities",
             active = true
         )
@@ -131,7 +131,7 @@ class AdminAccessibilityTagMapperTest {
         val id = UUID.randomUUID()
         val updateRequestDto = AdminAccessibilityTagUpdateRequestDTO(
             id = id,
-            name = "Sign Language Available",
+            entityName = "Sign Language Available",
             description = "Sign language interpretation available",
             active = false
         )

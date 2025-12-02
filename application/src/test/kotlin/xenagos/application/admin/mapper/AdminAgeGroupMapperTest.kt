@@ -38,7 +38,7 @@ class AdminAgeGroupMapperTest {
         // Then
         assertThat(responseDto).isNotNull
         assertThat(responseDto.id).isEqualTo(id)
-        assertThat(responseDto.groupName).isEqualTo("Adults")
+        assertThat(responseDto.entityName).isEqualTo("Adults")
         assertThat(responseDto.minAge).isEqualTo(18)
         assertThat(responseDto.maxAge).isEqualTo(64)
         assertThat(responseDto.active).isTrue()
@@ -62,7 +62,7 @@ class AdminAgeGroupMapperTest {
         // Then
         assertThat(responseDto).isNotNull
         assertThat(responseDto.id).isEqualTo(id)
-        assertThat(responseDto.groupName).isEqualTo("Seniors")
+        assertThat(responseDto.entityName).isEqualTo("Seniors")
         assertThat(responseDto.minAge).isEqualTo(65)
         assertThat(responseDto.maxAge).isEqualTo(99)
         assertThat(responseDto.active).isFalse()
@@ -86,7 +86,7 @@ class AdminAgeGroupMapperTest {
         // Then
         assertThat(responseDto).isNotNull
         assertThat(responseDto.id).isEqualTo(id)
-        assertThat(responseDto.groupName).isEqualTo("Children")
+        assertThat(responseDto.entityName).isEqualTo("Children")
         assertThat(responseDto.minAge).isEqualTo(0)
         assertThat(responseDto.maxAge).isEqualTo(12)
         assertThat(responseDto.active).isTrue()
@@ -97,7 +97,7 @@ class AdminAgeGroupMapperTest {
         // Given
         val id = UUID.randomUUID()
         val newRequestDto = AdminAgeGroupNewRequestDTO(
-            groupName = "Teens",
+            entityName = "Teens",
             minAge = 13,
             maxAge = 17,
             active = true
@@ -120,7 +120,7 @@ class AdminAgeGroupMapperTest {
         // Given
         val id = UUID.randomUUID()
         val newRequestDto = AdminAgeGroupNewRequestDTO(
-            groupName = "Young Adults",
+            entityName = "Young Adults",
             minAge = 18,
             maxAge = 25,
             active = false
@@ -143,7 +143,7 @@ class AdminAgeGroupMapperTest {
         // Given
         val id = UUID.randomUUID()
         val newRequestDto = AdminAgeGroupNewRequestDTO(
-            groupName = "Specific Age",
+            entityName = "Specific Age",
             minAge = 30,
             maxAge = 30,
             active = true
@@ -167,7 +167,7 @@ class AdminAgeGroupMapperTest {
         val id = UUID.randomUUID()
         val updateRequestDto = AdminAgeGroupUpdateRequestDTO(
             id = id,
-            groupName = "Middle Age",
+            entityName = "Middle Age",
             minAge = 40,
             maxAge = 59,
             active = true
@@ -191,7 +191,7 @@ class AdminAgeGroupMapperTest {
         val id = UUID.randomUUID()
         val updateRequestDto = AdminAgeGroupUpdateRequestDTO(
             id = id,
-            groupName = "Elderly",
+            entityName = "Elderly",
             minAge = 80,
             maxAge = 120,
             active = false
@@ -215,7 +215,7 @@ class AdminAgeGroupMapperTest {
         val id = UUID.randomUUID()
         val updateRequestDto = AdminAgeGroupUpdateRequestDTO(
             id = id,
-            groupName = "All Ages",
+            entityName = "All Ages",
             minAge = 0,
             maxAge = 100,
             active = true
@@ -238,7 +238,7 @@ class AdminAgeGroupMapperTest {
         // Given
         val id = UUID.randomUUID()
         val newRequestDto = AdminAgeGroupNewRequestDTO(
-            groupName = "Preschool",
+            entityName = "Preschool",
             minAge = 3,
             maxAge = 5,
             active = true
@@ -250,7 +250,7 @@ class AdminAgeGroupMapperTest {
 
         // Then
         assertThat(responseDto.id).isEqualTo(id)
-        assertThat(responseDto.groupName).isEqualTo(newRequestDto.groupName)
+        assertThat(responseDto.entityName).isEqualTo(newRequestDto.entityName)
         assertThat(responseDto.minAge).isEqualTo(newRequestDto.minAge)
         assertThat(responseDto.maxAge).isEqualTo(newRequestDto.maxAge)
         assertThat(responseDto.active).isEqualTo(newRequestDto.active)
@@ -262,7 +262,7 @@ class AdminAgeGroupMapperTest {
         val id = UUID.randomUUID()
         val updateRequestDto = AdminAgeGroupUpdateRequestDTO(
             id = id,
-            groupName = "School Age",
+            entityName = "School Age",
             minAge = 6,
             maxAge = 12,
             active = true
@@ -274,7 +274,7 @@ class AdminAgeGroupMapperTest {
 
         // Then
         assertThat(responseDto.id).isEqualTo(updateRequestDto.id)
-        assertThat(responseDto.groupName).isEqualTo(updateRequestDto.groupName)
+        assertThat(responseDto.entityName).isEqualTo(updateRequestDto.entityName)
         assertThat(responseDto.minAge).isEqualTo(updateRequestDto.minAge)
         assertThat(responseDto.maxAge).isEqualTo(updateRequestDto.maxAge)
         assertThat(responseDto.active).isEqualTo(updateRequestDto.active)

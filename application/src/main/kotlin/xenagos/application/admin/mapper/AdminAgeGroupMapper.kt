@@ -18,8 +18,8 @@ class AdminAgeGroupMapper : BaseAdminMapper<
         AdminAgeGroupResponseDTO(entity.id, entity.groupName, entity.minAge, entity.maxAge, entity.active)
 
     override fun toEntity(dto: AdminAgeGroupNewRequestDTO, id: UUID): AgeGroup =
-        AgeGroup(id, dto.groupName, dto.minAge, dto.maxAge, dto.active)
+        AgeGroup(id, dto.entityName, dto.minAge, dto.maxAge, dto.active)
 
     override fun toEntity(dto: AdminAgeGroupUpdateRequestDTO): AgeGroup =
-        AgeGroup(dto.id, dto.groupName, dto.minAge, dto.maxAge, dto.active)
+        AgeGroup(dto.id, dto.entityName, dto.minAge, dto.maxAge, dto.active)
 }

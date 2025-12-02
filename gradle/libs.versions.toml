@@ -10,9 +10,8 @@ jakartaValidation="3.1.0"
 junitJupiter="5.11.3"
 springFramework="6.2.0"
 assertj="3.26.3"
-# Testcontainers
 testcontainers="1.20.4"
-#lombok="1.18.36"
+junitPlatformSuite="1.11.3"
 
 [libraries]
 sb-starter = {group="org.springframework.boot", name="spring-boot-starter", version.ref="springboot"}
@@ -21,16 +20,17 @@ sb-starter-data-jpa = {group="org.springframework.boot", name="spring-boot-start
 sb-starter-thymeleaf={group="org.springframework.boot", name="spring-boot-starter-thymeleaf", version.ref="springboot"}
 sb-starter-validation ={group="org.springframework.boot", name="spring-boot-starter-validation", version.ref="springboot"}
 sb-starter-test={group="org.springframework.boot", name="spring-boot-starter-test", version.ref="springboot"}
-#sb-dev-tools = {group="org.springframework.boot", name="spring-boot-devtools", version.ref="springboot"}
-thymeleafLD = {group="nz.net.ultraq.thymeleaf", name="thymeleaf-layout-dialect", version.ref="thymeleafLD"}
+spring-context = {group="org.springframework", name="spring-context", version.ref="springFramework"}
 jetbrains-kotlin-reflect = {group="org.jetbrains.kotlin", name="kotlin-reflect", version.ref="kotlinReflect"}
+thymeleafLD = {group="nz.net.ultraq.thymeleaf", name="thymeleaf-layout-dialect", version.ref="thymeleafLD"}
 postgres = {group="org.postgresql", name="postgresql", version.ref="postgres"}
 flywayCore = {group="org.flywaydb", name="flyway-core", version.ref="flyway"}
 flywayPostgresql = {group="org.flywaydb", name="flyway-database-postgresql", version.ref="flyway"}
 jakarta-validation = {group="jakarta.validation", name="jakarta.validation-api", version.ref="jakartaValidation"}
-junit-jupiter = {group="org.junit.jupiter", name="junit-jupiter", version.ref="junitJupiter"}
-spring-context = {group="org.springframework", name="spring-context", version.ref="springFramework"}
 assertj = {group="org.assertj", name="assertj-core", version.ref="assertj"}
+junit-jupiter = {group="org.junit.jupiter", name="junit-jupiter", version.ref="junitJupiter"}
+junit-platform-suite-api = {group="org.junit.platform", name="junit-platform-suite-api", version.ref="junitPlatformSuite"}
+junit-platform-suite-engine = {group="org.junit.platform", name="junit-platform-suite-engine", version.ref="junitPlatformSuite"}
 
 # Testcontainers
 testcontainers-bom = {group="org.testcontainers", name="testcontainers-bom", version.ref="testcontainers"}

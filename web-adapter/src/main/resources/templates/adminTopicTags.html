@@ -36,7 +36,7 @@
                 <!--field ID-->
                 <td class="text-nowrap"><span th:text="${topicTag.id}"></span></td>
                 <!--field 1-->
-                <td><span th:text="${topicTag.name}"></span></td>
+                <td><span th:text="${topicTag.entityName}"></span></td>
                 <!--field 2-->
                 <td><span th:text="${topicTag.description}"></span></td>
                 <!--field active-->
@@ -53,7 +53,7 @@
                             data-bs-toggle="modal"
                             data-bs-target="#edit_modal"
                             th:data-id="${topicTag.id}"
-                            th:data-field1="${topicTag.name}"
+                            th:data-field1="${topicTag.entityName}"
                             th:data-field2="${topicTag.description}"
                             th:data-active="${topicTag.active}">
                         Edit
@@ -64,7 +64,7 @@
                             data-bs-toggle="modal"
                             data-bs-target="#delete_modal"
                             th:data-id="${topicTag.id}"
-                            th:data-field1="${topicTag.name}"
+                            th:data-field1="${topicTag.entityName}"
                             th:data-field2="${topicTag.description}"
                             th:data-active="${topicTag.active}">
                         Delete

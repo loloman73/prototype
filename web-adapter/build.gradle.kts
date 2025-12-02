@@ -16,6 +16,10 @@ dependencies {
     implementation("io.github.wimdeblauwe:htmx-spring-boot-thymeleaf:4.0.1")
 
     testImplementation(libs.sb.starter.test)
+    // JUnit 5 Suite API to run grouped tests from IDE
+    testImplementation(libs.junit.platform.suite.api)
+    testRuntimeOnly(libs.junit.platform.suite.engine)
+    // Testcontainers for integration tests
     testImplementation(platform(libs.testcontainers.bom))
     testImplementation(libs.testcontainers.junit)
     testImplementation(libs.testcontainers.postgresql)

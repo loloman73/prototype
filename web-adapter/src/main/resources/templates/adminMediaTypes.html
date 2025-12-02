@@ -35,7 +35,7 @@
                     <!--field ID-->
                     <td class="text-nowrap"><span th:text="${mediaType.id}"></span></td>
                     <!--field 1-->
-                    <td><span th:text="${mediaType.name}"></span></td>
+                    <td><span th:text="${mediaType.entityName}"></span></td>
                     <!--field active-->
                     <td class="text-center">
                         <label>
@@ -51,7 +51,7 @@
                                 data-bs-toggle="modal"
                                 data-bs-target="#edit_modal"
                                 th:data-id="${mediaType.id}"
-                                th:data-field1="${mediaType.name}"
+                                th:data-field1="${mediaType.entityName}"
                                 th:data-active="${mediaType.active}">
                             Edit
                         </button>
@@ -61,7 +61,7 @@
                                 data-bs-toggle="modal"
                                 data-bs-target="#delete_modal"
                                 th:data-id="${mediaType.id}"
-                                th:data-field1="${mediaType.name}"
+                                th:data-field1="${mediaType.entityName}"
                                 th:data-active="${mediaType.active}">
                             Delete
                         </button>

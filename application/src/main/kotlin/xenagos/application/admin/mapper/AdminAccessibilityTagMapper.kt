@@ -18,8 +18,8 @@ class AdminAccessibilityTagMapper : BaseAdminMapper<
         AdminAccessibilityTagResponseDTO(entity.id, entity.name, entity.description, entity.active)
 
     override fun toEntity(dto: AdminAccessibilityTagNewRequestDTO, id: UUID): AccessibilityTag =
-        AccessibilityTag(id, dto.name, dto.description, dto.active)
+        AccessibilityTag(id, dto.entityName, dto.description, dto.active)
 
     override fun toEntity(dto: AdminAccessibilityTagUpdateRequestDTO): AccessibilityTag =
-        AccessibilityTag(dto.id, dto.name, dto.description, dto.active)
+        AccessibilityTag(dto.id, dto.entityName, dto.description, dto.active)
 }

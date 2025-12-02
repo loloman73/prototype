@@ -33,10 +33,10 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
 
     private val endPoint = "/admin/topic-tags"
 
-    private fun create(name: String, description: String, active: Boolean) =
+    private fun create(entityName: String, description: String, active: Boolean) =
         useCase.saveOneNew(
             AdminTopicTagNewRequestDTO(
-                name = name,
+                entityName = entityName,
                 description = description,
                 active = active
             )
@@ -48,7 +48,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
 
         // Arrange: add 1 valid entry using the UseCase
         val created = create(
-            name = "Topic A",
+            entityName = "Topic A",
             description = "Description for Topic A",
             active = true
         )
@@ -65,20 +65,20 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
         val listAllModel = mvcResult.modelAndView!!.model["listAllModel"] as List<AdminTopicTagResponseDTO>
         val found = listAllModel.firstOrNull { it.id == created.id }
         assertThat(found).withFailMessage("Expected created entry to appear in listAllModel").isNotNull
-        assertThat(found!!.name).isEqualTo(created.name)
+        assertThat(found!!.entityName).isEqualTo(created.entityName)
         assertThat(found.description).isEqualTo(created.description)
         assertThat(found.active).isEqualTo(created.active)
 
         // Assert: addOneNewModel is an empty DTO
         val addOneNew = mvcResult.modelAndView!!.model["addOneNewModel"] as AdminTopicTagNewRequestDTO
-        assertThat(addOneNew.name).isEmpty()
+        assertThat(addOneNew.entityName).isEmpty()
         assertThat(addOneNew.description).isEmpty()
         assertThat(addOneNew.active).isFalse()
 
         // Assert: updateOneModel is an empty DTO
         val updateOne = mvcResult.modelAndView!!.model["updateOneModel"] as AdminTopicTagUpdateRequestDTO
         assertThat(updateOne.id).isNotNull
-        assertThat(updateOne.name).isEmpty()
+        assertThat(updateOne.entityName).isEmpty()
         assertThat(updateOne.description).isEmpty()
         assertThat(updateOne.active).isFalse()
     }
@@ -88,12 +88,12 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
 
         // Arrange: add 2 more valid entries using the UseCase
         val created2 = create(
-            name = "Topic B",
+            entityName = "Topic B",
             description = "Description for Topic B",
             active = true
         )
         val created3 = create(
-            name = "Topic C",
+            entityName = "Topic C",
             description = "Description for Topic C",
             active = false
         )
@@ -111,13 +111,13 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
 
         val second = listAllModel.firstOrNull { it.id == created2.id }
         assertThat(second).withFailMessage("Expected second entry to appear in listAllModel").isNotNull
-        assertThat(second!!.name).isEqualTo(created2.name)
+        assertThat(second!!.entityName).isEqualTo(created2.entityName)
         assertThat(second.description).isEqualTo(created2.description)
         assertThat(second.active).isEqualTo(created2.active)
 
         val third = listAllModel.firstOrNull { it.id == created3.id }
         assertThat(third).withFailMessage("Expected third entry to appear in listAllModel").isNotNull
-        assertThat(third!!.name).isEqualTo(created3.name)
+        assertThat(third!!.entityName).isEqualTo(created3.entityName)
         assertThat(third.description).isEqualTo(created3.description)
         assertThat(third.active).isEqualTo(created3.active)
     }
@@ -136,7 +136,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
             post(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
-                .param("name", nameParam)
+                .param("entityName", nameParam)
                 .param("description", "Test Post Request description")
                 .param("active", "true")
         )
@@ -148,7 +148,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
         assertThat(existCountAfter).isEqualTo(existCountBefore + 1)
 
         // Assert entry created is same as posted
-        val created = useCase.getAll().firstOrNull { it.name == nameParam }
+        val created = useCase.getAll().firstOrNull { it.entityName == nameParam }
         assertThat(created).withFailMessage("Expected created entry to appear in listAllModel").isNotNull
     }
 
@@ -164,7 +164,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
             post(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
-                .param("name", nameParam)
+                .param("entityName", nameParam)
                 .param("description", "Test Post Request description")
         )
             .andExpect(status().isCreated)
@@ -175,7 +175,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
         assertThat(existCountAfter).isEqualTo(existCountBefore + 1)
 
         // Assert entry created is same as posted
-        val created = useCase.getAll().firstOrNull { it.name == nameParam }
+        val created = useCase.getAll().firstOrNull { it.entityName == nameParam }
         assertThat(created).withFailMessage("Expected created entry to appear in listAllModel").isNotNull
         assertThat(created!!.active).isFalse()
     }
@@ -191,7 +191,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
             post(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
-                .param("name", "")
+                .param("entityName", "")
                 .param("description", "This is a valid description")
                 .param("active", "true")
         )
@@ -217,7 +217,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
             post(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
-                .param("name", "Valid Name")
+                .param("entityName", "Valid Name")
                 .param("description", "")
                 .param("active", "true")
         ).andExpect(status().isUnprocessableEntity)
@@ -240,7 +240,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
             post(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
-                .param("name", "")
+                .param("entityName", "")
                 .param("description", "")
                 .param("active", "true")
         )
@@ -262,7 +262,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
 
         // Arrange: create an entry with active=true
         val created = create(
-            name = "Update Me",
+            entityName = "Update Me",
             description = "Original description",
             active = true
         )
@@ -277,7 +277,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("id", created.id.toString())
-                .param("name", newName)
+                .param("entityName", newName)
                 .param("description", newDesc)
                 .param("active", "true")
         )
@@ -286,7 +286,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
 
         // Assert: entity updated
         val after = useCase.getAll().first { it.id == created.id }
-        assertThat(after.name).isEqualTo(newName)
+        assertThat(after.entityName).isEqualTo(newName)
         assertThat(after.description).isEqualTo(newDesc)
         assertThat(after.active).isTrue()
     }
@@ -296,7 +296,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
 
         // Arrange: create an entry with active=true
         val created = create(
-            name = "Update Active Only",
+            entityName = "Update Active Only",
             description = "Original description",
             active = true
         )
@@ -308,7 +308,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("id", created.id.toString())
-                .param("name", created.name)
+                .param("entityName", created.entityName)
                 .param("description", created.description)
         )
             .andExpect(status().isOk)
@@ -317,7 +317,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
         // Assert: entity updated -> active should now be false
         val after = useCase.getAll().first { it.id == created.id }
         assertThat(after.active).isFalse()
-        assertThat(after.name).isEqualTo(created.name)
+        assertThat(after.entityName).isEqualTo(created.entityName)
         assertThat(after.description).isEqualTo(created.description)
     }
 
@@ -326,7 +326,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
 
         // Arrange: create an entry with active=true
         val created = create(
-            name = "Valid Name",
+            entityName = "Valid Name",
             description = "Valid description",
             active = true
         )
@@ -337,7 +337,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("id", created.id.toString())
-                .param("name", "")
+                .param("entityName", "")
                 .param("description", created.description)
                 .param("active", created.active.toString())
         )
@@ -349,7 +349,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
 
         // Assert: entity not updated
         val after = useCase.getAll().first { it.id == created.id }
-        assertThat(after.name).isEqualTo(created.name)
+        assertThat(after.entityName).isEqualTo(created.entityName)
         assertThat(after.description).isEqualTo(created.description)
         assertThat(after.active).isEqualTo(created.active)
     }
@@ -359,7 +359,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
 
         // Arrange: create an entry with active=true
         val created = create(
-            name = "Valid Name",
+            entityName = "Valid Name",
             description = "Valid description",
             active = true
         )
@@ -370,7 +370,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("id", created.id.toString())
-                .param("name", created.name)
+                .param("entityName", created.entityName)
                 .param("description", "")
                 .param("active", created.active.toString())
         )
@@ -382,7 +382,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
 
         // Assert: entity not updated
         val after = useCase.getAll().first { it.id == created.id }
-        assertThat(after.name).isEqualTo(created.name)
+        assertThat(after.entityName).isEqualTo(created.entityName)
         assertThat(after.description).isEqualTo(created.description)
         assertThat(after.active).isEqualTo(created.active)
     }
@@ -392,7 +392,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
 
         // Arrange: create an entry with active=true
         val created = create(
-            name = "Valid Name",
+            entityName = "Valid Name",
             description = "Valid description",
             active = true
         )
@@ -403,7 +403,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("id", created.id.toString())
-                .param("name", "")
+                .param("entityName", "")
                 .param("description", "")
                 .param("active", created.active.toString())
         )
@@ -415,7 +415,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
 
         // Assert: entity not updated
         val after = useCase.getAll().first { it.id == created.id }
-        assertThat(after.name).isEqualTo(created.name)
+        assertThat(after.entityName).isEqualTo(created.entityName)
         assertThat(after.description).isEqualTo(created.description)
         assertThat(after.active).isEqualTo(created.active)
     }
@@ -425,7 +425,7 @@ class AdminTopicTagsControllerIT : BaseWebIT() {
 
         // Arrange: create an entry
         val created = create(
-            name = "Delete Me",
+            entityName = "Delete Me",
             description = "To be deleted",
             active = true
         )

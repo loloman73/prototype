@@ -33,10 +33,10 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
 
     private val endPoint = "/admin/age-groups"
 
-    private fun create(groupName: String, minAge: Byte, maxAge: Byte, active: Boolean) =
+    private fun create(entityName: String, minAge: Byte, maxAge: Byte, active: Boolean) =
         useCase.saveOneNew(
             AdminAgeGroupNewRequestDTO(
-                groupName = groupName,
+                entityName = entityName,
                 minAge = minAge,
                 maxAge = maxAge,
                 active = active
@@ -48,7 +48,7 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
     fun `GET -With one existing entry`() {
 
         val created = create(
-            groupName = "Kids",
+            entityName = "Kids",
             minAge = 5,
             maxAge = 12,
             active = true
@@ -63,20 +63,20 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
         val listAllModel = mvcResult.modelAndView!!.model["listAllModel"] as List<AdminAgeGroupResponseDTO>
         val found = listAllModel.firstOrNull { it.id == created.id }
         assertThat(found).withFailMessage("Expected created entry to appear in listAllModel").isNotNull
-        assertThat(found!!.groupName).isEqualTo(created.groupName)
+        assertThat(found!!.entityName).isEqualTo(created.entityName)
         assertThat(found.minAge).isEqualTo(created.minAge)
         assertThat(found.maxAge).isEqualTo(created.maxAge)
         assertThat(found.active).isEqualTo(created.active)
 
         val addOneNew = mvcResult.modelAndView!!.model["addOneNewModel"] as AdminAgeGroupNewRequestDTO
-        assertThat(addOneNew.groupName).isEmpty()
+        assertThat(addOneNew.entityName).isEmpty()
         assertThat(addOneNew.minAge).isEqualTo(0)
         assertThat(addOneNew.maxAge).isEqualTo(0)
         assertThat(addOneNew.active).isFalse()
 
         val updateOne = mvcResult.modelAndView!!.model["updateOneModel"] as AdminAgeGroupUpdateRequestDTO
         assertThat(updateOne.id).isNotNull
-        assertThat(updateOne.groupName).isEmpty()
+        assertThat(updateOne.entityName).isEmpty()
         assertThat(updateOne.minAge).isEqualTo(0)
         assertThat(updateOne.maxAge).isEqualTo(0)
         assertThat(updateOne.active).isFalse()
@@ -98,14 +98,14 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
 
         val second = listAllModel.firstOrNull { it.id == created2.id }
         assertThat(second).withFailMessage("Expected second entry to appear in listAllModel").isNotNull
-        assertThat(second!!.groupName).isEqualTo(created2.groupName)
+        assertThat(second!!.entityName).isEqualTo(created2.entityName)
         assertThat(second.minAge).isEqualTo(created2.minAge)
         assertThat(second.maxAge).isEqualTo(created2.maxAge)
         assertThat(second.active).isEqualTo(created2.active)
 
         val third = listAllModel.firstOrNull { it.id == created3.id }
         assertThat(third).withFailMessage("Expected third entry to appear in listAllModel").isNotNull
-        assertThat(third!!.groupName).isEqualTo(created3.groupName)
+        assertThat(third!!.entityName).isEqualTo(created3.entityName)
         assertThat(third.minAge).isEqualTo(created3.minAge)
         assertThat(third.maxAge).isEqualTo(created3.maxAge)
         assertThat(third.active).isEqualTo(created3.active)
@@ -122,7 +122,7 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
             post(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
-                .param("groupName", nameParam)
+                .param("entityName", nameParam)
                 .param("minAge", "65")
                 .param("maxAge", "99")
                 .param("active", "true")
@@ -133,7 +133,7 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
         val existCountAfter = useCase.getAll().count()
         assertThat(existCountAfter).isEqualTo(existCountBefore + 1)
 
-        val created = useCase.getAll().firstOrNull { it.groupName == nameParam }
+        val created = useCase.getAll().firstOrNull { it.entityName == nameParam }
         assertThat(created).withFailMessage("Expected created entry to appear in listAllModel").isNotNull
     }
 
@@ -147,7 +147,7 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
             post(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
-                .param("groupName", nameParam)
+                .param("entityName", nameParam)
                 .param("minAge", "1")
                 .param("maxAge", "2")
         )
@@ -157,7 +157,7 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
         val existCountAfter = useCase.getAll().count()
         assertThat(existCountAfter).isEqualTo(existCountBefore + 1)
 
-        val created = useCase.getAll().firstOrNull { it.groupName == nameParam }
+        val created = useCase.getAll().firstOrNull { it.entityName == nameParam }
         assertThat(created).isNotNull
         assertThat(created!!.active).isFalse()
     }
@@ -171,7 +171,7 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
             post(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
-                .param("groupName", "")
+                .param("entityName", "")
                 .param("minAge", "3")
                 .param("maxAge", "6")
                 .param("active", "true")
@@ -194,7 +194,7 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
             post(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
-                .param("groupName", "Toddlers")
+                .param("entityName", "Toddlers")
                 .param("minAge", "0")
                 .param("maxAge", "3")
                 .param("active", "true")
@@ -217,7 +217,7 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
             post(endPoint)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
-                .param("groupName", "")
+                .param("entityName", "")
                 .param("minAge", "0")
                 .param("maxAge", "0")
                 .param("active", "true")
@@ -247,7 +247,7 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("id", created.id.toString())
-                .param("groupName", newName)
+                .param("entityName", newName)
                 .param("minAge", newMin.toString())
                 .param("maxAge", newMax.toString())
                 .param("active", "true")
@@ -256,7 +256,7 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
             .andExpect(header().string("HX-Redirect", endPoint))
 
         val after = useCase.getAll().first { it.id == created.id }
-        assertThat(after.groupName).isEqualTo(newName)
+        assertThat(after.entityName).isEqualTo(newName)
         assertThat(after.minAge).isEqualTo(newMin.toByte())
         assertThat(after.maxAge).isEqualTo(newMax.toByte())
         assertThat(after.active).isTrue()
@@ -272,7 +272,7 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("id", created.id.toString())
-                .param("groupName", created.groupName)
+                .param("entityName", created.entityName)
                 .param("minAge", created.minAge.toString())
                 .param("maxAge", created.maxAge.toString())
         )
@@ -281,7 +281,7 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
 
         val after = useCase.getAll().first { it.id == created.id }
         assertThat(after.active).isFalse()
-        assertThat(after.groupName).isEqualTo(created.groupName)
+        assertThat(after.entityName).isEqualTo(created.entityName)
         assertThat(after.minAge).isEqualTo(created.minAge)
         assertThat(after.maxAge).isEqualTo(created.maxAge)
     }
@@ -296,7 +296,7 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("id", created.id.toString())
-                .param("groupName", "")
+                .param("entityName", "")
                 .param("minAge", created.minAge.toString())
                 .param("maxAge", created.maxAge.toString())
                 .param("active", created.active.toString())
@@ -307,7 +307,7 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
         assertThat(mvcResult.response.contentAsString).contains("is-invalid")
 
         val after = useCase.getAll().first { it.id == created.id }
-        assertThat(after.groupName).isEqualTo(created.groupName)
+        assertThat(after.entityName).isEqualTo(created.entityName)
         assertThat(after.minAge).isEqualTo(created.minAge)
         assertThat(after.maxAge).isEqualTo(created.maxAge)
         assertThat(after.active).isEqualTo(created.active)
@@ -323,7 +323,7 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("id", created.id.toString())
-                .param("groupName", created.groupName)
+                .param("entityName", created.entityName)
                 .param("minAge", "0")
                 .param("maxAge", created.maxAge.toString())
                 .param("active", created.active.toString())
@@ -334,7 +334,7 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
         assertThat(mvcResult.response.contentAsString).contains("is-invalid")
 
         val after = useCase.getAll().first { it.id == created.id }
-        assertThat(after.groupName).isEqualTo(created.groupName)
+        assertThat(after.entityName).isEqualTo(created.entityName)
         assertThat(after.minAge).isEqualTo(created.minAge)
         assertThat(after.maxAge).isEqualTo(created.maxAge)
         assertThat(after.active).isEqualTo(created.active)
@@ -350,7 +350,7 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
                 .param("id", created.id.toString())
-                .param("groupName", "")
+                .param("entityName", "")
                 .param("minAge", "0")
                 .param("maxAge", "0")
                 .param("active", created.active.toString())
@@ -361,7 +361,7 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
         assertThat(mvcResult.response.contentAsString.split("is-invalid").size - 1).isGreaterThanOrEqualTo(3)
 
         val after = useCase.getAll().first { it.id == created.id }
-        assertThat(after.groupName).isEqualTo(created.groupName)
+        assertThat(after.entityName).isEqualTo(created.entityName)
         assertThat(after.minAge).isEqualTo(created.minAge)
         assertThat(after.maxAge).isEqualTo(created.maxAge)
         assertThat(after.active).isEqualTo(created.active)

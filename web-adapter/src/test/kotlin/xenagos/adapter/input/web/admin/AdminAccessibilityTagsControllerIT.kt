@@ -309,6 +309,7 @@ class AdminAccessibilityTagsControllerIT : BaseWebIT() {
                 .param("id", created.id.toString())
                 .param("entityName", created.entityName)
                 .param("description", created.description)
+                // active omitted -> false
         )
             .andExpect(status().isOk)
             .andExpect(header().string("HX-Redirect", endPoint))

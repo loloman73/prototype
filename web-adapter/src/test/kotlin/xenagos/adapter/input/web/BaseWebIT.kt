@@ -7,12 +7,8 @@ import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 import org.testcontainers.utility.DockerImageName
 
-/**
- * DO NOT USE - IT IS NOT WORKING - CONTAINER STOPS AFTER EACH TEST
-**/
-
 // Base class to bootstrap a PostgreSQL Testcontainers instance for end-to-end web tests.
-// With @Testcontainers, the container will be started once and stopped once for all tests
+// With @Testcontainers, the container will be started once and stopped once for all tests in a class
 @Testcontainers
 abstract class BaseWebIT {
 

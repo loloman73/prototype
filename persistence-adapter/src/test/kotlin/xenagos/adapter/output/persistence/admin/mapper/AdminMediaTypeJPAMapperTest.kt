@@ -27,7 +27,7 @@ class AdminMediaTypeJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = MediaType(
             id = id,
-            type = "Audio",
+            name = "Audio",
             active = true
         )
 
@@ -46,7 +46,7 @@ class AdminMediaTypeJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = MediaType(
             id = id,
-            type = "Video",
+            name = "Video",
             active = false
         )
 
@@ -65,7 +65,7 @@ class AdminMediaTypeJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = MediaType(
             id = id,
-            type = "Text",
+            name = "Text",
             active = true
         )
 
@@ -84,7 +84,7 @@ class AdminMediaTypeJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = MediaType(
             id = id,
-            type = "Audio/Video",
+            name = "Audio/Video",
             active = true
         )
 
@@ -103,7 +103,7 @@ class AdminMediaTypeJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = MediaType(
             id = id,
-            type = "Virtual Reality",
+            name = "Virtual Reality",
             active = true
         )
 
@@ -122,7 +122,7 @@ class AdminMediaTypeJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = MediaType(
             id = id,
-            type = "MP3",
+            name = "MP3",
             active = true
         )
 
@@ -150,7 +150,7 @@ class AdminMediaTypeJPAMapperTest {
 
         // Then
         assertThat(domainEntity.id).isEqualTo(id)
-        assertThat(domainEntity.type).isEqualTo("Image")
+        assertThat(domainEntity.name).isEqualTo("Image")
         assertThat(domainEntity.active).isTrue()
     }
 
@@ -169,7 +169,7 @@ class AdminMediaTypeJPAMapperTest {
 
         // Then
         assertThat(domainEntity.id).isEqualTo(id)
-        assertThat(domainEntity.type).isEqualTo("3D Model")
+        assertThat(domainEntity.name).isEqualTo("3D Model")
         assertThat(domainEntity.active).isFalse()
     }
 
@@ -179,7 +179,7 @@ class AdminMediaTypeJPAMapperTest {
         val id = UUID.randomUUID()
         val originalDomain = MediaType(
             id = id,
-            type = "Interactive",
+            name = "Interactive",
             active = true
         )
 
@@ -199,7 +199,7 @@ class AdminMediaTypeJPAMapperTest {
         val id = UUID.randomUUID()
         val originalDomain = MediaType(
             id = id,
-            type = "Augmented Reality",
+            name = "Augmented Reality",
             active = false
         )
 
@@ -297,7 +297,7 @@ class AdminMediaTypeJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = MediaType(
             id = id,
-            type = "360° Video",
+            name = "360° Video",
             active = true
         )
 
@@ -315,7 +315,7 @@ class AdminMediaTypeJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = MediaType(
             id = id,
-            type = "Stop-Motion",
+            name = "Stop-Motion",
             active = true
         )
 
@@ -391,7 +391,7 @@ class AdminMediaTypeJPAMapperTest {
             val domainEntity = mapper.toDomainEntity(jpaEntity)
 
             // Then
-            assertThat(domainEntity.type).isEqualTo(mediaTypeName)
+            assertThat(domainEntity.name).isEqualTo(mediaTypeName)
             assertThat(domainEntity.active).isEqualTo(isActive)
         }
     }
@@ -402,7 +402,7 @@ class AdminMediaTypeJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = MediaType(
             id = id,
-            type = "Interactive Exhibit",
+            name = "Interactive Exhibit",
             active = true
         )
 
@@ -419,7 +419,7 @@ class AdminMediaTypeJPAMapperTest {
         val id = UUID.randomUUID()
         val originalDomain = MediaType(
             id = id,
-            type = "Audio/Video Mix",
+            name = "Audio/Video Mix",
             active = true
         )
 
@@ -428,8 +428,8 @@ class AdminMediaTypeJPAMapperTest {
         val resultDomain = mapper.toDomainEntity(jpaEntity)
 
         // Then
-        assertThat(resultDomain.type)
-            .isEqualTo(originalDomain.type)
+        assertThat(resultDomain.name)
+            .isEqualTo(originalDomain.name)
             .isEqualTo("Audio/Video Mix")
     }
 

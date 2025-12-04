@@ -4,7 +4,7 @@ import java.util.*
 
 data class AgeGroup(
     val id: UUID,
-    val groupName: String,
+    val name: String,
     val minAge: Byte,
     val maxAge: Byte,
     val active: Boolean

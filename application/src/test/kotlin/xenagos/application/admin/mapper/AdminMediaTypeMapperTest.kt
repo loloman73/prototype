@@ -38,7 +38,7 @@ class AdminMediaTypeMapperTest {
         val id = UUID.randomUUID()
         val entity = MediaType(
             id = id,
-            type = "Audio",
+            name = "Audio",
             active = true
         )
 
@@ -58,7 +58,7 @@ class AdminMediaTypeMapperTest {
         val id = UUID.randomUUID()
         val entity = MediaType(
             id = id,
-            type = "Video",
+            name = "Video",
             active = false
         )
 
@@ -78,7 +78,7 @@ class AdminMediaTypeMapperTest {
         val id = UUID.randomUUID()
         val entity = MediaType(
             id = id,
-            type = "Image",
+            name = "Image",
             active = true
         )
 
@@ -107,7 +107,7 @@ class AdminMediaTypeMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.type).isEqualTo("Text")
+        assertThat(entity.name).isEqualTo("Text")
         assertThat(entity.active).isTrue()
     }
 
@@ -126,7 +126,7 @@ class AdminMediaTypeMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.type).isEqualTo("3D Model")
+        assertThat(entity.name).isEqualTo("3D Model")
         assertThat(entity.active).isFalse()
     }
 
@@ -145,7 +145,7 @@ class AdminMediaTypeMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.type).isEqualTo("Interactive")
+        assertThat(entity.name).isEqualTo("Interactive")
         assertThat(entity.active).isFalse()
     }
 
@@ -164,7 +164,7 @@ class AdminMediaTypeMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.type).isEqualTo("Audio/Video")
+        assertThat(entity.name).isEqualTo("Audio/Video")
         assertThat(entity.active).isTrue()
     }
 
@@ -183,7 +183,7 @@ class AdminMediaTypeMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.type).isEqualTo("Virtual Reality")
+        assertThat(entity.name).isEqualTo("Virtual Reality")
         assertThat(entity.active).isTrue()
     }
 
@@ -203,7 +203,7 @@ class AdminMediaTypeMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.type).isEqualTo("Augmented Reality")
+        assertThat(entity.name).isEqualTo("Augmented Reality")
         assertThat(entity.active).isTrue()
     }
 
@@ -223,7 +223,7 @@ class AdminMediaTypeMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.type).isEqualTo("PDF")
+        assertThat(entity.name).isEqualTo("PDF")
         assertThat(entity.active).isFalse()
     }
 
@@ -243,7 +243,7 @@ class AdminMediaTypeMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.type).isEqualTo("MP4")
+        assertThat(entity.name).isEqualTo("MP4")
         assertThat(entity.active).isTrue()
     }
 
@@ -311,7 +311,7 @@ class AdminMediaTypeMapperTest {
         val id = UUID.randomUUID()
         val entity = MediaType(
             id = id,
-            type = "Podcast",
+            name = "Podcast",
             active = true
         )
 
@@ -394,7 +394,7 @@ class AdminMediaTypeMapperTest {
 
         // Then
         assertThat(entity).isNotNull
-        assertThat(entity.type).isEqualTo("360° Video")
+        assertThat(entity.name).isEqualTo("360° Video")
     }
 
     @Test
@@ -412,7 +412,7 @@ class AdminMediaTypeMapperTest {
 
         // Then
         assertThat(entity).isNotNull
-        assertThat(entity.type).isEqualTo("Stop-Motion")
+        assertThat(entity.name).isEqualTo("Stop-Motion")
     }
 
     @Test
@@ -421,7 +421,7 @@ class AdminMediaTypeMapperTest {
         val id = UUID.randomUUID()
         val entity = MediaType(
             id = id,
-            type = "Documentary",
+            name = "Documentary",
             active = true
         )
 
@@ -429,7 +429,7 @@ class AdminMediaTypeMapperTest {
         val responseDto = mapper.toResponseDto(entity)
 
         // Then - verify that entity.type maps to responseDto.name
-        assertThat(responseDto.entityName).isEqualTo(entity.type)
+        assertThat(responseDto.entityName).isEqualTo(entity.name)
         assertThat(responseDto.entityName).isEqualTo("Documentary")
     }
 
@@ -446,8 +446,8 @@ class AdminMediaTypeMapperTest {
         val entity = mapper.toEntity(newRequestDto, id)
 
         // Then - verify that dto.name maps to entity.type
-        assertThat(entity.type).isEqualTo(newRequestDto.entityName)
-        assertThat(entity.type).isEqualTo("Tutorial")
+        assertThat(entity.name).isEqualTo(newRequestDto.entityName)
+        assertThat(entity.name).isEqualTo("Tutorial")
     }
 
     @Test
@@ -464,7 +464,7 @@ class AdminMediaTypeMapperTest {
         val entity = mapper.toEntity(updateRequestDto)
 
         // Then - verify that dto.name maps to entity.type
-        assertThat(entity.type).isEqualTo(updateRequestDto.entityName)
-        assertThat(entity.type).isEqualTo("Webinar")
+        assertThat(entity.name).isEqualTo(updateRequestDto.entityName)
+        assertThat(entity.name).isEqualTo("Webinar")
     }
 }

@@ -15,7 +15,7 @@ class AdminMediaTypeMapper : BaseAdminMapper<
         AdminMediaTypeResponseDTO> {
 
     override fun toResponseDto(entity: MediaType): AdminMediaTypeResponseDTO =
-        AdminMediaTypeResponseDTO(entity.id, entity.type, entity.active)
+        AdminMediaTypeResponseDTO(entity.id, entity.name, entity.active)
 
     override fun toEntity(dto: AdminMediaTypeNewRequestDTO, id: UUID): MediaType =
         MediaType(id, dto.entityName, dto.active)

@@ -15,7 +15,6 @@ class LoadToursForAreaHardEncodedAdapter : LoadToursForAreaOutPort {
     override fun whereAreaIs(area: Int): Set<Tour>? {
         return if (area == 51) {
             setOf(fakeTour(), fakeTour(), fakeTour(), fakeTour(), fakeTour(), fakeTour(), fakeTour(), fakeTour())
-            // setOf(fakeTour(), fakeTour())
         } else null
     }
 
@@ -43,7 +42,7 @@ class LoadToursForAreaHardEncodedAdapter : LoadToursForAreaOutPort {
                             mediaType = MediaType(UUID.randomUUID(), "",  true),
                             duration = Random.nextInt(1, 240).toShort(),
                             durationType = DurationType(UUID.randomUUID(), "aaa", false),
-                            ameaFriendlyTag = AmeaFriendlyTag(UUID.randomUUID(), "", ""),
+                            ameaTag = AmeaTag(UUID.randomUUID(), "", "", false),
                             topicTags = setOf(TopicTag(UUID.randomUUID(), "", "", true)),
                             ageGroups = setOf(AgeGroup(UUID.randomUUID(), "aaa", 12, 19, true))
                         )

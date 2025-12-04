@@ -35,7 +35,7 @@ open class AdminDurationTypesPersistenceIT : BasePersistenceIT() {
 
         // Assert
         assertThat(saved.id).isEqualTo(newEntry.id)
-        assertThat(saved.type).isEqualTo("Short Walk")
+        assertThat(saved.name).isEqualTo("Short Walk")
         assertThat(saved.active).isTrue()
     }
 
@@ -52,7 +52,7 @@ open class AdminDurationTypesPersistenceIT : BasePersistenceIT() {
         val all = persistence.getAll()
 
         // Assert
-        assertThat(all).extracting<String> { it.type }
+        assertThat(all).extracting<String> { it.name }
             .contains("Half Day", "Full Day")
     }
 
@@ -69,7 +69,7 @@ open class AdminDurationTypesPersistenceIT : BasePersistenceIT() {
 
         // Assert
         assertThat(result.id).isEqualTo(original.id)
-        assertThat(result.type).isEqualTo("New Label")
+        assertThat(result.name).isEqualTo("New Label")
         assertThat(result.active).isFalse()
     }
 
@@ -102,7 +102,7 @@ open class AdminDurationTypesPersistenceIT : BasePersistenceIT() {
     fun `saveOneNew accepts max-length type`() {
         val type35 = "x".repeat(35)
         val saved = persistence.saveOneNew(DurationType(UUID.randomUUID(), type35, true))
-        assertThat(saved.type).hasSize(35)
+        assertThat(saved.name).hasSize(35)
     }
 
     // deleteOne is a no-op on non-existing ID (CrudRepository.deleteById is idempotent)

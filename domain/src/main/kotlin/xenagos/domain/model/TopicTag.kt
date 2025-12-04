@@ -4,7 +4,7 @@ import java.util.*
 
 class TopicTag(
     val id: UUID,
-    val tagName: String,
+    val name: String,
     val description: String,
     val active: Boolean
 ) : BaseDomainEntity

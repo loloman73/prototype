@@ -33,8 +33,8 @@ open class MediaGuideJpaEntity : BaseJPAEntity  {
     open var durationType: DurationTypeJpaEntity? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "amea_friendly_type_id")
-    open var ameaFriendlyType: AmeaFriendlyTypeJpaEntity? = null
+    @JoinColumn(name = "amea_tag_id")
+    open var ameaTag: AmeaTagJpaEntity? = null
 
     @ManyToMany(mappedBy = "mediaGuides")
     open var ageGroups: MutableSet<AgeGroupJpaEntity> = mutableSetOf()

@@ -27,7 +27,7 @@ class AdminAgeGroupJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = AgeGroup(
             id = id,
-            groupName = "Adults",
+            name = "Adults",
             minAge = 18,
             maxAge = 64,
             active = true
@@ -50,7 +50,7 @@ class AdminAgeGroupJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = AgeGroup(
             id = id,
-            groupName = "Seniors",
+            name = "Seniors",
             minAge = 65,
             maxAge = 120,
             active = false
@@ -84,7 +84,7 @@ class AdminAgeGroupJPAMapperTest {
 
         // Then
         assertThat(domainEntity.id).isEqualTo(id)
-        assertThat(domainEntity.groupName).isEqualTo("Children")
+        assertThat(domainEntity.name).isEqualTo("Children")
         assertThat(domainEntity.minAge).isEqualTo(0)
         assertThat(domainEntity.maxAge).isEqualTo(12)
         assertThat(domainEntity.active).isTrue()
@@ -107,7 +107,7 @@ class AdminAgeGroupJPAMapperTest {
 
         // Then
         assertThat(domainEntity.id).isEqualTo(id)
-        assertThat(domainEntity.groupName).isEqualTo("Teenagers")
+        assertThat(domainEntity.name).isEqualTo("Teenagers")
         assertThat(domainEntity.minAge).isEqualTo(13)
         assertThat(domainEntity.maxAge).isEqualTo(17)
         assertThat(domainEntity.active).isFalse()
@@ -119,7 +119,7 @@ class AdminAgeGroupJPAMapperTest {
         val id = UUID.randomUUID()
         val originalDomain = AgeGroup(
             id = id,
-            groupName = "Young Adults",
+            name = "Young Adults",
             minAge = 18,
             maxAge = 25,
             active = true
@@ -141,7 +141,7 @@ class AdminAgeGroupJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = AgeGroup(
             id = id,
-            groupName = "Specific Age",
+            name = "Specific Age",
             minAge = 30,
             maxAge = 30,
             active = true
@@ -164,7 +164,7 @@ class AdminAgeGroupJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = AgeGroup(
             id = id,
-            groupName = "All Ages",
+            name = "All Ages",
             minAge = 0,
             maxAge = 100,
             active = true
@@ -187,7 +187,7 @@ class AdminAgeGroupJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = AgeGroup(
             id = id,
-            groupName = "Infants",
+            name = "Infants",
             minAge = 0,
             maxAge = 2,
             active = true
@@ -323,6 +323,6 @@ class AdminAgeGroupJPAMapperTest {
         // Then
         assertThat(domainEntity.minAge).isZero()
         assertThat(domainEntity.maxAge).isEqualTo(1)
-        assertThat(domainEntity.groupName).isEqualTo("Newborns")
+        assertThat(domainEntity.name).isEqualTo("Newborns")
     }
 }

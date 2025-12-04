@@ -9,7 +9,7 @@ class MediaGuide(
     val mediaType: MediaType,
     val duration: Short,
     val durationType: DurationType,
-    val ameaFriendlyTag: AmeaFriendlyTag,
+    val ameaTag: AmeaTag,
     val topicTags: Set<TopicTag>,
     val ageGroups: Set<AgeGroup>
 ) : BaseDomainEntity

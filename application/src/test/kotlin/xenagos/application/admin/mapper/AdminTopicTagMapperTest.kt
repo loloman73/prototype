@@ -46,7 +46,7 @@ class AdminTopicTagMapperTest {
         val id = UUID.randomUUID()
         val entity = TopicTag(
             id = id,
-            tagName = "Architecture",
+            name = "Architecture",
             description = "Buildings and structures",
             active = true
         )
@@ -68,7 +68,7 @@ class AdminTopicTagMapperTest {
         val id = UUID.randomUUID()
         val entity = TopicTag(
             id = id,
-            tagName = "History",
+            name = "History",
             description = "Historical context and events",
             active = false
         )
@@ -90,7 +90,7 @@ class AdminTopicTagMapperTest {
         val id = UUID.randomUUID()
         val entity = TopicTag(
             id = id,
-            tagName = "Art",
+            name = "Art",
             description = "Fine arts and paintings",
             active = true
         )
@@ -122,7 +122,7 @@ class AdminTopicTagMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.tagName).isEqualTo("Science")
+        assertThat(entity.name).isEqualTo("Science")
         assertThat(entity.description).isEqualTo("Scientific discoveries and innovations")
         assertThat(entity.active).isTrue()
     }
@@ -143,7 +143,7 @@ class AdminTopicTagMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.tagName).isEqualTo("Technology")
+        assertThat(entity.name).isEqualTo("Technology")
         assertThat(entity.description).isEqualTo("Technological advancements")
         assertThat(entity.active).isFalse()
     }
@@ -164,7 +164,7 @@ class AdminTopicTagMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.tagName).isEqualTo("Culture")
+        assertThat(entity.name).isEqualTo("Culture")
         assertThat(entity.description).isEqualTo("Cultural heritage and traditions")
         assertThat(entity.active).isFalse()
     }
@@ -186,7 +186,7 @@ class AdminTopicTagMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.tagName).isEqualTo("Ancient Civilizations")
+        assertThat(entity.name).isEqualTo("Ancient Civilizations")
         assertThat(entity.description).isEqualTo(longDescription)
         assertThat(entity.active).isTrue()
     }
@@ -207,7 +207,7 @@ class AdminTopicTagMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.tagName).isEqualTo("Religion & Philosophy")
+        assertThat(entity.name).isEqualTo("Religion & Philosophy")
         assertThat(entity.description).isEqualTo("Religious beliefs, practices & philosophical thought")
         assertThat(entity.active).isTrue()
     }
@@ -229,7 +229,7 @@ class AdminTopicTagMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.tagName).isEqualTo("Archaeology")
+        assertThat(entity.name).isEqualTo("Archaeology")
         assertThat(entity.description).isEqualTo("Archaeological findings and excavations")
         assertThat(entity.active).isTrue()
     }
@@ -251,7 +251,7 @@ class AdminTopicTagMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.tagName).isEqualTo("Literature")
+        assertThat(entity.name).isEqualTo("Literature")
         assertThat(entity.description).isEqualTo("Literary works and authors")
         assertThat(entity.active).isFalse()
     }
@@ -273,7 +273,7 @@ class AdminTopicTagMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.tagName).isEqualTo("Natural History")
+        assertThat(entity.name).isEqualTo("Natural History")
         assertThat(entity.description).isEqualTo("Natural world and biological sciences")
         assertThat(entity.active).isTrue()
     }
@@ -348,7 +348,7 @@ class AdminTopicTagMapperTest {
         val id = UUID.randomUUID()
         val entity = TopicTag(
             id = id,
-            tagName = "Geography",
+            name = "Geography",
             description = "Geographical locations and maps",
             active = true
         )
@@ -407,7 +407,7 @@ class AdminTopicTagMapperTest {
         val id = UUID.randomUUID()
         val entity = TopicTag(
             id = id,
-            tagName = "Astronomy",
+            name = "Astronomy",
             description = "Celestial objects and phenomena",
             active = true
         )
@@ -416,7 +416,7 @@ class AdminTopicTagMapperTest {
         val responseDto = mapper.toResponseDto(entity)
 
         // Then - verify that entity.tagName maps to responseDto.name
-        assertThat(responseDto.entityName).isEqualTo(entity.tagName)
+        assertThat(responseDto.entityName).isEqualTo(entity.name)
         assertThat(responseDto.entityName).isEqualTo("Astronomy")
     }
 
@@ -434,8 +434,8 @@ class AdminTopicTagMapperTest {
         val entity = mapper.toEntity(newRequestDto, id)
 
         // Then - verify that dto.name maps to entity.tagName
-        assertThat(entity.tagName).isEqualTo(newRequestDto.entityName)
-        assertThat(entity.tagName).isEqualTo("Economics")
+        assertThat(entity.name).isEqualTo(newRequestDto.entityName)
+        assertThat(entity.name).isEqualTo("Economics")
     }
 
     @Test
@@ -453,8 +453,8 @@ class AdminTopicTagMapperTest {
         val entity = mapper.toEntity(updateRequestDto)
 
         // Then - verify that dto.name maps to entity.tagName
-        assertThat(entity.tagName).isEqualTo(updateRequestDto.entityName)
-        assertThat(entity.tagName).isEqualTo("Politics")
+        assertThat(entity.name).isEqualTo(updateRequestDto.entityName)
+        assertThat(entity.name).isEqualTo("Politics")
     }
 
     @Test
@@ -498,7 +498,7 @@ class AdminTopicTagMapperTest {
 
         // Then
         assertThat(entity).isNotNull
-        assertThat(entity.tagName).isEqualTo("Pre-Columbian")
+        assertThat(entity.name).isEqualTo("Pre-Columbian")
         assertThat(entity.description).isEqualTo("Pre-Columbian American civilizations")
     }
 
@@ -518,7 +518,7 @@ class AdminTopicTagMapperTest {
 
         // Then
         assertThat(entity).isNotNull
-        assertThat(entity.tagName).isEqualTo("20th Century Art")
+        assertThat(entity.name).isEqualTo("20th Century Art")
         assertThat(entity.description).isEqualTo("Art from the 20th century")
     }
 
@@ -528,7 +528,7 @@ class AdminTopicTagMapperTest {
         val id = UUID.randomUUID()
         val entity = TopicTag(
             id = id,
-            tagName = "Miscellaneous",
+            name = "Miscellaneous",
             description = "Other",
             active = true
         )
@@ -576,7 +576,7 @@ class AdminTopicTagMapperTest {
 
         // Then
         assertThat(entity).isNotNull
-        assertThat(entity.tagName).isEqualTo("Decorative Arts (Applied Arts)")
+        assertThat(entity.name).isEqualTo("Decorative Arts (Applied Arts)")
         assertThat(entity.description).isEqualTo("Functional artistic objects")
         assertThat(entity.active).isTrue()
     }

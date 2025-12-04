@@ -4,7 +4,7 @@ import java.util.*
 
 class MediaType(
     val id: UUID,
-    val type: String,
+    val name: String,
     val active: Boolean
 ) : BaseDomainEntity
 

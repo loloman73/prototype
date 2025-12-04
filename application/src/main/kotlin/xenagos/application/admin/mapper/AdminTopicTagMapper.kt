@@ -15,7 +15,7 @@ class AdminTopicTagMapper : BaseAdminMapper<
         AdminTopicTagResponseDTO> {
 
     override fun toResponseDto(entity: TopicTag): AdminTopicTagResponseDTO =
-        AdminTopicTagResponseDTO(entity.id, entity.tagName, entity.description, entity.active)
+        AdminTopicTagResponseDTO(entity.id, entity.name, entity.description, entity.active)
 
     override fun toEntity(dto: AdminTopicTagNewRequestDTO, id: UUID ): TopicTag =
         TopicTag(id, dto.entityName, dto.description, dto.active)

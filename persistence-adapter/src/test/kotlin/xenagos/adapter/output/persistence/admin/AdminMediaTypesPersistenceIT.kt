@@ -35,7 +35,7 @@ open class AdminMediaTypesPersistenceIT : BasePersistenceIT() {
 
         // Assert
         assertThat(saved.id).isEqualTo(newEntry.id)
-        assertThat(saved.type).isEqualTo("Audio Guide")
+        assertThat(saved.name).isEqualTo("Audio Guide")
         assertThat(saved.active).isTrue()
     }
 
@@ -52,7 +52,7 @@ open class AdminMediaTypesPersistenceIT : BasePersistenceIT() {
         val all = persistence.getAll()
 
         // Assert
-        assertThat(all).extracting<String> { it.type }
+        assertThat(all).extracting<String> { it.name }
             .contains("Audio", "Visual")
     }
 
@@ -69,7 +69,7 @@ open class AdminMediaTypesPersistenceIT : BasePersistenceIT() {
 
         // Assert
         assertThat(result.id).isEqualTo(original.id)
-        assertThat(result.type).isEqualTo("Updated Type")
+        assertThat(result.name).isEqualTo("Updated Type")
         assertThat(result.active).isFalse()
     }
 
@@ -102,7 +102,7 @@ open class AdminMediaTypesPersistenceIT : BasePersistenceIT() {
     fun `saveOneNew accepts max-length type`() {
         val type35 = "x".repeat(35)
         val saved = persistence.saveOneNew(MediaType(UUID.randomUUID(), type35, true))
-        assertThat(saved.type).hasSize(35)
+        assertThat(saved.name).hasSize(35)
     }
 
     // deleteOne is a no-op on non-existing ID

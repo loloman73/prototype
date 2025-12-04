@@ -26,7 +26,7 @@ class AdminAgeGroupMapperTest {
         val id = UUID.randomUUID()
         val entity = AgeGroup(
             id = id,
-            groupName = "Adults",
+            name = "Adults",
             minAge = 18,
             maxAge = 64,
             active = true
@@ -50,7 +50,7 @@ class AdminAgeGroupMapperTest {
         val id = UUID.randomUUID()
         val entity = AgeGroup(
             id = id,
-            groupName = "Seniors",
+            name = "Seniors",
             minAge = 65,
             maxAge = 99,
             active = false
@@ -74,7 +74,7 @@ class AdminAgeGroupMapperTest {
         val id = UUID.randomUUID()
         val entity = AgeGroup(
             id = id,
-            groupName = "Children",
+            name = "Children",
             minAge = 0,
             maxAge = 12,
             active = true
@@ -109,7 +109,7 @@ class AdminAgeGroupMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.groupName).isEqualTo("Teens")
+        assertThat(entity.name).isEqualTo("Teens")
         assertThat(entity.minAge).isEqualTo(13)
         assertThat(entity.maxAge).isEqualTo(17)
         assertThat(entity.active).isTrue()
@@ -132,7 +132,7 @@ class AdminAgeGroupMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.groupName).isEqualTo("Young Adults")
+        assertThat(entity.name).isEqualTo("Young Adults")
         assertThat(entity.minAge).isEqualTo(18)
         assertThat(entity.maxAge).isEqualTo(25)
         assertThat(entity.active).isFalse()
@@ -155,7 +155,7 @@ class AdminAgeGroupMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.groupName).isEqualTo("Specific Age")
+        assertThat(entity.name).isEqualTo("Specific Age")
         assertThat(entity.minAge).isEqualTo(30)
         assertThat(entity.maxAge).isEqualTo(30)
         assertThat(entity.active).isTrue()
@@ -179,7 +179,7 @@ class AdminAgeGroupMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.groupName).isEqualTo("Middle Age")
+        assertThat(entity.name).isEqualTo("Middle Age")
         assertThat(entity.minAge).isEqualTo(40)
         assertThat(entity.maxAge).isEqualTo(59)
         assertThat(entity.active).isTrue()
@@ -203,7 +203,7 @@ class AdminAgeGroupMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.groupName).isEqualTo("Elderly")
+        assertThat(entity.name).isEqualTo("Elderly")
         assertThat(entity.minAge).isEqualTo(80)
         assertThat(entity.maxAge).isEqualTo(120)
         assertThat(entity.active).isFalse()
@@ -227,7 +227,7 @@ class AdminAgeGroupMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.groupName).isEqualTo("All Ages")
+        assertThat(entity.name).isEqualTo("All Ages")
         assertThat(entity.minAge).isEqualTo(0)
         assertThat(entity.maxAge).isEqualTo(100)
         assertThat(entity.active).isTrue()

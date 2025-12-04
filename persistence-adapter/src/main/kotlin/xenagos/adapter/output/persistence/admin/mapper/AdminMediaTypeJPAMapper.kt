@@ -9,7 +9,7 @@ class AdminMediaTypeJPAMapper : BaseJPAMapper<MediaType, MediaTypeJpaEntity> {
 
     override fun toJpaEntity(dEntity: MediaType): MediaTypeJpaEntity = MediaTypeJpaEntity().apply {
         id = dEntity.id
-        mediaType = dEntity.type
+        mediaType = dEntity.name
         active = dEntity.active
     }
 

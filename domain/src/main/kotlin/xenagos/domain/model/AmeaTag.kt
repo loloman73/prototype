@@ -2,10 +2,11 @@ package xenagos.domain.model
 
 import java.util.*
 
-data class AmeaFriendlyTag(
+data class AmeaTag(
     val id: UUID,
-    val tag: String,
-    val description: String
+    val name: String,
+    val description: String,
+    val active: Boolean
 ) : BaseDomainEntity
 
 // Blind

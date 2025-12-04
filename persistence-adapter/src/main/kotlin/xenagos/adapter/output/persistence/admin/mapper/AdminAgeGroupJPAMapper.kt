@@ -9,7 +9,7 @@ class AdminAgeGroupJPAMapper : BaseJPAMapper<AgeGroup, AgeGroupJpaEntity> {
 
     override fun toJpaEntity(dEntity: AgeGroup): AgeGroupJpaEntity = AgeGroupJpaEntity().apply {
         id = dEntity.id
-        ageGroup = dEntity.groupName
+        ageGroup = dEntity.name
         minAge = dEntity.minAge
         maxAge = dEntity.maxAge
         active = dEntity.active

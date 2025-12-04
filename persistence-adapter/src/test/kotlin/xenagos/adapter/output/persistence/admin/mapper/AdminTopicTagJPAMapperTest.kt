@@ -27,7 +27,7 @@ class AdminTopicTagJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = TopicTag(
             id = id,
-            tagName = "Ancient History",
+            name = "Ancient History",
             description = "Topics related to ancient civilizations and historical periods",
             active = true
         )
@@ -48,7 +48,7 @@ class AdminTopicTagJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = TopicTag(
             id = id,
-            tagName = "Modern Art",
+            name = "Modern Art",
             description = "Contemporary art movements and styles from the 20th century onwards",
             active = false
         )
@@ -69,7 +69,7 @@ class AdminTopicTagJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = TopicTag(
             id = id,
-            tagName = "Natural Sciences",
+            name = "Natural Sciences",
             description = "Biology, geology, paleontology and other natural science topics",
             active = true
         )
@@ -90,7 +90,7 @@ class AdminTopicTagJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = TopicTag(
             id = id,
-            tagName = "Architecture",
+            name = "Architecture",
             description = "Building design and construction",
             active = true
         )
@@ -109,7 +109,7 @@ class AdminTopicTagJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = TopicTag(
             id = id,
-            tagName = "Cultural Heritage",
+            name = "Cultural Heritage",
             description = "Preservation and interpretation of cultural artifacts, traditions, customs, and practices that have been passed down through generations and represent the collective identity of communities",
             active = true
         )
@@ -139,7 +139,7 @@ class AdminTopicTagJPAMapperTest {
 
         // Then
         assertThat(domainEntity.id).isEqualTo(id)
-        assertThat(domainEntity.tagName).isEqualTo("Archaeology")
+        assertThat(domainEntity.name).isEqualTo("Archaeology")
         assertThat(domainEntity.description).isEqualTo("Study of human history through excavation and analysis of artifacts")
         assertThat(domainEntity.active).isTrue()
     }
@@ -160,7 +160,7 @@ class AdminTopicTagJPAMapperTest {
 
         // Then
         assertThat(domainEntity.id).isEqualTo(id)
-        assertThat(domainEntity.tagName).isEqualTo("Renaissance")
+        assertThat(domainEntity.name).isEqualTo("Renaissance")
         assertThat(domainEntity.description).isEqualTo("European cultural movement from the 14th to 17th century")
         assertThat(domainEntity.active).isFalse()
     }
@@ -171,7 +171,7 @@ class AdminTopicTagJPAMapperTest {
         val id = UUID.randomUUID()
         val originalDomain = TopicTag(
             id = id,
-            tagName = "Classical Music",
+            name = "Classical Music",
             description = "Western art music from the Medieval period to the present day",
             active = true
         )
@@ -192,7 +192,7 @@ class AdminTopicTagJPAMapperTest {
         val id = UUID.randomUUID()
         val originalDomain = TopicTag(
             id = id,
-            tagName = "Baroque Period",
+            name = "Baroque Period",
             description = "Art and music style from approximately 1600 to 1750",
             active = false
         )
@@ -237,7 +237,7 @@ class AdminTopicTagJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = TopicTag(
             id = id,
-            tagName = "20th & 21st Century",
+            name = "20th & 21st Century",
             description = "Modern era (1900-present): technology, wars, and social changes",
             active = true
         )
@@ -257,7 +257,7 @@ class AdminTopicTagJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = TopicTag(
             id = id,
-            tagName = "Pre-Columbian Art",
+            name = "Pre-Columbian Art",
             description = "Art and artifacts from Americas before Columbus (pre-1492)",
             active = true
         )
@@ -418,7 +418,7 @@ class AdminTopicTagJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = TopicTag(
             id = id,
-            tagName = "Victorian Era",
+            name = "Victorian Era",
             description = "British history and culture during Queen Victoria's reign (1837-1901)",
             active = true
         )
@@ -437,7 +437,7 @@ class AdminTopicTagJPAMapperTest {
         val id = UUID.randomUUID()
         val originalDomain = TopicTag(
             id = id,
-            tagName = "Mathematics",
+            name = "Mathematics",
             description = "Study of numbers, quantities, shapes & patterns (algebra, geometry, etc.)",
             active = true
         )
@@ -460,7 +460,7 @@ class AdminTopicTagJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = TopicTag(
             id = id,
-            tagName = "Digital Humanities",
+            name = "Digital Humanities",
             description = "Intersection of computing and humanities disciplines for cultural analysis",
             active = true
         )
@@ -496,8 +496,8 @@ class AdminTopicTagJPAMapperTest {
 
         // Then
         assertThat(domainEntities).hasSize(2)
-        assertThat(domainEntities[0].tagName).isEqualTo("Folklore")
-        assertThat(domainEntities[1].tagName).isEqualTo("Performing Arts")
+        assertThat(domainEntities[0].name).isEqualTo("Folklore")
+        assertThat(domainEntities[1].name).isEqualTo("Performing Arts")
         assertThat(domainEntities).allMatch { it.active }
     }
 }

@@ -17,7 +17,7 @@ class AdminDurationTypeMapperTest {
         val id = UUID.randomUUID()
         val entity = DurationType(
             id = id,
-            type = "Half Day",
+            name = "Half Day",
             active = true
         )
 
@@ -37,7 +37,7 @@ class AdminDurationTypeMapperTest {
         val id = UUID.randomUUID()
         val entity = DurationType(
             id = id,
-            type = "Full Day",
+            name = "Full Day",
             active = false
         )
 
@@ -68,7 +68,7 @@ class AdminDurationTypeMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.type).isEqualTo("Guided Tour")
+        assertThat(entity.name).isEqualTo("Guided Tour")
         assertThat(entity.active).isTrue()
     }
 
@@ -87,7 +87,7 @@ class AdminDurationTypeMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.type).isEqualTo("Audio Guide")
+        assertThat(entity.name).isEqualTo("Audio Guide")
         assertThat(entity.active).isFalse()
     }
 
@@ -109,7 +109,7 @@ class AdminDurationTypeMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.type).isEqualTo("Extended Tour")
+        assertThat(entity.name).isEqualTo("Extended Tour")
         assertThat(entity.active).isFalse()
     }
 
@@ -128,7 +128,7 @@ class AdminDurationTypeMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.type).isEqualTo("Extended Tour")
+        assertThat(entity.name).isEqualTo("Extended Tour")
         assertThat(entity.active).isFalse()
     }
 

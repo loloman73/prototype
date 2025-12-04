@@ -9,7 +9,7 @@ class AdminDurationTypeJPAMapper: BaseJPAMapper<DurationType, DurationTypeJpaEnt
     override fun toJpaEntity(dEntity: DurationType): DurationTypeJpaEntity =
         DurationTypeJpaEntity().apply {
             id = dEntity.id
-            durationType = dEntity.type
+            durationType = dEntity.name
             active = dEntity.active
         }
 

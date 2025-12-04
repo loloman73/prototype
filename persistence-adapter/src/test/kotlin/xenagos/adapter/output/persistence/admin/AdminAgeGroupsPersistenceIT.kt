@@ -37,7 +37,7 @@ open class AdminAgeGroupsPersistenceIT : BasePersistenceIT() {
 
         // Assert
         assertThat(saved.id).isEqualTo(newEntry.id)
-        assertThat(saved.groupName).isEqualTo("Teenagers")
+        assertThat(saved.name).isEqualTo("Teenagers")
         assertThat(saved.minAge).isEqualTo(13)
         assertThat(saved.maxAge).isEqualTo(17)
         assertThat(saved.active).isTrue()
@@ -56,7 +56,7 @@ open class AdminAgeGroupsPersistenceIT : BasePersistenceIT() {
         val all = persistence.getAll()
 
         // Assert
-        assertThat(all).extracting<String> { it.groupName }
+        assertThat(all).extracting<String> { it.name }
             .contains("Preteens", "Young Adults")
     }
 
@@ -73,7 +73,7 @@ open class AdminAgeGroupsPersistenceIT : BasePersistenceIT() {
 
         // Assert
         assertThat(result.id).isEqualTo(original.id)
-        assertThat(result.groupName).isEqualTo("Middle Age Updated")
+        assertThat(result.name).isEqualTo("Middle Age Updated")
         assertThat(result.minAge).isEqualTo(31)
         assertThat(result.maxAge).isEqualTo(60)
         assertThat(result.active).isFalse()
@@ -108,7 +108,7 @@ open class AdminAgeGroupsPersistenceIT : BasePersistenceIT() {
     fun `saveOneNew accepts max-length groupName`() {
         val name35 = "x".repeat(35)
         val saved = persistence.saveOneNew(AgeGroup(UUID.randomUUID(), name35, 6.toByte(), 9.toByte(), true))
-        assertThat(saved.groupName).hasSize(35)
+        assertThat(saved.name).hasSize(35)
     }
 
     // deleteOne is a no-op on non-existing ID (CrudRepository.deleteById is idempotent)

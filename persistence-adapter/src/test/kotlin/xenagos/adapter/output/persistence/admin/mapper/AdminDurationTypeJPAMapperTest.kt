@@ -23,7 +23,7 @@ class AdminDurationTypeJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = DurationType(
             id = id,
-            type = "Short",
+            name = "Short",
             active = true
         )
 
@@ -42,7 +42,7 @@ class AdminDurationTypeJPAMapperTest {
         val id = UUID.randomUUID()
         val domainEntity = DurationType(
             id = id,
-            type = "Long",
+            name = "Long",
             active = false
         )
 
@@ -70,7 +70,7 @@ class AdminDurationTypeJPAMapperTest {
 
         // Then
         assertThat(domainEntity.id).isEqualTo(id)
-        assertThat(domainEntity.type).isEqualTo("Medium")
+        assertThat(domainEntity.name).isEqualTo("Medium")
         assertThat(domainEntity.active).isTrue()
     }
 
@@ -89,7 +89,7 @@ class AdminDurationTypeJPAMapperTest {
 
         // Then
         assertThat(domainEntity.id).isEqualTo(id)
-        assertThat(domainEntity.type).isEqualTo("Very Long")
+        assertThat(domainEntity.name).isEqualTo("Very Long")
         assertThat(domainEntity.active).isFalse()
     }
 
@@ -99,7 +99,7 @@ class AdminDurationTypeJPAMapperTest {
         val id = UUID.randomUUID()
         val originalDomain = DurationType(
             id = id,
-            type = "Custom",
+            name = "Custom",
             active = true
         )
 

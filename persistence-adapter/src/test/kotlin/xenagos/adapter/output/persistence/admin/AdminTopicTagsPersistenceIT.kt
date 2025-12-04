@@ -36,7 +36,7 @@ open class AdminTopicTagsPersistenceIT : BasePersistenceIT() {
 
         // Assert
         assertThat(saved.id).isEqualTo(newEntry.id)
-        assertThat(saved.tagName).isEqualTo("Architecture")
+        assertThat(saved.name).isEqualTo("Architecture")
         assertThat(saved.description).isEqualTo("Related to buildings and structures")
         assertThat(saved.active).isTrue()
     }
@@ -54,7 +54,7 @@ open class AdminTopicTagsPersistenceIT : BasePersistenceIT() {
         val all = persistence.getAll()
 
         // Assert
-        assertThat(all).extracting<String> { it.tagName }
+        assertThat(all).extracting<String> { it.name }
             .contains("Religion", "Technology")
     }
 
@@ -71,7 +71,7 @@ open class AdminTopicTagsPersistenceIT : BasePersistenceIT() {
 
         // Assert
         assertThat(result.id).isEqualTo(original.id)
-        assertThat(result.tagName).isEqualTo("Arts Updated")
+        assertThat(result.name).isEqualTo("Arts Updated")
         assertThat(result.description).isEqualTo("About arts and culture")
         assertThat(result.active).isFalse()
     }
@@ -106,7 +106,7 @@ open class AdminTopicTagsPersistenceIT : BasePersistenceIT() {
         val name35 = "x".repeat(35)
         val desc250 = "y".repeat(250)
         val saved = persistence.saveOneNew(TopicTag(UUID.randomUUID(), name35, desc250, true))
-        assertThat(saved.tagName).hasSize(35)
+        assertThat(saved.name).hasSize(35)
         assertThat(saved.description).hasSize(250)
     }
 

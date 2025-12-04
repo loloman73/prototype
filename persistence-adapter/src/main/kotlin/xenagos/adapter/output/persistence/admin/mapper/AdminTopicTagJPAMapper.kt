@@ -8,7 +8,7 @@ import xenagos.domain.model.TopicTag
 class AdminTopicTagJPAMapper : BaseJPAMapper<TopicTag, TopicTagJpaEntity> {
     override fun toJpaEntity(dEntity: TopicTag): TopicTagJpaEntity = TopicTagJpaEntity().apply {
         id = dEntity.id
-        topicTag = dEntity.tagName
+        topicTag = dEntity.name
         description = dEntity.description
         active = dEntity.active
     }

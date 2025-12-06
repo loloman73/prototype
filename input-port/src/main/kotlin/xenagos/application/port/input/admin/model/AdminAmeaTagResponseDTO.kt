@@ -2,7 +2,7 @@ package xenagos.application.port.input.admin.model
 
 import java.util.UUID
 
-data class AdminAmeaResponseDTO(
+data class AdminAmeaTagResponseDTO(
     val id: UUID,
     val entityName: String,
     val description: String,

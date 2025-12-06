@@ -6,7 +6,6 @@ import xenagos.domain.model.AccessibilityTag
 
 @Component
 class AdminAccessibilityTagJPAMapper : BaseJPAMapper<AccessibilityTag, AccessibilityTagJpaEntity> {
-
     override fun toJpaEntity(dEntity: AccessibilityTag): AccessibilityTagJpaEntity =
         AccessibilityTagJpaEntity().apply {
             id = dEntity.id

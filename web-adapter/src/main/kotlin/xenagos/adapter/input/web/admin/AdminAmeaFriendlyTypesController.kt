@@ -10,6 +10,6 @@ class AdminAmeaFriendlyTypesController {
 
     @GetMapping
     fun getAmeaFriendlyTypes(): String {
-        return "adminAmeaFriendlyTypes"
+        return "adminAmeaTags"
     }
 }

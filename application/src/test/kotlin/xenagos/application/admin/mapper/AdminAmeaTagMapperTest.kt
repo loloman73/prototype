@@ -2,24 +2,24 @@ package xenagos.application.admin.mapper
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import xenagos.application.port.input.admin.model.AdminAccessibilityTagNewRequestDTO
-import xenagos.application.port.input.admin.model.AdminAccessibilityTagUpdateRequestDTO
-import xenagos.domain.model.AccessibilityTag
+import xenagos.application.port.input.admin.model.AdminAmeaTagNewRequestDTO
+import xenagos.application.port.input.admin.model.AdminAmeaTagUpdateRequestDTO
+import xenagos.domain.model.AmeaTag
 import java.util.UUID
 
-class AdminAccessibilityTagMapperTest {
+class AdminAmeaTagMapperTest {
 
-    private val mapper = AdminAccessibilityTagMapper()
+    private val mapper = AdminAmeaTagMapper()
 
     // maps Entity to Response DTO
     @Test
     fun `toResponseDto should map domain entity to response DTO correctly`() {
         // Given
         val id = UUID.randomUUID()
-        val entity = AccessibilityTag(
+        val entity = AmeaTag(
             id = id,
-            name = "Wheelchair Accessible",
-            description = "Suitable for wheelchair users",
+            name = "Blind",
+            description = "Suitable for blind visitors",
             active = true
         )
 
@@ -29,19 +29,19 @@ class AdminAccessibilityTagMapperTest {
         // Then
         assertThat(responseDto).isNotNull
         assertThat(responseDto.id).isEqualTo(id)
-        assertThat(responseDto.entityName).isEqualTo("Wheelchair Accessible")
-        assertThat(responseDto.description).isEqualTo("Suitable for wheelchair users")
+        assertThat(responseDto.entityName).isEqualTo("Blind")
+        assertThat(responseDto.description).isEqualTo("Suitable for blind visitors")
         assertThat(responseDto.active).isTrue()
     }
-
+    
     @Test
-    fun `toResponseDto should handle inactive status`() {
+    fun `toResponseDto should handle inactive status`(){
         // Given
         val id = UUID.randomUUID()
-        val entity = AccessibilityTag(
+        val entity = AmeaTag(
             id = id,
-            name = "Visual Impairment",
-            description = "Suitable for visually impaired visitors",
+            name = "Deaf",
+            description = "Suitable for deaf visitors",
             active = false
         )
 
@@ -51,8 +51,8 @@ class AdminAccessibilityTagMapperTest {
         // Then
         assertThat(responseDto).isNotNull
         assertThat(responseDto.id).isEqualTo(id)
-        assertThat(responseDto.entityName).isEqualTo("Visual Impairment")
-        assertThat(responseDto.description).isEqualTo("Suitable for visually impaired visitors")
+        assertThat(responseDto.entityName).isEqualTo("Deaf")
+        assertThat(responseDto.description).isEqualTo("Suitable for deaf visitors")
         assertThat(responseDto.active).isFalse()
     }
 
@@ -62,9 +62,9 @@ class AdminAccessibilityTagMapperTest {
     fun `toEntity with NewRequestDTO should map to domain entity correctly`() {
         // Given
         val id = UUID.randomUUID()
-        val newRequestDto = AdminAccessibilityTagNewRequestDTO(
-            entityName = "Hearing Impairment",
-            description = "Suitable for hearing impaired visitors",
+        val newRequestDto = AdminAmeaTagNewRequestDTO(
+            entityName = "Autistic",
+            description = "Suitable for autistic visitors",
             active = true
         )
 
@@ -74,8 +74,8 @@ class AdminAccessibilityTagMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.name).isEqualTo("Hearing Impairment")
-        assertThat(entity.description).isEqualTo("Suitable for hearing impaired visitors")
+        assertThat(entity.name).isEqualTo("Autistic")
+        assertThat(entity.description).isEqualTo("Suitable for autistic visitors")
         assertThat(entity.active).isTrue()
     }
 
@@ -83,8 +83,8 @@ class AdminAccessibilityTagMapperTest {
     fun `toEntity with NewRequestDTO should handle inactive status`() {
         // Given
         val id = UUID.randomUUID()
-        val newRequestDto = AdminAccessibilityTagNewRequestDTO(
-            entityName = "Mobility Impairment",
+        val newRequestDto = AdminAmeaTagNewRequestDTO(
+            entityName = "Mobility",
             description = "Suitable for visitors with mobility issues",
             active = false
         )
@@ -95,20 +95,20 @@ class AdminAccessibilityTagMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.name).isEqualTo("Mobility Impairment")
+        assertThat(entity.name).isEqualTo("Mobility")
         assertThat(entity.description).isEqualTo("Suitable for visitors with mobility issues")
         assertThat(entity.active).isFalse()
     }
-
-
+    
+    
     // maps UpdateRequest DTO to Entity
     @Test
     fun `toEntity with UpdateRequestDTO should map to domain entity correctly`() {
         // Given
         val id = UUID.randomUUID()
-        val updateRequestDto = AdminAccessibilityTagUpdateRequestDTO(
+        val updateRequestDto = AdminAmeaTagUpdateRequestDTO(
             id = id,
-            entityName = "Cognitive Disability",
+            entityName = "Cognitive",
             description = "Suitable for visitors with cognitive disabilities",
             active = true
         )
@@ -119,7 +119,7 @@ class AdminAccessibilityTagMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.name).isEqualTo("Cognitive Disability")
+        assertThat(entity.name).isEqualTo("Cognitive")
         assertThat(entity.description).isEqualTo("Suitable for visitors with cognitive disabilities")
         assertThat(entity.active).isTrue()
     }
@@ -128,9 +128,9 @@ class AdminAccessibilityTagMapperTest {
     fun `toEntity with UpdateRequestDTO should handle inactive status`() {
         // Given
         val id = UUID.randomUUID()
-        val updateRequestDto = AdminAccessibilityTagUpdateRequestDTO(
+        val updateRequestDto = AdminAmeaTagUpdateRequestDTO(
             id = id,
-            entityName = "Sign Language Available",
+            entityName = "Sign Language",
             description = "Sign language interpretation available",
             active = false
         )
@@ -141,7 +141,7 @@ class AdminAccessibilityTagMapperTest {
         // Then
         assertThat(entity).isNotNull
         assertThat(entity.id).isEqualTo(id)
-        assertThat(entity.name).isEqualTo("Sign Language Available")
+        assertThat(entity.name).isEqualTo("Sign Language")
         assertThat(entity.description).isEqualTo("Sign language interpretation available")
         assertThat(entity.active).isFalse()
     }

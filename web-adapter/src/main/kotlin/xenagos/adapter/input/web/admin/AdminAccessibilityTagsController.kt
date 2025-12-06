@@ -16,9 +16,9 @@ import java.util.UUID
 @RequestMapping("/admin/accessibility-tags")
 class AdminAccessibilityTagsController(private val service: AdminAccessibilityTagsUseCase) : BaseAdminController() {
 
-    override val fragmentForAddOneNewRequest: String = "accessibility-tag-modal-form-add-new"
-    override val fragmentForUpdateOneRequest: String = "accessibility-tag-modal-form-edit"
-    override val myEndpointPath: String = "accessibility-tags"
+    override val fragmentForAddOneNewRequest = "accessibility-tag-modal-form-add-new"
+    override val fragmentForUpdateOneRequest = "accessibility-tag-modal-form-edit"
+    override val myEndpointPath = "accessibility-tags"
     override val emptyNewRequestDTO = AdminAccessibilityTagNewRequestDTO.createEmptyDeactivated()
     override val emptyUpdateRequestDTO = AdminAccessibilityTagUpdateRequestDTO.createEmptyDeactivated()
 
@@ -50,6 +50,8 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
 
     @HxRequest
     @DeleteMapping
-    fun deleteOne(@RequestParam id: UUID, response: HttpServletResponse): String =
-        handleDeleteOne(response) { service.deleteOne(id) }
+    fun deleteOne(
+        @RequestParam id: UUID,
+        response: HttpServletResponse
+    ): String = handleDeleteOne(response) { service.deleteOne(id) }
 }

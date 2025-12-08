@@ -114,7 +114,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-danger" id="delete_one_btn"
                         th:hx-delete="@{__${endpoint_link}__}"
-                        onclick="appendIdToDeleteUrl()">
+                        hx-on:htmx:beforeRequest="appendIdToDeleteUrl()">
                     Delete
                 </button>
             </div>

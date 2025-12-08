@@ -49,9 +49,9 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
     ): String = handleUpdateOne(bindingResult, response) { service.updateOne(requestDTO) }
 
     @HxRequest
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     fun deleteOne(
-        @RequestParam id: UUID,
+        @PathVariable id: UUID,
         response: HttpServletResponse
     ): String = handleDeleteOne(response) { service.deleteOne(id) }
 }

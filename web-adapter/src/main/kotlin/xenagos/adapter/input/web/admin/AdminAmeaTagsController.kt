@@ -9,10 +9,10 @@ import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
 import xenagos.application.port.input.admin.AdminAmeaTagsUseCase
 import xenagos.application.port.input.admin.model.AdminAmeaTagNewRequestDTO
 import xenagos.application.port.input.admin.model.AdminAmeaTagUpdateRequestDTO
@@ -55,9 +55,9 @@ class AdminAmeaTagsController(private val service: AdminAmeaTagsUseCase) : BaseA
     ): String = handleUpdateOne(bindingResult, response) { service.updateOne(requestDTO) }
 
     @HxRequest
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     fun deleteOne(
-        @RequestParam id: UUID,
+        @PathVariable id: UUID,
         response: HttpServletResponse
     ): String = handleDeleteOne(response) { service.deleteOne(id) }
 }

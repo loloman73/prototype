@@ -49,7 +49,9 @@ class AdminLanguagesController(private val service: AdminLanguagesUseCase) : Bas
     ): String = handleUpdateOne(bindingResult, response) { service.updateOne(requestDTO) }
 
     @HxRequest
-    @DeleteMapping
-    fun deleteOne(@RequestParam id: UUID, response: HttpServletResponse): String =
-        handleDeleteOne(response) { service.deleteOne(id) }
+    @DeleteMapping("/{id}")
+    fun deleteOne(
+        @PathVariable id: UUID,
+        response: HttpServletResponse
+    ): String = handleDeleteOne(response) { service.deleteOne(id) }
 }

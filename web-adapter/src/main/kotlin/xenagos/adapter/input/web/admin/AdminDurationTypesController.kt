@@ -46,10 +46,12 @@ class AdminDurationTypesController(private val service: AdminDurationTypesUseCas
         requestDTO: AdminDurationTypeUpdateRequestDTO,
         bindingResult: BindingResult,
         response: HttpServletResponse
-    ):String = handleUpdateOne(bindingResult, response) { service.updateOne(requestDTO) }
+    ): String = handleUpdateOne(bindingResult, response) { service.updateOne(requestDTO) }
 
     @HxRequest
-    @DeleteMapping
-    fun deleteOne(@RequestParam id: UUID, response: HttpServletResponse):String =
-        handleDeleteOne(response) { service.deleteOne(id) }
+    @DeleteMapping("/{id}")
+    fun deleteOne(
+        @PathVariable id: UUID,
+        response: HttpServletResponse
+    ): String = handleDeleteOne(response) { service.deleteOne(id) }
 }

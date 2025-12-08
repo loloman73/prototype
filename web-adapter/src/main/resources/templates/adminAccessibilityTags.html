@@ -67,7 +67,8 @@
                             th:data-id="${accessibilityTag.id}"
                             th:data-field1="${accessibilityTag.entityName}"
                             th:data-field2="${accessibilityTag.description}"
-                            th:data-active="${accessibilityTag.active}">
+                            th:data-active="${accessibilityTag.active}"
+                            >
                         Delete
                     </button>
                 </td>
@@ -88,6 +89,16 @@
     <!--Script-->
     <script type="text/javascript" th:src="@{/js/adminAccessibilityTags.js}"></script>
     <script type="text/javascript" th:src="@{/js/adminActionButtons.js}"></script>
+    <script>
+        function appendIdToDeleteUrl(){
+            const id = document.getElementById("delete_id").value;
+            const deleteButton = document.getElementById('delete_one_btn');
+            const currentUrl = deleteButton.getAttribute('hx-delete');
+            const newUrl = currentUrl + '/' + id;
+            deleteButton.setAttribute('hx-delete', newUrl);
+        }
+    </script>
+
 
 </th:block>
 

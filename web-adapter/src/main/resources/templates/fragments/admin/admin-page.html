@@ -39,7 +39,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-success"
-                        th:attr="hx-post='__${endpoint_link}__'"
+                        th:hx-post="@{__${endpoint_link}__}"
                         hx-include="#add_new_form"
                         hx-target="#add_new_form"
                         hx-target-error="#add_new_form"
@@ -76,7 +76,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-success"
-                        th:attr="hx-put='__${endpoint_link}__'"
+                        th:hx-put="@{__${endpoint_link}__}"
                         hx-include="#edit_form"
                         hx-target="#edit_form"
                         hx-target-error="#edit_form"
@@ -112,8 +112,9 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-danger"
-                        th:hx-delete="@{__${endpoint_link}__/{id}}">
+                <button type="submit" class="btn btn-danger" id="delete_one_btn"
+                        th:hx-delete="@{__${endpoint_link}__}"
+                        onclick="appendIdToDeleteUrl()">
                     Delete
                 </button>
             </div>

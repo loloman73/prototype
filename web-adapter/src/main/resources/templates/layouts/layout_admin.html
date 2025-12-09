@@ -32,7 +32,7 @@
             <a id="language_sidebar_link" href="/admin/languages" class="list-group-item list-group-item-action list-group-item-primary">Languages</a>
             <a id="media_type_sidebar_link" href="/admin/media-types" class="list-group-item list-group-item-action list-group-item-primary">Media Types</a>
             <a id="duration_type_sidebar_link" href="/admin/duration-types" class="list-group-item list-group-item-action list-group-item-primary">Duration Types</a>
-            <a href="/admin/ameaFriendlyTypes" class="list-group-item list-group-item-action list-group-item-primary">AmeA Friendly Types</a>
+            <a id="amea_tag_sidebar_link" href="/admin/amea-tags" class="list-group-item list-group-item-action list-group-item-primary">AmeA Tags</a>
         </div>
     </div>
 </th:block>
@@ -41,6 +41,30 @@
     <div class="col-10 pt-3">
         <th:block layout:fragment="ADMIN_DATA_SPACE"></th:block>
     </div>
+</th:block>
+
+<th:block layout:fragment="SCRIPTS">
+    <script type="text/javascript" th:src="@{/js/adminActionButtons.js}"></script>
+    <script type="text/javascript">
+        function appendIdToDeleteUrl(event){
+            try {
+                const idInput = document.getElementById('delete_id');
+                if (!idInput) { return; }
+                const id = (idInput.value || '').toString().trim();
+                const deleteButton = document.getElementById('delete_one_btn');
+                if (!deleteButton) { return; }
+                const currentUrl = deleteButton.getAttribute('hx-delete') || '';
+                const base = currentUrl.endsWith('/') ? currentUrl.slice(0, -1) : currentUrl;
+                const newPath = id ? base + '/' + encodeURIComponent(id) : base;
+                // Tell htmx to use the new path for THIS request
+                if (event && event.detail) {
+                    event.detail.path = newPath;
+                }
+            } catch (e) {
+                // no-op; keep default path if anything goes wrong
+            }
+        }
+    </script>
 </th:block>
 
 </body>

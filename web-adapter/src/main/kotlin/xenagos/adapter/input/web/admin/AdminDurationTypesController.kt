@@ -16,9 +16,9 @@ import java.util.UUID
 @RequestMapping("/admin/duration-types")
 class AdminDurationTypesController(private val service: AdminDurationTypesUseCase) : BaseAdminController() {
 
-    override val fragmentForAddOneNewRequest: String = "duration-type-modal-form-add-new"
-    override val fragmentForUpdateOneRequest: String = "duration-type-modal-form-edit"
-    override val myEndpointPath: String = "duration-types"
+    override val fragmentForAddOneNewRequest = "duration-type-modal-form-add-new"
+    override val fragmentForUpdateOneRequest = "duration-type-modal-form-edit"
+    override val myEndpointPath = "duration-types"
     override val emptyNewRequestDTO = AdminDurationTypeNewRequestDTO.createEmptyDeactivated()
     override val emptyUpdateRequestDTO = AdminDurationTypeUpdateRequestDTO.createEmptyDeactivated()
 

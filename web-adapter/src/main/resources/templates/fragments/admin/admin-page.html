@@ -120,26 +120,6 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        function appendIdToDeleteUrl(event){
-            try {
-                const idInput = document.getElementById('delete_id');
-                if (!idInput) { return; }
-                const id = (idInput.value || '').toString().trim();
-                const deleteButton = document.getElementById('delete_one_btn');
-                if (!deleteButton) { return; }
-                const currentUrl = deleteButton.getAttribute('hx-delete') || '';
-                const base = currentUrl.endsWith('/') ? currentUrl.slice(0, -1) : currentUrl;
-                const newPath = id ? base + '/' + encodeURIComponent(id) : base;
-                // Tell htmx to use the new path for THIS request
-                if (event && event.detail) {
-                    event.detail.path = newPath;
-                }
-            } catch (e) {
-                // no-op; keep default path if anything goes wrong
-            }
-        }
-    </script>
 </div>
 
 </body>

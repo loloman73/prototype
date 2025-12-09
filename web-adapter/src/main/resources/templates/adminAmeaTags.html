@@ -78,13 +78,13 @@
     </div>
 
     <!-- Add New Modal -->
-    <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_MODAL('Amea Tag','~{/fragments/admin/amea-tag-modal-form-add-new}','/admin/amea-tags')}"></div>
+    <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_MODAL('Amea Tag','/fragments/admin/amea-tag-modal-form-add-new','/admin/amea-tags')}"></div>
 
     <!-- Edit Modal -->
-    <div th:replace="~{fragments/admin/admin-page.html :: EDIT_MODAL('Amea Tag','~{/fragments/admin/amea-tag-modal-form-edit}','/admin/amea-tags')}"></div>
+    <div th:replace="~{fragments/admin/admin-page.html :: EDIT_MODAL('Amea Tag','/fragments/admin/amea-tag-modal-form-edit','/admin/amea-tags')}"></div>
 
     <!-- Delete Modal -->
-    <div th:replace="~{fragments/admin/admin-page.html :: DELETE_MODAL('Amea Tag','~{/fragments/admin/amea-tag-modal-form-delete}','/admin/amea-tags')}"></div>
+    <div th:replace="~{fragments/admin/admin-page.html :: DELETE_MODAL('Amea Tag','/fragments/admin/amea-tag-modal-form-delete','/admin/amea-tags')}"></div>
 
     <!--Script-->
     <script type="text/javascript" th:src="@{/js/adminAmeaTags.js}"></script>

@@ -72,13 +72,13 @@
     </div>
 
     <!-- Add New Modal -->
-    <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_MODAL('Duration Type','~{/fragments/admin/duration-type-modal-form-add-new}','/admin/duration-types')}"></div>
+    <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_MODAL('Duration Type','/fragments/admin/duration-type-modal-form-add-new','/admin/duration-types')}"></div>
 
     <!-- Edit Modal -->
-    <div th:replace="~{fragments/admin/admin-page.html :: EDIT_MODAL('Duration Type','~{/fragments/admin/duration-type-modal-form-edit}','/admin/duration-types')}"></div>
+    <div th:replace="~{fragments/admin/admin-page.html :: EDIT_MODAL('Duration Type','/fragments/admin/duration-type-modal-form-edit','/admin/duration-types')}"></div>
 
     <!-- Delete Modal -->
-    <div th:replace="~{fragments/admin/admin-page.html :: DELETE_MODAL('Duration Type','~{/fragments/admin/duration-type-modal-form-delete}','/admin/duration-types')}"></div>
+    <div th:replace="~{fragments/admin/admin-page.html :: DELETE_MODAL('Duration Type','/fragments/admin/duration-type-modal-form-delete','/admin/duration-types')}"></div>
 
     <!--Script-->
     <script type="text/javascript" th:src="@{/js/adminDurationTypes.js}"></script>

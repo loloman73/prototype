@@ -2,17 +2,94 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layouts/layout_admin}"
+      layout:decorate="~{/layouts/layout_admin(childPageName='Amea Tags')}"
       lang="en">
 <head>
-    <title>Main Admin Page</title>
+    <title>Main Amea Tags</title>
 </head>
 
 <body>
 
 <th:block layout:fragment="ADMIN_DATA_SPACE">
-    <h4>AmeA Friendly Types</h4>
-    <br> <br>
+
+    <!--Add New Button-->
+    <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_BTN}"></div>
+
+    <!--Table-->
+    <div class="col-10">
+        <table class="table table-sm table-light table-striped table-bordered border-primary-subtle table-hover shadow">
+            <thead>
+            <tr class="text-center">
+                <!--Column Headers -->
+                <th scope="col">#</th>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Active</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="ameaTag : ${listAllModel}">
+                <!--## column-->
+                <th scope="row"><span th:text="${listAllModel.indexOf(ameaTag)+1}"></span></th>
+                <!--field ID-->
+                <td class="text-nowrap"><span th:text="${ameaTag.id}"></span></td>
+                <!--field 1-->
+                <td><span th:text="${ameaTag.entityName}"></span></td>
+                <!--field 2-->
+                <td><span th:text="${ameaTag.description}"></span></td>
+                <!--field active-->
+                <td class="text-center">
+                    <label>
+                        <input class="form-check-input" type="checkbox" th:checked="${ameaTag.active}"
+                               disabled>
+                    </label>
+                </td>
+                <!--Action buttons-->
+                <td class="text-nowrap">
+                    <!--Edit button-->
+                    <button class="btn btn-warning ms-1 me-1 py-1"
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#edit_modal"
+                            th:data-id="${ameaTag.id}"
+                            th:data-field1="${ameaTag.entityName}"
+                            th:data-field2="${ameaTag.description}"
+                            th:data-active="${ameaTag.active}">
+                        Edit
+                    </button>
+                    <!--Delete button-->
+                    <button class="btn btn-danger me-1 py-1 "
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#delete_modal"
+                            th:data-id="${ameaTag.id}"
+                            th:data-field1="${ameaTag.entityName}"
+                            th:data-field2="${ameaTag.description}"
+                            th:data-active="${ameaTag.active}"
+                    >
+                        Delete
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add New Modal -->
+    <div th:replace="~{fragments/admin/admin-page.html :: ADD_NEW_MODAL('Amea Tag','~{/fragments/admin/amea-tag-modal-form-add-new}','/admin/amea-tags')}"></div>
+
+    <!-- Edit Modal -->
+    <div th:replace="~{fragments/admin/admin-page.html :: EDIT_MODAL('Amea Tag','~{/fragments/admin/amea-tag-modal-form-edit}','/admin/amea-tags')}"></div>
+
+    <!-- Delete Modal -->
+    <div th:replace="~{fragments/admin/admin-page.html :: DELETE_MODAL('Amea Tag','~{/fragments/admin/amea-tag-modal-form-delete}','/admin/amea-tags')}"></div>
+
+    <!--Script-->
+    <script type="text/javascript" th:src="@{/js/adminAmeaTags.js}"></script>
+
+
 </th:block>
 
 </body>

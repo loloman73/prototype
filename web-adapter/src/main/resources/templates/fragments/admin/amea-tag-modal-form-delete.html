@@ -1,0 +1,46 @@
+<form>
+    <!--field ID-->
+    <div class="col-10">
+        <div class="form-floating mb-3">
+            <input class="form-control"
+                   id="delete_id"
+                   type="text"
+                   name="id"
+                   readonly>
+            <label class="text-secondary" for="delete_id">Id</label>
+        </div>
+    </div>
+    <!--field 1-->
+    <div class="col-9">
+        <div class="form-floating mb-3">
+            <input class="form-control"
+                   id="delete_field1"
+                   name="entityName"
+                   type="text"
+                   readonly>
+            <label class="text-secondary" for="delete_field1">Name</label>
+        </div>
+    </div>
+    <!--field 2-->
+    <div class="col-12">
+        <div class="form-floating mb-3">
+      <textarea class="form-control"
+                id="delete_field2"
+                name="description"
+                readonly
+                style="height: 150px"> </textarea>
+            <label class="text-secondary" for="delete_field2">Description</label>
+        </div>
+    </div>
+    <!--field active-->
+    <div class="col-12">
+        <div class="form-check">
+            <input class="form-check-input"
+                   type="checkbox"
+                   id="delete_active"
+                   name="active"
+                   disabled/>
+            <label class="form-check-label" for="delete_active">Active</label>
+        </div>
+    </div>
+</form>

@@ -30,10 +30,9 @@ class AdminAmeaTagsController(private val service: AdminAmeaTagsUseCase) : BaseA
 
     @GetMapping
     fun showAll(model: Model): String {
-        model.addAttribute("listAllModel", service.getAll())
         model.addAttribute("addOneNewModel", emptyNewRequestDTO)
         model.addAttribute("updateOneModel", emptyUpdateRequestDTO)
-        return pathPrefix + "adminAmeaTags"
+        return ADMIN_TEMPLATE_PATH_PREFIX + "adminAmeaTags"
     }
 
     @HxRequest

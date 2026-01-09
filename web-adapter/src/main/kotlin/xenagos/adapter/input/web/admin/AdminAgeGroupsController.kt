@@ -27,7 +27,7 @@ class AdminAgeGroupsController(private val service: AdminAgeGroupUseCase) : Base
         model.addAttribute("listAllModel", service.getAll())
         model.addAttribute("addOneNewModel", emptyNewRequestDTO)
         model.addAttribute("updateOneModel", emptyUpdateRequestDTO)
-        return pathPrefix + "adminAgeGroups"
+        return ADMIN_TEMPLATE_PATH_PREFIX + "adminAgeGroups"
     }
 
     @HxRequest

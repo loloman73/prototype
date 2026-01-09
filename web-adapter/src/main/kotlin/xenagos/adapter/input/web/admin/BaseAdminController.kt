@@ -6,6 +6,8 @@ import org.springframework.validation.BindingResult
 import xenagos.application.port.input.admin.model.BaseAdminNewRequestDTO
 import xenagos.application.port.input.admin.model.BaseAdminUpdateRequestDTO
 
+const val tes ="sadasd"
+
 // Base controller for admin web adapters to share common helpers.
 // Handlers return the fragment, with data errors, if validation fails,
 //    otherwise executes the action and return the redirect string to self endpoint.
@@ -16,7 +18,10 @@ abstract class BaseAdminController {
     abstract val myURLEndpoint: String
     abstract val emptyNewRequestDTO: BaseAdminNewRequestDTO
     abstract val emptyUpdateRequestDTO: BaseAdminUpdateRequestDTO
-    protected val pathPrefix = "/pages/admin/"
+
+    companion object {
+        const val ADMIN_TEMPLATE_PATH_PREFIX = "pages/admin/"
+    }
 
     protected fun handleAddOneNew(
         bindingResult: BindingResult,
@@ -26,7 +31,7 @@ abstract class BaseAdminController {
         val htmlResponseOrFragment: String
         if (bindingResult.hasErrors()) {
             response.status = HttpStatus.UNPROCESSABLE_ENTITY.value()
-            htmlResponseOrFragment = "./fragments/admin/$fragmentForAddOneNewRequest"
+            htmlResponseOrFragment = "fragments/admin/$fragmentForAddOneNewRequest"
         } else {
             saveAction()
             response.status = HttpStatus.CREATED.value()
@@ -43,7 +48,7 @@ abstract class BaseAdminController {
         val htmlResponseOrFragment: String
         if (bindingResult.hasErrors()) {
             response.status = HttpStatus.UNPROCESSABLE_ENTITY.value()
-            htmlResponseOrFragment = "./fragments/admin/$fragmentForUpdateOneRequest"
+            htmlResponseOrFragment = "fragments/admin/$fragmentForUpdateOneRequest"
         } else {
             saveAction()
             response.status = HttpStatus.OK.value()

@@ -27,7 +27,7 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
         model.addAttribute("listAllModel", service.getAll())
         model.addAttribute("addOneNewModel", emptyNewRequestDTO)
         model.addAttribute("updateOneModel", emptyUpdateRequestDTO)
-        return pathPrefix + "adminAccessibilityTags"
+        return ADMIN_TEMPLATE_PATH_PREFIX + "adminAccessibilityTags"
     }
 
     @HxRequest

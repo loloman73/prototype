@@ -27,7 +27,7 @@ class AdminMediaTypesController(private val service: AdminMediaTypesUseCase) : B
         model.addAttribute("listAllModel", service.getAll())
         model.addAttribute("addOneNewModel", emptyNewRequestDTO)
         model.addAttribute("updateOneModel", emptyUpdateRequestDTO)
-        return pathPrefix + "adminMediaTypes"
+        return ADMIN_TEMPLATE_PATH_PREFIX + "adminMediaTypes"
     }
 
     @HxRequest

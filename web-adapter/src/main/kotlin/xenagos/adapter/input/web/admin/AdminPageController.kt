@@ -10,6 +10,6 @@ class AdminPageController {
 
     @GetMapping
     fun mainAdminPage(): String{
-        return "/pages/admin/adminMain"
+        return BaseAdminController.ADMIN_TEMPLATE_PATH_PREFIX + "adminMain"
     }
 }

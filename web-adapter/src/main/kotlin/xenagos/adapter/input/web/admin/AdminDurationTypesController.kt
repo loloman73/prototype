@@ -27,7 +27,7 @@ class AdminDurationTypesController(private val service: AdminDurationTypesUseCas
         model.addAttribute("listAllModel", service.getAll())
         model.addAttribute("addOneNewModel", emptyNewRequestDTO)
         model.addAttribute("updateOneModel", emptyUpdateRequestDTO)
-        return pathPrefix + "adminDurationTypes"
+        return ADMIN_TEMPLATE_PATH_PREFIX + "adminDurationTypes"
     }
 
     @HxRequest

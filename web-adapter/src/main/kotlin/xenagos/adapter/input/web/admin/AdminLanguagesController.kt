@@ -27,7 +27,7 @@ class AdminLanguagesController(private val service: AdminLanguagesUseCase) : Bas
         model.addAttribute("listAllModel", service.getAll())
         model.addAttribute("addOneNewModel", emptyNewRequestDTO)
         model.addAttribute("updateOneModel", emptyUpdateRequestDTO)
-        return pathPrefix + "adminLanguages"
+        return ADMIN_TEMPLATE_PATH_PREFIX + "adminLanguages"
     }
 
     @HxRequest

@@ -27,7 +27,7 @@ class AdminTopicTagsController(private val service: AdminTopicTagsUseCase) : Bas
         model.addAttribute("listAllModel", service.getAll())
         model.addAttribute("addOneNewModel", emptyNewRequestDTO)
         model.addAttribute("updateOneModel", emptyUpdateRequestDTO)
-        return pathPrefix + "adminTopicTags"
+        return ADMIN_TEMPLATE_PATH_PREFIX + "adminTopicTags"
     }
 
     @HxRequest

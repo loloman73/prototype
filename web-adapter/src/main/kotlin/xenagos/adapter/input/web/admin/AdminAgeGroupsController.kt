@@ -18,7 +18,7 @@ class AdminAgeGroupsController(private val service: AdminAgeGroupUseCase) : Base
 
     override val fragmentForAddOneNewRequest: String = "age-group-modal-form-add-new"
     override val fragmentForUpdateOneRequest: String = "age-group-modal-form-edit"
-    override val myEndpointPath: String = "age-groups"
+    override val myURLEndpoint: String = "age-groups"
     override val emptyNewRequestDTO = AdminAgeGroupNewRequestDTO.createEmptyDeactivated()
     override val emptyUpdateRequestDTO = AdminAgeGroupUpdateRequestDTO.createEmptyDeactivated()
 
@@ -27,7 +27,7 @@ class AdminAgeGroupsController(private val service: AdminAgeGroupUseCase) : Base
         model.addAttribute("listAllModel", service.getAll())
         model.addAttribute("addOneNewModel", emptyNewRequestDTO)
         model.addAttribute("updateOneModel", emptyUpdateRequestDTO)
-        return "adminAgeGroups"
+        return pathPrefix + "adminAgeGroups"
     }
 
     @HxRequest

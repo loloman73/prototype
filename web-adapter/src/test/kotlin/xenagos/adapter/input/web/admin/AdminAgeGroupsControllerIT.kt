@@ -375,10 +375,9 @@ class AdminAgeGroupsControllerIT : BaseWebIT() {
         val countBefore = useCase.getAll().count()
 
         mockMvc.perform(
-            delete(endPoint)
+            delete("$endPoint/${created.id}")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("HX-Request", "true")
-                .param("id", created.id.toString())
         )
             .andExpect(status().isNoContent)
             .andExpect(header().string("HX-Redirect", endPoint))

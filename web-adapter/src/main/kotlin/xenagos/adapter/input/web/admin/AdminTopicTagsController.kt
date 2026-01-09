@@ -18,7 +18,7 @@ class AdminTopicTagsController(private val service: AdminTopicTagsUseCase) : Bas
 
     override val fragmentForAddOneNewRequest: String = "topic-tag-modal-form-add-new"
     override val fragmentForUpdateOneRequest: String = "topic-tag-modal-form-edit"
-    override val myEndpointPath: String = "topic-tags"
+    override val myURLEndpoint: String = "topic-tags"
     override val emptyNewRequestDTO = AdminTopicTagNewRequestDTO.createEmptyDeactivated()
     override val emptyUpdateRequestDTO = AdminTopicTagUpdateRequestDTO.createEmptyDeactivated()
 
@@ -27,7 +27,7 @@ class AdminTopicTagsController(private val service: AdminTopicTagsUseCase) : Bas
         model.addAttribute("listAllModel", service.getAll())
         model.addAttribute("addOneNewModel", emptyNewRequestDTO)
         model.addAttribute("updateOneModel", emptyUpdateRequestDTO)
-        return "adminTopicTags"
+        return pathPrefix + "adminTopicTags"
     }
 
     @HxRequest

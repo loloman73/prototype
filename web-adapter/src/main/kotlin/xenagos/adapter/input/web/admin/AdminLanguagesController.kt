@@ -18,7 +18,7 @@ class AdminLanguagesController(private val service: AdminLanguagesUseCase) : Bas
 
     override val fragmentForAddOneNewRequest = "language-modal-form-add-new"
     override val fragmentForUpdateOneRequest = "language-modal-form-edit"
-    override val myEndpointPath: String = "languages"
+    override val myURLEndpoint: String = "languages"
     override val emptyNewRequestDTO = AdminLanguageNewRequestDTO.createEmptyDeactivated()
     override val emptyUpdateRequestDTO = AdminLanguageUpdateRequestDTO.createEmptyDeactivated()
 
@@ -27,7 +27,7 @@ class AdminLanguagesController(private val service: AdminLanguagesUseCase) : Bas
         model.addAttribute("listAllModel", service.getAll())
         model.addAttribute("addOneNewModel", emptyNewRequestDTO)
         model.addAttribute("updateOneModel", emptyUpdateRequestDTO)
-        return "adminLanguages"
+        return pathPrefix + "adminLanguages"
     }
 
     @HxRequest

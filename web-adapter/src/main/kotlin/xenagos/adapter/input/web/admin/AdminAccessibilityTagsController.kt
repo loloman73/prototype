@@ -18,7 +18,7 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
 
     override val fragmentForAddOneNewRequest = "accessibility-tag-modal-form-add-new"
     override val fragmentForUpdateOneRequest = "accessibility-tag-modal-form-edit"
-    override val myEndpointPath = "accessibility-tags"
+    override val myURLEndpoint = "accessibility-tags"
     override val emptyNewRequestDTO = AdminAccessibilityTagNewRequestDTO.createEmptyDeactivated()
     override val emptyUpdateRequestDTO = AdminAccessibilityTagUpdateRequestDTO.createEmptyDeactivated()
 
@@ -27,7 +27,7 @@ class AdminAccessibilityTagsController(private val service: AdminAccessibilityTa
         model.addAttribute("listAllModel", service.getAll())
         model.addAttribute("addOneNewModel", emptyNewRequestDTO)
         model.addAttribute("updateOneModel", emptyUpdateRequestDTO)
-        return "adminAccessibilityTags"
+        return pathPrefix + "adminAccessibilityTags"
     }
 
     @HxRequest

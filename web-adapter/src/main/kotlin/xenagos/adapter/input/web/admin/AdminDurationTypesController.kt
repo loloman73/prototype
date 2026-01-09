@@ -18,7 +18,7 @@ class AdminDurationTypesController(private val service: AdminDurationTypesUseCas
 
     override val fragmentForAddOneNewRequest = "duration-type-modal-form-add-new"
     override val fragmentForUpdateOneRequest = "duration-type-modal-form-edit"
-    override val myEndpointPath = "duration-types"
+    override val myURLEndpoint = "duration-types"
     override val emptyNewRequestDTO = AdminDurationTypeNewRequestDTO.createEmptyDeactivated()
     override val emptyUpdateRequestDTO = AdminDurationTypeUpdateRequestDTO.createEmptyDeactivated()
 
@@ -27,7 +27,7 @@ class AdminDurationTypesController(private val service: AdminDurationTypesUseCas
         model.addAttribute("listAllModel", service.getAll())
         model.addAttribute("addOneNewModel", emptyNewRequestDTO)
         model.addAttribute("updateOneModel", emptyUpdateRequestDTO)
-        return "adminDurationTypes"
+        return pathPrefix + "adminDurationTypes"
     }
 
     @HxRequest

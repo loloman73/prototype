@@ -24,7 +24,7 @@ class AdminAmeaTagsController(private val service: AdminAmeaTagsUseCase) : BaseA
 
     override val fragmentForAddOneNewRequest = "amea-tag-modal-form-add-new"
     override val fragmentForUpdateOneRequest = "amea-tag-modal-form-edit"
-    override val myEndpointPath = "amea-tags"
+    override val myURLEndpoint = "amea-tags"
     override val emptyNewRequestDTO = AdminAmeaTagNewRequestDTO.createEmptyDeactivated()
     override val emptyUpdateRequestDTO = AdminAmeaTagUpdateRequestDTO.createEmptyDeactivated()
 
@@ -33,7 +33,7 @@ class AdminAmeaTagsController(private val service: AdminAmeaTagsUseCase) : BaseA
         model.addAttribute("listAllModel", service.getAll())
         model.addAttribute("addOneNewModel", emptyNewRequestDTO)
         model.addAttribute("updateOneModel", emptyUpdateRequestDTO)
-        return "adminAmeaTags"
+        return pathPrefix + "adminAmeaTags"
     }
 
     @HxRequest

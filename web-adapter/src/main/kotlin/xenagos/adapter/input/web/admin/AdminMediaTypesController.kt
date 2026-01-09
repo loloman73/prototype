@@ -18,7 +18,7 @@ class AdminMediaTypesController(private val service: AdminMediaTypesUseCase) : B
 
     override val fragmentForAddOneNewRequest: String = "media-type-modal-form-add-new"
     override val fragmentForUpdateOneRequest: String = "media-type-modal-form-edit"
-    override val myEndpointPath: String = "media-types"
+    override val myURLEndpoint: String = "media-types"
     override val emptyNewRequestDTO = AdminMediaTypeNewRequestDTO.createEmptyDeactivated()
     override val emptyUpdateRequestDTO = AdminMediaTypeUpdateRequestDTO.createEmptyDeactivated()
 
@@ -27,7 +27,7 @@ class AdminMediaTypesController(private val service: AdminMediaTypesUseCase) : B
         model.addAttribute("listAllModel", service.getAll())
         model.addAttribute("addOneNewModel", emptyNewRequestDTO)
         model.addAttribute("updateOneModel", emptyUpdateRequestDTO)
-        return "adminMediaTypes"
+        return pathPrefix + "adminMediaTypes"
     }
 
     @HxRequest

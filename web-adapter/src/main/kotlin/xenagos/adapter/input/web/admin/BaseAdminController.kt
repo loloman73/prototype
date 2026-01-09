@@ -13,9 +13,10 @@ abstract class BaseAdminController {
 
     abstract val fragmentForAddOneNewRequest: String
     abstract val fragmentForUpdateOneRequest: String
-    abstract val myEndpointPath: String
+    abstract val myURLEndpoint: String
     abstract val emptyNewRequestDTO: BaseAdminNewRequestDTO
     abstract val emptyUpdateRequestDTO: BaseAdminUpdateRequestDTO
+    protected val pathPrefix = "/pages/admin/"
 
     protected fun handleAddOneNew(
         bindingResult: BindingResult,
@@ -29,7 +30,7 @@ abstract class BaseAdminController {
         } else {
             saveAction()
             response.status = HttpStatus.CREATED.value()
-            htmlResponseOrFragment = "redirect:htmx:/admin/$myEndpointPath"
+            htmlResponseOrFragment = "redirect:htmx:/admin/$myURLEndpoint"
         }
         return htmlResponseOrFragment
     }
@@ -46,7 +47,7 @@ abstract class BaseAdminController {
         } else {
             saveAction()
             response.status = HttpStatus.OK.value()
-            htmlResponseOrFragment = "redirect:htmx:/admin/$myEndpointPath"
+            htmlResponseOrFragment = "redirect:htmx:/admin/$myURLEndpoint"
         }
         return htmlResponseOrFragment
     }
@@ -57,6 +58,6 @@ abstract class BaseAdminController {
     ): String {
         deleteAction()
         response.status = HttpStatus.NO_CONTENT.value()
-        return "redirect:htmx:/admin/$myEndpointPath"
+        return "redirect:htmx:/admin/$myURLEndpoint"
     }
 }

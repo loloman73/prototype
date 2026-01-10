@@ -5,11 +5,13 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
-@RequestMapping("/xenagos/my-tours")
-class XenagosMyTours {
+@RequestMapping("/xenagos")
+class XenagosMain {
 
     @GetMapping
-    fun showMyTours(): String{
-        return "pages/xenagos/xenagosMyTours"
+    fun redirectMainPage(): String{
+        // if xenagos is logged in, redirect to my tours
+        // else redirect to login
+        return "redirect:/xenagos/my-tours"
     }
 }

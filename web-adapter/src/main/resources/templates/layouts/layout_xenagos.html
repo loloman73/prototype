@@ -11,28 +11,41 @@
 
 <th:block layout:fragment="HEADER_BOTTOM">
     <div class="row py-3 px-3 shadow-sm">
-        <div class="col">
+        <div class="col-6">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item h4"><a href="/xenagos">Xenagos</a></li>
-                    <li class="breadcrumb-item active h4" aria-current="page" th:text="${childPageName}" ></li>
+                    <li class="breadcrumb-item active h4" aria-current="page" th:text="${childPageName}"></li>
                 </ol>
             </nav>
+        </div>
+        <div class="col-6 align-content-end">
+            <button class="btn btn-outline-secondary py-1 me-2">
+                My Tours
+            </button>
+
+            <button class="btn btn-outline-secondary py-1 me-2">
+                Analytics
+            </button>
+
+            <button class="btn btn-outline-secondary py-1 me-2">
+                My Public Profile
+            </button>
+
         </div>
     </div>
 </th:block>
 
 <th:block layout:fragment="MAIN_CONTAINER_LEFT">
     <div class="col-2 pt-3">
-        <div class="list-group me-3 shadow">
-            <a id="my_tours_sidebar_link" href="/xenagos/my-tours" class="list-group-item list-group-item-action list-group-item-primary">My Tours</a>
-            <a id="analytics_sidebar_link" href="/xenagos/analytics" class="list-group-item list-group-item-action list-group-item-primary">Analytics</a>
-            <a id="my_account_sidebar_link" href="/xenagos/my-account" class="list-group-item list-group-item-action list-group-item-primary">My Account</a>
-        </div>
+        <th:block layout:fragment="XENAGOS_MAIN_CONTAINER_LEFT"></th:block>
     </div>
 </th:block>
 
 <th:block layout:fragment="MAIN_CONTAINER_RIGHT">
+    <div class="col-10 pt-3">
+        <th:block layout:fragment="XENAGOS_MAIN_CONTAINER_RIGHT"></th:block>
+    </div>
 </th:block>
 
 <th:block layout:fragment="SCRIPTS">

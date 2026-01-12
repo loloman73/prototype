@@ -10,7 +10,6 @@
 
 .tour-card:hover {
     background-color:hsla(185, 100%, 45%, 0.03);
-    box-shadow: 0 0 15px 5px rgb(220, 220, 220);
 }
 
 .company-text-color{

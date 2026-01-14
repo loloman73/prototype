@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import kotlin.collections.listOf
 
-class Tour(val id: String, val description: String, val region: String, val status: String)
-class TourPublished(val id: String, val description: String, val region: String, publishedDate: String)
+class Tour(val id: String, val name: String, val region: String, val status: String)
+class TourPublished(val id: String, val name: String, val region: String, publishedDate: String)
 
 @Controller
 @RequestMapping("/xenagos/my-tours")

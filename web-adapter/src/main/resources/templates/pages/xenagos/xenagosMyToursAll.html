@@ -16,7 +16,50 @@
 </th:block>
 
 <th:block layout:fragment="XENAGOS_MAIN_CONTAINER_RIGHT">
-    <h4>All Tours</h4>
+    <h4 class="text-dark">All Tours</h4>
+    <!--Table-->
+    <div class="col-10">
+        <table class="table table-sm table-light table-striped table-bordered border-primary-subtle table-hover shadow">
+            <thead>
+            <tr class="text-center">
+                <!--Column Headers -->
+                <th scope="col">#</th>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Region</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tour : ${myToursAll}">
+                <!--## column-->
+                <th scope="row"><span th:text="${myToursAll.indexOf(tour)+1}"></span></th>
+                <!--field ID-->
+                <td class="text-nowrap"><span th:text="${tour.id}"></span></td>
+                <!--field Name-->
+                <td><span th:text="${tour.name}"></span></td>
+                <!--field Region-->
+                <td><span th:text="${tour.region}"></span></td>
+                <!--field Status-->
+                <td><span th:text="${tour.status}"></span></td>
+                <!--Action buttons-->
+                <td class="text-nowrap">
+                    <!--Edit button-->
+                    <button class="btn btn-warning ms-1 me-1 py-1"
+                            type="button">
+                        Edit
+                    </button>
+                    <!--Deactivate button-->
+                    <button class="btn btn-danger me-1 py-1 "
+                            type="button">
+                        Deactivate
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </th:block>
 
 </body>

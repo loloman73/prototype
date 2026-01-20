@@ -1,4 +1,4 @@
-package xenagos.adapter.input.web.xenagos
+package xenagos.adapter.input.web.tourGuide
 
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -11,7 +11,7 @@ class Tour(val id: String, val name: String, val region: String, val status: Str
 class TourPublished(val id: String, val name: String, val region: String, publishedDate: String)
 
 @Controller
-@RequestMapping("/xenagos/my-tours")
+@RequestMapping("/tour-guide/my-tours")
 class XenagosMyTours {
 
     fun myToursAll(): List<Tour> {
@@ -34,20 +34,20 @@ class XenagosMyTours {
 
         if (status == "all") {
             model.addAttribute("myToursAll", myToursAll())
-            return "pages/xenagos/xenagosMyToursAll"
+            return "pages/tourGuide/tourGuideMyToursAll"
         }
         if (status == "published") {
             model.addAttribute("myToursPublished", myToursPublished())
-            return "pages/xenagos/xenagosMyToursPublished"
+            return "pages/tourGuide/tourGuideMyToursPublished"
         }
         if (status == "unpublished") {
-            return "pages/xenagos/xenagosMyToursUnpublished"
+            return "pages/tourGuide/tourGuideMyToursUnpublished"
         }
         if (status == "deactivated") {
-            return "pages/xenagos/xenagosMyToursDeactivated"
+            return "pages/tourGuide/tourGuideMyToursDeactivated"
         }
 
-        return "redirect:/xenagos/my-tours?status=all"
+        return "redirect:/tour-guide/my-tours?status=all"
     }
 
 }

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layouts/layout_xenagos.html}"
+      layout:decorate="~{/layouts/layout_tour_guide.html}"
       lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,11 +11,11 @@
 <body>
 
 
-<th:block layout:fragment="XENAGOS_MAIN_CONTAINER_LEFT">
-    <div th:replace="~{fragments/xenagos/xenagos-my-tours.html :: LEFT_SIDE_MENU_FILTERS}"></div>
+<th:block layout:fragment="TOUR_GUIDE_MAIN_CONTAINER_LEFT">
+    <div th:replace="~{fragments/tourGuide/tour-guide-my-tours.html :: LEFT_SIDE_MENU_FILTERS}"></div>
 </th:block>
 
-<th:block layout:fragment="XENAGOS_MAIN_CONTAINER_RIGHT">
+<th:block layout:fragment="TOUR_GUIDE_MAIN_CONTAINER_RIGHT">
     <h4 class="text-dark">All Tours</h4>
     <!--Table-->
     <div class="col-10">

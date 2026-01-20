@@ -5,14 +5,14 @@
       layout:decorate="~{/layouts/layout_main.html}"
       lang="en">
 <head>
-    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Xenagos Page</title>
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Tour Guide Page</title>
 </head>
 <body>
 
 <th:block layout:fragment="HEADER_BOTTOM">
     <div class="row py-3 px-3 shadow-sm">
         <div class="col-6">
-            <h4 class="text-dark">Xenagos administration page</h4>
+            <h4 class="text-dark">Tour Guide administration page</h4>
         </div>
         <div class="col-6 d-flex justify-content-end ">
             <button class="btn btn-outline-secondary py-1 me-2 fw-semibold">
@@ -40,13 +40,13 @@
 
 <th:block layout:fragment="MAIN_CONTAINER_LEFT">
     <div class="col-2 pt-3">
-        <th:block layout:fragment="XENAGOS_MAIN_CONTAINER_LEFT"></th:block>
+        <th:block layout:fragment="TOUR_GUIDE_MAIN_CONTAINER_LEFT"></th:block>
     </div>
 </th:block>
 
 <th:block layout:fragment="MAIN_CONTAINER_RIGHT">
     <div class="col-10 pt-3">
-        <th:block layout:fragment="XENAGOS_MAIN_CONTAINER_RIGHT"></th:block>
+        <th:block layout:fragment="TOUR_GUIDE_MAIN_CONTAINER_RIGHT"></th:block>
     </div>
 </th:block>
 

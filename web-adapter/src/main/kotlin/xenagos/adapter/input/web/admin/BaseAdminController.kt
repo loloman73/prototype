@@ -1,27 +1,75 @@
 package xenagos.adapter.input.web.admin
 
+import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxRequest
 import jakarta.servlet.http.HttpServletResponse
+import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
+import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.ModelAttribute
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import xenagos.application.port.input.admin.BaseAdminUseCase
 import xenagos.application.port.input.admin.model.BaseAdminNewRequestDTO
+import xenagos.application.port.input.admin.model.BaseAdminResponseDTO
 import xenagos.application.port.input.admin.model.BaseAdminUpdateRequestDTO
-
-const val tes ="sadasd"
+import java.util.UUID
 
 // Base controller for admin web adapters to share common helpers.
 // Handlers return the fragment, with data errors, if validation fails,
 //    otherwise executes the action and return the redirect string to self endpoint.
-abstract class BaseAdminController {
+abstract class BaseAdminController<
+        TNew : BaseAdminNewRequestDTO,
+        TUpdate : BaseAdminUpdateRequestDTO,
+        TResponse : BaseAdminResponseDTO>
+    (protected val service: BaseAdminUseCase<TNew, TUpdate, TResponse>) {
 
     abstract val fragmentForAddOneNewRequest: String
     abstract val fragmentForUpdateOneRequest: String
     abstract val myURLEndpoint: String
-    abstract val emptyNewRequestDTO: BaseAdminNewRequestDTO
-    abstract val emptyUpdateRequestDTO: BaseAdminUpdateRequestDTO
+    abstract val templateName: String
+    abstract fun createEmptyNewRequestDTO(): TNew
+    abstract fun createEmptyUpdateRequestDTO(): TUpdate
 
     companion object {
         const val ADMIN_TEMPLATE_PATH_PREFIX = "pages/admin/"
     }
+
+    @GetMapping
+    fun showAll(model: Model): String {
+        model.addAttribute("listAllModel", service.getAll())
+        model.addAttribute("addOneNewModel", createEmptyNewRequestDTO())
+        model.addAttribute("updateOneModel", createEmptyUpdateRequestDTO())
+        return ADMIN_TEMPLATE_PATH_PREFIX + templateName
+    }
+
+    @HxRequest
+    @PostMapping
+    fun addOneNew(
+        @Valid @ModelAttribute("addOneNewModel") requestDTO: TNew,
+        bindingResult: BindingResult,
+        response: HttpServletResponse
+    ): String = handleAddOneNew(bindingResult, response) { service.saveOneNew(requestDTO) }
+
+    @HxRequest
+    @PutMapping
+    fun updateOne(
+        @Valid @ModelAttribute("updateOneModel") requestDTO: TUpdate,
+        bindingResult: BindingResult,
+        response: HttpServletResponse
+    ): String = handleUpdateOne(bindingResult, response) { service.updateOne(requestDTO) }
+
+    @HxRequest
+    @DeleteMapping("/{id}")
+    fun deleteOne(
+        @PathVariable id: UUID,
+        response: HttpServletResponse
+    ): String = handleDeleteOne(response) { service.deleteOne(id) }
+
+
 
     protected fun handleAddOneNew(
         bindingResult: BindingResult,

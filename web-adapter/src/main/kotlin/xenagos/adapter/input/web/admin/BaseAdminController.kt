@@ -18,9 +18,6 @@ import xenagos.application.port.input.admin.model.BaseAdminResponseDTO
 import xenagos.application.port.input.admin.model.BaseAdminUpdateRequestDTO
 import java.util.UUID
 
-// Base controller for admin web adapters to share common helpers.
-// Handlers return the fragment, with data errors, if validation fails,
-//    otherwise executes the action and return the redirect string to self endpoint.
 abstract class BaseAdminController<
         TNew : BaseAdminNewRequestDTO,
         TUpdate : BaseAdminUpdateRequestDTO,

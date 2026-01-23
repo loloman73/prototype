@@ -71,7 +71,7 @@ abstract class BaseAdminController<
 
 
 
-    protected fun handleAddOneNew(
+    private fun handleAddOneNew(
         bindingResult: BindingResult,
         response: HttpServletResponse,
         saveAction: () -> Unit
@@ -88,7 +88,7 @@ abstract class BaseAdminController<
         return htmlResponseOrFragment
     }
 
-    protected fun handleUpdateOne(
+    private fun handleUpdateOne(
         bindingResult: BindingResult,
         response: HttpServletResponse,
         saveAction: () -> Unit
@@ -105,7 +105,7 @@ abstract class BaseAdminController<
         return htmlResponseOrFragment
     }
 
-    protected fun handleDeleteOne(
+    private fun handleDeleteOne(
         response: HttpServletResponse,
         deleteAction: () -> Unit
     ): String {

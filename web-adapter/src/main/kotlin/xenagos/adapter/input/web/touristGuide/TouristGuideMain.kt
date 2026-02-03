@@ -1,17 +1,17 @@
-package xenagos.adapter.input.web.tourGuide
+package xenagos.adapter.input.web.touristGuide
 
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
-@RequestMapping("/tour-guide")
-class TourGuideMain {
+@RequestMapping("/tourist-guide")
+class TouristGuideMain {
 
     @GetMapping
     fun redirectMainPage(): String{
-        // if Tour Guide is logged in, redirect to my tours
+        // if Tourist Guide is logged in, redirect to my tours
         // else redirect to login page
-        return "redirect:/tour-guide/my-tours?status=all"
+        return "redirect:/tourist-guide/my-tours?status=all"
     }
 }

@@ -12,8 +12,8 @@ open class TourJpaEntity : BaseJPAEntity  {
     open var id: UUID? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "xenagos_id")
-    open var xenagos: XenagoiJpaEntity? = null
+    @JoinColumn(name = "tourist_guide_id")
+    open var tourist_guide: TouristGuideJpaEntity? = null
 
     @Column(name = "title", length = Integer.MAX_VALUE)
     open var title: String? = null

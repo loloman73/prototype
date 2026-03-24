@@ -4,10 +4,10 @@ import jakarta.persistence.*
 import java.util.*
 
 @Entity
-@Table(name = "xenagoi")
-open class XenagoiJpaEntity : BaseJPAEntity  {
+@Table(name = "tourist_guides")
+open class TouristGuideJpaEntity : BaseJPAEntity  {
     @Id
-    @Column(name = "xenagos_id", nullable = false)
+    @Column(name = "tourist_guide_id", nullable = false)
     open var id: UUID? = null
 
     @Column(name = "name", length = Integer.MAX_VALUE)
@@ -16,6 +16,6 @@ open class XenagoiJpaEntity : BaseJPAEntity  {
     @Column(name = "photo_file_name")
     open var photoFileName: UUID? = null
 
-    @OneToMany(mappedBy = "xenagos")
+    @OneToMany(mappedBy = "tourist_guide")
     open var tours: MutableSet<TourJpaEntity> = mutableSetOf()
 }

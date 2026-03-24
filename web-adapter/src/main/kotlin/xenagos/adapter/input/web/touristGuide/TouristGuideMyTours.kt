@@ -1,4 +1,4 @@
-package xenagos.adapter.input.web.tourGuide
+package xenagos.adapter.input.web.touristGuide
 
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -11,8 +11,8 @@ class Tour(val id: String, val name: String, val region: String, val status: Str
 class TourPublished(val id: String, val name: String, val region: String, publishedDate: String)
 
 @Controller
-@RequestMapping("/tour-guide/my-tours")
-class XenagosMyTours {
+@RequestMapping("/tourist-guide/my-tours")
+class TouristGuideMyTours {
 
     fun myToursAll(): List<Tour> {
         val tour1 = Tour("T-11111", "Tour 1 description", "Greece", "Published")
@@ -34,20 +34,20 @@ class XenagosMyTours {
 
         if (status == "all") {
             model.addAttribute("myToursAll", myToursAll())
-            return "pages/tourGuide/tourGuideMyToursAll"
+            return "pages/touristGuide/touristGuideMyToursAll"
         }
         if (status == "published") {
             model.addAttribute("myToursPublished", myToursPublished())
-            return "pages/tourGuide/tourGuideMyToursPublished"
+            return "pages/touristGuide/touristGuideMyToursPublished"
         }
         if (status == "unpublished") {
-            return "pages/tourGuide/tourGuideMyToursUnpublished"
+            return "pages/touristGuide/touristGuideMyToursUnpublished"
         }
         if (status == "deactivated") {
-            return "pages/tourGuide/tourGuideMyToursDeactivated"
+            return "pages/touristGuide/touristGuideMyToursDeactivated"
         }
 
-        return "redirect:/tour-guide/my-tours?status=all"
+        return "redirect:/tourist-guide/my-tours?status=all"
     }
 
 }

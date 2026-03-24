@@ -18,9 +18,9 @@ class TourMapper {
         val dtoAvgCoordinates= entity.avgCoordinates
 
         //TODO query find xenagos UUID
-        val dtoXenagosId = UUID.randomUUID()
-        val dtoXenagosName = "John Doe"
-        val dtoXenagosPhotoFileName = UUID.randomUUID()
+        val dtoTouristGuideId = UUID.randomUUID()
+        val dtoTouristGuideName = "John Doe"
+        val dtoTouristGuidePhotoFileName = UUID.randomUUID()
         val dtoTourPointsQuantity = entity.tourPoints.size.toShort()
 
         return TourDTO(
@@ -32,11 +32,10 @@ class TourMapper {
             tourRate = dtoTourRate,
             tourReviews=dtoTourReviews,
             avgCoordinates = dtoAvgCoordinates,
-            xenagosId = dtoXenagosId,
-            xenagosName = dtoXenagosName,
-            xenagosPhotoFileName = dtoXenagosPhotoFileName,
+            touristGuideId = dtoTouristGuideId,
+            touristGuideName = dtoTouristGuideName,
+            touristGuidePhotoFileName = dtoTouristGuidePhotoFileName,
             tourPointsQuantity = dtoTourPointsQuantity
         )
     }
-
 }

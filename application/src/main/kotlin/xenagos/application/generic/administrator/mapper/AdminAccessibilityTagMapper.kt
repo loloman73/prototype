@@ -1,4 +1,4 @@
-package xenagos.application.admin.mapper
+package xenagos.application.generic.administrator.mapper
 
 import org.springframework.stereotype.Component
 import xenagos.application.port.input.admin.model.AdminAccessibilityTagUpdateRequestDTO
@@ -8,7 +8,7 @@ import xenagos.domain.model.AccessibilityTag
 import java.util.UUID
 
 @Component
-class AdminAccessibilityTagMapper : BaseAdminMapper<
+class AdminAccessibilityTagMapper : xenagos.application.generic.administrator.mapper.BaseAdminMapper<
         AccessibilityTag,
         AdminAccessibilityTagNewRequestDTO,
         AdminAccessibilityTagUpdateRequestDTO,

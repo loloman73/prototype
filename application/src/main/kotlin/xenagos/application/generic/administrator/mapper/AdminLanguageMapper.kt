@@ -1,4 +1,4 @@
-package xenagos.application.admin.mapper
+package xenagos.application.generic.administrator.mapper
 
 import org.springframework.stereotype.Component
 import xenagos.application.port.input.admin.model.AdminLanguageUpdateRequestDTO
@@ -8,7 +8,7 @@ import xenagos.domain.model.Language
 import java.util.UUID
 
 @Component
-class AdminLanguageMapper : BaseAdminMapper<
+class AdminLanguageMapper : xenagos.application.generic.administrator.mapper.BaseAdminMapper<
         Language,
         AdminLanguageNewRequestDTO,
         AdminLanguageUpdateRequestDTO,

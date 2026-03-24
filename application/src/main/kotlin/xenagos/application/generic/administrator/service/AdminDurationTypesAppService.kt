@@ -1,7 +1,7 @@
-package xenagos.application.admin.service
+package xenagos.application.generic.administrator.service
 
 import org.springframework.stereotype.Service
-import xenagos.application.admin.mapper.AdminDurationTypeMapper
+import xenagos.application.generic.administrator.mapper.AdminDurationTypeMapper
 import xenagos.application.port.input.admin.AdminDurationTypesUseCase
 import xenagos.application.port.input.admin.model.AdminDurationTypeNewRequestDTO
 import xenagos.application.port.input.admin.model.AdminDurationTypeResponseDTO
@@ -10,8 +10,8 @@ import xenagos.application.port.output.admin.AdminDurationTypesOutputPort
 import xenagos.domain.model.DurationType
 
 @Service
-class AdminDurationTypesAppService(persistence: AdminDurationTypesOutputPort, mapper: AdminDurationTypeMapper) :
-    BaseAdminAppService<
+class AdminDurationTypesAppService(persistence: AdminDurationTypesOutputPort, mapper: xenagos.application.generic.administrator.mapper.AdminDurationTypeMapper) :
+    xenagos.application.generic.administrator.service.BaseAdminAppService<
             DurationType,
             AdminDurationTypeNewRequestDTO,
             AdminDurationTypeUpdateRequestDTO,

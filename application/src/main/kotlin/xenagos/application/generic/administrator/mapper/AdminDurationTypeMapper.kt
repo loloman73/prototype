@@ -1,4 +1,4 @@
-package xenagos.application.admin.mapper
+package xenagos.application.generic.administrator.mapper
 
 import org.springframework.stereotype.Component
 import xenagos.application.port.input.admin.model.AdminDurationTypeNewRequestDTO
@@ -8,7 +8,7 @@ import xenagos.domain.model.DurationType
 import java.util.UUID
 
 @Component
-class AdminDurationTypeMapper : BaseAdminMapper<
+class AdminDurationTypeMapper : xenagos.application.generic.administrator.mapper.BaseAdminMapper<
         DurationType,
         AdminDurationTypeNewRequestDTO,
         AdminDurationTypeUpdateRequestDTO,

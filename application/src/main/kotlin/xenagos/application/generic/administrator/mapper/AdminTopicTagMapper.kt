@@ -1,4 +1,4 @@
-package xenagos.application.admin.mapper
+package xenagos.application.generic.administrator.mapper
 
 import org.springframework.stereotype.Component
 import xenagos.application.port.input.admin.model.AdminTopicTagUpdateRequestDTO
@@ -8,7 +8,7 @@ import xenagos.domain.model.TopicTag
 import java.util.*
 
 @Component
-class AdminTopicTagMapper : BaseAdminMapper<
+class AdminTopicTagMapper : xenagos.application.generic.administrator.mapper.BaseAdminMapper<
         TopicTag,
         AdminTopicTagNewRequestDTO,
         AdminTopicTagUpdateRequestDTO,

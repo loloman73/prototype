@@ -1,4 +1,4 @@
-package xenagos.application.admin.mapper
+package xenagos.application.generic.administrator.mapper
 
 import org.springframework.stereotype.Component
 import xenagos.application.port.input.admin.model.AdminAmeaTagNewRequestDTO
@@ -8,7 +8,7 @@ import xenagos.domain.model.AmeaTag
 import java.util.UUID
 
 @Component
-class AdminAmeaTagMapper : BaseAdminMapper<
+class AdminAmeaTagMapper : xenagos.application.generic.administrator.mapper.BaseAdminMapper<
         AmeaTag,
         AdminAmeaTagNewRequestDTO,
         AdminAmeaTagUpdateRequestDTO,

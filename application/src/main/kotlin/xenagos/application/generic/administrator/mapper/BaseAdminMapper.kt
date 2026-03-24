@@ -1,4 +1,4 @@
-package xenagos.application.admin.mapper
+package xenagos.application.generic.administrator.mapper
 
 import xenagos.application.port.input.admin.model.BaseAdminNewRequestDTO
 import xenagos.application.port.input.admin.model.BaseAdminResponseDTO

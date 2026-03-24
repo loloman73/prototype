@@ -1,4 +1,4 @@
-package xenagos.application.admin.mapper
+package xenagos.application.generic.administrator.mapper
 
 import org.springframework.stereotype.Component
 import xenagos.application.port.input.admin.model.AdminMediaTypeUpdateRequestDTO
@@ -8,7 +8,7 @@ import xenagos.domain.model.MediaType
 import java.util.UUID
 
 @Component
-class AdminMediaTypeMapper : BaseAdminMapper<
+class AdminMediaTypeMapper : xenagos.application.generic.administrator.mapper.BaseAdminMapper<
         MediaType,
         AdminMediaTypeNewRequestDTO,
         AdminMediaTypeUpdateRequestDTO,

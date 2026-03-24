@@ -1,4 +1,4 @@
-package xenagos.application.admin.mapper
+package xenagos.application.generic.administrator.mapper
 
 import org.springframework.stereotype.Component
 import xenagos.application.port.input.admin.model.AdminAgeGroupUpdateRequestDTO
@@ -8,7 +8,7 @@ import xenagos.domain.model.AgeGroup
 import java.util.UUID
 
 @Component
-class AdminAgeGroupMapper : BaseAdminMapper<
+class AdminAgeGroupMapper : xenagos.application.generic.administrator.mapper.BaseAdminMapper<
         AgeGroup,
         AdminAgeGroupNewRequestDTO,
         AdminAgeGroupUpdateRequestDTO,

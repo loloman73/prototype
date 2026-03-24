@@ -1,5 +1,4 @@
-
-package xenagos.application.admin.mapper
+package xenagos.application.generic.administrator.mapper
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -30,7 +29,7 @@ import java.util.UUID
 
 class AdminMediaTypeMapperTest {
 
-    private val mapper = AdminMediaTypeMapper()
+    private val mapper = _root_ide_package_.xenagos.application.generic.administrator.mapper.AdminMediaTypeMapper()
 
     @Test
     fun `toResponseDto should map domain entity to response DTO correctly`() {

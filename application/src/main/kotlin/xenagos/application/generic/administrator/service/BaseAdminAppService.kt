@@ -1,6 +1,6 @@
-package xenagos.application.admin.service
+package xenagos.application.generic.administrator.service
 
-import xenagos.application.admin.mapper.BaseAdminMapper
+import xenagos.application.generic.administrator.mapper.BaseAdminMapper
 import xenagos.application.port.input.admin.BaseAdminUseCase
 import xenagos.application.port.input.admin.model.BaseAdminNewRequestDTO
 import xenagos.application.port.input.admin.model.BaseAdminResponseDTO
@@ -15,7 +15,8 @@ abstract class BaseAdminAppService<
         TUpdate : BaseAdminUpdateRequestDTO,
         TResponse : BaseAdminResponseDTO>
     (private val persistence: BaseAdminOutputPort<TEntity>,
-     private val mapper: BaseAdminMapper<TEntity, TNew, TUpdate, TResponse>) :
+     private val mapper: xenagos.application.generic.administrator.mapper.BaseAdminMapper<TEntity, TNew, TUpdate, TResponse>
+) :
     BaseAdminUseCase<TNew, TUpdate, TResponse> {
 
     override fun getAll(): ArrayList<TResponse> = arrayListOf<TResponse>().apply {

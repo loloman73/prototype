@@ -1,4 +1,4 @@
-package xenagos.application.admin.mapper
+package xenagos.application.generic.administrator.mapper
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -9,7 +9,8 @@ import java.util.UUID
 
 class AdminAccessibilityTagMapperTest {
 
-    private val mapper = AdminAccessibilityTagMapper()
+    private val mapper =
+        _root_ide_package_.xenagos.application.generic.administrator.mapper.AdminAccessibilityTagMapper()
 
     // maps Entity to Response DTO
     @Test

@@ -11,9 +11,9 @@ dependencies {
     implementation(libs.thymeleafLD)
     implementation(libs.sb.starter.validation)
     //HTMX
-    implementation("org.webjars.npm:htmx.org:2.0.4")
-    implementation("org.webjars.npm:htmx-ext-response-targets:2.0.0")
-    implementation("io.github.wimdeblauwe:htmx-spring-boot-thymeleaf:4.0.1")
+    implementation(libs.htmx.core)
+    implementation(libs.htmx.ext.response.targets)
+    implementation(libs.htmx.spring.boot.thymeleaf)
 
     testImplementation(libs.sb.starter.test)
     // JUnit 5 Suite API to run grouped tests from IDE

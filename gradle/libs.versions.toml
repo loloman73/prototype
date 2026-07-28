@@ -12,6 +12,11 @@ springFramework="6.2.0"
 assertj="3.26.3"
 testcontainers="1.20.4"
 junitPlatformSuite="1.11.3"
+htmx="2.0.4"
+htmxExtResponseTargets="2.0.0"
+htmxSpringBootThymeleaf="4.0.1"
+reflections="0.10.2"
+foojay="0.8.0"
 
 [libraries]
 sb-starter = {group="org.springframework.boot", name="spring-boot-starter", version.ref="springboot"}
@@ -31,6 +36,10 @@ assertj = {group="org.assertj", name="assertj-core", version.ref="assertj"}
 junit-jupiter = {group="org.junit.jupiter", name="junit-jupiter", version.ref="junitJupiter"}
 junit-platform-suite-api = {group="org.junit.platform", name="junit-platform-suite-api", version.ref="junitPlatformSuite"}
 junit-platform-suite-engine = {group="org.junit.platform", name="junit-platform-suite-engine", version.ref="junitPlatformSuite"}
+htmx-core = { group = "org.webjars.npm", name = "htmx.org", version.ref = "htmx" }
+htmx-ext-response-targets = { group = "org.webjars.npm", name = "htmx-ext-response-targets", version.ref = "htmxExtResponseTargets" }
+htmx-spring-boot-thymeleaf = { group = "io.github.wimdeblauwe", name = "htmx-spring-boot-thymeleaf", version.ref = "htmxSpringBootThymeleaf" }
+reflections = { group = "org.reflections", name = "reflections", version.ref = "reflections" }
 
 # Testcontainers
 testcontainers-bom = {group="org.testcontainers", name="testcontainers-bom", version.ref="testcontainers"}
@@ -42,3 +51,4 @@ testcontainers-postgresql = {group="org.testcontainers", name="postgresql", vers
 sb = {id="org.springframework.boot", version.ref="springboot"}
 jetbrains-kotlin-spring = {id="org.jetbrains.kotlin.plugin.spring", version.ref="kotlinSpring"}
 jetbrains-kotlin-noarg={id="org.jetbrains.kotlin.plugin.noarg", version.ref="kotlinNoarg"}
+foojay = { id = "org.gradle.toolchains.foojay-resolver-convention", version.ref = "foojay" }

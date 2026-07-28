@@ -8,6 +8,6 @@ dependencies {
 
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.assertj)
-    testImplementation("org.reflections:reflections:0.10.2")
-    testImplementation(kotlin("reflect"))
+    testImplementation(libs.reflections)
+    testImplementation(libs.jetbrains.kotlin.reflect)
 }
